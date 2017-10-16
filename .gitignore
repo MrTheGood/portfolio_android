@@ -69,9 +69,6 @@ $RECYCLE.BIN/
 # Files for the ART/Dalvik VM
 *.dex
 
-# Java class files
-*.class
-
 # Generated files
 bin/
 gen/
@@ -98,8 +95,6 @@ captures/
 
 # Intellij
 *.iml
-.idea/workspace.xml
-.idea/libraries
 
 # Keystore files
 *.jks
