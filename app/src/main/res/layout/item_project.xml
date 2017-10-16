@@ -2,12 +2,15 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/project_background"
     android:elevation="8dp"
     android:orientation="vertical"
-    android:layout_margin="@dimen/margin_projectSmall"
+    android:layout_margin="@dimen/margin_projectSmall_side"
+    android:layout_marginTop="@dimen/margin_projectSmall_top"
+    android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
     >
     
     <ImageView
@@ -27,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Project"
+        tools:text="Project"
         app:layout_constraintEnd_toStartOf="@+id/expand_project"
         app:layout_constraintStart_toEndOf="@id/project_image"
         />
