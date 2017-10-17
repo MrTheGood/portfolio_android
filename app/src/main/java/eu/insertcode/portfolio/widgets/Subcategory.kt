@@ -1,14 +1,18 @@
 package eu.insertcode.portfolio.widgets
 
+import android.content.Context
+import android.util.AttributeSet
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.SubcategoryItem
 
 /**
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class Subcategory : ConstraintLayout {
+class Subcategory : LinearLayout {
     private val title: TextView
     private val layout: LinearLayout
 
@@ -21,10 +25,10 @@ class Subcategory : ConstraintLayout {
         title = findViewById(R.id.subcategory_title)
         title.text = item.title
         title.setOnClickListener({
-            if (layout.visibillity == View.GONE)
-                layout.visibillity = View.VISIBLE
+            if (layout.visibility == View.GONE)
+                layout.visibility = View.VISIBLE
             else
-                layout.visibillity = View.GONE
+                layout.visibility = View.GONE
         })
     }
 }

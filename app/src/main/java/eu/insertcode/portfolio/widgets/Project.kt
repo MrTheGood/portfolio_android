@@ -17,7 +17,7 @@ import eu.insertcode.portfolio.data.ProjectItem
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class Project : ViewGroup {
+class Project : ConstraintLayout {
     private val projectImage: ImageView
     private val projectTitle: TextView
     private val projectDescription: TextView

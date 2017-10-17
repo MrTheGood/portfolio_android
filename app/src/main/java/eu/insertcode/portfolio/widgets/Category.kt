@@ -5,6 +5,8 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.CategoryItem
@@ -14,7 +16,8 @@ import eu.insertcode.portfolio.data.CategoryItem
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class Category : ViewGroup {
+class Category : LinearLayout {
+
     private val title: TextView
 
     constructor(item: CategoryItem, ctx: Context) : this(item, ctx, null)

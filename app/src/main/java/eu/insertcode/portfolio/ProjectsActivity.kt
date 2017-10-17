@@ -38,7 +38,7 @@ class ProjectsActivity : AppCompatActivity() {
                 }
                 is SubcategoryItem -> {
                     val  category = Subcategory(item, this)
-                    parent.addViews(category)
+                    parent.addView(category)
                     loadProjects(category.findViewById(R.id.subcategory_content), item.items)
                 }
                 is ProjectItem -> parent.addView(Project(item, this))
