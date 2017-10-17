@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Portfolio</string>
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/json.json</string>
-    
-    <string name="lorem_ipsum" translatable="false">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </string>
+    <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
     
     <string name="msg_connecting">Connecting.. Please wait</string>
     

@@ -8,10 +8,10 @@ import android.os.AsyncTask
 import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.ProjectsActivity
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.Category
+import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.Item
-import eu.insertcode.portfolio.data.Project
-import eu.insertcode.portfolio.data.Subcategory
+import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.data.SubcategoryItem
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
@@ -21,7 +21,7 @@ import javax.net.ssl.HttpsURLConnection
 
 /**
  * Created by maartendegoede on 16/10/17.
- * Copyright © 2017 AppStudio.nl. All rights reserved.
+ * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, String>() {
 
@@ -54,9 +54,9 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
             ProjectsActivity.items = (0 until json.length()).map {
                 val o = json.getJSONObject(it)
                 when (o.getString("type")) {
-                    "item" -> Project(o)
-                    "subcategory" -> Subcategory(o)
-                    "category" -> Category(o)
+                    "item" -> ProjectItem(o)
+                    "subcategory" -> SubcategoryItem(o)
+                    "category" -> CategoryItem(o)
                     else -> Item(o)
                 }
             }

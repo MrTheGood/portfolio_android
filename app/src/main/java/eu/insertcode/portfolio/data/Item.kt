@@ -12,33 +12,34 @@ open class Item(o: JSONObject) {
     val title = o.getString("title")!!
 }
 
-data class Category(val o: JSONObject) : Item(o) {
+data class CategoryItem(val o: JSONObject) : Item(o) {
     val items = (0 until o.getJSONArray("items").length()).map {
         val item = o.getJSONArray("items").getJSONObject(it)
         when {
-            item.getString("type") == "item" -> Project(item)
-            item.getString("type") == "subcategory" -> Subcategory(item)
+            item.getString("type") == "item" -> ProjectItem(item)
+            item.getString("type") == "subcategory" -> SubcategoryItem(item)
             else -> Item(o)
         }
     }
 }
 
 
-data class Subcategory(val o: JSONObject) : Item(o) {
+data class SubcategoryItem(val o: JSONObject) : Item(o) {
     val items =
             (0 until o.getJSONArray("items").length()).map {
                 val item = o.getJSONArray("items").getJSONObject(it)
                 when {
-                    item.getString("type") == "item" -> Project(item)
-                    item.getString("type") == "subcategory" -> Subcategory(item)
+                    item.getString("type") == "item" -> ProjectItem(item)
+                    item.getString("type") == "subcategory" -> SubcategoryItem(item)
                     else -> Item(item)
                 }
             }
 }
 
-data class Project(val o: JSONObject) : Item(o) {
+data class ProjectItem(val o: JSONObject) : Item(o) {
     val img = o.getString("img")!!
     val description = o.getString(("description"))!!
+    //TODO: Change
 //    val shortDescription = o.getString("shortDescription")!!
 //    val fullDescription = o.getString("fullDescription")!!
 //    val date = o.getString("date")!!
