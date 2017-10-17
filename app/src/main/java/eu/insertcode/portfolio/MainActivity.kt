@@ -12,10 +12,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        intent = Intent(this, ProjectsActivity::class.java)
-//        startActivity(intent)
-
     }
 
     override fun onStart() {
@@ -25,9 +21,11 @@ class MainActivity : AppCompatActivity() {
             GetDataAsync(this).execute(resources.getString(R.string.url_getData))
         } else {
             AlertDialog.Builder(this)
-                    .setTitle("No Internet Connection")
-                    .setMessage("Please check your internet connection and try again.")
-                    .setPositiveButton(android.R.string.ok) { dialog, which -> }
+                    .setTitle(R.string.error_noInternet_title)
+                    .setMessage(R.string.error_noInternet_msg)
+                    .setPositiveButton(android.R.string.ok) {
+                        _, _ -> finish()
+                    }
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show()
         }

@@ -6,9 +6,11 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.data.Item
 
-var items: List<Item>? = null
 
 class ProjectsActivity : AppCompatActivity() {
+    companion object {
+        var items: List<Item>? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,4 +19,6 @@ class ProjectsActivity : AppCompatActivity() {
         val imageView = findViewById<ImageView>(R.id.project_image)
         Glide.with(this).asBitmap().load("https://portfolio.insertcode.eu/media/game_unity_mgfm1.png").into(imageView)
     }
+
+
 }

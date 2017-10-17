@@ -5,4 +5,14 @@
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </string>
+    
+    <string name="msg_connecting">Connecting.. Please wait</string>
+    
+    <string name="error_noInternet_title">No Internet Connection"</string>
+    <string name="error_noInternet_msg">Please check your internet connection and try again.</string>
+    <string name="error_somethingWrong_title">Something Went Wrong</string>
+    <string name="error_somethingWrong_msg">Oops, something went wrong! Please try again later.</string>
+    
+    
+    <string name="str_logo">Logo</string>
 </resources>
