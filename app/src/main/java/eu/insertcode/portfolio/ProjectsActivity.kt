@@ -10,6 +10,7 @@ import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.data.SubcategoryItem
 import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
+import eu.insertcode.portfolio.widgets.Subcategory
 
 
 class ProjectsActivity : AppCompatActivity() {
@@ -29,17 +30,18 @@ class ProjectsActivity : AppCompatActivity() {
 
     private fun loadProjects(parent: ViewGroup, items: List<Item>) {
         for (item in items.iterator()) {
-            if (item is CategoryItem) {
-                val category = Category(item, this)
-                parent.addView(category)
-                loadProjects(category.findViewById(R.id.category_content), item.items)
-            }
-            if (item is SubcategoryItem) {
-                //TODO: add sub to view
-                loadProjects(parent, item.items)
-            }
-            if (item is ProjectItem) {
-                parent.addView(Project(item, this))
+            when (item) {
+                is CategoryItem -> {
+                    val category = Category(item, this)
+                    parent.addView(category)
+                    loadProjects(category.findViewById(R.id.category_content), item.items)
+                }
+                is SubcategoryItem -> {
+                    val  category = Subcategory(item, this)
+                    parent.addViews(category)
+                    loadProjects(category.findViewById(R.id.subcategory_content), item.items)
+                }
+                is ProjectItem -> parent.addView(Project(item, this))
             }
         }
     }

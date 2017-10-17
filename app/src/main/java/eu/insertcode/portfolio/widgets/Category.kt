@@ -14,7 +14,7 @@ import eu.insertcode.portfolio.data.CategoryItem
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class Category : ConstraintLayout {
+class Category : ViewGroup {
     private val title: TextView
 
     constructor(item: CategoryItem, ctx: Context) : this(item, ctx, null)

@@ -37,8 +37,8 @@ data class SubcategoryItem(val o: JSONObject) : Item(o) {
 }
 
 data class ProjectItem(val o: JSONObject) : Item(o) {
-    val img = o.getString("img")!!
-    val description = o.getString(("description"))!!
+    val img = o.getString("img")!!//TODO: Make list
+    val description = o.getString(("description"))!!//TODO: Remove
     //TODO: Change
 //    val shortDescription = o.getString("shortDescription")!!
 //    val fullDescription = o.getString("fullDescription")!!

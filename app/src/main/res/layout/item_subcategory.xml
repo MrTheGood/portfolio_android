@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_dark"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/subcategory_title"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16sp"
+        android:paddingStart="16sp"
+        android:paddingTop="8dp"
+        android:textColor="@color/colorWhite"
+        tools:text="Subcategory"
+        />
+
+    <LinearLayout
+        android:id="@+id/subcategory_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
