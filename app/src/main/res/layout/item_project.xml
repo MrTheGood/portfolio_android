@@ -17,11 +17,11 @@
         android:id="@+id/project_image"
         android:layout_width="64dp"
         android:layout_height="0dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/colorAccent"
         android:scaleType="center"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
     
     <TextView
@@ -30,9 +30,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        tools:text="Project"
         app:layout_constraintEnd_toStartOf="@+id/expand_project"
         app:layout_constraintStart_toEndOf="@id/project_image"
+        tools:text="Project"
         />
     
     <TextView
@@ -41,10 +41,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/lorem_ipsum"
         app:layout_constraintEnd_toStartOf="@+id/expand_project"
         app:layout_constraintStart_toEndOf="@id/project_image"
         app:layout_constraintTop_toBottomOf="@id/project_title"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         />
     
     <ImageView
@@ -52,9 +52,9 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/ic_navigate_next"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </android.support.constraint.ConstraintLayout>
