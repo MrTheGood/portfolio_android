@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundDark"
+    android:background="@color/background_dark"
     android:orientation="vertical"
     >
     
@@ -17,7 +17,7 @@
         android:paddingStart="16sp"
         android:paddingTop="8dp"
         android:text="Category"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         />
     
     <LinearLayout
