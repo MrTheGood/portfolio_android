@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.data.Item
 
 var items: List<Item>? = null
+
 class ProjectsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
