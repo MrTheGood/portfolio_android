@@ -27,7 +27,6 @@
             android:background="@color/colorAccent"
             android:contentDescription="@string/desc_projectThumbnail"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />

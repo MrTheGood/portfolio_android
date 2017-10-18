@@ -33,8 +33,10 @@ class Project : ConstraintLayout {
         projectDescription = findViewById(R.id.project_description)
         expandProject = findViewById(R.id.expand_project)
 
-        val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
-        Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
+        if (item.img != null)  {
+            val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
+            Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
+        }
         projectTitle.text = item.title
         projectDescription.text = item.shortDescription
         expandProject.setOnClickListener({

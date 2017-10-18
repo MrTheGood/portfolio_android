@@ -30,14 +30,14 @@ data class SubcategoryItem(private val o: JSONObject) : Item(o) {
                 val item = o.getJSONArray("items").getJSONObject(it)
                 when {
                     item.getString("type") == "project" -> ProjectItem(item)
-                    item.getString("type") == "subcategory" -> SubcategoryItem(item)
+//                    item.getString("type") == "subcategory" -> SubcategoryItem(item) TODO: Remove
                     else -> Item(item)
                 }
             }
 }
 
 data class ProjectItem(private val o: JSONObject) : Item(o) {
-    val img = o.getString("img")!!//TODO: Make list
+    val img: String? = o.optString("img", null)//TODO: Make list
     val shortDescription = o.getString("shortDescription")!!
     val fullDescription = o.getString("fullDescription")!!
     val date = o.getString("date")!!

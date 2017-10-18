@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.SubcategoryItem
-import eu.insertcode.portfolio.utils.AnimatorUtils
 
 @SuppressLint("ViewConstructor")
 /**
@@ -17,21 +16,13 @@ import eu.insertcode.portfolio.utils.AnimatorUtils
  */
 class Subcategory : LinearLayout {
     private val title: TextView
-    private val layout: LinearLayout
 
     constructor(item: SubcategoryItem, ctx: Context) : this(item, ctx, null)
     constructor(item: SubcategoryItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
     constructor(item: SubcategoryItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
         View.inflate(ctx, R.layout.item_subcategory, this)
 
-        layout = findViewById(R.id.subcategory_content)
         title = findViewById(R.id.subcategory_title)
         title.text = item.title
-        title.setOnClickListener({
-            if (layout.visibility == View.GONE)
-                AnimatorUtils.expandView(layout)
-            else
-                AnimatorUtils.collapseView(layout)
-        })
     }
 }
