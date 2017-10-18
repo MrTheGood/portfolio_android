@@ -42,14 +42,8 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
     }
 
     override fun onPostExecute(result: String?) {
-        var success = false
         try {
-            val json = try {
-                JSONArray(result)
-            } catch (e: JSONException) {
-                startProjectsActivity(success)
-                return
-            }
+            val json = JSONArray(result)
 
             ProjectsActivity.items = (0 until json.length()).map {
                 val o = json.getJSONObject(it)
@@ -60,22 +54,26 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
                     else -> Item(o)
                 }
             }
-            success = true
+            startProjectsActivity()
         } catch (e: JSONException) {
-            AlertDialog.Builder(context)
-                    .setTitle(R.string.error_somethingWrong_title)
-                    .setMessage(R.string.error_somethingWrong_msg)
-                    .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
-                    .show()
+            throwExceptionMessage(e)
+            return
+        } catch (e: NullPointerException) {
+            throwExceptionMessage(e)
             return
         }
-
-        startProjectsActivity(success)
     }
 
-    private fun startProjectsActivity(success: Boolean) {
+    private fun throwExceptionMessage(e: Exception) {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.error_somethingWrong_title)
+                .setMessage(R.string.error_somethingWrong_msg)
+                .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
+                .show()
+    }
+
+    private fun startProjectsActivity() {
         val intent = Intent(context, ProjectsActivity::class.java)
-        intent.putExtra("success", success)
         context.startActivity(intent)
     }
 

@@ -13,12 +13,12 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/view_subcategory_titleBackground"
         android:paddingBottom="8dp"
         android:paddingEnd="16sp"
-        android:paddingStart="16sp"
+        android:paddingStart="22sp"
         android:paddingTop="8dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/view_subcategory_title"
         tools:text="Subcategory"
         />
     

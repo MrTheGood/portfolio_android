@@ -36,10 +36,10 @@ class Project : ConstraintLayout {
         val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
         Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
         projectTitle.text = item.title
-        projectDescription.text = item.description
+        projectDescription.text = item.shortDescription
         expandProject.setOnClickListener({
             Log.d("TODO", "TODO")
-            //TODO: expandImage listener
+            //TODO: expandProject listener
             //TODO: put this listener on the whole project instead of only the button.
         })
     }

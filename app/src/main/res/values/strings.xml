@@ -2,7 +2,7 @@
     <string name="app_name">Portfolio</string>
     
     <!-- Data URLs -->
-    <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/json.json</string>
+    <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
     <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
     
     <!-- Error Messages -->

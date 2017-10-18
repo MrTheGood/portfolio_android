@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colours -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    
     <color name="colorWhite">#FFFFFFFF</color>
+    
     <color name="colorTransparent">#00000000</color>
     
-    <color name="background_light">#EEEEEE</color>
-    <color name="background_dark">#E0E0E0</color>
+    <color name="colorGrayLight">#EEEEEE</color>
+    <color name="colorGrayDark">#E0E0E0</color>
+    <color name="colorGrayDarkest">#A0A0A0</color>
     
-    <color name="view_progressbar">#FFE0E0E0</color>
+    
+    <!-- View Colors -->
+    <color name="background_light">@color/colorGrayLight</color>
+    <color name="background_dark">@color/colorGrayDark</color>
+    
+    <color name="view_progressbar">@color/colorGrayDark</color>
+    
+    <color name="view_category_title">@color/colorWhite</color>
+    <color name="view_category_titleBackground">@color/colorPrimary</color>
+    
+    <color name="view_subcategory_title">@color/colorWhite</color>
+    <color name="view_subcategory_titleBackground">@color/colorGrayDarkest</color>
 </resources>
