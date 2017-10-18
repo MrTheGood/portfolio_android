@@ -181,3 +181,5 @@ fabric.properties
 /build
 .idea/
 app/app.iml
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
