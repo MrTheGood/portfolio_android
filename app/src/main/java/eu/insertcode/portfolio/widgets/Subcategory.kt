@@ -1,5 +1,6 @@
 package eu.insertcode.portfolio.widgets
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
@@ -7,7 +8,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.SubcategoryItem
+import eu.insertcode.portfolio.utils.AnimatorUtils
 
+@SuppressLint("ViewConstructor")
 /**
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
@@ -26,9 +29,9 @@ class Subcategory : LinearLayout {
         title.text = item.title
         title.setOnClickListener({
             if (layout.visibility == View.GONE)
-                layout.visibility = View.VISIBLE
+                AnimatorUtils.expandView(layout)
             else
-                layout.visibility = View.GONE
+                AnimatorUtils.collapseView(layout)
         })
     }
 }
