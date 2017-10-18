@@ -1,9 +1,10 @@
 package eu.insertcode.portfolio
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.Item
 import eu.insertcode.portfolio.data.ProjectItem
@@ -17,15 +18,18 @@ class ProjectsActivity : AppCompatActivity() {
     companion object {
         var items: List<Item>? = null
     }
+    private val pageAdapter = CategoriesPagerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projects)
 
-        val layout: LinearLayout = findViewById(R.id.projects_root)
+        val viewPager: ViewPager = findViewById(R.id.projects_root)
+        viewPager.adapter = pageAdapter
 
         val items = items ?: return
-        loadProjects(layout, items)
+        loadProjects(viewPager, items)
+        viewPager.currentItem = 0
     }
 
     private fun loadProjects(parent: ViewGroup, items: List<Item>) {
@@ -33,7 +37,7 @@ class ProjectsActivity : AppCompatActivity() {
             when (item) {
                 is CategoryItem -> {
                     val category = Category(item, this)
-                    parent.addView(category)
+                    pageAdapter.addView(category)
                     loadProjects(category.findViewById(R.id.category_content), item.items)
                 }
                 is SubcategoryItem -> {

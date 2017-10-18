@@ -9,24 +9,18 @@
     tools:context="eu.insertcode.portfolio.ProjectsActivity"
     >
     
-    <!-- TODO: Logo or something similar -->
+    <!-- TODO: Change this to a logo or something similar -->
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         />
     
-    <ScrollView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/projects_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <LinearLayout
-            android:id="@+id/projects_root"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-        
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        >
+    
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>
