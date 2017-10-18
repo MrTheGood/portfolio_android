@@ -7,7 +7,7 @@
     android:background="@color/background_dark"
     android:orientation="vertical"
     >
-
+    
     <TextView
         android:id="@+id/subcategory_title"
         style="@style/TextAppearance.AppCompat.Title"
@@ -21,7 +21,7 @@
         android:textColor="@color/colorWhite"
         tools:text="Subcategory"
         />
-
+    
     <LinearLayout
         android:id="@+id/subcategory_content"
         android:layout_width="match_parent"

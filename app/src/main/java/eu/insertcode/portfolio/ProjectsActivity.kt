@@ -22,7 +22,7 @@ class ProjectsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projects)
 
-        val layout: LinearLayout = findViewById(R.id.projects_root)
+        val layout = findViewById(R.id.projects_root) as LinearLayout
 
         val items = items ?: return
         loadProjects(layout, items)
@@ -37,7 +37,7 @@ class ProjectsActivity : AppCompatActivity() {
                     loadProjects(category.findViewById(R.id.category_content), item.items)
                 }
                 is SubcategoryItem -> {
-                    val  category = Subcategory(item, this)
+                    val category = Subcategory(item, this)
                     parent.addView(category)
                     loadProjects(category.findViewById(R.id.subcategory_content), item.items)
                 }

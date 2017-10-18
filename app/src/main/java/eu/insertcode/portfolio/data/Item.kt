@@ -12,7 +12,7 @@ open class Item(o: JSONObject) {
     val title = o.getString("title")!!
 }
 
-data class CategoryItem(val o: JSONObject) : Item(o) {
+data class CategoryItem(private val o: JSONObject) : Item(o) {
     val items = (0 until o.getJSONArray("items").length()).map {
         val item = o.getJSONArray("items").getJSONObject(it)
         when {
@@ -24,7 +24,7 @@ data class CategoryItem(val o: JSONObject) : Item(o) {
 }
 
 
-data class SubcategoryItem(val o: JSONObject) : Item(o) {
+data class SubcategoryItem(private val o: JSONObject) : Item(o) {
     val items =
             (0 until o.getJSONArray("items").length()).map {
                 val item = o.getJSONArray("items").getJSONObject(it)
@@ -36,7 +36,7 @@ data class SubcategoryItem(val o: JSONObject) : Item(o) {
             }
 }
 
-data class ProjectItem(val o: JSONObject) : Item(o) {
+data class ProjectItem(private val o: JSONObject) : Item(o) {
     val img = o.getString("img")!!//TODO: Make list
     val description = o.getString(("description"))!!//TODO: Remove
     //TODO: Change

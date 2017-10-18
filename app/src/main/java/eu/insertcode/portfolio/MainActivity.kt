@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                     .setTitle(R.string.error_noInternet_title)
                     .setMessage(R.string.error_noInternet_msg)
-                    .setPositiveButton(android.R.string.ok) {
-                        _, _ -> finish()
+                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                        finish()
                     }
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show()
