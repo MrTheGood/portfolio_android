@@ -1,62 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_projectSmall_side"
-    android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
-    android:layout_marginTop="@dimen/margin_projectSmall_top"
-    android:background="@drawable/project_background"
-    android:elevation="8dp"
-    android:orientation="vertical"
     >
     
-    <ImageView
-        android:id="@+id/project_image"
-        android:layout_width="64dp"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        android:scaleType="center"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/desc_projectThumbnail"
-        />
-    
-    <TextView
-        android:id="@+id/project_title"
-        style="@style/TextAppearance.AppCompat.Body2"
-        android:layout_width="0dp"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/expand_project"
-        app:layout_constraintStart_toEndOf="@id/project_image"
-        tools:text="Project"
-        />
+        android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
+        android:layout_marginEnd="@dimen/margin_projectSmall_side"
+        android:layout_marginStart="@dimen/margin_projectSmall_side"
+        android:layout_marginTop="@dimen/margin_projectSmall_top"
+        android:background="@drawable/project_background"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        >
+        
+        <ImageView
+            android:id="@+id/project_image"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/desc_projectThumbnail"
+            android:scaleType="center"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        
+        <TextView
+            android:id="@+id/project_title"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/expand_project"
+            app:layout_constraintStart_toEndOf="@id/project_image"
+            tools:text="Project"
+            />
+        
+        <TextView
+            android:id="@+id/project_description"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/expand_project"
+            app:layout_constraintStart_toEndOf="@id/project_image"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            />
+        
+        <ImageView
+            android:id="@+id/expand_project"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/desc_expandProject"
+            android:src="@drawable/ic_navigate_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
     
-    <TextView
-        android:id="@+id/project_description"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/expand_project"
-        app:layout_constraintStart_toEndOf="@id/project_image"
-        app:layout_constraintTop_toBottomOf="@id/project_title"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        />
-    
-    <ImageView
-        android:id="@+id/expand_project"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:contentDescription="@string/desc_expandProject"
-        android:src="@drawable/ic_navigate_next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
