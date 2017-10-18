@@ -22,7 +22,7 @@ class ProjectsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_projects)
 
-        val layout = findViewById(R.id.projects_root) as LinearLayout
+        val layout: LinearLayout = findViewById(R.id.projects_root)
 
         val items = items ?: return
         loadProjects(layout, items)
