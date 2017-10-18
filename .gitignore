@@ -173,8 +173,11 @@ fabric.properties
 ####################
 ## Intellij Patch ##
 ####################
-# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
-# modules.xml
-# .idea/misc.xml
-# *.ipr
-/.idea/codeStyleSettings.xml
+# Source: https://stackoverflow.com/questions/26363025/gitignore-misc-xml-and-iml-with-android-studio-0-8-9
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+.idea/
+app/app.iml
