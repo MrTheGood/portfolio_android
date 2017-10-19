@@ -18,7 +18,7 @@
         android:paddingEnd="16sp"
         android:paddingStart="16sp"
         android:paddingTop="8dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/view_category_title"
         tools:text="Category"
         />
 

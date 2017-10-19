@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#BDBDBD</color>
-    <color name="colorPrimaryDark">#9E9E9E</color>
-    <color name="colorAccent">#424242</color>
+    <color name="colorPrimaryDark">@color/colorGrayDarkest</color>
+    <color name="colorPrimary">@color/colorGrayDark</color>
+    <color name="colorSecondary">@color/colorGrayLightest</color>
+    <color name="colorAccent">@color/colorGrayDarkest</color>
 
     <!-- Colours -->
-    <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     
     <color name="colorTransparent">#00000000</color>
     
+    <color name="colorGrayLightest">#BDBDBD</color>
     <color name="colorGrayLight">#EEEEEE</color>
-    <color name="colorGrayDark">#E0E0E0</color>
-    <color name="colorGrayDarkest">#A0A0A0</color>
+    <color name="colorGrayLight_dark">#E0E0E0</color>
+    <color name="colorGrayDark">#9E9E9E</color>
+    <color name="colorGrayDarkest">#424242</color>
     
     
     <!-- View Colors -->
     <color name="background_light">@color/colorGrayLight</color>
-    <color name="background_dark">@color/colorGrayDark</color>
+    <color name="background_dark">@color/colorGrayLight_dark</color>
     
-    <color name="view_progressbar">@color/colorGrayDark</color>r
+    <color name="view_progressbar">@color/colorGrayLight_dark</color>
     
     <color name="view_category_title">@color/colorWhite</color>
-    <color name="view_category_titleBackground">@color/colorPrimaryDark</color>
+    <color name="view_category_titleBackground">@color/colorPrimary</color>
     
     <color name="view_subcategory_title">@color/colorWhite</color>
-    <color name="view_subcategory_titleBackground">@color/colorPrimary</color>
+    <color name="view_subcategory_titleBackground">@color/colorSecondary</color>
 </resources>
