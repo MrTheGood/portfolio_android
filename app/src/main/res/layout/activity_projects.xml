@@ -27,7 +27,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:background="@color/view_category_tabLayout_Background"
             app:tabMode="scrollable"
+            app:tabTextColor="@color/view_category_tabLayout_Text"
+            app:tabSelectedTextColor="@color/view_category_tabLayout_TextSelected"
             />
     
     </android.support.v4.view.ViewPager>

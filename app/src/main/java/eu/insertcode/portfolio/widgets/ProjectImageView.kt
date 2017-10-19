@@ -25,7 +25,7 @@ class ProjectImageView : ImageView {
         val b = drawable.bitmap
         val bitmap = b.copy(Bitmap.Config.ARGB_8888, true)
 
-        val roundBitmap = BitmapUtil.getRoundedCornerBitmap(context, bitmap, 16, width, height, false, true, false, true)
+        val roundBitmap = BitmapUtil.getRoundedCornerBitmap(context, bitmap, 2, width, height, false, true, false, true)
         canvas.drawBitmap(roundBitmap, 0f, 0f, null)
     }
 }

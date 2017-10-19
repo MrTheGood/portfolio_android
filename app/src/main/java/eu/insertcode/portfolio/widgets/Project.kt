@@ -26,7 +26,6 @@ class Project : ConstraintLayout {
     private val projectFullDescription: TextView? = null
     private val projectCopyright: TextView? = null
     private val projectDate: TextView
-    private val expandProject: ImageView
 
     constructor(item: ProjectItem, ctx: Context) : this(item, ctx, null)
     constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
@@ -37,7 +36,6 @@ class Project : ConstraintLayout {
         projectTitle = findViewById(R.id.project_title)
         projectShortDescription = findViewById(R.id.project_shortDescription)
         projectDate = findViewById(R.id.project_date)
-        expandProject = findViewById(R.id.expand_project)
 
         if (item.img != null)  {
             val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
@@ -53,10 +51,9 @@ class Project : ConstraintLayout {
         if (item.date == null) projectDate.visibility = View.GONE
         projectDate.text = item.date
 
-        expandProject.setOnClickListener({
+        setOnClickListener({
             Log.d("TODO", "TODO")
             //TODO: expandProject listener
-            //TODO: put this listener on the whole project instead of only the button.
         })
     }
 }
