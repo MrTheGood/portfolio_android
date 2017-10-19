@@ -40,5 +40,6 @@ data class ProjectItem(private val o: JSONObject) : Item(o) {
     val img: String? = o.optString("img", null)//TODO: Make list
     val shortDescription = o.getString("shortDescription")!!
     val fullDescription = o.getString("fullDescription")!!
-    val date = o.getString("date")!!
+    val copyright: String? = o.optString("copyright", null)
+    val date: String? = o.optString("date", null)
 }

@@ -24,8 +24,8 @@
             android:layout_width="64dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/desc_projectThumbnail"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -42,7 +42,7 @@
             />
         
         <TextView
-            android:id="@+id/project_description"
+            android:id="@+id/project_shortDescription"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,6 +51,18 @@
             app:layout_constraintStart_toEndOf="@id/project_image"
             app:layout_constraintTop_toBottomOf="@id/project_title"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            />
+        
+        <TextView
+            android:id="@+id/project_date"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toStartOf="@id/expand_project"
+            app:layout_constraintStart_toEndOf="@id/project_image"
+            app:layout_constraintTop_toBottomOf="@id/project_shortDescription"
+            tools:text="October 2017"
             />
         
         <ImageView

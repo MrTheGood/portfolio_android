@@ -22,7 +22,10 @@ import eu.insertcode.portfolio.data.ProjectItem
 class Project : ConstraintLayout {
     private val projectImage: ImageView
     private val projectTitle: TextView
-    private val projectDescription: TextView
+    private val projectShortDescription: TextView
+    private val projectFullDescription: TextView? = null
+    private val projectCopyright: TextView? = null
+    private val projectDate: TextView
     private val expandProject: ImageView
 
     constructor(item: ProjectItem, ctx: Context) : this(item, ctx, null)
@@ -32,19 +35,23 @@ class Project : ConstraintLayout {
 
         projectImage = findViewById(R.id.project_image)
         projectTitle = findViewById(R.id.project_title)
-        projectDescription = findViewById(R.id.project_description)
+        projectShortDescription = findViewById(R.id.project_shortDescription)
+        projectDate = findViewById(R.id.project_date)
         expandProject = findViewById(R.id.expand_project)
 
         if (item.img != null)  {
             val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
             Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
         }
+
         projectTitle.text = item.title
-        projectDescription.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        projectShortDescription.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(item.shortDescription, Html.FROM_HTML_MODE_COMPACT)
         } else {
             Html.fromHtml(item.shortDescription)
         }
+        if (item.date == null) projectDate.visibility = View.GONE
+        projectDate.text = item.date
 
         expandProject.setOnClickListener({
             Log.d("TODO", "TODO")
