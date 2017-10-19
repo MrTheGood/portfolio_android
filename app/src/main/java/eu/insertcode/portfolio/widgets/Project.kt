@@ -2,7 +2,9 @@ package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.support.constraint.ConstraintLayout
+import android.text.Html
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -38,7 +40,12 @@ class Project : ConstraintLayout {
             Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
         }
         projectTitle.text = item.title
-        projectDescription.text = item.shortDescription
+        projectDescription.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(item.shortDescription, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            Html.fromHtml(item.shortDescription)
+        }
+
         expandProject.setOnClickListener({
             Log.d("TODO", "TODO")
             //TODO: expandProject listener
