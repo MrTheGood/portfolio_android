@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#BDBDBD</color>
+    <color name="colorPrimaryDark">#9E9E9E</color>
+    <color name="colorAccent">#424242</color>
+
     <!-- Colours -->
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    
     <color name="colorWhite">#FFFFFFFF</color>
     
     <color name="colorTransparent">#00000000</color>
@@ -18,11 +18,11 @@
     <color name="background_light">@color/colorGrayLight</color>
     <color name="background_dark">@color/colorGrayDark</color>
     
-    <color name="view_progressbar">@color/colorGrayDark</color>
+    <color name="view_progressbar">@color/colorGrayDark</color>r
     
     <color name="view_category_title">@color/colorWhite</color>
-    <color name="view_category_titleBackground">@color/colorPrimary</color>
+    <color name="view_category_titleBackground">@color/colorPrimaryDark</color>
     
     <color name="view_subcategory_title">@color/colorWhite</color>
-    <color name="view_subcategory_titleBackground">@color/colorGrayDarkest</color>
+    <color name="view_subcategory_titleBackground">@color/colorPrimary</color>
 </resources>

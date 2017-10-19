@@ -7,13 +7,13 @@
     android:background="@color/background_dark"
     android:orientation="vertical"
     >
-    
+
     <TextView
         android:id="@+id/category_title"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/view_category_titleBackground"
         android:paddingBottom="8dp"
         android:paddingEnd="16sp"
         android:paddingStart="16sp"
@@ -21,11 +21,11 @@
         android:textColor="@color/colorWhite"
         tools:text="Category"
         />
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
         <LinearLayout
             android:id="@+id/category_content"
             android:layout_width="match_parent"
