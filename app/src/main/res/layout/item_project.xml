@@ -19,14 +19,13 @@
         android:orientation="vertical"
         >
         
-        <ImageView
+        <eu.insertcode.portfolio.widgets.ProjectImageView
             android:id="@+id/project_image"
             android:layout_width="64dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:background="@color/colorAccent"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/desc_projectThumbnail"
-            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
