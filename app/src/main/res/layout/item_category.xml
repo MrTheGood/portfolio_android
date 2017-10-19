@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_dark"
     android:orientation="vertical"
     >
-
-    <TextView
-        android:id="@+id/category_title"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/view_category_titleBackground"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16sp"
-        android:paddingStart="16sp"
-        android:paddingTop="8dp"
-        android:textColor="@color/view_category_title"
-        tools:text="Category"
-        />
-
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        
         <LinearLayout
             android:id="@+id/category_content"
             android:layout_width="match_parent"

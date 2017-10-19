@@ -5,9 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.CategoryItem
 
 @SuppressLint("ViewConstructor")
 /**
@@ -16,14 +14,9 @@ import eu.insertcode.portfolio.data.CategoryItem
  */
 class Category : LinearLayout {
 
-    private val title: TextView
-
-    constructor(item: CategoryItem, ctx: Context) : this(item, ctx, null)
-    constructor(item: CategoryItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
-    constructor(item: CategoryItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
+    constructor(ctx: Context) : this(ctx, null)
+    constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
+    constructor(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
         View.inflate(ctx, R.layout.item_category, this)
-
-        title = findViewById(R.id.category_title)
-        title.text = item.title
     }
 }

@@ -1,6 +1,7 @@
 package eu.insertcode.portfolio
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
@@ -26,6 +27,8 @@ class ProjectsActivity : AppCompatActivity() {
 
         val viewPager: ViewPager = findViewById(R.id.projects_root)
         viewPager.adapter = pageAdapter
+        val tabLayout: TabLayout = findViewById(R.id.projects_tabLayout)
+        tabLayout.setupWithViewPager(viewPager)
 
         val items = items ?: return
         loadProjects(viewPager, items)
@@ -36,8 +39,8 @@ class ProjectsActivity : AppCompatActivity() {
         for (item in items.iterator()) {
             when (item) {
                 is CategoryItem -> {
-                    val category = Category(item, this)
-                    pageAdapter.addView(category)
+                    val category = Category(this)
+                    pageAdapter.addView(category, item.title)
                     loadProjects(category.findViewById(R.id.category_content), item.items)
                 }
                 is SubcategoryItem -> {

@@ -10,6 +10,7 @@ import android.view.ViewGroup
  */
 class CategoriesPagerAdapter : PagerAdapter() {
     private val views = ArrayList<View>()
+    private val titles = ArrayList<CharSequence>()
 
     override fun getItemPosition(item: Any): Int {
         val index = views.indexOf(item)
@@ -32,10 +33,13 @@ class CategoriesPagerAdapter : PagerAdapter() {
 
     override fun isViewFromObject(view: View, item: Any) = view == item
 
-    fun addView(v: View) = addView(v, views.size)
-    private fun addView(v: View, position: Int): Int {
+    fun addView(v: View, title: String) = addView(v, title, views.size)
+    private fun addView(v: View, title: String, position: Int): Int {
         views.add(position, v)
+        titles.add(position, title)
         notifyDataSetChanged()
         return position
     }
+
+    override fun getPageTitle(position: Int) = titles[position]
 }
