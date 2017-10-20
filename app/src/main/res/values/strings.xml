@@ -11,10 +11,7 @@
     <string name="error_somethingWrong_title">Something Went Wrong</string>
     <string name="error_somethingWrong_msg">Oops, something went wrong! Please try again later.</string>
     
-    <!-- Normal Strings -->
-    <string name="str_logo">Logo</string>
-    
     <!-- Content Descriptions -->
-    <string name="desc_expandProject">More information</string>
+    <string name="desc_logo">Logo</string>
     <string name="desc_projectThumbnail">Project Thumbnail</string>
 </resources>

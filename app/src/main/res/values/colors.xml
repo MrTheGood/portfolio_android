@@ -15,18 +15,16 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     
-    <color name="colorTransparent">#00000000</color>
-    
     <color name="colorGrayLightest">#BDBDBD</color>
     <color name="colorGrayLight">#EEEEEE</color>
-    <color name="colorGrayLight_dark">#E0E0E0</color>
+    <color name="colorGray">#E0E0E0</color>
     <color name="colorGrayDark">#9E9E9E</color>
     <color name="colorGrayDarkest">#424242</color>
     
     
     <!-- View Colors -->
     <color name="background_light">@color/colorGrayLight</color>
-    <color name="background_dark">@color/colorGrayLight_dark</color>
+    <color name="background_dark">@color/colorGray</color>
     
     <color name="view_progressbar">@color/colorAccent</color>
     
