@@ -9,10 +9,8 @@ import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.Item
 import eu.insertcode.portfolio.data.ProjectItem
-import eu.insertcode.portfolio.data.SubcategoryItem
 import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
-import eu.insertcode.portfolio.widgets.Subcategory
 
 
 class ProjectsActivity : AppCompatActivity() {
@@ -42,11 +40,6 @@ class ProjectsActivity : AppCompatActivity() {
                     val category = Category(this)
                     pageAdapter.addView(category, item.title)
                     loadProjects(category.findViewById(R.id.category_content), item.items)
-                }
-                is SubcategoryItem -> {
-                    val category = Subcategory(item, this)
-                    parent.addView(category)
-                    loadProjects(category.findViewById(R.id.subcategory_content), item.items)
                 }
                 is ProjectItem -> parent.addView(Project(item, this))
             }

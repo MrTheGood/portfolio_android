@@ -11,7 +11,6 @@ import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.Item
 import eu.insertcode.portfolio.data.ProjectItem
-import eu.insertcode.portfolio.data.SubcategoryItem
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
@@ -49,7 +48,6 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
                 val o = json.getJSONObject(it)
                 when (o.getString("type")) {
                     "item" -> ProjectItem(o)
-                    "subcategory" -> SubcategoryItem(o)
                     "category" -> CategoryItem(o)
                     else -> Item(o)
                 }
@@ -75,6 +73,7 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
     private fun startProjectsActivity() {
         val intent = Intent(context, ProjectsActivity::class.java)
         context.startActivity(intent)
+        context.finish()
     }
 
 }

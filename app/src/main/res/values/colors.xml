@@ -34,8 +34,5 @@
     <color name="view_category_tabLayout_TextSelected">@color/colorWhite</color>
     <color name="view_category_tabLayout_Background">@color/colorPrimary</color>
     
-    <color name="view_subcategory_title">@color/colorPrimary</color>
-    <color name="view_subcategory_titleLine">@color/insertCode_goldDark</color>
-    
     <color name="view_project_background">@color/colorWhite</color>
 </resources>
