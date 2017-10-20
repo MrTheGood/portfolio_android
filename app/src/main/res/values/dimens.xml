@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_projectSmall_top">8dp</dimen>
-    <dimen name="margin_projectSmall_bottom">8dp</dimen>
-    <dimen name="margin_projectSmall_side">16dp</dimen>
+    <dimen name="margin_projectSmall_top">6dp</dimen>
+    <dimen name="margin_projectSmall_bottom">6dp</dimen>
+    <dimen name="margin_projectSmall_side">8dp</dimen>
 </resources>

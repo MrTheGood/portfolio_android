@@ -7,8 +7,10 @@ import android.support.constraint.ConstraintLayout
 import android.text.Html
 import android.util.AttributeSet
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.R
@@ -26,6 +28,7 @@ class Project : ConstraintLayout {
     private val projectFullDescription: TextView? = null
     private val projectCopyright: TextView? = null
     private val projectDate: TextView
+    private val projectTags: LinearLayout
 
     constructor(item: ProjectItem, ctx: Context) : this(item, ctx, null)
     constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
@@ -36,8 +39,9 @@ class Project : ConstraintLayout {
         projectTitle = findViewById(R.id.project_title)
         projectShortDescription = findViewById(R.id.project_shortDescription)
         projectDate = findViewById(R.id.project_date)
+        projectTags = findViewById(R.id.project_tags)
 
-        if (item.img != null)  {
+        if (item.img != null) {
             val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
             Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
         }
@@ -51,9 +55,18 @@ class Project : ConstraintLayout {
         if (item.date == null) projectDate.visibility = View.GONE
         projectDate.text = item.date
 
+        item.tags.indices.forEach {
+            addSubcategory(item.tags[it], it)
+        }
+
         setOnClickListener({
             Log.d("TODO", "TODO")
             //TODO: expandProject listener
         })
+    }
+
+    private fun addSubcategory(tag: String, i: Int) {
+        val v = LayoutInflater.from(context).inflate(R.layout.item_project_tag, projectTags) as LinearLayout
+        v.getChildAt(i).findViewById<TextView>(R.id.project_tag_text).text = tag
     }
 }
