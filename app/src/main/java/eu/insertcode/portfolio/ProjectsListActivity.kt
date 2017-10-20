@@ -13,7 +13,7 @@ import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
 
 
-class ProjectsActivity : AppCompatActivity() {
+class ProjectsListActivity : AppCompatActivity() {
     companion object {
         var items: List<Item>? = null
     }
@@ -21,7 +21,7 @@ class ProjectsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_projects)
+        setContentView(R.layout.activity_projects_list)
 
         val viewPager: ViewPager = findViewById(R.id.projects_root)
         viewPager.adapter = pageAdapter

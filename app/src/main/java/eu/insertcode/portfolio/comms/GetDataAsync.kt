@@ -6,7 +6,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import eu.insertcode.portfolio.MainActivity
-import eu.insertcode.portfolio.ProjectsActivity
+import eu.insertcode.portfolio.ProjectsListActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.Item
@@ -44,7 +44,7 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
         try {
             val json = JSONArray(result)
 
-            ProjectsActivity.items = (0 until json.length()).map {
+            ProjectsListActivity.items = (0 until json.length()).map {
                 val o = json.getJSONObject(it)
                 when (o.getString("type")) {
                     "item" -> ProjectItem(o)
@@ -71,7 +71,7 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
     }
 
     private fun startProjectsActivity() {
-        val intent = Intent(context, ProjectsActivity::class.java)
+        val intent = Intent(context, ProjectsListActivity::class.java)
         context.startActivity(intent)
         context.finish()
     }

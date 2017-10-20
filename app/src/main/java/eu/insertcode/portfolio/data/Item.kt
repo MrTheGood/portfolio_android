@@ -20,7 +20,7 @@ data class CategoryItem(private val o: JSONObject) : Item(o) {
     }
 }
 
-data class ProjectItem(private val o: JSONObject) : Item(o) {
+data class ProjectItem(val o: JSONObject) : Item(o) {
     val img: String? = o.optString("img", null)//TODO: Make list
     val shortDescription = o.getString("shortDescription")!!
     val fullDescription = o.getString("fullDescription")!!
@@ -33,7 +33,7 @@ data class ProjectItem(private val o: JSONObject) : Item(o) {
     } catch (e: NullPointerException) {
         emptyList<String>()
     }
-    val contributors = try {
+    val contributors = try { //TODO: Implement
         (0 until o.optJSONArray("contributors").length()).map {
             Contributor(o.getJSONArray("contributors").getJSONObject(it))
         }

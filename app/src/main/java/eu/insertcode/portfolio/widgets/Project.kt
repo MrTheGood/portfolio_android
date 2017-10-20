@@ -1,27 +1,29 @@
 package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
-import android.os.Build
-import android.support.constraint.ConstraintLayout
-import android.text.Html
+import android.content.Intent
+import android.support.v4.app.ActivityOptionsCompat
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import eu.insertcode.portfolio.ProjectActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.utils.Utils
+import android.support.v4.util.Pair as AndroidPair
 
 @SuppressLint("ViewConstructor")
 /**
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class Project : ConstraintLayout {
+class Project : FrameLayout {
     private val projectImage: ImageView
     private val projectTitle: TextView
     private val projectShortDescription: TextView
@@ -41,31 +43,27 @@ class Project : ConstraintLayout {
         projectDate = findViewById(R.id.project_date)
         projectTags = findViewById(R.id.project_tags)
 
-        if (item.img != null) {
-            val imageUrl = resources.getString(R.string.url_images_prefix) + item.img
-            Glide.with(this).asBitmap().load(imageUrl).into(projectImage)
-        }
+        Utils.putImageInView(ctx, item.img, projectImage)
 
         projectTitle.text = item.title
-        projectShortDescription.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(item.shortDescription, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            Html.fromHtml(item.shortDescription)
-        }
+        projectShortDescription.text = Utils.fromHtmlCompat(item.shortDescription)
+
         if (item.date == null) projectDate.visibility = View.GONE
         projectDate.text = item.date
 
         item.tags.indices.forEach {
-            addSubcategory(item.tags[it], it)
+            addProjectTag(item.tags[it], it)
         }
 
         setOnClickListener({
-            Log.d("TODO", "TODO")
-            //TODO: expandProject listener
+            val intent = Intent(context, ProjectActivity::class.java)
+            intent.putExtra(ProjectActivity.EXTRA_ITEM, item.o.toString())
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, projectImage, "project_image")
+            context.startActivity(intent, options.toBundle())
         })
     }
 
-    private fun addSubcategory(tag: String, i: Int) {
+    private fun addProjectTag(tag: String, i: Int) {
         val v = LayoutInflater.from(context).inflate(R.layout.item_project_tag, projectTags) as LinearLayout
         v.getChildAt(i).findViewById<TextView>(R.id.project_tag_text).text = tag
     }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    tools:context="eu.insertcode.portfolio.ProjectActivity"
+    >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        
+        <TextView
+            android:id="@+id/project_title"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="8dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/colorWhite"
+            tools:text="Project"
+            />
+        
+        <ImageView
+            android:id="@+id/project_image"
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc_projectImage"
+            android:scaleType="fitCenter"
+            android:transitionName="project_image"
+            />
+        
+        <LinearLayout
+            android:id="@+id/project_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            >
+            
+            <TextView
+                android:id="@+id/project_copyright"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="© 2017 Maarten de Goede"
+                />
+            
+            <TextView
+                android:id="@+id/project_fullDescription"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="description"
+                />
+            
+            <TextView
+                android:id="@+id/project_date"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="Januari 2015 - Februari 2023"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
