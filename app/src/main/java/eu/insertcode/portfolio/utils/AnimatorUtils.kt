@@ -7,7 +7,7 @@ import android.view.animation.Transformation
 
 /**
  * Created by maartendegoede on 18/10/17.
- * Copyright © 2017 AppStudio.nl. All rights reserved.
+ * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 class AnimatorUtils {
     companion object {

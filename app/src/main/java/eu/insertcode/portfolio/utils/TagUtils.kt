@@ -10,7 +10,7 @@ import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 23/10/17.
- * Copyright © 2017 AppStudio.nl. All rights reserved.
+ * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 class TagUtils {
     companion object {

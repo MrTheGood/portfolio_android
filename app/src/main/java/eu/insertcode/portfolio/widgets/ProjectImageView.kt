@@ -15,7 +15,6 @@ import eu.insertcode.portfolio.utils.BitmapUtil
 class ProjectImageView : ImageView {
 
     constructor(ctx: Context) : this(ctx, null)
-
     constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
     constructor(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr)
 

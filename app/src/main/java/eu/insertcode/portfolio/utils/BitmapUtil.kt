@@ -5,7 +5,7 @@ import android.graphics.*
 
 /**
  * Created by maartendegoede on 19/10/17.
- * Copyright © 2017 AppStudio.nl. All rights reserved.
+ * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 class BitmapUtil {
     companion object {
