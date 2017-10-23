@@ -1,6 +1,7 @@
 package eu.insertcode.portfolio
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -57,6 +58,10 @@ class ProjectActivity : AppCompatActivity() {
                 first = false
             }
         }
+
+        // setup viewpager indicator
+        if (item.images.size > 1)
+            findViewById<TabLayout>(R.id.project_image_indicator).setupWithViewPager(projectImages)
 
         // Add text content
         projectTitle.text = item.title
