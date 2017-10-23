@@ -3,12 +3,12 @@ package eu.insertcode.portfolio
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
 import org.json.JSONObject
 
@@ -52,16 +52,11 @@ class ProjectActivity : AppCompatActivity() {
         projectDate.text = item.date
 
         item.tags.indices.forEach {
-            addProjectTag(item.tags[it], it, projectTags)
+            TagUtils.addProjectTag(item.tags[it], it, this, projectTags)
         }
     }
 
     override fun onBackPressed() {
         supportFinishAfterTransition()
-    }
-
-    private fun addProjectTag(tag: String, i: Int, projectTags: LinearLayout) {
-        LayoutInflater.from(this).inflate(R.layout.item_project_tag, projectTags)
-        projectTags.getChildAt(i).findViewById<TextView>(R.id.project_tag_text).text = tag
     }
 }

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.app.ActivityOptionsCompat
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -15,6 +14,7 @@ import android.widget.TextView
 import eu.insertcode.portfolio.ProjectActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
 import android.support.v4.util.Pair as AndroidPair
 
@@ -24,6 +24,7 @@ import android.support.v4.util.Pair as AndroidPair
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 class Project : FrameLayout {
+
     private val projectImage: ImageView
     private val projectTitle: TextView
     private val projectShortDescription: TextView
@@ -52,7 +53,7 @@ class Project : FrameLayout {
         projectDate.text = item.date
 
         item.tags.indices.forEach {
-            addProjectTag(item.tags[it], it)
+            TagUtils.addProjectTag(item.tags[it], it, context, projectTags)
         }
 
         setOnClickListener({
@@ -61,10 +62,5 @@ class Project : FrameLayout {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, projectImage, "project_image")
             context.startActivity(intent, options.toBundle())
         })
-    }
-
-    private fun addProjectTag(tag: String, i: Int) {
-        val v = LayoutInflater.from(context).inflate(R.layout.item_project_tag, projectTags) as LinearLayout
-        v.getChildAt(i).findViewById<TextView>(R.id.project_tag_text).text = tag
     }
 }

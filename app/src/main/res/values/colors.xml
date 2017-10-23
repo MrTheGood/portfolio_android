@@ -24,6 +24,7 @@
     
     <!-- View Colors -->
     <color name="background_light">@color/colorGrayLightest</color>
+    <color name="background_normal">@color/colorGrayLight</color>
     <color name="background_dark">@color/colorGray</color>
     
     <color name="view_progressbar">@color/colorAccent</color>
@@ -33,5 +34,6 @@
     <color name="view_category_tabLayout_Background">@color/colorPrimary</color>
     
     <color name="view_project_background">@color/colorWhite</color>
-    <color name="view_project_tag_background">@color/background_dark</color>
+    
+    <color name="activity_project_imageBackground">@color/background_normal</color>
 </resources>
