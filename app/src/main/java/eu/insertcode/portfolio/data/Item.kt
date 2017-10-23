@@ -21,7 +21,13 @@ data class CategoryItem(private val o: JSONObject) : Item(o) {
 }
 
 data class ProjectItem(val o: JSONObject) : Item(o) {
-    val img: String? = o.optString("img", null)//TODO: Make list
+    val images = try {
+        (0 until o.optJSONArray("images").length()).map {
+            o.getJSONArray("images").getString(it)
+        }
+    } catch (e: NullPointerException) {
+        emptyList<String>()
+    }
     val shortDescription = o.getString("shortDescription")!!
     val fullDescription = o.getString("fullDescription")!!
     val copyright: String? = o.optString("copyright", null)

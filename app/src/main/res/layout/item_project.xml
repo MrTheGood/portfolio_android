@@ -30,7 +30,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/desc_projectThumbnail"
                 android:scaleType="centerCrop"
-                android:transitionName="project_image"
+                android:transitionName="@string/trans_projectImage"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
@@ -75,6 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:transitionName="@string/trans_projectTags"
                     />
             
             </LinearLayout>

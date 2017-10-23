@@ -44,7 +44,8 @@ class Project : FrameLayout {
         projectDate = findViewById(R.id.project_date)
         projectTags = findViewById(R.id.project_tags)
 
-        Utils.putImageInView(ctx, item.img, projectImage)
+        if (!item.images.isEmpty())
+            Utils.putImageInView(ctx, item.images[0], projectImage)
 
         projectTitle.text = item.title
         projectShortDescription.text = Utils.fromHtmlCompat(item.shortDescription)
@@ -59,7 +60,9 @@ class Project : FrameLayout {
         setOnClickListener({
             val intent = Intent(context, ProjectActivity::class.java)
             intent.putExtra(ProjectActivity.EXTRA_ITEM, item.o.toString())
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, projectImage, "project_image")
+            val imagePair = AndroidPair<View, String>(projectImage, resources.getString(R.string.trans_projectImage))
+            val tagPair = AndroidPair<View, String>(projectTags, resources.getString(R.string.trans_projectTags))
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, imagePair, tagPair)
             context.startActivity(intent, options.toBundle())
         })
     }

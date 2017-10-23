@@ -18,4 +18,8 @@
     
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
+    
+    <!-- transition names -->
+    <string name="trans_projectImage">project_image</string>
+    <string name="trans_projectTags">project_tags</string>
 </resources>
