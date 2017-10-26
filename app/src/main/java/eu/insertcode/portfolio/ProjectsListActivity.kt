@@ -17,6 +17,7 @@ class ProjectsListActivity : AppCompatActivity() {
     companion object {
         var items: List<Item>? = null
     }
+
     private val pageAdapter = CategoriesPagerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
