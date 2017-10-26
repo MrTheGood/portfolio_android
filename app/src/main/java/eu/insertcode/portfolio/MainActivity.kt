@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import eu.insertcode.portfolio.comms.GetDataAsync
+import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         if (isNetworkConnected()) {
-            GetDataAsync(this).execute(resources.getString(R.string.url_getData))
+            GetDataAsync(WeakReference(this)).execute(resources.getString(R.string.url_getData))
         } else {
             AlertDialog.Builder(this)
                     .setTitle(R.string.error_noInternet_title)

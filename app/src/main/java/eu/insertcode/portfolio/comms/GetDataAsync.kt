@@ -15,6 +15,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
 import java.io.InputStream
+import java.lang.ref.WeakReference
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
@@ -22,7 +23,7 @@ import javax.net.ssl.HttpsURLConnection
  * Created by maartendegoede on 16/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, String>() {
+class GetDataAsync(private val context: WeakReference<MainActivity>?) : AsyncTask<String, Int, String>() {
 
     override fun doInBackground(vararg params: String?): String? {
         val inputStream: InputStream? = null
@@ -63,17 +64,22 @@ class GetDataAsync(private val context: MainActivity) : AsyncTask<String, Int, S
     }
 
     private fun throwExceptionMessage(e: Exception) {
-        AlertDialog.Builder(context)
-                .setTitle(R.string.error_somethingWrong_title)
-                .setMessage(R.string.error_somethingWrong_msg)
-                .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
-                .show()
+        val ctx = context?.get()
+        if (ctx != null) {
+            AlertDialog.Builder(ctx)
+                    .setTitle(R.string.error_somethingWrong_title)
+                    .setMessage(R.string.error_somethingWrong_msg)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
+                    .show()
+        }
     }
 
     private fun startProjectsActivity() {
-        val intent = Intent(context, ProjectsListActivity::class.java)
-        context.startActivity(intent)
-        context.finish()
+        val ctx = context?.get()
+        if (ctx != null) {
+            val intent = Intent(ctx, ProjectsListActivity::class.java)
+            ctx.startActivity(intent)
+            ctx.finish()
+        }
     }
-
 }
