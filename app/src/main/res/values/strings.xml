@@ -14,8 +14,7 @@
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
     <string name="desc_projectThumbnail">Project Thumbnail</string>
-    <string name="desc_projectImage">Project Image</string>
-    
+
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
     
