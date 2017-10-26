@@ -39,6 +39,7 @@ data class ProjectItem(val o: JSONObject) : Item(o) {
     } catch (e: NullPointerException) {
         emptyList<String>()
     }
+    @Suppress("unused")
     val contributors = try { //TODO: Implement
         (0 until o.optJSONArray("contributors").length()).map {
             Contributor(o.getJSONArray("contributors").getJSONObject(it))

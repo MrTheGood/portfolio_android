@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@color/insertCode_black,@color/colorBlack,@color/colorGray,@color/colorGrayDarkest,@color/background_dark"
+    >
     <color name="colorPrimaryDark">@color/insertCode_redDark</color>
     <color name="colorPrimary">@color/insertCode_redLight</color>
     <color name="colorAccent">@color/insertCode_goldDark</color>
-    
+
     <!-- insertCode Colours -->
     <color name="insertCode_black">@color/colorBlack</color>
     <color name="insertCode_redLight">#ae0001</color>
     <color name="insertCode_redDark">#740001</color>
     <color name="insertCode_goldLight">#d3a625</color>
     <color name="insertCode_goldDark">#eeba30</color>
-    
+
     <!-- Colours -->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    
+
     <color name="colorGrayLightest">#F8F8F8</color>
     <color name="colorGrayLight">#EEEEEE</color>
     <color name="colorGray">#E0E0E0</color>
     <color name="colorGrayDark">#9E9E9E</color>
     <color name="colorGrayDarkest">#424242</color>
-    
-    
+
+
     <!-- View Colors -->
     <color name="background_light">@color/colorGrayLightest</color>
     <color name="background_normal">@color/colorGrayLight</color>
     <color name="background_dark">@color/colorGray</color>
-    
+
     <color name="view_progressbar">@color/colorAccent</color>
-    
+
     <color name="view_category_tabLayout_Text">@color/colorWhite</color>
     <color name="view_category_tabLayout_TextSelected">@color/colorWhite</color>
     <color name="view_category_tabLayout_Background">@color/colorPrimary</color>
-    
+
     <color name="view_project_background">@color/colorWhite</color>
-    
+
     <color name="activity_project_imageBackground">@color/background_normal</color>
-    
-    
+
+
     <color name="view_indicator_default">#AAF8F8F8</color>
     <color name="view_indicator_selected">@color/colorGrayDark</color>
 </resources>

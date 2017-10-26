@@ -28,8 +28,6 @@ class Project : FrameLayout {
     private val projectImage: ImageView
     private val projectTitle: TextView
     private val projectShortDescription: TextView
-    private val projectFullDescription: TextView? = null
-    private val projectCopyright: TextView? = null
     private val projectDate: TextView
     private val projectTags: LinearLayout
 
