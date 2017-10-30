@@ -5,6 +5,10 @@
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
     <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
     
+    <!-- transition names -->
+    <string name="trans_projectImage" translatable="false">project_image</string>
+    <string name="trans_projectTags" translatable="false">project_tags</string>
+    
     <!-- Error Messages -->
     <string name="error_noInternet_title">No Internet Connection"</string>
     <string name="error_noInternet_msg">Please check your internet connection and try again.</string>
@@ -18,7 +22,10 @@
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
     
-    <!-- transition names -->
-    <string name="trans_projectImage">project_image</string>
-    <string name="trans_projectTags">project_tags</string>
+    <!-- Menu Titles -->
+    <string name="menu_action_settings">Settings</string>
+    
+    <!-- Activity Titles -->
+    <string name="title_activity_about">About Me</string>
+    <string name="title_activity_projectsList">Projects</string>
 </resources>

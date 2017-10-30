@@ -21,11 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ProjectsListActivity"
-            >
-        </activity>
+        <activity android:name=".ProjectsListActivity" />
         <activity android:name=".ProjectActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme"
+            />
     </application>
 
 </manifest>
