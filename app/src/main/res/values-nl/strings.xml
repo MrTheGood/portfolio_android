@@ -14,9 +14,6 @@
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
     
-    <!-- Menu Titles -->
-    <string name="menu_action_settings">Instellingen</string>
-    
     <!-- Activity Titles -->
     <string name="title_activity_about">Over Mij</string>
     <string name="title_activity_projectsList">Projecten</string>

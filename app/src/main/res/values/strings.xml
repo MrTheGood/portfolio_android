@@ -22,9 +22,6 @@
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
     
-    <!-- Menu Titles -->
-    <string name="menu_action_settings">Settings</string>
-    
     <!-- Activity Titles -->
     <string name="title_activity_about">About Me</string>
     <string name="title_activity_projectsList">Projects</string>
