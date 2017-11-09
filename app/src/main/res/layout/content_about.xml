@@ -9,7 +9,7 @@
     tools:context="eu.insertcode.portfolio.AboutActivity"
     tools:showIn="@layout/activity_about"
     >
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

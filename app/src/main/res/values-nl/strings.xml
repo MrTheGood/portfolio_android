@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">Portfolio</string>
-    
+
     <!-- Error Messages -->
     <string name="error_noInternet_title">Geen Internetverbinding</string>
     <string name="error_noInternet_msg">Check AUB uw internetverbinding en probeer het opniew.</string>
     <string name="error_somethingWrong_title">Er Is Iets Fout Gegaan</string>
     <string name="error_somethingWrong_msg">Oeps, er is iets fout gegaan! Probeer het later opniew.</string>
-    
+
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
     <string name="desc_projectThumbnail">Project Thumbnail</string>
-    
+
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
-    
+
     <!-- Activity Titles -->
     <string name="title_activity_about">Over Mij</string>
     <string name="title_activity_projectsList">Projecten</string>

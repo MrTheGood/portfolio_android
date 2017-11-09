@@ -1,27 +1,27 @@
 <resources>
     <string name="app_name">Portfolio</string>
-    
+
     <!-- Data URLs -->
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
     <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
-    
+
     <!-- transition names -->
     <string name="trans_projectImage" translatable="false">project_image</string>
     <string name="trans_projectTags" translatable="false">project_tags</string>
-    
+
     <!-- Error Messages -->
     <string name="error_noInternet_title">No Internet Connection"</string>
     <string name="error_noInternet_msg">Please check your internet connection and try again.</string>
     <string name="error_somethingWrong_title">Something Went Wrong</string>
     <string name="error_somethingWrong_msg">Oops, something went wrong! Please try again later.</string>
-    
+
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
     <string name="desc_projectThumbnail">Project Thumbnail</string>
-    
+
     <!-- Strings -->
     <string name="str_copyrightSymbol">© %s</string>
-    
+
     <!-- Activity Titles -->
     <string name="title_activity_about">About Me</string>
     <string name="title_activity_projectsList">Projects</string>

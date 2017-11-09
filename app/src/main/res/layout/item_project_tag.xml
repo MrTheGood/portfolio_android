@@ -14,7 +14,7 @@
     app:contentPaddingLeft="2dp"
     app:contentPaddingRight="2dp"
     >
-    
+
     <TextView
         android:id="@+id/project_tag_text"
         style="@style/TextAppearance.AppCompat.Caption"

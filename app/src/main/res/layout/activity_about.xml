@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context="eu.insertcode.portfolio.AboutActivity"
     >
-    
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/about_app_bar"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         >
-        
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/about_toolbar_layout"
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar"
             >
-            
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/about_toolbar"
                 android:layout_width="match_parent"
@@ -34,13 +34,13 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 />
-        
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-    
+
     <include layout="@layout/content_about"
         />
-    
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/about_mail_btn"
         android:layout_width="wrap_content"
