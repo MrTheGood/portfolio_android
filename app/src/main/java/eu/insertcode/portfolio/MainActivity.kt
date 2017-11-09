@@ -1,5 +1,6 @@
 package eu.insertcode.portfolio
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -74,6 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_projects -> {
             }
             R.id.nav_about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_featured -> {
