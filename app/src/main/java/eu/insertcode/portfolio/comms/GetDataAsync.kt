@@ -5,7 +5,8 @@ package eu.insertcode.portfolio.comms
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
-import eu.insertcode.portfolio.ProjectsListActivity
+import android.support.annotation.StringRes
+import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.SplashActivity
 import eu.insertcode.portfolio.data.CategoryItem
@@ -35,6 +36,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
 
             conn.inputStream.bufferedReader().use { it.readText() }
         } catch (e: IOException) {
+            e.printStackTrace()
             null
         } finally {
             inputStream?.close()
@@ -45,7 +47,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
         try {
             val json = JSONArray(result)
 
-            ProjectsListActivity.items = (0 until json.length()).map {
+            MainActivity.items = (0 until json.length()).map {
                 val o = json.getJSONObject(it)
                 when (o.getString("type")) {
                     "item" -> ProjectItem(o)
@@ -55,20 +57,20 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
             }
             startProjectsActivity()
         } catch (e: JSONException) {
-            throwExceptionMessage(e)
+            throwExceptionMessage(e, R.string.error_somethingWrong_title, R.string.error_somethingWrong_msg)
             return
         } catch (e: NullPointerException) {
-            throwExceptionMessage(e)
+            throwExceptionMessage(e, R.string.error_somethingWrong_title, R.string.error_somethingWrong_msg)
             return
         }
     }
 
-    private fun throwExceptionMessage(e: Exception) {
+    private fun throwExceptionMessage(e: Exception, @StringRes title: Int, @StringRes message: Int) {
         val ctx = context?.get()
         if (ctx != null) {
             AlertDialog.Builder(ctx)
-                    .setTitle(R.string.error_somethingWrong_title)
-                    .setMessage(R.string.error_somethingWrong_msg)
+                    .setTitle(title)
+                    .setMessage(message)
                     .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
                     .show()
         }
@@ -77,7 +79,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
     private fun startProjectsActivity() {
         val ctx = context?.get()
         if (ctx != null) {
-            val intent = Intent(ctx, ProjectsListActivity::class.java)
+            val intent = Intent(ctx, MainActivity::class.java)
             ctx.startActivity(intent)
             ctx.finish()
         }

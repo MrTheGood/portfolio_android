@@ -5,7 +5,7 @@
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
     <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
 
-    <!-- transition names -->
+    <!-- Transition Names -->
     <string name="trans_projectImage" translatable="false">project_image</string>
     <string name="trans_projectTags" translatable="false">project_tags</string>
 
@@ -18,11 +18,24 @@
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
     <string name="desc_projectThumbnail">Project Thumbnail</string>
-
-    <!-- Strings -->
-    <string name="str_copyrightSymbol">© %s</string>
+    <string name="desc_drawer_open">Open navigation drawer</string>
+    <string name="desc_drawer_close">Close navigation drawer</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_about">About Me</string>
-    <string name="title_activity_projectsList">Projects</string>
+    <string name="title_activity_main">Projects</string>
+
+    <!-- Menu Titles -->
+    <string name="menu_projects">Projects</string>
+    <string name="menu_aboutMe">About Me</string>
+    <string name="menu_featured">Featured</string>
+    <string name="menu_games">Games</string>
+    <string name="menu_websites">Websites</string>
+    <string name="menu_apps">Apps</string>
+    <string name="menu_other">Other</string>
+
+    <!-- Unsorted -->
+    <string name="str_copyrightSymbol">© %s</string>
+    <string name="str_drawerHeader">insertCode Portfolio</string>
+
 </resources>
