@@ -40,7 +40,7 @@ class ProjectActivity : AppCompatActivity() {
         val projectCopyright = findViewById<TextView>(R.id.project_copyright)
         val projectFullDescription = findViewById<TextView>(R.id.project_fullDescription)
         val projectDate = findViewById<TextView>(R.id.project_date)
-//        val projectContributors = findViewById<View?>(R.id.) TODO
+//        val projectContributors = findViewById<View?>(R.id.) TODO: Implement Contributors
 
         //postpone enter transition
         postponeEnterTransition()
