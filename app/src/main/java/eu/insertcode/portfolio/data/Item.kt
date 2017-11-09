@@ -40,7 +40,7 @@ data class ProjectItem(val o: JSONObject) : Item(o) {
         emptyList<String>()
     }
     @Suppress("unused")
-    val contributors = try { //TODO: Implement
+    val contributors = try { //TODO: Implement Contributors
         (0 until o.optJSONArray("contributors").length()).map {
             Contributor(o.getJSONArray("contributors").getJSONObject(it))
         }
@@ -52,5 +52,5 @@ data class ProjectItem(val o: JSONObject) : Item(o) {
 }
 
 data class Contributor(private val o: JSONObject) {
-    //TODO
+    //TODO: Implement Contributors
 }

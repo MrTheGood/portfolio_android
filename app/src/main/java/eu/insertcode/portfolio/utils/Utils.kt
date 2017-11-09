@@ -24,6 +24,7 @@ class Utils {
         fun fromHtmlCompat(s: String): Spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(s, Html.FROM_HTML_MODE_COMPACT)
         } else {
+            @Suppress("DEPRECATION")
             Html.fromHtml(s)
         }
     }

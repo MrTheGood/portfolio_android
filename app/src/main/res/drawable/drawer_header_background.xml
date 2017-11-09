@@ -1,0 +1,12 @@
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+    <!-- TODO: change to colour or image -->
+    <gradient
+        android:angle="135"
+        android:startColor="#deaa20"
+        android:endColor="@color/insertCode_goldLight"
+        android:type="linear"
+        />
+</shape>

@@ -8,13 +8,13 @@
     android:background="@color/background_light"
     tools:context="eu.insertcode.portfolio.ProjectActivity"
     >
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        
+
         <TextView
             android:id="@+id/project_title"
             style="@style/Base.TextAppearance.AppCompat.Title"
@@ -28,11 +28,11 @@
             android:textColor="@color/colorWhite"
             tools:text="Project"
             />
-        
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="224dp">
-            
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/project_image"
                 android:layout_width="0dp"
@@ -43,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
-            
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/project_image_indicator"
                 android:layout_width="0dp"
@@ -57,7 +57,7 @@
                 app:tabPadding="2dp"
                 />
         </android.support.constraint.ConstraintLayout>
-        
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:orientation="vertical"
             android:paddingBottom="8dp"
             >
-            
+
             <LinearLayout
                 android:id="@+id/project_tags"
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:orientation="horizontal"
                 android:transitionName="@string/trans_projectTags"
                 />
-            
+
             <TextView
                 android:id="@+id/project_copyright"
                 style="@style/TextAppearance.AppCompat.Caption"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="8dp"
                 tools:text="© 2017 Maarten de Goede"
                 />
-            
+
             <TextView
                 android:id="@+id/project_fullDescription"
                 style="@style/TextAppearance.AppCompat.Body1"
@@ -92,7 +92,7 @@
                 android:layout_marginTop="8dp"
                 tools:text="description"
                 />
-            
+
             <TextView
                 android:id="@+id/project_date"
                 style="@style/TextAppearance.AppCompat.Caption"
