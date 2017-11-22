@@ -25,7 +25,7 @@ class ProjectImagesPagerAdapter : PagerAdapter() {
         return v
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any?) =
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) =
             container.removeView(views[position])
 
     override fun getCount(): Int = views.size
