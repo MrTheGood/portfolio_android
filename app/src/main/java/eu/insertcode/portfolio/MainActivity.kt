@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -19,7 +20,8 @@ import eu.insertcode.portfolio.widgets.Project
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+
     companion object {
         var items: List<Item> = emptyList()
     }
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         projects_root.adapter = pageAdapter
+        projects_root.addOnPageChangeListener(this)
         projects_tabLayout.setupWithViewPager(projects_root)
         val items = items
         loadProjects(projects_root, items)
@@ -58,16 +61,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         for (i in items.indices) {
             val item = items[i]
-            when (item) {
-                is CategoryItem -> {
-                    menu.add(R.id.menu_group_categories, i, Menu.NONE, item.title)
-                    menu.findItem(i).icon = ContextCompat.getDrawable(this, menuIcons[item.icon] ?: R.drawable.ic_other)
-                    menu.findItem(i).isCheckable = true
-                }
+            if (item is CategoryItem) {
+                menu.add(R.id.menu_group_categories, i, Menu.NONE, item.title)
+                menu.findItem(i).icon = ContextCompat.getDrawable(this, menuIcons[item.icon] ?: R.drawable.ic_other)
+                menu.findItem(i).isCheckable = true
             }
         }
-        //TODO: Check the first item
-        //menu.getItem(1).isChecked = true
     }
 
 
@@ -96,24 +95,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // TODO: Can this be written more elegantly?
-        when (item.itemId) {
-            R.id.nav_projects -> {
-            }
-            R.id.nav_about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
+        if (item.itemId == R.id.nav_about) {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
         }
 
-        (0..items.size).filter { item.itemId == it }
+        items.indices.filter { item.itemId == it }
                 .forEach {
-                    // -1 because the first item in the items list is metadata.
-                    projects_root.currentItem = it - 1
+                    projects_root.currentItem = it
                 }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+
+    override fun onPageScrollStateChanged(state: Int) {}
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+    override fun onPageSelected(position: Int) {
+        // position + 1 because about_me is the first item.
+        nav_view.menu.getItem(position + 1).isChecked = true
     }
     //endregion user-interaction
 }
