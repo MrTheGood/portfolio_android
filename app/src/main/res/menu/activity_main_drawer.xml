@@ -5,20 +5,12 @@
     tools:showIn="navigation_view"
     >
 
-    <group
-        android:id="@+id/menu_group_main"
-        >
-        <item
-            android:id="@+id/nav_projects"
-            android:icon="@drawable/ic_projects"
-            android:title="@string/menu_projects"
-            />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_about_me"
-            android:title="@string/menu_aboutMe"
-            />
-    </group>
+    <item
+        android:id="@+id/nav_about"
+        android:checkable="false"
+        android:icon="@drawable/ic_about_me"
+        android:title="@string/menu_aboutMe"
+        />
 
     <group
         android:id="@+id/menu_group_categories"
