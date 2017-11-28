@@ -57,21 +57,29 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
             }
             startProjectsActivity()
         } catch (e: JSONException) {
-            throwExceptionMessage(e, R.string.error_somethingWrong_title, R.string.error_somethingWrong_msg)
+            showErrorDialog(R.string.error_server_title, R.string.error_server_msg, { _, _ -> throw e })
             return
         } catch (e: NullPointerException) {
-            throwExceptionMessage(e, R.string.error_somethingWrong_title, R.string.error_somethingWrong_msg)
+            val ctx = context?.get()
+            if (ctx != null) {
+                if (ctx.isNetworkConnected()) {
+                    showErrorDialog(R.string.error_unexpected_title, R.string.error_unexpected_msg, { _, _ -> throw e })
+                } else {
+                    showErrorDialog(R.string.error_connectionLost_title, R.string.error_connectionLost_msg, { _, _ -> ctx.finish() })
+                }
+            }
             return
         }
     }
 
-    private fun throwExceptionMessage(e: Exception, @StringRes title: Int, @StringRes message: Int) {
+    private fun showErrorDialog(@StringRes title: Int, @StringRes message: Int, listener: (Any, Any) -> Unit) {
         val ctx = context?.get()
         if (ctx != null) {
             AlertDialog.Builder(ctx)
                     .setTitle(title)
                     .setMessage(message)
-                    .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
+                    .setPositiveButton(android.R.string.ok, listener)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
                     .setCancelable(false)
                     .show()
         }

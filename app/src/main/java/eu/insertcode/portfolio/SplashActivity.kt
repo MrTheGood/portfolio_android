@@ -28,12 +28,12 @@ class SplashActivity : AppCompatActivity() {
                         finish()
                     }
                     .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setCancelable(false)
                     .show()
         }
     }
 
-
-    private fun isNetworkConnected(): Boolean {
+    fun isNetworkConnected(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected

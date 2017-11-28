@@ -3,9 +3,16 @@
 
     <!-- Error Messages -->
     <string name="error_noInternet_title">Geen Internetverbinding</string>
-    <string name="error_noInternet_msg">Check AUB uw internetverbinding en probeer het opniew.</string>
-    <string name="error_somethingWrong_title">Er Is Iets Fout Gegaan</string>
-    <string name="error_somethingWrong_msg">Oeps, er is iets fout gegaan! Probeer het later opniew.</string>
+    <string name="error_noInternet_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
+
+    <string name="error_connectionLost_title">Internetverbinding Verloren"</string>
+    <string name="error_connectionLost_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
+
+    <string name="error_unexpected_title">Onverwachte Fout</string>
+    <string name="error_unexpected_msg">Een onverwachte fout is opgetreden. Probeer het AUB later opnieuw.</string>
+
+    <string name="error_server_title">Onverwachte Server Fout</string>
+    <string name="error_server_msg">Een onverwachte server fout is opgetreden. Probeer het AUB later opnieuw.</string>
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
