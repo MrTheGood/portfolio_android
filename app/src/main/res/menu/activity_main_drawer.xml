@@ -23,32 +23,5 @@
     <group
         android:id="@+id/menu_group_categories"
         android:checkableBehavior="single"
-        >
-        <item
-            android:id="@+id/nav_featured"
-            android:checked="true"
-            android:icon="@drawable/ic_projects"
-            android:title="@string/menu_featured"
-            />
-        <item
-            android:id="@+id/nav_games"
-            android:icon="@drawable/ic_games"
-            android:title="@string/menu_games"
-            />
-        <item
-            android:id="@+id/nav_websites"
-            android:icon="@drawable/ic_websites"
-            android:title="@string/menu_websites"
-            />
-        <item
-            android:id="@+id/nav_apps"
-            android:icon="@drawable/ic_apps"
-            android:title="@string/menu_apps"
-            />
-        <item
-            android:id="@+id/nav_other"
-            android:icon="@drawable/ic_other"
-            android:title="@string/menu_other"
-            />
-    </group>
+        />
 </menu>
