@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         projects_root.currentItem = 0
 
         setupMenuDrawer(nav_view.menu, items)
+        onPageSelected(0)
     }
 
     private fun setupMenuDrawer(menu: Menu, items: List<Item>) {
