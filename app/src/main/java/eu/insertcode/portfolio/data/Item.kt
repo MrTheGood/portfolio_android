@@ -18,6 +18,7 @@ data class CategoryItem(private val o: JSONObject) : Item(o) {
             else -> Item(o)
         }
     }
+    val icon = o.getString("icon")
 }
 
 data class ProjectItem(val o: JSONObject) : Item(o) {
