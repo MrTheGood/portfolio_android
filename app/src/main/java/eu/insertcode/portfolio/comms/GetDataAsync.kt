@@ -72,6 +72,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
                     .setTitle(title)
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok) { _, _ -> throw e }
+                    .setCancelable(false)
                     .show()
         }
     }
