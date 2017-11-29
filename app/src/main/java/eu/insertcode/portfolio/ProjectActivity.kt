@@ -1,6 +1,7 @@
 package eu.insertcode.portfolio
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -95,7 +96,7 @@ class ProjectActivity : AppCompatActivity() {
                 override fun onPageScrollStateChanged(state: Int) {}
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                     if (position == 0 && positionOffset in -0.01f..0.01f) {
-                        o.supportFinishAfterTransition()
+                        Handler().post { o.supportFinishAfterTransition() }
                     }
                 }
 
