@@ -1,13 +1,11 @@
 package eu.insertcode.portfolio.widgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import eu.insertcode.portfolio.R
 
-@SuppressLint("ViewConstructor")
 /**
  * Created by maartendegoede on 17/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.

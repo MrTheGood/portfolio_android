@@ -25,13 +25,7 @@
     <string name="title_activity_main">Projecten</string>
 
     <!-- Menu Titles -->
-    <string name="menu_projects">Projects</string>
     <string name="menu_aboutMe">About Me</string>
-    <string name="menu_featured">Featured</string>
-    <string name="menu_games">Games</string>
-    <string name="menu_websites">Websites</string>
-    <string name="menu_apps">Apps</string>
-    <string name="menu_other">Other</string>
 
     <!-- Unsorted -->
     <string name="str_copyrightSymbol">© %s</string>

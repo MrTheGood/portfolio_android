@@ -7,7 +7,7 @@ import org.json.JSONObject
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
 open class Item(o: JSONObject) {
-    val title = o.getString("title")!!
+    val title = o.optString("title", "")!!
 }
 
 data class CategoryItem(private val o: JSONObject) : Item(o) {
@@ -18,7 +18,7 @@ data class CategoryItem(private val o: JSONObject) : Item(o) {
             else -> Item(o)
         }
     }
-    val icon = o.getString("icon")
+    val icon = o.optString("icon", "")!!
 }
 
 data class ProjectItem(val o: JSONObject) : Item(o) {

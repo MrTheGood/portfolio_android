@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package eu.insertcode.portfolio.comms
 
 import android.app.AlertDialog

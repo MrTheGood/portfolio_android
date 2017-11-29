@@ -37,7 +37,6 @@
 
     <color name="view_category_tabLayout_Text">@color/colorWhite</color>
     <color name="view_category_tabLayout_TextSelected">@color/colorWhite</color>
-    <color name="view_category_tabLayout_Background">@color/colorPrimary</color>
 
     <color name="view_project_background">@color/colorWhite</color>
 
