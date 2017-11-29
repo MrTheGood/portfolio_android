@@ -31,7 +31,8 @@ data class ProjectItem(val o: JSONObject) : Item(o) {
     }
     val shortDescription = o.getString("shortDescription")!!
     val fullDescription = o.getString("fullDescription")!!
-    val copyright: String? = o.optString("copyright", null)
+    val copyright = o.getString("copyright")!!
+    val layout = o.optString("layout", "")!!
 
     val tags = try {
         (0 until o.optJSONArray("tags").length()).map {
