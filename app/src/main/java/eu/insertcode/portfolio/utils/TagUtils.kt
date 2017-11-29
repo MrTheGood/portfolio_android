@@ -15,7 +15,12 @@ import eu.insertcode.portfolio.R
 class TagUtils {
     companion object {
         private val tags: ArrayList<String> = ArrayList()
-        private val tagColors = listOf(R.color.insertCode_redDark, R.color.insertCode_redLight, R.color.insertCode_goldLight, R.color.insertCode_goldDark)//, R.color.insertCode_black)
+        private val tagColors = listOf(
+                R.color.insertCode_redDark, R.color.insertCode_redLight, R.color.insertCode_goldLight, R.color.insertCode_goldDark,
+                R.color.tag_slytherin_1, R.color.tag_slytherin_2, R.color.tag_slytherin_3,
+                R.color.tag_ravenclaw_1, R.color.tag_ravenclaw_2, R.color.tag_ravenclaw_3,
+                R.color.tag_huffelpuf_1, R.color.tag_huffelpuf_2, R.color.tag_huffelpuf_3
+        )
 
         fun addProjectTag(tag: String, i: Int, context: Context, layout: LinearLayout) {
             LayoutInflater.from(context).inflate(R.layout.item_project_tag, layout)

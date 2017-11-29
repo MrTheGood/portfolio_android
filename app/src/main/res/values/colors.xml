@@ -17,6 +17,18 @@
     <color name="insertCode_goldLight">#d3a625</color>
     <color name="insertCode_goldDark">#eeba30</color>
 
+    <!-- tag colours -->
+    <color name="tag_slytherin_1">#1a472a</color>
+    <color name="tag_slytherin_2">#2a623d</color>
+    <color name="tag_slytherin_3">#aaaaaa</color>
+
+    <color name="tag_huffelpuf_1">#2cb939</color>
+    <color name="tag_huffelpuf_2">#f0c75e</color>
+    <color name="tag_huffelpuf_3">#372e29</color>
+
+    <color name="tag_ravenclaw_1">#0e1a40</color>
+    <color name="tag_ravenclaw_2">#222f5b</color>
+    <color name="tag_ravenclaw_3">#946b2d</color>
     <!-- Colours -->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
