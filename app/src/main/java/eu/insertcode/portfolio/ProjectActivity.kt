@@ -88,10 +88,21 @@ class ProjectActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (projectImages == null || projectImages?.currentItem == 0) {
-            supportFinishAfterTransition()
+        if (projectImages != null && projectImages?.currentItem != 0) {
+            val o: ProjectActivity = this
+            projectImages?.setCurrentItem(0, true)
+            projectImages?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {}
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    if (position == 0 && positionOffset in -0.01f..0.01f) {
+                        o.supportFinishAfterTransition()
+                    }
+                }
+
+                override fun onPageSelected(position: Int) {}
+            })
             return
         }
-        projectImages?.setCurrentItem(0, true)
+        supportFinishAfterTransition()
     }
 }
