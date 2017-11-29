@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
+        android:layout_marginEnd="@dimen/margin_projectSmall_side"
+        android:layout_marginStart="@dimen/margin_projectSmall_side"
+        android:layout_marginTop="@dimen/margin_projectSmall_top"
+        app:cardBackgroundColor="@color/view_project_background"
+        app:cardCornerRadius="2dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/project_title"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/insertCode_redLight"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/colorWhite"
+                tools:ignore="SelectableText"
+                tools:text="Project"
+                />
+
+            <eu.insertcode.portfolio.widgets.ProjectImageView
+                android:id="@+id/project_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@color/colorWhite"
+                android:contentDescription="@string/desc_projectThumbnail"
+                android:maxHeight="@dimen/maxHeight_projectImage"
+                android:scaleType="fitCenter"
+                android:transitionName="@string/trans_projectImage"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:paddingTop="0dp"
+                >
+
+                <LinearLayout
+                    android:id="@+id/project_tags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="2dp"
+                    android:transitionName="@string/trans_projectTags"
+                    />
+
+                <TextView
+                    android:id="@+id/project_shortDescription"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    tools:ignore="SelectableText"
+                    tools:text="Short example project description for the shortDescription stuff for a project."
+                    />
+
+                <TextView
+                    android:id="@+id/project_date"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="SelectableText"
+                    tools:text="October 2017"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

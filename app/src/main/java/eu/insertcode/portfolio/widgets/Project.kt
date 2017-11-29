@@ -34,7 +34,12 @@ class Project : FrameLayout {
     constructor(item: ProjectItem, ctx: Context) : this(item, ctx, null)
     constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
     constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
-        View.inflate(ctx, R.layout.item_project, this)
+        val layoutResource = if (item.layout == "item_project_large") {
+            R.layout.item_project_large
+        } else {
+            R.layout.item_project
+        }
+        View.inflate(ctx, layoutResource, this)
 
         projectImage = findViewById(R.id.project_image)
         projectTitle = findViewById(R.id.project_title)
