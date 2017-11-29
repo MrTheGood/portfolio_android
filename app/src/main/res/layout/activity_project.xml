@@ -26,6 +26,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:textColor="@color/colorWhite"
+            tools:ignore="SelectableText"
             tools:text="Project"
             />
 
@@ -81,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                tools:ignore="SelectableText"
                 tools:text="© 2017 Maarten de Goede"
                 />
 
@@ -90,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textIsSelectable="true"
                 tools:text="description"
                 />
 
@@ -99,7 +102,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:text="Januari 2015 - Februari 2023"
+                tools:ignore="SelectableText"
+                tools:text="January 2015 - February 2023"
                 />
         </LinearLayout>
     </LinearLayout>
