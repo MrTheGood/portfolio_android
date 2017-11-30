@@ -8,7 +8,6 @@
     <color name="colorAccent">@color/insertCode_goldDark</color>
 
     <color name="ic_launcher_background">#ffffff</color>
-    <color name="ic_launcher_background_option2">#373737</color>
 
     <!-- insertCode Colours -->
     <color name="insertCode_black">@color/colorBlack</color>
