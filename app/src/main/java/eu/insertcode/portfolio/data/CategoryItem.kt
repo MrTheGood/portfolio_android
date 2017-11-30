@@ -15,8 +15,8 @@ data class CategoryItem(
     companion object {
         fun builder(o: JSONObject) = CategoryItem(
                 o.optString("title", "")!!,
-                (0 until o.getJSONArray("projects").length()).map {
-                    ProjectItem.builder(o.getJSONArray("projects").getJSONObject(it))
+                (0 until o.getJSONArray("items").length()).map {
+                    ProjectItem.builder(o.getJSONArray("items").getJSONObject(it))
                 },
                 o.optString("icon", "")!!
         )
