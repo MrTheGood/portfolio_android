@@ -13,7 +13,6 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
-import eu.insertcode.portfolio.data.Item
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.content_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
     companion object {
-        var items: List<Item> = emptyList()
+        var categories: List<CategoryItem> = emptyList()
     }
 
     private val pageAdapter = CategoriesPagerAdapter()
@@ -44,15 +43,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         projects_root.adapter = pageAdapter
         projects_root.addOnPageChangeListener(this)
         projects_tabLayout.setupWithViewPager(projects_root)
-        val items = items
-        loadProjects(projects_root, items)
+        loadProjects(projects_root, categories)
         projects_root.currentItem = 0
 
-        setupMenuDrawer(nav_view.menu, items)
+        setupMenuDrawer(nav_view.menu, categories)
         onPageSelected(0)
     }
 
-    private fun setupMenuDrawer(menu: Menu, items: List<Item>) {
+    private fun setupMenuDrawer(menu: Menu, categories: List<CategoryItem>) {
         val menuIcons = mapOf(
                 Pair("ic_projects", R.drawable.ic_projects),
                 Pair("ic_games", R.drawable.ic_games),
@@ -60,24 +58,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Pair("ic_apps", R.drawable.ic_apps)
         )
 
-        for (i in items.indices) {
-            val item = items[i]
-            if (item is CategoryItem) {
-                menu.add(R.id.menu_group_categories, i, Menu.NONE, item.title)
-                menu.findItem(i).icon = ContextCompat.getDrawable(this, menuIcons[item.icon] ?: R.drawable.ic_other)
-                menu.findItem(i).isCheckable = true
-            }
+        for (i in categories.indices) {
+            val category = categories[i]
+            menu.add(R.id.menu_group_categories, i, Menu.NONE, category.title)
+            menu.findItem(i).icon = ContextCompat.getDrawable(this, menuIcons[category.icon] ?: R.drawable.ic_other)
+            menu.findItem(i).isCheckable = true
         }
     }
 
 
-    private fun loadProjects(parent: ViewGroup, items: List<Item>) {
+    private fun loadProjects(parent: ViewGroup, items: List<Any>) {
         items.iterator().forEach {
             when (it) {
                 is CategoryItem -> {
                     val category = Category(this)
                     pageAdapter.addView(category, it.title)
-                    loadProjects(category.findViewById(R.id.category_content), it.items)
+                    loadProjects(category.findViewById(R.id.category_content), it.projects)
                 }
                 is ProjectItem -> parent.addView(Project(it, this))
             }
@@ -101,7 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
 
-        items.indices.filter { item.itemId == it }
+        categories.indices.filter { item.itemId == it }
                 .forEach {
                     projects_root.currentItem = it
                 }

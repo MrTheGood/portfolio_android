@@ -1,58 +1,75 @@
 package eu.insertcode.portfolio.data
 
 import org.json.JSONObject
+import java.io.Serializable
 
 /**
  * Created by maartendegoede on 16/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-open class Item(o: JSONObject) {
-    val title = o.optString("title", "")!!
+data class CategoryItem(
+        val title: String,
+        val projects: List<ProjectItem>,
+        val icon: String
+) : Serializable {
+    companion object {
+        fun builder(o: JSONObject) = CategoryItem(
+                o.optString("title", "")!!,
+                (0 until o.getJSONArray("projects").length()).map {
+                    ProjectItem.builder(o.getJSONArray("projects").getJSONObject(it))
+                },
+                o.optString("icon", "")!!
+        )
+    }
 }
 
-data class CategoryItem(private val o: JSONObject) : Item(o) {
-    val items = (0 until o.getJSONArray("items").length()).map {
-        val item = o.getJSONArray("items").getJSONObject(it)
-        when {
-            item.getString("type") == "project" -> ProjectItem(item)
-            else -> Item(o)
-        }
+data class ProjectItem(
+        val title: String,
+        val images: List<String>,
+        val shortDescription: String,
+        val fullDescription: String,
+        val copyright: String,
+        val layout: String,
+        val tags: List<String>,
+        val contributors: List<Contributor>,
+        val date: String?
+) : Serializable {
+    companion object {
+        fun builder(o: JSONObject) = ProjectItem(
+                o.optString("title", "")!!,
+                try {
+                    (0 until o.optJSONArray("images").length()).map {
+                        o.getJSONArray("images").getString(it)
+                    }
+                } catch (e: NullPointerException) {
+                    emptyList<String>()
+                },
+                o.getString("shortDescription")!!,
+                o.getString("fullDescription")!!,
+                o.getString("copyright")!!,
+                o.optString("layout", "")!!,
+                try {
+                    (0 until o.optJSONArray("tags").length()).map {
+                        o.getJSONArray("tags").getString(it)
+                    }
+                } catch (e: NullPointerException) {
+                    emptyList<String>()
+                },
+                try { //TODO: Implement Contributors
+                    (0 until o.optJSONArray("contributors").length()).map {
+                        Contributor.builder(o.getJSONArray("contributors").getJSONObject(it))
+                    }
+                } catch (e: NullPointerException) {
+                    emptyList<Contributor>()
+                },
+                o.optString("date", null)
+        )
     }
-    val icon = o.optString("icon", "")!!
 }
 
-data class ProjectItem(val o: JSONObject) : Item(o) {
-    val images = try {
-        (0 until o.optJSONArray("images").length()).map {
-            o.getJSONArray("images").getString(it)
-        }
-    } catch (e: NullPointerException) {
-        emptyList<String>()
+data class Contributor(val title: String) : Serializable {
+    companion object {
+        fun builder(o: JSONObject) = Contributor(o.optString("title", "")!!)
     }
-    val shortDescription = o.getString("shortDescription")!!
-    val fullDescription = o.getString("fullDescription")!!
-    val copyright = o.getString("copyright")!!
-    val layout = o.optString("layout", "")!!
-
-    val tags = try {
-        (0 until o.optJSONArray("tags").length()).map {
-            o.getJSONArray("tags").getString(it)
-        }
-    } catch (e: NullPointerException) {
-        emptyList<String>()
-    }
-    @Suppress("unused")
-    val contributors = try { //TODO: Implement Contributors
-        (0 until o.optJSONArray("contributors").length()).map {
-            Contributor(o.getJSONArray("contributors").getJSONObject(it))
-        }
-    } catch (e: NullPointerException) {
-        emptyList<String>()
-    }
-
-    val date: String? = o.optString("date", null)
-}
-
-data class Contributor(private val o: JSONObject) {
     //TODO: Implement Contributors
 }

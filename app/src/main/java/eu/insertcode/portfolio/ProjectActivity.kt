@@ -13,11 +13,10 @@ import eu.insertcode.portfolio.adapters.ProjectImagesPagerAdapter
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
-import org.json.JSONObject
 
 class ProjectActivity : AppCompatActivity() {
     companion object {
-        val EXTRA_ITEM = "project_item"
+        val EXTRA_PROJECT = "extra_project"
     }
 
     private var projectImages: ViewPager? = null
@@ -27,12 +26,12 @@ class ProjectActivity : AppCompatActivity() {
         setContentView(R.layout.activity_project)
 
         //get intent extras
-        val item: ProjectItem =
+        val project: ProjectItem =
                 if (intent.extras == null) {
                     finish()
                     return
                 } else
-                    ProjectItem(JSONObject(intent.extras.getString(EXTRA_ITEM)))
+                    intent.extras.get(EXTRA_PROJECT) as ProjectItem
 
         //initialize views
         val projectTitle = findViewById<TextView>(R.id.project_title)
@@ -52,29 +51,29 @@ class ProjectActivity : AppCompatActivity() {
         // Add images
         val adapter = ProjectImagesPagerAdapter()
         projectImages?.adapter = adapter
-        if (!item.images.isEmpty()) {
+        if (!project.images.isEmpty()) {
             var first = true
-            for (img in item.images) {
+            for (img in project.images) {
                 addProjectImage(adapter, img, first)
                 first = false
             }
         }
 
         // setup viewpager indicator
-        if (item.images.size > 1)
+        if (project.images.size > 1)
             findViewById<TabLayout>(R.id.project_image_indicator).setupWithViewPager(projectImages)
 
         // Add text content
-        projectTitle.text = item.title
-        projectCopyright.text = String.format(resources.getString(R.string.str_copyrightSymbol), item.copyright)
-        projectFullDescription.text = Utils.fromHtmlCompat(item.fullDescription)
+        projectTitle.text = project.title
+        projectCopyright.text = String.format(resources.getString(R.string.str_copyrightSymbol), project.copyright)
+        projectFullDescription.text = Utils.fromHtmlCompat(project.fullDescription)
 
-        if (item.date == null) projectDate.visibility = View.GONE
-        projectDate.text = item.date
+        if (project.date == null) projectDate.visibility = View.GONE
+        projectDate.text = project.date
 
         //Add tags
-        item.tags.indices.forEach {
-            TagUtils.addProjectTag(item.tags[it], it, this, projectTags)
+        project.tags.indices.forEach {
+            TagUtils.addProjectTag(project.tags[it], it, this, projectTags)
         }
     }
 

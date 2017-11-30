@@ -16,6 +16,7 @@ import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
+import java.io.Serializable
 import android.support.v4.util.Pair as AndroidPair
 
 @SuppressLint("ViewConstructor")
@@ -31,10 +32,10 @@ class Project : FrameLayout {
     private val projectDate: TextView
     private val projectTags: LinearLayout
 
-    constructor(item: ProjectItem, ctx: Context) : this(item, ctx, null)
-    constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(item, ctx, attrs, 0)
-    constructor(item: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
-        val layoutResource = if (item.layout == "item_project_large") {
+    constructor(project: ProjectItem, ctx: Context) : this(project, ctx, null)
+    constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(project, ctx, attrs, 0)
+    constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
+        val layoutResource = if (project.layout == "item_project_large") {
             R.layout.item_project_large
         } else {
             R.layout.item_project
@@ -47,22 +48,22 @@ class Project : FrameLayout {
         projectDate = findViewById(R.id.project_date)
         projectTags = findViewById(R.id.project_tags)
 
-        if (!item.images.isEmpty())
-            Utils.putImageInView(ctx, item.images[0], projectImage)
+        if (!project.images.isEmpty())
+            Utils.putImageInView(ctx, project.images[0], projectImage)
 
-        projectTitle.text = item.title
-        projectShortDescription.text = Utils.fromHtmlCompat(item.shortDescription)
+        projectTitle.text = project.title
+        projectShortDescription.text = Utils.fromHtmlCompat(project.shortDescription)
 
-        if (item.date == null) projectDate.visibility = View.GONE
-        projectDate.text = item.date
+        if (project.date == null) projectDate.visibility = View.GONE
+        projectDate.text = project.date
 
-        item.tags.indices.forEach {
-            TagUtils.addProjectTag(item.tags[it], it, context, projectTags)
+        project.tags.indices.forEach {
+            TagUtils.addProjectTag(project.tags[it], it, context, projectTags)
         }
 
         setOnClickListener({
             val intent = Intent(context, ProjectActivity::class.java)
-            intent.putExtra(ProjectActivity.EXTRA_ITEM, item.o.toString())
+            intent.putExtra(ProjectActivity.EXTRA_PROJECT, project as Serializable)
             val imagePair = AndroidPair<View, String>(projectImage, resources.getString(R.string.trans_projectImage))
             val tagPair = AndroidPair<View, String>(projectTags, resources.getString(R.string.trans_projectTags))
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, imagePair, tagPair)
