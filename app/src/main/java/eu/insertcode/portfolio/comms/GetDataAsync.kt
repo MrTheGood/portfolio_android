@@ -8,8 +8,6 @@ import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.SplashActivity
 import eu.insertcode.portfolio.data.CategoryItem
-import eu.insertcode.portfolio.data.Item
-import eu.insertcode.portfolio.data.ProjectItem
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.IOException
@@ -45,13 +43,8 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
         try {
             val json = JSONArray(result)
 
-            MainActivity.items = (0 until json.length()).map {
-                val o = json.getJSONObject(it)
-                when (o.getString("type")) {
-                    "item" -> ProjectItem(o)
-                    "category" -> CategoryItem(o)
-                    else -> Item(o)
-                }
+            MainActivity.categories = (0 until json.length()).map {
+                CategoryItem.builder(json.getJSONObject(it))
             }
             startProjectsActivity()
         } catch (e: JSONException) {
