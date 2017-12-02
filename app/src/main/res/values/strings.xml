@@ -3,7 +3,6 @@
 
     <!-- Data URLs -->
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
-    <string name="url_images_prefix" translatable="false">https://portfolio.insertcode.eu/media/</string>
 
     <!-- Transition Names -->
     <string name="trans_projectImage" translatable="false">project_image</string>
