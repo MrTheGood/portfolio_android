@@ -9,6 +9,8 @@ import eu.insertcode.portfolio.comms.GetDataAsync
 import java.lang.ref.WeakReference
 
 class SplashActivity : AppCompatActivity() {
+    var paused = true
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,16 @@ class SplashActivity : AppCompatActivity() {
                     .setCancelable(false)
                     .show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        paused = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        paused = true
     }
 
     fun isNetworkConnected(): Boolean {
