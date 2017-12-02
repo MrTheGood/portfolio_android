@@ -6,7 +6,6 @@ import android.text.Html
 import android.text.Spanned
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 20/10/17.
@@ -16,8 +15,7 @@ class Utils {
     companion object {
         fun putImageInView(ctx: Context, img: String?, view: ImageView) {
             if (img != null) {
-                val imageUrl = ctx.resources.getString(R.string.url_images_prefix) + img
-                Glide.with(ctx).asBitmap().load(imageUrl).into(view)
+                Glide.with(ctx).asBitmap().load(img).into(view)
             }
         }
 
