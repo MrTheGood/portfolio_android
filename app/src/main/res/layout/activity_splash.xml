@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="eu.insertcode.portfolio.SplashActivity"
     >
 
     <ImageView
+        android:id="@+id/splash_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -18,8 +21,10 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_below="@id/splash_logo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="64dp"
         android:indeterminateTint="@color/view_progressbar"
         />
 
-</merge>
+</RelativeLayout>
