@@ -78,7 +78,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
 
     private fun startProjectsActivity() {
         val ctx = context?.get()
-        if (ctx != null) {
+        if (ctx != null && !ctx.paused) {
             val intent = Intent(ctx, MainActivity::class.java)
             ctx.startActivity(intent)
             ctx.finish()
