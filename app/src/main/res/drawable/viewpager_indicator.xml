@@ -6,7 +6,5 @@
         android:state_selected="true"
         />
 
-    <item
-        android:drawable="@drawable/viewpager_indicator_dot_default"
-        />
+    <item android:drawable="@drawable/viewpager_indicator_dot_default" />
 </selector>
