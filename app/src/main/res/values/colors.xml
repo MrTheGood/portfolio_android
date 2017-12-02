@@ -54,6 +54,6 @@
     <color name="activity_project_imageBackground">@color/background_normal</color>
 
 
-    <color name="view_indicator_default">#AAF8F8F8</color>
-    <color name="view_indicator_selected">@color/colorGrayDark</color>
+    <color name="view_indicator_default">#77000000</color>
+    <color name="view_indicator_selected">#BBae0001</color>
 </resources>
