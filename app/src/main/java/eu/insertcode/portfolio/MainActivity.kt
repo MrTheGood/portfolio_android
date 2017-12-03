@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //Blur drawer header
         var img = BitmapFactory.decodeResource(resources, R.drawable.drawer_header_background)
-        img = BitmapUtil.getBlurredBitmap(this, img)
         img = BitmapUtil.getTintedBitmap(this, img, R.color.drawer_header_image)
         nav_view.getHeaderView(0).findViewById<ImageView>(R.id.drawer_header_image)?.setImageBitmap(img)
     }
