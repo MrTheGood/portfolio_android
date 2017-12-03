@@ -16,7 +16,7 @@ import android.widget.ImageView
 import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.ProjectItem
-import eu.insertcode.portfolio.utils.BlurBuilder
+import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
 import kotlinx.android.synthetic.main.activity_main.*
@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //Blur drawer header
         var img = BitmapFactory.decodeResource(resources, R.drawable.drawer_header_background)
-        img = BlurBuilder.blur(this, img, R.color.drawer_header_image)
+        img = BitmapUtil.getBlurredBitmap(this, img)
+        img = BitmapUtil.getTintedBitmap(this, img, R.color.drawer_header_image)
         nav_view.getHeaderView(0).findViewById<ImageView>(R.id.drawer_header_image)?.setImageBitmap(img)
     }
 
