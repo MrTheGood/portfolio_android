@@ -1,6 +1,7 @@
 package eu.insertcode.portfolio
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
@@ -11,9 +12,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.ImageView
 import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.utils.BlurBuilder
 import eu.insertcode.portfolio.widgets.Category
 import eu.insertcode.portfolio.widgets.Project
 import kotlinx.android.synthetic.main.activity_main.*
@@ -48,6 +51,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setupMenuDrawer(nav_view.menu, categories)
         onPageSelected(0)
+
+
+        //Blur drawer header
+        var img = BitmapFactory.decodeResource(resources, R.drawable.drawer_header_background)
+        img = BlurBuilder.blur(this, img, R.color.drawer_header_image)
+        nav_view.getHeaderView(0).findViewById<ImageView>(R.id.drawer_header_image)?.setImageBitmap(img)
     }
 
     private fun setupMenuDrawer(menu: Menu, categories: List<CategoryItem>) {
