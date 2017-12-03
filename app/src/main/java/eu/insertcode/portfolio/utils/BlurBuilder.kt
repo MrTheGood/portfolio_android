@@ -16,8 +16,8 @@ import android.support.v4.content.ContextCompat
  */
 class BlurBuilder {
     companion object {
-        private val BITMAP_SCALE = 0.8f
-        private val BLUR_RADIUS = 3.5f
+        private val BITMAP_SCALE = 0.6f
+        private val BLUR_RADIUS = 7.5f
 
         fun blur(ctx: Context, img: Bitmap, @ColorRes overlay: Int): Bitmap {
             val width = Math.round(img.width * BITMAP_SCALE)
