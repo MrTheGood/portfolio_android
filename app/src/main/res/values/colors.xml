@@ -56,4 +56,5 @@
 
     <color name="view_indicator_default">#77000000</color>
     <color name="view_indicator_selected">#BBae0001</color>
+    <color name="drawer_header_image">#44000000</color>
 </resources>

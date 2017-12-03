@@ -19,6 +19,7 @@
     <string name="desc_projectThumbnail">Project Thumbnail</string>
     <string name="desc_drawer_open">Open navigation drawer</string>
     <string name="desc_drawer_close">Close navigation drawer</string>
+    <string name="desc_drawer_header">Drawer header</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_about">Over Mij</string>
