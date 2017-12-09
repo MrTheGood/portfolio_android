@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view"
     >
-
-    <item
-        android:id="@+id/nav_about"
-        android:checkable="false"
-        android:icon="@drawable/ic_about_me"
-        android:title="@string/menu_aboutMe"
-        />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_me"
+            android:title="@string/menu_aboutMe"
+            />
+    </group>
 
     <group
         android:id="@+id/menu_group_categories"
