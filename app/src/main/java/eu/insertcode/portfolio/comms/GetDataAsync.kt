@@ -38,6 +38,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncT
             inputStream?.close()
         }
     }
+    //TODO: Implement some kind of {"success":"true", ...} / {"success":"false", "error":"No internet connection"}.
 
     override fun onPostExecute(result: String?) {
         try {

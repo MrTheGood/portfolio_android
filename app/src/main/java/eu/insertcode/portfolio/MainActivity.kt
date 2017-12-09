@@ -1,16 +1,18 @@
 package eu.insertcode.portfolio
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.NavigationView
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
@@ -22,7 +24,10 @@ import eu.insertcode.portfolio.widgets.Project
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
+class MainActivity : AppCompatActivity(),
+        AboutFragment.Companion.AboutFragmentListener,
+        NavigationView.OnNavigationItemSelectedListener,
+        ViewPager.OnPageChangeListener {
 
     companion object {
         var categories: List<CategoryItem> = emptyList()
@@ -34,12 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.desc_drawer_open, R.string.desc_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+        setupActionBar(toolbar, R.string.title_activity_main)
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -75,6 +75,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    override fun setupActionBar(v: Toolbar, @StringRes title: Int) {
+        v.title = getString(title)
+        setSupportActionBar(v)
+
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, v,
+                R.string.desc_drawer_open, R.string.desc_drawer_close
+        )
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
 
     private fun loadProjects(parent: ViewGroup, items: List<Any>) {
         items.iterator().forEach {
@@ -93,25 +104,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //region user-interaction
     override fun onBackPressed() =
-            if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-                drawer_layout.closeDrawer(GravityCompat.START)
-            } else {
-                super.onBackPressed()
+            when {
+                drawer_layout.isDrawerOpen(GravityCompat.START) -> {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                }
+                overlay_root.visibility == View.VISIBLE -> {
+                    overlay_root.visibility = View.GONE
+                    toolbar_layout.visibility = View.VISIBLE
+                }
+                else -> super.onBackPressed()
             }
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawer_layout.closeDrawer(GravityCompat.START)
+
         if (item.itemId == R.id.nav_about) {
-            val intent = Intent(this, AboutActivity::class.java)
-            startActivity(intent)
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(overlay_root.id, AboutFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit()
+            overlay_root.visibility = View.VISIBLE
+            toolbar_layout.visibility = View.GONE
         }
 
         categories.indices.filter { item.itemId == it }
                 .forEach {
+                    overlay_root.visibility = View.GONE
+                    toolbar_layout.visibility = View.VISIBLE
                     projects_root.currentItem = it
                 }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
