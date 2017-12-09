@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity(),
                 overlay_root.visibility == View.VISIBLE -> {
                     overlay_root.visibility = View.GONE
                     toolbar_layout.visibility = View.VISIBLE
+                    onPageSelected(projects_root.currentItem)
                 }
                 else -> super.onBackPressed()
             }
@@ -127,6 +128,7 @@ class MainActivity : AppCompatActivity(),
                     .commit()
             overlay_root.visibility = View.VISIBLE
             toolbar_layout.visibility = View.GONE
+            nav_view.menu.getItem(0).isChecked = true
         }
 
         categories.indices.filter { item.itemId == it }
