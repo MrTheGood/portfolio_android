@@ -7,14 +7,12 @@
     <color name="colorPrimary">@color/insertCode_redLight</color>
     <color name="colorAccent">@color/insertCode_goldDark</color>
 
-    <color name="ic_launcher_background">#ffffff</color>
-
     <!-- insertCode Colours -->
     <color name="insertCode_black">@color/colorBlack</color>
     <color name="insertCode_redLight">#ae0001</color>
     <color name="insertCode_redDark">#740001</color>
-    <color name="insertCode_goldLight">#d3a625</color>
-    <color name="insertCode_goldDark">#eeba30</color>
+    <color name="insertCode_goldLight">#eeba30</color>
+    <color name="insertCode_goldDark">#d3a625</color>
 
     <!-- tag colours -->
     <color name="tag_slytherin_1">#1a472a</color>
