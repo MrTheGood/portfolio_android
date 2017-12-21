@@ -1,22 +1,19 @@
 package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.support.v4.app.ActivityOptionsCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import eu.insertcode.portfolio.ProjectActivity
+import eu.insertcode.portfolio.MainActivity
+import eu.insertcode.portfolio.ProjectFragment
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
-import java.io.Serializable
 import android.support.v4.util.Pair as AndroidPair
 
 @SuppressLint("ViewConstructor")
@@ -62,12 +59,11 @@ class Project : FrameLayout {
         }
 
         setOnClickListener({
-            val intent = Intent(context, ProjectActivity::class.java)
-            intent.putExtra(ProjectActivity.EXTRA_PROJECT, project as Serializable)
-            val imagePair = AndroidPair<View, String>(projectImage, resources.getString(R.string.trans_projectImage))
-            val tagPair = AndroidPair<View, String>(projectTags, resources.getString(R.string.trans_projectTags))
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as Activity, imagePair, tagPair)
-            context.startActivity(intent, options.toBundle())
+            (context as MainActivity)
+                    .getFragmentTransaction(ProjectFragment.newInstance(project))
+                    .addSharedElement(projectImage, resources.getString(R.string.trans_projectImage))
+                    .addSharedElement(projectTags, resources.getString(R.string.trans_projectTags))
+                    .commit()
         })
     }
 }

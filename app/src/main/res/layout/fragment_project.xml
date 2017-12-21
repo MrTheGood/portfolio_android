@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
-    tools:context="eu.insertcode.portfolio.ProjectActivity"
+    tools:context="eu.insertcode.portfolio.ProjectFragment"
     >
 
     <LinearLayout
@@ -15,19 +15,13 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/project_title"
-            style="@style/Base.TextAppearance.AppCompat.Title"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/project_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:paddingBottom="8dp"
-            android:paddingEnd="0dp"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:textColor="@color/colorWhite"
-            tools:ignore="SelectableText"
-            tools:text="Project"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
             />
 
         <android.support.constraint.ConstraintLayout
