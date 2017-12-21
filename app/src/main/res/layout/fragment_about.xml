@@ -37,10 +37,23 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/about_content"
-        layout="@layout/content_about"
-        />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Night gathers, and no wmy watch begins. It shall not end until my death. I shall take no wife, hold no lands, father no children. I shall live and die at my post. \n\nI am the sword in the darkness. I am the watcher on the walls. I am the fire that burns against the cold, the light that brings the dawn, the horn that wakes the sleepers, the shield that guards the realms of men. \n\nI pledge my life and honor the the Night's Watch, for this night and all nights to come."
+            tools:text="Night gathers, and no wmy watch begins. It shall not end until my death. I shall take no wife, hold no lands, father no children. I shall live and die at my post. \n\nI am the sword in the darkness. I am the watcher on the walls. I am the fire that burns against the cold, the light that brings the dawn, the horn that wakes the sleepers, the shield that guards the realms of men. \n\nI pledge my life and honor the the Night's Watch, for this night and all nights to come."
+            />
+        <!-- TODO: Add content from web page -->
+
+    </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/about_mail_btn"
