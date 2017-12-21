@@ -1,57 +1,48 @@
 package eu.insertcode.portfolio
 
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.annotation.StringRes
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
 import eu.insertcode.portfolio.data.CategoryItem
-import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.BitmapUtil
-import eu.insertcode.portfolio.widgets.Category
-import eu.insertcode.portfolio.widgets.Project
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity(),
+        MainFragment.Companion.MainFragmentListener,
         AboutFragment.Companion.AboutFragmentListener,
-        NavigationView.OnNavigationItemSelectedListener,
-        ViewPager.OnPageChangeListener {
-
+        ProjectFragment.Companion.ProjectFragmentListener,
+        NavigationView.OnNavigationItemSelectedListener {
     companion object {
         var categories: List<CategoryItem> = emptyList()
     }
 
-    private val pageAdapter = CategoriesPagerAdapter()
+    private var currentFragment: Fragment? = null
+    private lateinit var mainFragment: MainFragment
 
     //region initialization
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupActionBar(toolbar, R.string.title_activity_main)
+
+        mainFragment = MainFragment.newInstance(categories)
+        supportFragmentManager.beginTransaction()
+                .add(R.id.main_fragment_layout, mainFragment)
+                .commit()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-        projects_root.adapter = pageAdapter
-        projects_root.addOnPageChangeListener(this)
-        projects_tabLayout.setupWithViewPager(projects_root)
-        loadProjects(projects_root, categories)
-        projects_root.currentItem = 0
-
         setupMenuDrawer(nav_view.menu, categories)
-        onPageSelected(0)
-
 
         //Blur drawer header
         var img = BitmapFactory.decodeResource(resources, R.drawable.drawer_header_background)
@@ -75,8 +66,8 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun setupActionBar(v: Toolbar, @StringRes title: Int) {
-        v.title = getString(title)
+    override fun setupActionBar(v: Toolbar, title: String) {
+        v.title = title
         setSupportActionBar(v)
 
         val toggle = ActionBarDrawerToggle(
@@ -85,19 +76,6 @@ class MainActivity : AppCompatActivity(),
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-    }
-
-    private fun loadProjects(parent: ViewGroup, items: List<Any>) {
-        items.iterator().forEach {
-            when (it) {
-                is CategoryItem -> {
-                    val category = Category(this)
-                    pageAdapter.addView(category, it.title)
-                    loadProjects(category.findViewById(R.id.category_content), it.projects)
-                }
-                is ProjectItem -> parent.addView(Project(it, this))
-            }
-        }
     }
     //endregion initialization
 
@@ -108,10 +86,12 @@ class MainActivity : AppCompatActivity(),
                 drawer_layout.isDrawerOpen(GravityCompat.START) -> {
                     drawer_layout.closeDrawer(GravityCompat.START)
                 }
-                overlay_root.visibility == View.VISIBLE -> {
-                    overlay_root.visibility = View.GONE
-                    toolbar_layout.visibility = View.VISIBLE
-                    onPageSelected(projects_root.currentItem)
+                currentFragment != null -> {
+                    supportFragmentManager.beginTransaction()
+                            .remove(currentFragment)
+                            .commit()
+                    currentFragment = null
+                    updateMenuDrawer(mainFragment.getCurrentItem())
                 }
                 else -> super.onBackPressed()
             }
@@ -121,29 +101,32 @@ class MainActivity : AppCompatActivity(),
         drawer_layout.closeDrawer(GravityCompat.START)
 
         if (item.itemId == R.id.nav_about) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(overlay_root.id, AboutFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-            overlay_root.visibility = View.VISIBLE
-            toolbar_layout.visibility = View.GONE
+            getFragmentTransaction(AboutFragment.newInstance()).commit()
             nav_view.menu.getItem(0).isChecked = true
         }
 
         categories.indices.filter { item.itemId == it }
                 .forEach {
-                    overlay_root.visibility = View.GONE
-                    toolbar_layout.visibility = View.VISIBLE
-                    projects_root.currentItem = it
+                    if (currentFragment != null) {
+                        supportFragmentManager.beginTransaction()
+                                .remove(currentFragment)
+                                .commit()
+                        currentFragment = null
+                    }
+                    mainFragment.projects_root.currentItem = it
                 }
         return true
     }
 
+    //FIXME: If the activity gets killed while a fragment is open and the user navigates back to the activity, some problems occur.
+    //          (Steps to reproduce: Turn on "Don't keep activities", open any fragment and reopen the app.)
+    @SuppressLint("CommitTransaction")
+    fun getFragmentTransaction(fragment: Fragment): FragmentTransaction {
+        currentFragment = fragment
+        return supportFragmentManager.beginTransaction().replace(fragments_layout.id, fragment)
+    }
 
-    override fun onPageScrollStateChanged(state: Int) {}
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-    override fun onPageSelected(position: Int) {
+    override fun updateMenuDrawer(position: Int) {
         // position + 1 because about_me is the first item.
         nav_view.menu.getItem(position + 1).isChecked = true
     }
