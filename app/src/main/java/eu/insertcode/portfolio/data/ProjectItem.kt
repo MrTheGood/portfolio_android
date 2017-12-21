@@ -15,7 +15,6 @@ data class ProjectItem(
         val copyright: String,
         val layout: String,
         val tags: List<String>,
-        val contributors: List<Contributor>,
         val date: String?
 ) : Serializable {
     companion object {
@@ -38,13 +37,6 @@ data class ProjectItem(
                     }
                 } catch (e: NullPointerException) {
                     emptyList<String>()
-                },
-                try { //TODO: Implement Contributors
-                    (0 until o.optJSONArray("contributors").length()).map {
-                        Contributor.builder(o.getJSONArray("contributors").getJSONObject(it))
-                    }
-                } catch (e: NullPointerException) {
-                    emptyList<Contributor>()
                 },
                 o.optString("date", null)
         )
