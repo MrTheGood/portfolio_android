@@ -69,7 +69,6 @@ class ProjectFragment : Fragment() {
         val projectCopyright = v.project_copyright
         val projectFullDescription = v.project_fullDescription
         val projectDate = v.project_date
-//        val projectContributors = v. TODO: Implement Contributors
 
 
         //postpone enter transition
