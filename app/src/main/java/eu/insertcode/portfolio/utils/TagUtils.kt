@@ -16,11 +16,10 @@ class TagUtils {
     companion object {
         private val tags: ArrayList<String> = ArrayList()
         private val tagColors = listOf(
-                R.color.tag0_dark, R.color.tag0, R.color.tag0_light,
-                R.color.tag1_dark, R.color.tag1, R.color.tag1_light,
-                R.color.tag2_dark, R.color.tag2, R.color.tag2_light,
-                R.color.tag3_dark, R.color.tag3, R.color.tag3_light,
-                R.color.tag4_dark, R.color.tag4, R.color.tag4_light
+                R.color.tag0_dark, R.color.tag0,
+                R.color.tag1_dark, R.color.tag1,
+                R.color.tag2_dark, R.color.tag2,
+                R.color.tag3_dark, R.color.tag3
         )
 
         fun addProjectTag(tag: String, i: Int, context: Context, layout: LinearLayout) {

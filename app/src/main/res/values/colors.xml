@@ -10,26 +10,17 @@
     <color name="colorAccent">#eeba30</color>
 
     <!-- tag colours -->
-    <!-- TODO: Choose better colours -->
-    <color name="tag0_light">#5df2d6</color>
-    <color name="tag0">#00bfa5</color>
-    <color name="tag0_dark">#008e76</color>
+    <color name="tag0">#009688</color>
+    <color name="tag0_dark">#00675b</color>
 
-    <color name="tag1_light">#e254ff</color>
-    <color name="tag1">#aa00ff</color>
-    <color name="tag1_dark">#7200ca</color>
+    <color name="tag1">#3f51b5</color>
+    <color name="tag1_dark">#002984</color>
 
-    <color name="tag2_light">#7a7cff</color>
-    <color name="tag2">#304ffe</color>
-    <color name="tag2_dark">#0026ca</color>
+    <color name="tag2">#4caf50</color>
+    <color name="tag2_dark">#087f23</color>
 
-    <color name="tag3_light">#9cff57</color>
-    <color name="tag3">#64dd17</color>
-    <color name="tag3_dark">#1faa00</color>
-
-    <color name="tag4_light">#ffdd4b</color>
-    <color name="tag4">#ffab00</color>
-    <color name="tag4_dark">#c67c00</color>
+    <color name="tag3">#ffca28</color>
+    <color name="tag3_dark">#c79a00</color>
 
     <!-- Colours -->
     <color name="colorWhite">#FFFFFF</color>
