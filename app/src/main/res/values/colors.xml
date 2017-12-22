@@ -3,29 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:keep="@color/insertCode_black,@color/colorBlack,@color/colorGray,@color/colorGrayDarkest,@color/background_dark"
     >
-    <color name="colorPrimaryDark">@color/insertCode_redDark</color>
-    <color name="colorPrimary">@color/insertCode_redLight</color>
-    <color name="colorAccent">@color/insertCode_goldDark</color>
-
-    <!-- insertCode Colours -->
-    <color name="insertCode_black">@color/colorBlack</color>
-    <color name="insertCode_redLight">#ae0001</color>
-    <color name="insertCode_redDark">#740001</color>
-    <color name="insertCode_goldLight">#eeba30</color>
-    <color name="insertCode_goldDark">#d3a625</color>
+    <!-- Main Colours -->
+    <color name="colorPrimaryLight">#e04535</color>
+    <color name="colorPrimary">#ae0000</color>
+    <color name="colorPrimaryDark">#740000</color>
+    <color name="colorAccent">#eeba30</color>
 
     <!-- tag colours -->
-    <color name="tag_slytherin_1">#1a472a</color>
-    <color name="tag_slytherin_2">#2a623d</color>
-    <color name="tag_slytherin_3">#aaaaaa</color>
+    <!-- TODO: Choose better colours -->
+    <color name="tag0_light">#5df2d6</color>
+    <color name="tag0">#00bfa5</color>
+    <color name="tag0_dark">#008e76</color>
 
-    <color name="tag_huffelpuf_1">#2cb939</color>
-    <color name="tag_huffelpuf_2">#f0c75e</color>
-    <color name="tag_huffelpuf_3">#372e29</color>
+    <color name="tag1_light">#e254ff</color>
+    <color name="tag1">#aa00ff</color>
+    <color name="tag1_dark">#7200ca</color>
 
-    <color name="tag_ravenclaw_1">#0e1a40</color>
-    <color name="tag_ravenclaw_2">#222f5b</color>
-    <color name="tag_ravenclaw_3">#946b2d</color>
+    <color name="tag2_light">#7a7cff</color>
+    <color name="tag2">#304ffe</color>
+    <color name="tag2_dark">#0026ca</color>
+
+    <color name="tag3_light">#9cff57</color>
+    <color name="tag3">#64dd17</color>
+    <color name="tag3_dark">#1faa00</color>
+
+    <color name="tag4_light">#ffdd4b</color>
+    <color name="tag4">#ffab00</color>
+    <color name="tag4_dark">#c67c00</color>
+
     <!-- Colours -->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
@@ -49,7 +54,7 @@
 
     <color name="view_project_background">@color/colorWhite</color>
 
-    <color name="activity_project_imageBackground">@color/background_normal</color>
+    <color name="fragment_project_imageBackground">@color/background_normal</color>
 
 
     <color name="view_indicator_default">#77000000</color>
