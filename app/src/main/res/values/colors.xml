@@ -9,6 +9,8 @@
     <color name="colorPrimaryDark">#740000</color>
     <color name="colorAccent">#eeba30</color>
 
+    <color name="ic_launcher_background">#FFFFFF</color>
+
     <!-- tag colours -->
     <color name="tag0">#009688</color>
     <color name="tag0_dark">#00675b</color>
