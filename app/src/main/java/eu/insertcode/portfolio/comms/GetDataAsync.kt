@@ -8,10 +8,11 @@ import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.SplashActivity
 import eu.insertcode.portfolio.data.CategoryItem
-import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.lang.ref.WeakReference
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
@@ -20,65 +21,124 @@ import javax.net.ssl.HttpsURLConnection
  * Created by maartendegoede on 16/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-class GetDataAsync(private val context: WeakReference<SplashActivity>?) : AsyncTask<String, Int, String>() {
+@Suppress("LiftReturnOrAssignment")
+class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTask<String, Int, String>() {
+    companion object {
+        val RETRY_DELAY_MS = 100L
+        val MAX_RETRIES = 3
+    }
 
-    override fun doInBackground(vararg params: String?): String? {
-        val inputStream: InputStream? = null
-        return try {
-            val url = URL(params[0])
-            val conn = url.openConnection() as HttpsURLConnection
+    private var retries = 0
+    private var url = ""
+    private var cachePath = ""
+
+    /**
+     *  Downloads and caches app content.
+     *  If downloading fails, it retries 3 times.
+     *  If it still fails, it loads a cache if any exists.
+     *  If there isn't a cache, it warns the user.
+     */
+    override fun doInBackground(vararg params: String): String {
+        try {
+            cachePath = context.get()?.cacheDir?.absolutePath + "cache.txt"
+
+            url = params[0]
+            val conn = URL(url).openConnection() as HttpsURLConnection
             conn.requestMethod = "GET"
             conn.connect()
 
-            conn.inputStream.bufferedReader().use { it.readText() }
+            val result = conn.inputStream.bufferedReader().use { it.readText() }
+            saveCache(result)
+            return result
         } catch (e: IOException) {
             e.printStackTrace()
-            null
-        } finally {
-            inputStream?.close()
+            if (retries < MAX_RETRIES) {
+                retries++
+                Thread.sleep(RETRY_DELAY_MS)
+                return doInBackground(*params)
+            } else {
+                if (hasCache()) {
+                    return getCache()
+                } else {
+                    val errorMsg = if (context.get()?.isNetworkConnected() == true) {
+                        context.get()?.getString(R.string.error_unexpected)
+                    } else {
+                        context.get()?.getString(R.string.error_connectionLost_msg)
+                    }
+
+                    return "{\"success\":\"false\", \"error\":\"$errorMsg\"}"
+                }
+            }
         }
     }
-    //TODO: Implement some kind of {"success":"true", ...} / {"success":"false", "error":"No internet connection"}.
 
-    override fun onPostExecute(result: String?) {
+    private fun hasCache() = File(cachePath).exists()
+
+    private fun getCache(): String {
+        val inputStream = File(cachePath).inputStream()
+        val text = inputStream.bufferedReader().use { it.readText() }
+        inputStream.close()
+
+        return text
+    }
+
+    private fun saveCache(json: String) {
+        val stream = FileOutputStream(File(cachePath))
+        stream.write(json.toByteArray())
+        stream.close()
+    }
+
+    override fun onPostExecute(result: String) {
         try {
-            val json = JSONArray(result)
+            val json = JSONObject(result)
 
-            MainActivity.categories = (0 until json.length()).map {
-                CategoryItem.builder(json.getJSONObject(it))
+            val success = json.getBoolean("success")
+            val error = json.optString("error")
+            val categories = json.optJSONArray("categories")
+
+            if (!success) {
+                showErrorDialog(R.string.error_title_general, error!!, true)
+                return
+            }
+
+            MainActivity.categories = (0 until categories.length()).map {
+                CategoryItem.builder(categories.getJSONObject(it))
             }
             startProjectsActivity()
         } catch (e: JSONException) {
-            showErrorDialog(R.string.error_server_title, R.string.error_server_msg, { _, _ -> throw e })
-            return
-        } catch (e: NullPointerException) {
-            val ctx = context?.get()
-            if (ctx != null) {
-                if (ctx.isNetworkConnected()) {
-                    showErrorDialog(R.string.error_unexpected_title, R.string.error_unexpected_msg, { _, _ -> throw e })
-                } else {
-                    showErrorDialog(R.string.error_connectionLost_title, R.string.error_connectionLost_msg, { _, _ -> ctx.finish() })
-                }
-            }
-            return
+            showErrorDialog(R.string.error_server_title, R.string.error_server_msg, false)
         }
     }
 
-    private fun showErrorDialog(@StringRes title: Int, @StringRes message: Int, listener: (Any, Any) -> Unit) {
-        val ctx = context?.get()
+    private fun showErrorDialog(@StringRes title: Int, @StringRes message: Int, retryable: Boolean) {
+        val msg = context.get()?.getString(message)
+        if (msg != null) {
+            showErrorDialog(title, msg, retryable)
+        }
+    }
+
+    private fun showErrorDialog(@StringRes title: Int, message: String, retryable: Boolean) {
+        val ctx = context.get()
         if (ctx != null) {
-            AlertDialog.Builder(ctx)
+            val dialog = AlertDialog.Builder(ctx)
                     .setTitle(title)
                     .setMessage(message)
-                    .setPositiveButton(android.R.string.ok, listener)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setCancelable(false)
-                    .show()
+
+            if (retryable) {
+                dialog.setPositiveButton(R.string.dialog_retry, { _, _ -> GetDataAsync(context).execute(url) })
+                dialog.setNegativeButton(R.string.dialog_cancel, { _, _ -> ctx.finish() })
+            } else {
+                dialog.setPositiveButton(android.R.string.ok, { _, _ -> ctx.finish() })
+                dialog.setCancelable(false)
+            }
+
+            dialog.show()
         }
     }
 
     private fun startProjectsActivity() {
-        val ctx = context?.get()
+        val ctx = context.get()
         if (ctx != null && !ctx.paused) {
             val intent = Intent(ctx, MainActivity::class.java)
             ctx.startActivity(intent)
