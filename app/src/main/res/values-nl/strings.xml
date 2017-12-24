@@ -2,17 +2,22 @@
     <string name="app_name">Portfolio</string>
 
     <!-- Error Messages -->
+    <string name="error_title_general">Een fout is opgetreden</string>
+
     <string name="error_noInternet_title">Geen Internetverbinding</string>
     <string name="error_noInternet_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
 
     <string name="error_connectionLost_title">Internetverbinding Verloren"</string>
     <string name="error_connectionLost_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
 
-    <string name="error_unexpected_title">Onverwachte Fout</string>
-    <string name="error_unexpected_msg">Een onverwachte fout is opgetreden. Probeer het AUB later opnieuw.</string>
+    <string name="error_unexpected">Een onverwachte fout is opgetreden. Probeer het AUB later opnieuw.</string>
 
     <string name="error_server_title">Onverwachte Server Fout</string>
     <string name="error_server_msg">Een onverwachte server fout is opgetreden. Probeer het AUB later opnieuw.</string>
+
+    <!-- Dialog -->
+    <string name="dialog_retry">Probeer Opnieuw</string>
+    <string name="dialog_cancel">Annuleer</string>
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>

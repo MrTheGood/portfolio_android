@@ -9,17 +9,22 @@
     <string name="trans_projectTags" translatable="false">project_tags</string>
 
     <!-- Error Messages -->
+    <string name="error_title_general">An error occurred</string>
+
     <string name="error_noInternet_title">No Internet Connection"</string>
     <string name="error_noInternet_msg">Please check your internet connection and try again.</string>
 
     <string name="error_connectionLost_title">Connection Lost"</string>
     <string name="error_connectionLost_msg">Please check your internet connection and try again.</string>
 
-    <string name="error_unexpected_title">Unexpected Error</string>
-    <string name="error_unexpected_msg">An unexpected error occurred. Please try again later.</string>
+    <string name="error_unexpected">An unexpected error occurred. Please try again later.</string>
 
     <string name="error_server_title">Unexpected Server Error</string>
     <string name="error_server_msg">An unexpected server error occurred. Please try again later.</string>
+
+    <!-- Dialog -->
+    <string name="dialog_retry">Retry</string>
+    <string name="dialog_cancel">Cancel</string>
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
