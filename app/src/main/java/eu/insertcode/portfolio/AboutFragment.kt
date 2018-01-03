@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
+import android.support.transition.Fade
 import android.support.transition.Slide
 import android.support.transition.TransitionSet
 import android.support.v4.app.Fragment
@@ -72,9 +73,15 @@ class AboutFragment : Fragment() {
             contentSlide.mode = Slide.MODE_IN
             contentSlide.addTarget(R.id.about_content)
 
+            val fade = Fade(Fade.IN)
+            fade.mode = Fade.MODE_IN
+            fade.addTarget(R.id.about_app_bar)
+            fade.addTarget(R.id.about_content)
+
             return TransitionSet()
                     .addTransition(appBarSlide)
                     .addTransition(contentSlide)
+                    .addTransition(fade)
                     .setDuration(resources.getInteger(R.integer.config_enterAnimTime).toLong())
                     .setInterpolator(LinearOutSlowInInterpolator())
         }
