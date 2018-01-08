@@ -25,6 +25,7 @@
     <string name="desc_drawer_open">Open navigation drawer</string>
     <string name="desc_drawer_close">Close navigation drawer</string>
     <string name="desc_drawer_header">Drawer header</string>
+    <string name="desc_playVideo">Play video</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_main">Projecten</string>

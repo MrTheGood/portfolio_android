@@ -46,7 +46,7 @@ class Project : FrameLayout {
         projectTags = findViewById(R.id.project_tags)
 
         if (!project.images.isEmpty())
-            Utils.putImageInView(ctx, project.images[0], projectImage)
+            Utils.putImageInView(ctx, project.images[0].image, projectImage)
 
         projectTitle.text = project.title
         projectShortDescription.text = Utils.fromHtmlCompat(project.shortDescription)
