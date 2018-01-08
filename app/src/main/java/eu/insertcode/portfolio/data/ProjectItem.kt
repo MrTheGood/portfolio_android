@@ -9,7 +9,7 @@ import java.io.Serializable
  */
 data class ProjectItem(
         val title: String,
-        val images: List<String>,
+        val images: List<MediaItem>,
         val shortDescription: String,
         val fullDescription: String,
         val copyright: String,
@@ -22,10 +22,15 @@ data class ProjectItem(
                 o.optString("title", "")!!,
                 try {
                     (0 until o.optJSONArray("images").length()).map {
-                        o.getJSONArray("images").getString(it)
+                        val item = o.getJSONArray("images").get(it)
+                        if (item is JSONObject) {
+                            MediaItem.builder(item)
+                        } else {
+                            MediaItem.builder(item as String)
+                        }
                     }
                 } catch (e: NullPointerException) {
-                    emptyList<String>()
+                    emptyList<MediaItem>()
                 },
                 o.getString("shortDescription")!!,
                 o.getString("fullDescription")!!,
