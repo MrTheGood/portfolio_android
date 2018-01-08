@@ -1,6 +1,7 @@
 package eu.insertcode.portfolio
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -129,6 +130,14 @@ class MainActivity : AppCompatActivity(),
     override fun updateMenuDrawer(position: Int) {
         // position + 1 because about_me is the first item.
         nav_view.menu.getItem(position + 1).isChecked = true
+    }
+
+    fun openVideoActivity(video: String?) {
+        if (video != null) {
+            val intent = Intent(this, YoutubeVideoActivity::class.java)
+            intent.putExtra(YoutubeVideoActivity.EXTRA_VIDEO, video)
+            startActivity(intent)
+        }
     }
     //endregion user-interaction
 }

@@ -127,7 +127,7 @@ class ProjectFragment : Fragment() {
 
         if (view is VideoThumbnailView) {
             view.playButton.setOnClickListener {
-                //                (activity as MainActivity).openVideoActivity(img.video)
+                (activity as MainActivity).openVideoActivity(img.video)
             }
         }
 
