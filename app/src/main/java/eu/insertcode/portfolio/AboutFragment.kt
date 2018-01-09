@@ -1,12 +1,14 @@
 package eu.insertcode.portfolio
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.Snackbar
 import android.support.transition.Fade
 import android.support.transition.Slide
 import android.support.transition.TransitionSet
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.view.animation.FastOutLinearInInterpolator
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
@@ -46,9 +48,15 @@ class AboutFragment : Fragment() {
         layout = inflater.inflate(R.layout.fragment_about, container, false) as ViewGroup
 
         layout.about_mail_btn.setOnClickListener {
-            //TODO: Auto-generated code. Replace.
-            Snackbar.make(it, "Replace with our own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val options = ActivityOptionsCompat.makeClipRevealAnimation(
+                    layout,
+                    layout.about_mail_btn.x.toInt(),
+                    layout.about_mail_btn.y.toInt(),
+                    0, 0
+            )
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse(resources.getString(R.string.uri_mailto))
+            activity?.startActivity(intent, options.toBundle())
         }
         listener.setupActionBar(layout.about_toolbar, getString(R.string.title_fragment_about))
 

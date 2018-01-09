@@ -61,9 +61,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/floating_action_button_margin"
+        android:tint="@color/colorWhite"
+        app:fabSize="normal"
         app:layout_anchor="@id/about_app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email"
+        app:srcCompat="@drawable/ic_email"
         />
 
 </android.support.design.widget.CoordinatorLayout>
