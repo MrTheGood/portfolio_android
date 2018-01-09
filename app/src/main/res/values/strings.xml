@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Portfolio</string>
 
-    <!-- Data URLs -->
+    <!-- Data URIs -->
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
+    <string name="uri_mailto" translatable="false">mailto:mail@insertcode.eu</string>
 
     <!-- Transition Names -->
     <string name="trans_projectImage" translatable="false">project_image</string>
