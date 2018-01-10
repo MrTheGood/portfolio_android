@@ -3,7 +3,7 @@
     <dimen name="margin_projectSmall_top">6dp</dimen>
     <dimen name="margin_projectSmall_bottom">6dp</dimen>
     <dimen name="margin_projectSmall_side">8dp</dimen>
-    <dimen name="maxHeight_projectImage">224dp</dimen>
+    <dimen name="maxHeight_projectImage">198dp</dimen>
 
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="floating_action_button_margin">16dp</dimen>
