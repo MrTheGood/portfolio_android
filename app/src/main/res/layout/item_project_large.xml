@@ -24,39 +24,59 @@
             android:orientation="vertical"
             >
 
-            <TextView
-                android:id="@+id/project_title"
-                style="@style/TextAppearance.AppCompat.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:paddingBottom="4dp"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:textColor="@color/colorWhite"
-                tools:ignore="SelectableText"
-                tools:text="Project"
-                />
-
-            <eu.insertcode.portfolio.widgets.ProjectImageView
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/project_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:background="@color/colorWhite"
+                android:background="@color/colorGrayLight"
                 android:contentDescription="@string/desc_projectThumbnail"
                 android:maxHeight="@dimen/maxHeight_projectImage"
                 android:scaleType="fitCenter"
                 android:transitionName="@string/trans_projectImage"
                 />
 
+            <TextView
+                android:id="@+id/project_title"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="24dp"
+                android:textSize="24sp"
+                tools:text="Project Title"
+                />
+
+            <TextView
+                android:id="@+id/project_date"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="14sp"
+                tools:ignore="SelectableText"
+                tools:text="October 2017"
+                />
+
+            <TextView
+                android:id="@+id/project_shortDescription"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:ignore="SelectableText"
+                tools:text="Short example project description for the shortDescription stuff for a project."
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp"
-                android:paddingTop="0dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 >
 
                 <LinearLayout
@@ -64,27 +84,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="2dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:transitionName="@string/trans_projectTags"
-                    />
-
-                <TextView
-                    android:id="@+id/project_shortDescription"
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
-                    tools:ignore="SelectableText"
-                    tools:text="Short example project description for the shortDescription stuff for a project."
-                    />
-
-                <TextView
-                    android:id="@+id/project_date"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="SelectableText"
-                    tools:text="October 2017"
                     />
 
 
