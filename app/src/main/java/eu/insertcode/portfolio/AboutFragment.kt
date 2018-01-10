@@ -52,7 +52,8 @@ class AboutFragment : Fragment() {
                     layout,
                     layout.about_mail_btn.x.toInt(),
                     layout.about_mail_btn.y.toInt(),
-                    0, 0
+                    layout.about_mail_btn.width,
+                    layout.about_mail_btn.height
             )
             val intent = Intent(Intent.ACTION_SENDTO)
             intent.data = Uri.parse(resources.getString(R.string.uri_mailto))
