@@ -24,17 +24,31 @@
             android:orientation="vertical"
             >
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/project_image"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:background="@color/colorGrayLight"
-                android:contentDescription="@string/desc_projectThumbnail"
-                android:maxHeight="@dimen/maxHeight_projectImage"
-                android:scaleType="fitCenter"
-                android:transitionName="@string/trans_projectImage"
-                />
+                >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/project_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/maxHeight_projectImage"
+                    android:background="@color/fragment_project_imageBackground"
+                    />
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/project_image_indicator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/project_image"
+                    app:layout_constraintStart_toStartOf="@id/project_image"
+                    app:layout_constraintTop_toTopOf="@id/project_image"
+                    app:tabBackground="@drawable/viewpager_indicator"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabPadding="2dp"
+                    />
+            </android.support.constraint.ConstraintLayout>
 
             <TextView
                 android:id="@+id/project_title"
