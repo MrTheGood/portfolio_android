@@ -2,6 +2,8 @@ package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -9,12 +11,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import eu.insertcode.portfolio.MainActivity
-import eu.insertcode.portfolio.ProjectFragment
 import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.adapters.ProjectImagesPagerAdapter
+import eu.insertcode.portfolio.data.MediaItem
 import eu.insertcode.portfolio.data.ProjectItem
+import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
-import android.support.v4.util.Pair as AndroidPair
+import kotlinx.android.synthetic.main.item_project_large.view.*
+import kotlinx.android.synthetic.main.video_thumbnail.view.*
 
 @SuppressLint("ViewConstructor")
 /**
@@ -23,7 +28,7 @@ import android.support.v4.util.Pair as AndroidPair
  */
 class Project : FrameLayout {
 
-    private val projectImage: ImageView
+    private val projectImages: ViewPager
     private val projectTitle: TextView
     private val projectShortDescription: TextView
     private val projectDate: TextView
@@ -32,21 +37,31 @@ class Project : FrameLayout {
     constructor(project: ProjectItem, ctx: Context) : this(project, ctx, null)
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(project, ctx, attrs, 0)
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
-        val layoutResource = if (project.layout == "item_project_large") {
-            R.layout.item_project_large
-        } else {
-            R.layout.item_project
+        val v = View.inflate(ctx, R.layout.item_project_large, this)
+
+        projectImages = v.project_image
+        projectTitle = v.project_title
+        projectShortDescription = v.project_shortDescription
+        projectDate = v.project_date
+        projectTags = v.project_tags
+
+        // Add images
+        val adapter = ProjectImagesPagerAdapter()
+        projectImages.adapter = adapter
+        if (!project.images.isEmpty()) {
+            for (img in project.images) {
+                addProjectImage(adapter, img)
+            }
         }
-        View.inflate(ctx, layoutResource, this)
 
-        projectImage = findViewById(R.id.project_image)
-        projectTitle = findViewById(R.id.project_title)
-        projectShortDescription = findViewById(R.id.project_shortDescription)
-        projectDate = findViewById(R.id.project_date)
-        projectTags = findViewById(R.id.project_tags)
+        // setup viewpager indicator
+        if (project.images.size > 1) {
+            v.project_image_indicator.setupWithViewPager(projectImages)
+        } else if (project.images.isEmpty()) {
+            v.project_image.visibility = View.GONE
+            v.project_image_indicator.visibility = View.GONE
+        }
 
-        if (!project.images.isEmpty())
-            Utils.putImageInView(ctx, project.images[0].image, projectImage)
 
         projectTitle.text = project.title
         projectShortDescription.text = Utils.fromHtmlCompat(project.shortDescription)
@@ -59,11 +74,38 @@ class Project : FrameLayout {
         }
 
         setOnClickListener({
-            (context as MainActivity)
-                    .getFragmentTransaction(ProjectFragment.newInstance(project))
-                    .addSharedElement(projectImage, resources.getString(R.string.trans_projectImage))
-                    .addSharedElement(projectTags, resources.getString(R.string.trans_projectTags))
-                    .commit()
+            //TODO: Expand view
+        })
+    }
+
+    private fun addProjectImage(adapter: ProjectImagesPagerAdapter, img: MediaItem) {
+        val view = if (img.hasVideo()) {
+            VideoThumbnailView(context)
+        } else {
+            ImageView(context)
+        }
+        val imageView = view.thumbnail ?: view as ImageView
+        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+        imageView.adjustViewBounds = true
+
+        if (view is VideoThumbnailView) {
+            view.playButton.setOnClickListener {
+                (context as MainActivity).openVideoActivity(img.video)
+            }
+        }
+
+        adapter.addView(view)
+        Utils.putImageInView(context!!, img.image, imageView)
+
+
+        imageView.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+            override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+                if (v is ImageView && v.drawable != null) {
+                    v.background = BitmapDrawable(resources, BitmapUtil.getBlurredBitmap(context, BitmapUtil.drawableToBitmap(v.drawable), 0.2f, 15f))
+                    v.removeOnLayoutChangeListener(this)
+                }
+            }
+
         })
     }
 }
