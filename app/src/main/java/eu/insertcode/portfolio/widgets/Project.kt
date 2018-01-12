@@ -1,17 +1,19 @@
 package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubeThumbnailLoader
+import com.google.android.youtube.player.YouTubeThumbnailView
 import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.YoutubeVideoActivity
 import eu.insertcode.portfolio.adapters.ProjectImagesPagerAdapter
 import eu.insertcode.portfolio.data.MediaItem
 import eu.insertcode.portfolio.data.ProjectItem
@@ -19,7 +21,6 @@ import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
 import kotlinx.android.synthetic.main.item_project_large.view.*
-import kotlinx.android.synthetic.main.video_thumbnail.view.*
 
 @SuppressLint("ViewConstructor")
 /**
@@ -79,33 +80,47 @@ class Project : FrameLayout {
     }
 
     private fun addProjectImage(adapter: ProjectImagesPagerAdapter, img: MediaItem) {
-        val view = if (img.hasVideo()) {
-            VideoThumbnailView(context)
-        } else {
-            ImageView(context)
-        }
-        val imageView = view.thumbnail ?: view as ImageView
-        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
-        imageView.adjustViewBounds = true
+        if (img.hasYoutubeVideo()) {
 
-        if (view is VideoThumbnailView) {
-            view.playButton.setOnClickListener {
-                (context as MainActivity).openVideoActivity(img.video)
-            }
-        }
-
-        adapter.addView(view)
-        Utils.putImageInView(context!!, img.image, imageView)
-
-
-        imageView.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-            override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
-                if (v is ImageView && v.drawable != null) {
-                    v.background = BitmapDrawable(resources, BitmapUtil.getBlurredBitmap(context, BitmapUtil.drawableToBitmap(v.drawable), 0.2f, 15f))
-                    v.removeOnLayoutChangeListener(this)
+            val view = YouTubeThumbnailView(context)
+            view.initialize(YoutubeVideoActivity.API_KEY, object : YouTubeThumbnailView.OnInitializedListener {
+                override fun onInitializationSuccess(view: YouTubeThumbnailView?, loader: YouTubeThumbnailLoader?) {
+                    loader?.setVideo(img.youtubeVideo)
                 }
-            }
 
-        })
+                override fun onInitializationFailure(view: YouTubeThumbnailView?, errorReason: YouTubeInitializationResult?) {
+                    if (errorReason?.isUserRecoverableError == true) {
+                        errorReason.getErrorDialog(context as Activity, YoutubeVideoActivity.RECOVERY_REQUEST).show()
+                    } else {
+                        Toast.makeText(context, errorReason.toString(), Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+
+            val button = VideoButtonView(context)
+            button.setOnClickListener { (context as MainActivity).openVideoActivity(img.youtubeVideo) }
+
+            val layout = FrameLayout(context)
+            layout.addView(view)
+            layout.addView(button)
+            adapter.addView(layout)
+
+        } else if (img.hasImage()) {
+
+            val view = ImageView(context)
+            view.scaleType = ImageView.ScaleType.FIT_CENTER
+            view.adjustViewBounds = true
+            adapter.addView(view)
+
+            Utils.putImageInView(context!!, img.image, view)
+            view.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+                override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+                    if (v is ImageView && v.drawable != null) {
+                        v.background = BitmapDrawable(resources, BitmapUtil.getBlurredBitmap(context, BitmapUtil.drawableToBitmap(v.drawable), 0.2f, 15f))
+                        v.removeOnLayoutChangeListener(this)
+                    }
+                }
+            })
+        }
     }
 }
