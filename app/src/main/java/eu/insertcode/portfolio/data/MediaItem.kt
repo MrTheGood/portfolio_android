@@ -8,13 +8,14 @@ import java.io.Serializable
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 data class MediaItem(
-        val image: String,
-        val video: String?
+        val image: String?,
+        val youtubeVideo: String?
 ) : Serializable {
     companion object {
-        fun builder(o: JSONObject) = MediaItem(o.getString("image"), o.optString("video"))
+        fun builder(o: JSONObject) = MediaItem(null, o.optString("youtube"))
         fun builder(s: String) = MediaItem(s, null)
     }
 
-    fun hasVideo() = (video != null && !video.isEmpty())
+    fun hasYoutubeVideo() = (youtubeVideo != null && !youtubeVideo.isEmpty())
+    fun hasImage() = (image != null && !image.isEmpty())
 }

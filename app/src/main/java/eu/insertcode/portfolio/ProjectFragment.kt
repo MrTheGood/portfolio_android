@@ -8,15 +8,12 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import eu.insertcode.portfolio.adapters.ProjectImagesPagerAdapter
 import eu.insertcode.portfolio.data.MediaItem
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
-import eu.insertcode.portfolio.widgets.VideoThumbnailView
 import kotlinx.android.synthetic.main.fragment_project.view.*
-import kotlinx.android.synthetic.main.video_thumbnail.view.*
 
 /**
  * Created by maarten on 2017-12-09.
@@ -114,24 +111,5 @@ class ProjectFragment : Fragment() {
     }
 
     private fun addProjectImage(adapter: ProjectImagesPagerAdapter, img: MediaItem, doAddTransitionName: Boolean) {
-        val view = if (img.hasVideo()) {
-            VideoThumbnailView(context)
-        } else {
-            ImageView(context)
-        }
-        val imageView = view.thumbnail ?: view as ImageView
-        imageView.scaleType = ImageView.ScaleType.FIT_CENTER
-        imageView.adjustViewBounds = true
-        if (doAddTransitionName)
-            view.transitionName = resources.getString(R.string.trans_projectImage)
-
-        if (view is VideoThumbnailView) {
-            view.playButton.setOnClickListener {
-                (activity as MainActivity).openVideoActivity(img.video)
-            }
-        }
-
-        adapter.addView(view)
-        Utils.putImageInView(context!!, img.image, imageView)
     }
 }
