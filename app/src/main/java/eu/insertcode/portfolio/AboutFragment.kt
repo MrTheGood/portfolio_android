@@ -17,6 +17,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import eu.insertcode.portfolio.utils.Utils
 import kotlinx.android.synthetic.main.fragment_about.view.*
 
 /**
@@ -25,6 +26,8 @@ import kotlinx.android.synthetic.main.fragment_about.view.*
  */
 class AboutFragment : Fragment() {
     companion object {
+        var aboutMeText = ""
+
         fun newInstance() = AboutFragment()
 
         interface AboutFragmentListener {
@@ -47,6 +50,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         layout = inflater.inflate(R.layout.fragment_about, container, false) as ViewGroup
 
+        layout.about_text.text = Utils.fromHtmlCompat(aboutMeText)
         layout.about_mail_btn.setOnClickListener {
             val options = ActivityOptionsCompat.makeClipRevealAnimation(
                     layout,

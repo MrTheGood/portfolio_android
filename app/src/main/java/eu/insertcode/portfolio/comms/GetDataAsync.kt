@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.annotation.StringRes
+import eu.insertcode.portfolio.AboutFragment
 import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.SplashActivity
@@ -95,6 +96,7 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTa
             val success = json.getBoolean("success")
             val error = json.optString("error")
             val categories = json.optJSONArray("categories")
+            val aboutMe = json.optString("about_me")
 
             if (!success) {
                 showErrorDialog(R.string.error_title_general, error!!, true)
@@ -104,6 +106,8 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTa
             MainActivity.categories = (0 until categories.length()).map {
                 CategoryItem.builder(categories.getJSONObject(it))
             }
+            AboutFragment.aboutMeText = aboutMe ?: ""
+
             startProjectsActivity()
         } catch (e: JSONException) {
             showErrorDialog(R.string.error_server_title, R.string.error_server_msg, false)
