@@ -84,6 +84,18 @@
                 tools:text="Short example project description for the shortDescription stuff for a project."
                 />
 
+            <TextView
+                android:id="@+id/project_fullDescription"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:visibility="gone"
+                tools:ignore="SelectableText"
+                tools:text="Short example project description for the shortDescription stuff for a project."
+                />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
