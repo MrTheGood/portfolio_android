@@ -1,13 +1,15 @@
 package eu.insertcode.portfolio.widgets
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubeThumbnailLoader
 import com.google.android.youtube.player.YouTubeThumbnailView
@@ -89,11 +91,6 @@ class Project : FrameLayout {
                 }
 
                 override fun onInitializationFailure(view: YouTubeThumbnailView?, errorReason: YouTubeInitializationResult?) {
-                    if (errorReason?.isUserRecoverableError == true) {
-                        errorReason.getErrorDialog(context as Activity, YoutubeVideoActivity.RECOVERY_REQUEST).show()
-                    } else {
-                        Toast.makeText(context, errorReason.toString(), Toast.LENGTH_LONG).show()
-                    }
                 }
             })
 
