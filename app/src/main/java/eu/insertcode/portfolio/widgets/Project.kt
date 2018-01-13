@@ -3,9 +3,11 @@ package eu.insertcode.portfolio.widgets
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
+import android.support.transition.TransitionManager
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -34,8 +36,11 @@ class Project : FrameLayout {
     private val projectImages: ViewPager
     private val projectTitle: TextView
     private val projectShortDescription: TextView
+    private val projectFullDescription: TextView
     private val projectDate: TextView
     private val projectTags: LinearLayout
+
+    private var expanded = false
 
     constructor(project: ProjectItem, ctx: Context) : this(project, ctx, null)
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(project, ctx, attrs, 0)
@@ -45,6 +50,7 @@ class Project : FrameLayout {
         projectImages = v.project_image
         projectTitle = v.project_title
         projectShortDescription = v.project_shortDescription
+        projectFullDescription = v.project_fullDescription
         projectDate = v.project_date
         projectTags = v.project_tags
 
@@ -68,6 +74,7 @@ class Project : FrameLayout {
 
         projectTitle.text = project.title
         projectShortDescription.text = Utils.fromHtmlCompat(project.shortDescription)
+        projectFullDescription.text = Utils.fromHtmlCompat(project.fullDescription)
 
         if (project.date == null) projectDate.visibility = View.GONE
         projectDate.text = project.date
@@ -77,7 +84,16 @@ class Project : FrameLayout {
         }
 
         setOnClickListener({
-            //TODO: Expand view
+            TransitionManager.beginDelayedTransition(this.parent as ViewGroup)
+            if (expanded) {
+                projectShortDescription.visibility = View.VISIBLE
+                projectFullDescription.visibility = View.GONE
+                expanded = !expanded
+            } else {
+                projectShortDescription.visibility = View.GONE
+                projectFullDescription.visibility = View.VISIBLE
+                expanded = !expanded
+            }
         })
     }
 
