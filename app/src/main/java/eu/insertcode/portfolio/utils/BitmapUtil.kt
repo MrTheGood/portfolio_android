@@ -22,8 +22,6 @@ class BitmapUtil {
         private val DEFAULT_BLUR_RADIUS = 7.5f
 
         fun getRoundedCornerBitmap(ctx: Context, input: Bitmap, pixels: Int, width: Int, height: Int) = getRoundedCornerBitmap(ctx, input, pixels, width, height, false, false, false, false)
-
-        //TODO: Remove rounded corners on big images
         fun getRoundedCornerBitmap(ctx: Context, input: Bitmap, pixels: Int, width: Int, height: Int, TL: Boolean, TR: Boolean, BL: Boolean, BR: Boolean): Bitmap {
             val output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(output)
