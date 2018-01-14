@@ -1,14 +1,13 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/error_connectionLost,@string/error_unexpected,@string/desc_playVideo"
+    >
     <string name="app_name">Portfolio</string>
 
     <!-- Error Messages -->
     <string name="error_title_general">Een fout is opgetreden</string>
 
-    <string name="error_noInternet_title">Geen Internetverbinding</string>
-    <string name="error_noInternet_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
-
-    <string name="error_connectionLost_title">Internetverbinding Verloren"</string>
-    <string name="error_connectionLost_msg">Controleer AUB uw internetverbinding en probeer het opniew.</string>
+    <string name="error_connectionLost">Controleer AUB uw internetverbinding en probeer het opniew.</string>
 
     <string name="error_unexpected">Een onverwachte fout is opgetreden. Probeer het AUB later opnieuw.</string>
 
@@ -21,7 +20,6 @@
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
-    <string name="desc_projectThumbnail">Project Thumbnail</string>
     <string name="desc_drawer_open">Open navigation drawer</string>
     <string name="desc_drawer_close">Close navigation drawer</string>
     <string name="desc_drawer_header">Drawer header</string>
@@ -35,7 +33,6 @@
     <string name="menu_aboutMe">About Me</string>
 
     <!-- Unsorted -->
-    <string name="str_copyrightSymbol">© %s</string>
     <string name="str_drawerHeader">insertCode Portfolio</string>
 
 </resources>

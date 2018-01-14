@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlack"
     tools:context=".YoutubeVideoActivity"
+    tools:ignore="Overdraw"
     >
 
     <com.google.android.youtube.player.YouTubePlayerView

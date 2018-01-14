@@ -24,7 +24,7 @@ import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
-import kotlinx.android.synthetic.main.item_project_large.view.*
+import kotlinx.android.synthetic.main.item_project.view.*
 
 @SuppressLint("ViewConstructor")
 /**
@@ -45,7 +45,7 @@ class Project : FrameLayout {
     constructor(project: ProjectItem, ctx: Context) : this(project, ctx, null)
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?) : this(project, ctx, attrs, 0)
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
-        val v = View.inflate(ctx, R.layout.item_project_large, this)
+        val v = View.inflate(ctx, R.layout.item_project, this)
 
         projectImages = v.project_image
         projectTitle = v.project_title
@@ -125,7 +125,7 @@ class Project : FrameLayout {
             view.adjustViewBounds = true
             adapter.addView(view)
 
-            Utils.putImageInView(context!!, img.image, view)
+            Utils.putImageInView(context, img.image, view)
             view.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
                 override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
                     if (v is ImageView && v.drawable != null) {
