@@ -93,6 +93,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:autoLink="web"
                 android:textIsSelectable="true"
                 android:visibility="gone"
                 tools:text="Short example project description for the shortDescription stuff for a project."
