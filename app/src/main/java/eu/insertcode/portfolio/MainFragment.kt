@@ -53,7 +53,7 @@ class MainFragment : Fragment(), ViewPager.OnPageChangeListener {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         layout = inflater.inflate(R.layout.fragment_main, container, false)
 
         @Suppress("UNCHECKED_CAST")
@@ -74,14 +74,16 @@ class MainFragment : Fragment(), ViewPager.OnPageChangeListener {
 
 
     private fun loadProjects(parent: ViewGroup, items: List<Any>) {
+        if (context == null) return
+        val context = context!!
         items.iterator().forEach {
             when (it) {
                 is CategoryItem -> {
-                    val category = Category(context!!)
+                    val category = Category(context)
                     pageAdapter.addView(category, it.title)
                     loadProjects(category.findViewById(R.id.category_content), it.projects)
                 }
-                is ProjectItem -> parent.addView(Project(it, context!!))
+                is ProjectItem -> parent.addView(Project(it, context))
             }
         }
     }

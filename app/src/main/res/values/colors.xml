@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources
     xmlns:tools="http://schemas.android.com/tools"
-    tools:keep="@color/insertCode_black,@color/colorBlack,@color/colorGray,@color/colorGrayDarkest,@color/background_dark"
+    tools:keep="@color/background,@color/view_project_background,@color/fragment_project_imageBackground,@color/view_indicator_default,@color/view_indicator_selected,@color/colorGray,@color/colorGrayDark,@color/colorGrayDarkest"
     >
     <!-- Main Colours -->
-    <color name="colorPrimaryLight">#e04535</color>
     <color name="colorPrimary">#ae0000</color>
     <color name="colorPrimaryDark">#740000</color>
     <color name="colorAccent">#eeba30</color>
@@ -37,8 +36,7 @@
 
     <!-- View Colors -->
     <color name="background_light">@color/colorGrayLightest</color>
-    <color name="background_normal">@color/colorGrayLight</color>
-    <color name="background_dark">@color/colorGray</color>
+    <color name="background">@color/colorGrayLight</color>
 
     <color name="view_progressbar">@color/colorAccent</color>
 
@@ -47,7 +45,7 @@
 
     <color name="view_project_background">@color/colorWhite</color>
 
-    <color name="fragment_project_imageBackground">@color/background_normal</color>
+    <color name="fragment_project_imageBackground">@color/background</color>
 
 
     <color name="view_indicator_default">#77000000</color>

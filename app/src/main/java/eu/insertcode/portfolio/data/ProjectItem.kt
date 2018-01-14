@@ -12,14 +12,12 @@ data class ProjectItem(
         val images: List<MediaItem>,
         val shortDescription: String,
         val fullDescription: String,
-        val copyright: String,
-        val layout: String,
         val tags: List<String>,
         val date: String?
 ) : Serializable {
     companion object {
         fun builder(o: JSONObject) = ProjectItem(
-                o.optString("title", "")!!,
+                o.getString("title"),
                 try {
                     (0 until o.optJSONArray("images").length()).map {
                         val item = o.getJSONArray("images").get(it)
@@ -32,10 +30,8 @@ data class ProjectItem(
                 } catch (e: NullPointerException) {
                     emptyList<MediaItem>()
                 },
-                o.getString("shortDescription")!!,
-                o.getString("fullDescription")!!,
-                o.getString("copyright")!!,
-                o.optString("layout", "")!!,
+                o.getString("shortDescription"),
+                o.getString("fullDescription"),
                 try {
                     (0 until o.optJSONArray("tags").length()).map {
                         o.getJSONArray("tags").getString(it)

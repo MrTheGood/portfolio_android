@@ -14,11 +14,11 @@ data class CategoryItem(
 ) : Serializable {
     companion object {
         fun builder(o: JSONObject) = CategoryItem(
-                o.optString("title", "")!!,
+                o.getString("title"),
                 (0 until o.getJSONArray("items").length()).map {
                     ProjectItem.builder(o.getJSONArray("items").getJSONObject(it))
                 },
-                o.optString("icon", "")!!
+                o.getString("icon")
         )
     }
 }

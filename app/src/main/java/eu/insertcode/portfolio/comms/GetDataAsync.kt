@@ -22,7 +22,6 @@ import javax.net.ssl.HttpsURLConnection
  * Created by maartendegoede on 16/10/17.
  * Copyright © 2017 insertCode.eu. All rights reserved.
  */
-@Suppress("LiftReturnOrAssignment")
 class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTask<String, Int, String>() {
     companion object {
         val RETRY_DELAY_MS = 100L
@@ -58,13 +57,14 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTa
                 Thread.sleep(RETRY_DELAY_MS)
                 return doInBackground(*params)
             } else {
+                @Suppress("LiftReturnOrAssignment")
                 if (hasCache()) {
                     return getCache()
                 } else {
                     val errorMsg = if (context.get()?.isNetworkConnected() == true) {
                         context.get()?.getString(R.string.error_unexpected)
                     } else {
-                        context.get()?.getString(R.string.error_connectionLost_msg)
+                        context.get()?.getString(R.string.error_connectionLost)
                     }
 
                     return "{\"success\":\"false\", \"error\":\"$errorMsg\"}"
@@ -94,19 +94,19 @@ class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTa
             val json = JSONObject(result)
 
             val success = json.getBoolean("success")
-            val error = json.optString("error")
+            val error = json.optString("error", "null")
             val categories = json.optJSONArray("categories")
             val aboutMe = json.optString("about_me")
 
             if (!success) {
-                showErrorDialog(R.string.error_title_general, error!!, true)
+                showErrorDialog(R.string.error_title_general, error, true)
                 return
             }
 
             MainActivity.categories = (0 until categories.length()).map {
                 CategoryItem.builder(categories.getJSONObject(it))
             }
-            AboutFragment.aboutMeText = aboutMe ?: ""
+            AboutFragment.aboutMeText = aboutMe
 
             startProjectsActivity()
         } catch (e: JSONException) {

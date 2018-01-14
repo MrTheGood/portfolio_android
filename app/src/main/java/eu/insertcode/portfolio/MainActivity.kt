@@ -1,12 +1,10 @@
 package eu.insertcode.portfolio
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -23,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainActivity : AppCompatActivity(),
         MainFragment.Companion.MainFragmentListener,
         AboutFragment.Companion.AboutFragmentListener,
-        ProjectFragment.Companion.ProjectFragmentListener,
         NavigationView.OnNavigationItemSelectedListener {
     companion object {
         var categories: List<CategoryItem> = emptyList()
@@ -31,6 +28,9 @@ class MainActivity : AppCompatActivity(),
 
     private var currentFragment: Fragment? = null
     private lateinit var mainFragment: MainFragment
+
+    //FIXME: If the activity gets killed while a fragment is open and the user navigates back to the activity, some problems occur.
+    //          (Steps to reproduce: Turn on "Don't keep activities", open any fragment and reopen the app.)
 
     //region initialization
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +102,10 @@ class MainActivity : AppCompatActivity(),
         drawer_layout.closeDrawer(GravityCompat.START)
 
         if (item.itemId == R.id.nav_about) {
-            getFragmentTransaction(AboutFragment.newInstance()).commit()
+            currentFragment = AboutFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                    .replace(fragments_layout.id, currentFragment)
+                    .commit()
             nav_view.menu.getItem(0).isChecked = true
         }
 
@@ -119,13 +122,6 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    //FIXME: If the activity gets killed while a fragment is open and the user navigates back to the activity, some problems occur.
-    //          (Steps to reproduce: Turn on "Don't keep activities", open any fragment and reopen the app.)
-    @SuppressLint("CommitTransaction")
-    fun getFragmentTransaction(fragment: Fragment): FragmentTransaction {
-        currentFragment = fragment
-        return supportFragmentManager.beginTransaction().replace(fragments_layout.id, fragment)
-    }
 
     override fun updateMenuDrawer(position: Int) {
         // position + 1 because about_me is the first item.

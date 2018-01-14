@@ -12,7 +12,7 @@ data class MediaItem(
         val youtubeVideo: String?
 ) : Serializable {
     companion object {
-        fun builder(o: JSONObject) = MediaItem(null, o.optString("youtube"))
+        fun builder(o: JSONObject) = MediaItem(null, o.getString("youtube"))
         fun builder(s: String) = MediaItem(s, null)
     }
 

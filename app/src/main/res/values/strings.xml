@@ -1,22 +1,17 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/error_connectionLost,@string/error_unexpected,@string/desc_playVideo"
+    >
     <string name="app_name">Portfolio</string>
 
     <!-- Data URIs -->
     <string name="url_getData" translatable="false">https://portfolio.insertcode.eu/apptestjson.json</string>
     <string name="uri_mailto" translatable="false">mailto:mail@insertcode.eu</string>
 
-    <!-- Transition Names -->
-    <string name="trans_projectImage" translatable="false">project_image</string>
-    <string name="trans_projectTags" translatable="false">project_tags</string>
-
     <!-- Error Messages -->
     <string name="error_title_general">An error occurred</string>
 
-    <string name="error_noInternet_title">No Internet Connection"</string>
-    <string name="error_noInternet_msg">Please check your internet connection and try again.</string>
-
-    <string name="error_connectionLost_title">Connection Lost"</string>
-    <string name="error_connectionLost_msg">Please check your internet connection and try again.</string>
+    <string name="error_connectionLost">Please check your internet connection and try again.</string>
 
     <string name="error_unexpected">An unexpected error occurred. Please try again later.</string>
 
@@ -29,7 +24,6 @@
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
-    <string name="desc_projectThumbnail">Project Thumbnail</string>
     <string name="desc_drawer_open">Open navigation drawer</string>
     <string name="desc_drawer_close">Close navigation drawer</string>
     <string name="desc_drawer_header">Drawer header</string>
@@ -43,7 +37,6 @@
     <string name="menu_aboutMe">About Me</string>
 
     <!-- Unsorted -->
-    <string name="str_copyrightSymbol">© %s</string>
     <string name="str_drawerHeader">insertCode Portfolio</string>
 
 </resources>
