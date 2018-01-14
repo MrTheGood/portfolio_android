@@ -20,11 +20,11 @@
 
     <!-- Content Descriptions -->
     <string name="desc_logo">Logo</string>
-    <string name="desc_drawer_open">Open navigation drawer</string>
-    <string name="desc_drawer_close">Close navigation drawer</string>
-    <string name="desc_drawer_header">Drawer header</string>
-    <string name="desc_playVideo">Play video</string>
-    <string name="desc_expandProject">Expand project</string>
+    <string name="desc_drawer_open">Open navigatie menu</string>
+    <string name="desc_drawer_close">Sluit navigatie menu</string>
+    <string name="desc_drawer_header">Menu header</string>
+    <string name="desc_playVideo">Speel video</string>
+    <string name="desc_expandProject">Open project</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_main">Projecten</string>
