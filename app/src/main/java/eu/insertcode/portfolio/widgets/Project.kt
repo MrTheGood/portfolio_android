@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.support.transition.TransitionManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
@@ -26,6 +27,7 @@ import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
 import kotlinx.android.synthetic.main.item_project.view.*
 
+
 @SuppressLint("ViewConstructor")
 /**
  * Created by maartendegoede on 17/10/17.
@@ -39,6 +41,7 @@ class Project : FrameLayout {
     private val projectFullDescription: TextView
     private val projectDate: TextView
     private val projectTags: LinearLayout
+    private val expandButton: ImageView
 
     private var expanded = false
 
@@ -53,6 +56,7 @@ class Project : FrameLayout {
         projectFullDescription = v.project_fullDescription
         projectDate = v.project_date
         projectTags = v.project_tags
+        expandButton = v.project_expandButton
 
         // Add images
         val adapter = ProjectImagesPagerAdapter()
@@ -83,16 +87,16 @@ class Project : FrameLayout {
             TagUtils.addProjectTag(project.tags[it], it, context, projectTags)
         }
 
-        setOnClickListener({
+        expandButton.setOnClickListener({
             TransitionManager.beginDelayedTransition(this.parent as ViewGroup)
             if (expanded) {
-                projectShortDescription.visibility = View.VISIBLE
                 projectFullDescription.visibility = View.GONE
                 expanded = !expanded
+                expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_expand))
             } else {
-                projectShortDescription.visibility = View.GONE
                 projectFullDescription.visibility = View.VISIBLE
                 expanded = !expanded
+                expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_collapse))
             }
         })
     }
