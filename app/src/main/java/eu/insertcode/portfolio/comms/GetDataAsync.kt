@@ -19,8 +19,8 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 /**
- * Created by maartendegoede on 16/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 16/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class GetDataAsync(private val context: WeakReference<SplashActivity>) : AsyncTask<String, Int, String>() {
     companion object {

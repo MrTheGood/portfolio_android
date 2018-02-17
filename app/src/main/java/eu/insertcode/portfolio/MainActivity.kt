@@ -18,6 +18,10 @@ import eu.insertcode.portfolio.utils.BitmapUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
+/**
+ * Created by MrTheGood.
+ * Copyright © 2018 MrTheGood. All rights reserved.
+ */
 class MainActivity : AppCompatActivity(),
         MainFragment.Companion.MainFragmentListener,
         AboutFragment.Companion.AboutFragmentListener,

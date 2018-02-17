@@ -9,8 +9,8 @@ import android.widget.TextView
 import eu.insertcode.portfolio.R
 
 /**
- * Created by maartendegoede on 23/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 23/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class TagUtils {
     companion object {

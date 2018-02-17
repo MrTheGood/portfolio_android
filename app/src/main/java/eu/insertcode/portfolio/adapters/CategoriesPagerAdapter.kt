@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Created by maartendegoede on 18/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 18/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class CategoriesPagerAdapter : PagerAdapter() {
     private val views = ArrayList<View>()

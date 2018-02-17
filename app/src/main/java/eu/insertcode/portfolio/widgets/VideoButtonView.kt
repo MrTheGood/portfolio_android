@@ -7,8 +7,8 @@ import android.widget.FrameLayout
 import eu.insertcode.portfolio.R
 
 /**
- * Created by maarten on 2018-01-08.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 2018-01-08.
+ * Copyright © 2018 MrTheGood. All rights reserved.
  */
 class VideoButtonView : FrameLayout {
 

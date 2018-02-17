@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 import java.io.Serializable
 
 /**
- * Created by maarten on 2017-12-21.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 2017-12-21.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class MainFragment : Fragment(), ViewPager.OnPageChangeListener {
     companion object {

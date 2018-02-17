@@ -11,6 +11,10 @@ import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_youtube_video.*
 
+/**
+ * Created by MrTheGood.
+ * Copyright © 2018 MrTheGood. All rights reserved.
+ */
 class YoutubeVideoActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
     companion object {
         val EXTRA_VIDEO = "EXTRA_VIDEO"

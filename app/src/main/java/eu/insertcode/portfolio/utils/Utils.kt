@@ -8,8 +8,8 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 /**
- * Created by maartendegoede on 20/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 20/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class Utils {
     companion object {
