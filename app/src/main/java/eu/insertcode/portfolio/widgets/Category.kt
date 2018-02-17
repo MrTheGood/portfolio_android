@@ -7,8 +7,8 @@ import android.widget.LinearLayout
 import eu.insertcode.portfolio.R
 
 /**
- * Created by maartendegoede on 17/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 17/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class Category : LinearLayout {
 

@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import eu.insertcode.portfolio.comms.GetDataAsync
 import java.lang.ref.WeakReference
 
+/**
+ * Created by MrTheGood.
+ * Copyright © 2018 MrTheGood. All rights reserved.
+ */
 class SplashActivity : AppCompatActivity() {
     var paused = true
         private set

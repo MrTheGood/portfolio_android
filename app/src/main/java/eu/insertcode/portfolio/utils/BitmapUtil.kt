@@ -12,8 +12,8 @@ import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 
 /**
- * Created by maartendegoede on 19/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 19/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 @Suppress("unused", "MemberVisibilityCanPrivate")
 class BitmapUtil {

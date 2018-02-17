@@ -4,8 +4,8 @@ import org.json.JSONObject
 import java.io.Serializable
 
 /**
- * Created by maarten on 2018-01-03.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 2018-01-03.
+ * Copyright © 2018 MrTheGood. All rights reserved.
  */
 data class MediaItem(
         val image: String?,

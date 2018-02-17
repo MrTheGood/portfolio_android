@@ -21,8 +21,8 @@ import eu.insertcode.portfolio.utils.Utils
 import kotlinx.android.synthetic.main.fragment_about.view.*
 
 /**
- * Created by maarten on 2017-12-03.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 2017-12-03.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class AboutFragment : Fragment() {
     companion object {

@@ -30,8 +30,8 @@ import kotlinx.android.synthetic.main.item_project.view.*
 
 @SuppressLint("ViewConstructor")
 /**
- * Created by maartendegoede on 17/10/17.
- * Copyright © 2017 insertCode.eu. All rights reserved.
+ * Created by MrTheGood on 17/10/17.
+ * Copyright © 2017 MrTheGood. All rights reserved.
  */
 class Project : FrameLayout {
 
