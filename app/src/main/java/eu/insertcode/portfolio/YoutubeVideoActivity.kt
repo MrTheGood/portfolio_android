@@ -27,7 +27,9 @@ class YoutubeVideoActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedL
     private var player: YouTubePlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setWindowFlags()
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        setUIFlags()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube_video)
 
@@ -36,9 +38,12 @@ class YoutubeVideoActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedL
         youtube_view.initialize(API_KEY, this)
     }
 
-    private fun setWindowFlags() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    override fun onResume() {
+        super.onResume()
+        setUIFlags()
+    }
+
+    private fun setUIFlags() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
