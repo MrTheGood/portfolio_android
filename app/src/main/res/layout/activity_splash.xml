@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="eu.insertcode.portfolio.SplashActivity"
+    tools:ignore="UseCompoundDrawables"
     >
 
     <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_width="match_parent"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="-64dp"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/desc_logo"
         android:src="@drawable/logo"
         />
 
-    <ProgressBar
+    <TextView
+        style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splash_logo"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="64dp"
-        android:indeterminateTint="@color/view_progressbar"
+        android:layout_marginTop="16dp"
+        android:text="@string/app_name"
         />
 
-</RelativeLayout>
+</LinearLayout>
