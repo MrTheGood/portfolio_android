@@ -1,9 +1,10 @@
-package eu.insertcode.portfolio
+package eu.insertcode.portfolio.view.activity
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.comms.GetDataAsync
 import java.lang.ref.WeakReference
 

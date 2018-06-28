@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio.widgets
+package eu.insertcode.portfolio.view.view
 
 import android.content.Context
 import android.util.AttributeSet
