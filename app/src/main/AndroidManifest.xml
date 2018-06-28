@@ -15,22 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".SplashActivity">
+        <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             />
-        <activity
-            android:name=".YoutubeVideoActivity"
-            android:theme="@style/AppTheme"
-            />
+        <activity android:name=".view.activity.YoutubeVideoActivity" />
     </application>
 
 </manifest>

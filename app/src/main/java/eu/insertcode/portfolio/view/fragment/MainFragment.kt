@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio
+package eu.insertcode.portfolio.view.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,11 +8,12 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import eu.insertcode.portfolio.adapters.CategoriesPagerAdapter
+import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.data.ProjectItem
-import eu.insertcode.portfolio.widgets.Category
-import eu.insertcode.portfolio.widgets.Project
+import eu.insertcode.portfolio.view.adapter.CategoriesPagerAdapter
+import eu.insertcode.portfolio.view.view.Category
+import eu.insertcode.portfolio.view.view.Project
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import java.io.Serializable
 

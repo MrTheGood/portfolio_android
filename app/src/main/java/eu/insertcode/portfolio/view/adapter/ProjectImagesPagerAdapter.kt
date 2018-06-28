@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio.adapters
+package eu.insertcode.portfolio.view.adapter
 
 import android.support.v4.view.PagerAdapter
 import android.view.View

@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio.widgets
+package eu.insertcode.portfolio.view.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,15 +16,15 @@ import android.widget.TextView
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubeThumbnailLoader
 import com.google.android.youtube.player.YouTubeThumbnailView
-import eu.insertcode.portfolio.MainActivity
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.YoutubeVideoActivity
-import eu.insertcode.portfolio.adapters.ProjectImagesPagerAdapter
 import eu.insertcode.portfolio.data.MediaItem
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.utils.TagUtils
 import eu.insertcode.portfolio.utils.Utils
+import eu.insertcode.portfolio.view.activity.MainActivity
+import eu.insertcode.portfolio.view.activity.YoutubeVideoActivity
+import eu.insertcode.portfolio.view.adapter.ProjectImagesPagerAdapter
 import kotlinx.android.synthetic.main.item_project.view.*
 
 

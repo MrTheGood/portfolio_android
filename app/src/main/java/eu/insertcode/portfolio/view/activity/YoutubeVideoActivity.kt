@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio
+package eu.insertcode.portfolio.view.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
+import eu.insertcode.portfolio.R
 import kotlinx.android.synthetic.main.activity_youtube_video.*
 
 /**

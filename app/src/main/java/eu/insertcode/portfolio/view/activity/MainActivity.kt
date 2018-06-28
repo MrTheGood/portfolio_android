@@ -1,4 +1,4 @@
-package eu.insertcode.portfolio
+package eu.insertcode.portfolio.view.activity
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -13,8 +13,11 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.CategoryItem
 import eu.insertcode.portfolio.utils.BitmapUtil
+import eu.insertcode.portfolio.view.fragment.AboutFragment
+import eu.insertcode.portfolio.view.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
