@@ -1,137 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<!--
+  ~    Copyright 2018 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:keep="@layout/item_project"
+    android:layout_marginStart="@dimen/margin_projectSmall_side"
+    android:layout_marginTop="@dimen/margin_projectSmall_top"
+    android:layout_marginEnd="@dimen/margin_projectSmall_side"
+    android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
+    app:cardBackgroundColor="@color/view_project_background"
+    app:cardCornerRadius="2dp"
     >
 
-    <android.support.v7.widget.CardView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_projectSmall_side"
-        android:layout_marginTop="@dimen/margin_projectSmall_top"
-        android:layout_marginEnd="@dimen/margin_projectSmall_side"
-        android:layout_marginBottom="@dimen/margin_projectSmall_bottom"
-        app:cardBackgroundColor="@color/view_project_background"
-        app:cardCornerRadius="2dp"
         >
 
-        <LinearLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/project_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/maxHeight_projectImage"
+            android:background="@color/fragment_project_imageBackground"
+            />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/project_image_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/project_image"
+            app:layout_constraintStart_toStartOf="@id/project_image"
+            app:layout_constraintTop_toTopOf="@id/project_image"
+            app:tabBackground="@drawable/viewpager_indicator"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabPadding="2dp"
+            />
+
+        <TextView
+            android:id="@+id/project_title"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/project_image"
+            tools:text="Project Title"
+            />
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+        <TextView
+            android:id="@+id/project_date"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
+            tools:ignore="SelectableText"
+            tools:text="October 2017"
+            />
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/project_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/maxHeight_projectImage"
-                    android:background="@color/fragment_project_imageBackground"
-                    />
+        <TextView
+            android:id="@+id/project_shortDescription"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textIsSelectable="true"
+            app:layout_constraintTop_toBottomOf="@id/project_date"
+            tools:text="Short example project description for the shortDescription stuff for a project."
+            />
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/project_image_indicator"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@id/project_image"
-                    app:layout_constraintStart_toStartOf="@id/project_image"
-                    app:layout_constraintTop_toTopOf="@id/project_image"
-                    app:tabBackground="@drawable/viewpager_indicator"
-                    app:tabGravity="center"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabPadding="2dp"
-                    />
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/project_title"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="16dp"
-                android:textSize="24sp"
-                tools:text="Project Title"
-                />
-
-            <TextView
-                android:id="@+id/project_date"
-                style="@style/TextAppearance.AppCompat.Caption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textSize="14sp"
-                tools:ignore="SelectableText"
-                tools:text="October 2017"
-                />
-
-            <TextView
-                android:id="@+id/project_shortDescription"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:textIsSelectable="true"
-                tools:text="Short example project description for the shortDescription stuff for a project."
-                />
-
-            <TextView
-                android:id="@+id/project_fullDescription"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:autoLink="web"
-                android:textIsSelectable="true"
-                android:visibility="gone"
-                tools:text="Short example project description for the shortDescription stuff for a project."
-                />
+        <TextView
+            android:id="@+id/project_fullDescription"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:autoLink="web"
+            android:textIsSelectable="true"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/project_shortDescription"
+            tools:text="Short example project description for the shortDescription stuff for a project."
+            />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="8dp"
-                >
+        <LinearLayout
+            android:id="@+id/project_tags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toStartOf="@id/project_expandButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_fullDescription"
+            />
 
-                <LinearLayout
-                    android:id="@+id/project_tags"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="8dp"
-                    />
-
-                <ImageView
-                    android:id="@+id/project_expandButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:contentDescription="@string/desc_expandProject"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_expand"
-                    />
+        <ImageView
+            android:id="@+id/project_expandButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/desc_expandProject"
+            android:padding="8dp"
+            android:src="@drawable/ic_expand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_fullDescription"
+            />
 
 
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</FrameLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
