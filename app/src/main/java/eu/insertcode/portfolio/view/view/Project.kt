@@ -21,14 +21,11 @@ import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.support.transition.TransitionManager
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubeThumbnailLoader
 import com.google.android.youtube.player.YouTubeThumbnailView
@@ -37,7 +34,8 @@ import eu.insertcode.portfolio.data.MediaItem
 import eu.insertcode.portfolio.data.ProjectItem
 import eu.insertcode.portfolio.utils.BitmapUtil
 import eu.insertcode.portfolio.utils.TagUtils
-import eu.insertcode.portfolio.utils.Utils
+import eu.insertcode.portfolio.utils.loadImage
+import eu.insertcode.portfolio.utils.spanHtml
 import eu.insertcode.portfolio.view.activity.MainActivity
 import eu.insertcode.portfolio.view.activity.YoutubeVideoActivity
 import eu.insertcode.portfolio.view.adapter.ProjectImagesPagerAdapter
@@ -51,14 +49,6 @@ import kotlinx.android.synthetic.main.item_project.view.*
  */
 class Project : FrameLayout {
 
-    private val projectImages: ViewPager
-    private val projectTitle: TextView
-    private val projectShortDescription: TextView
-    private val projectFullDescription: TextView
-    private val projectDate: TextView
-    private val projectTags: LinearLayout
-    private val expandButton: ImageView
-
     private var expanded = false
 
     constructor(project: ProjectItem, ctx: Context) : this(project, ctx, null)
@@ -66,17 +56,9 @@ class Project : FrameLayout {
     constructor(project: ProjectItem, ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
         val v = View.inflate(ctx, R.layout.item_project, this)
 
-        projectImages = v.project_image
-        projectTitle = v.project_title
-        projectShortDescription = v.project_shortDescription
-        projectFullDescription = v.project_fullDescription
-        projectDate = v.project_date
-        projectTags = v.project_tags
-        expandButton = v.project_expandButton
-
         // Add images
         val adapter = ProjectImagesPagerAdapter()
-        projectImages.adapter = adapter
+        project_image.adapter = adapter
         if (!project.images.isEmpty()) {
             for (img in project.images) {
                 addProjectImage(adapter, img)
@@ -85,34 +67,32 @@ class Project : FrameLayout {
 
         // setup viewpager indicator
         if (project.images.size > 1) {
-            v.project_image_indicator.setupWithViewPager(projectImages)
+            v.project_image_indicator.setupWithViewPager(project_image)
         } else if (project.images.isEmpty()) {
             v.project_image.visibility = View.GONE
             v.project_image_indicator.visibility = View.GONE
         }
 
 
-        projectTitle.text = project.title
-        projectShortDescription.text = Utils.fromHtmlCompat(project.shortDescription)
-        projectFullDescription.text = Utils.fromHtmlCompat(project.fullDescription)
-
-        if (project.date == null) projectDate.visibility = View.GONE
-        projectDate.text = project.date
+        project_title.text = project.title
+        project_shortDescription.text = project.shortDescription.spanHtml()
+        project_fullDescription.text = project.fullDescription.spanHtml()
+        project_date.text = project.date
 
         project.tags.indices.forEach {
-            TagUtils.addProjectTag(project.tags[it], it, context, projectTags)
+            TagUtils.addProjectTag(project.tags[it], it, context, project_tags)
         }
 
-        expandButton.setOnClickListener {
+        project_expandButton.setOnClickListener {
             TransitionManager.beginDelayedTransition(this.parent as ViewGroup)
             if (expanded) {
-                projectFullDescription.visibility = View.GONE
+                project_fullDescription.visibility = View.GONE
                 expanded = !expanded
-                expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_expand))
+                project_expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_expand))
             } else {
-                projectFullDescription.visibility = View.VISIBLE
+                project_fullDescription.visibility = View.VISIBLE
                 expanded = !expanded
-                expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_collapse))
+                project_expandButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_collapse))
             }
         }
     }
@@ -145,7 +125,7 @@ class Project : FrameLayout {
             view.adjustViewBounds = true
             adapter.addView(view)
 
-            Utils.putImageInView(context, img.image, view)
+            view.loadImage(img.image)
             view.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
                 override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
                     if (v is ImageView && v.drawable != null) {
