@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.view.fragment
+package eu.insertcode.portfolio.ui
 
 import androidx.fragment.app.Fragment
 

@@ -14,15 +14,26 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.view
+package eu.insertcode.portfolio
 
 import android.os.Bundle
-import eu.insertcode.portfolio.R
+import androidx.appcompat.app.AppCompatActivity
+import eu.insertcode.portfolio.ui.BaseFragment
 
-class MainActivity : BaseActivity() {
+/**
+ * Created by maartendegoede on 23/08/2018.
+ * Copyright © 2018 insertCode.eu. All rights reserved.
+ */
+class MainActivity : AppCompatActivity() {
+
+    var currentFragment: BaseFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    override fun onBackPressed() {
+        if (currentFragment?.onBackPressed() != true) super.onBackPressed()
     }
 }
