@@ -14,15 +14,12 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio
+package eu.insertcode.portfolio.view.fragment
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+/**
+ * Created by maartendegoede on 23/08/2018.
+ * Copyright © 2018 insertCode.eu. All rights reserved.
+ */
+abstract class BaseFragment : Fragment()
