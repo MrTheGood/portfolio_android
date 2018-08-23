@@ -18,10 +18,18 @@ package eu.insertcode.portfolio.view
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
+import eu.insertcode.portfolio.view.fragment.BaseFragment
 
 /**
  * Created by maartendegoede on 23/08/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 @SuppressLint("Registered")
-abstract class BaseActivity : AppCompatActivity()
+abstract class BaseActivity : AppCompatActivity() {
+
+    var currentFragment: BaseFragment? = null
+
+    override fun onBackPressed() {
+        if (currentFragment?.onBackPressed() != true) super.onBackPressed()
+    }
+}

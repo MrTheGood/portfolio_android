@@ -22,4 +22,13 @@ import androidx.fragment.app.Fragment
  * Created by maartendegoede on 23/08/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-abstract class BaseFragment : Fragment()
+abstract class BaseFragment : Fragment() {
+
+    /**
+     * Called when the back button is pressed.
+     * Default implementation returns false.
+     *
+     * @return true if the back pressed is consumed, false otherwise
+     */
+    open fun onBackPressed() = false
+}
