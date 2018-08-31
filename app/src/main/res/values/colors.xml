@@ -17,9 +17,9 @@
 
 <resources>
     <!-- Main Colours -->
-    <color name="colorPrimary">#ae0000</color>
-    <color name="colorPrimaryDark">#740000</color>
-    <color name="colorAccent">#eeba30</color>
+    <color name="colorPrimary">#d50000</color>
+    <color name="colorPrimaryDark">#b71c1c</color>
+    <color name="colorAccent">#fbc02d</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>
