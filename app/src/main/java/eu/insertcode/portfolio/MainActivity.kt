@@ -18,7 +18,6 @@ package eu.insertcode.portfolio
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import eu.insertcode.portfolio.ui.BaseFragment
 
 /**
  * Created by maartendegoede on 23/08/2018.
@@ -26,14 +25,9 @@ import eu.insertcode.portfolio.ui.BaseFragment
  */
 class MainActivity : AppCompatActivity() {
 
-    var currentFragment: BaseFragment? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
-    override fun onBackPressed() {
-        if (currentFragment?.onBackPressed() != true) super.onBackPressed()
-    }
 }
