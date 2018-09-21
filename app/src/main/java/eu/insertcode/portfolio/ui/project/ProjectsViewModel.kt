@@ -19,6 +19,7 @@ package eu.insertcode.portfolio.ui.project
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import eu.insertcode.portfolio.DummyContent
 import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.model.Project
 
@@ -33,26 +34,7 @@ class ProjectsViewModel : ViewModel() {
         get() = _projects
 
     init {
-        _projects.value = Resource.success(listOf(
-                //todo: get data from web api
-                Project(
-                        id = "0",
-                        title = "Lorem Ipsum",
-                        shortDescription = "",
-                        fullDescription = "",
-                        date = "",
-                        images = emptyList(),
-                        tags = emptyList()
-                ),
-                Project(
-                        id = "1",
-                        title = "Dolor Sit",
-                        shortDescription = "",
-                        fullDescription = "",
-                        date = "",
-                        images = emptyList(),
-                        tags = emptyList()
-                )
-        ))
+        //todo: do
+        _projects.value = Resource.success(DummyContent.projects)
     }
 }
