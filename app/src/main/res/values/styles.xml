@@ -23,4 +23,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!-- Text styles -->
+    <style name="AppTheme.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="AppTheme.TextAppearance.Caption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
 </resources>
