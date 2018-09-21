@@ -33,4 +33,8 @@
         <item name="android:fontFamily">@font/nunito</item>
     </style>
 
+    <style name="AppTheme.TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
 </resources>

@@ -19,6 +19,8 @@ package eu.insertcode.portfolio.ui.project
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,10 @@ class ProjectsAdapter : ListAdapter<Project, ProjectsAdapter.ProjectViewHolder>(
 
     class ProjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(project: Project) {
+            view.setOnClickListener {
+                view.findNavController().navigate(R.id.action_project_detail, bundleOf("project_id" to project.id))
+            }
+
             Glide.with(view)
                     .load(project.images.firstOrNull())
                     .into(view.project_image)
