@@ -15,22 +15,17 @@
   ~    limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/projectsFragment"
     >
 
     <fragment
-        android:id="@+id/container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main"
+        android:id="@+id/projectsFragment"
+        android:name="eu.insertcode.portfolio.ui.project.ProjectsFragment"
+        android:label="ProjectsFragment"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</navigation>

@@ -14,18 +14,17 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.data.model
+package eu.insertcode.portfolio.util
+
+import android.content.res.Configuration
+import android.view.View
 
 /**
- * Created by maartendegoede on 23/08/2018.
+ * Created by maartendegoede on 21/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-data class Project(
-        val id: String,
-        val title: String,
-        val images: List<String>,
-        val shortDescription: String,
-        val fullDescription: String,
-        val tags: List<String>,
-        val date: String?
-)
+
+val View.orientation get() = resources.configuration.orientation
+
+fun View.isLandscapeOrientation() = orientation == Configuration.ORIENTATION_LANDSCAPE
+fun View.isPortraitOrientation() = orientation == Configuration.ORIENTATION_PORTRAIT
