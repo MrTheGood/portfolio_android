@@ -26,6 +26,8 @@
         android:id="@+id/projectsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="12dp"
         tools:listitem="@layout/item_project"
         />
 

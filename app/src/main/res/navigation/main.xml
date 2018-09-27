@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/projectsFragment"
         android:name="eu.insertcode.portfolio.ui.project.ProjectsFragment"
-        android:label="fragment_projects"
+        android:label="Portfolio"
         tools:layout="@layout/fragment_projects"
         >
         <action
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/projectFragment"
         android:name="eu.insertcode.portfolio.ui.project.ProjectFragment"
-        android:label="fragment_project"
+        android:label="Portfolio"
         tools:layout="@layout/fragment_project"
         >
         <argument
