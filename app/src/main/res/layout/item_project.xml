@@ -36,13 +36,8 @@
 
     <ImageView
         android:id="@+id/project_typeIndicator"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        style="@style/AppTheme.ProjectTypeIndicator"
         android:layout_marginStart="16dp"
-        android:background="@drawable/ic_circle"
-        android:padding="9dp"
-        android:scaleType="centerInside"
-        android:tint="#fff"
         app:layout_constraintBottom_toBottomOf="@id/project_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/project_title"
