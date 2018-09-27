@@ -29,4 +29,22 @@
         tools:listitem="@layout/item_project"
         />
 
+    <!-- TODO: Better state views -->
+    <TextView
+        android:id="@+id/projectsLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Loading..."
+        />
+
+    <TextView
+        android:id="@+id/projectsError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="An error occurred."
+        />
+
+
 </FrameLayout>
