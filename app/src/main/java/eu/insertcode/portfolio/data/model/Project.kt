@@ -29,6 +29,9 @@ data class Project(
         @field:SerializedName("title")
         val title: String,
 
+        @field:SerializedName("type")
+        val type: Type,
+
         @field:SerializedName("images")
         val images: List<String>,
 
@@ -40,4 +43,21 @@ data class Project(
 
         @field:SerializedName("date")
         val date: String?
-)
+) {
+    enum class Type(val type: String) {
+        @SerializedName("app")
+        APP("app"),
+
+        @SerializedName("game")
+        GAME("game"),
+
+        @SerializedName("web")
+        WEB("web"),
+
+        @SerializedName("watch")
+        WATCH("watch"),
+
+        @SerializedName("other")
+        OTHER("other")
+    }
+}

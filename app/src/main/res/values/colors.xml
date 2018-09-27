@@ -23,4 +23,16 @@
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="image_background">#3000</color>
+
+
+    <!-- TAG Colours -->
+    <color name="tagBackground1">#6200ea</color>
+    <color name="tagBackground2">#64dd17</color>
+    <color name="tagBackground3">#0091ea</color>
+    <color name="tagBackground4">#4dd0e1</color>
+    <color name="tagBackground5">#d500f9</color>
+    <color name="tagBackground6">#f50057</color>
+    <color name="tagBackground7">#00ff00</color>
+    <color name="tagBackground8">#ffc400</color>
+    <color name="tagBackground9">#ff9100</color>
 </resources>

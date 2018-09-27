@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.model.Project
+import eu.insertcode.portfolio.util.TagColourHelper
 import kotlinx.android.synthetic.main.item_project.view.*
 
 /**
@@ -53,6 +54,17 @@ class ProjectsAdapter : ListAdapter<Project, ProjectsAdapter.ProjectViewHolder>(
                     .into(view.project_image)
             view.project_date.text = project.date
             view.project_title.text = project.title
+
+            view.project_typeIndicator.backgroundTintList = TagColourHelper.getTagColorSL(project.type.toString(), view.context)
+
+            val resource = when (project.type) {
+                Project.Type.APP -> R.drawable.ic_type_app
+                Project.Type.GAME -> R.drawable.ic_type_game
+                Project.Type.WEB -> R.drawable.ic_type_web
+                Project.Type.WATCH -> R.drawable.ic_type_watch
+                Project.Type.OTHER -> R.drawable.ic_type_other
+            }
+            view.project_typeIndicator.setImageResource(resource)
         }
     }
 
