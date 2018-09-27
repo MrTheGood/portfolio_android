@@ -28,11 +28,7 @@ package eu.insertcode.portfolio.data
  * @param D Data type
  * @param E Error type
  */
-data class Resource<out D, out E>(val state: State, val data: D, val error: E) {
-
-    val isLoading get() = state == State.LOADING
-    val isError get() = state == State.ERROR
-    val isSuccess get() = state == State.SUCCESS
+data class Resource<out D, out E>(val state: State, val data: D?, val error: E?) {
 
     companion object {
         fun <D, E> loading(data: D? = null, error: E? = null) = Resource(State.LOADING, data, error)
@@ -40,3 +36,8 @@ data class Resource<out D, out E>(val state: State, val data: D, val error: E) {
         fun <D, E> error(error: E, data: D? = null) = Resource(State.ERROR, data, error)
     }
 }
+
+val Resource<Any, Any>?.isNull get() = this == null
+val Resource<Any, Any>?.isError get() = this?.state == State.ERROR
+val Resource<Any, Any>?.isSuccess get() = this?.state == State.SUCCESS
+val Resource<Any, Any>?.isLoading get() = this?.state == State.LOADING
