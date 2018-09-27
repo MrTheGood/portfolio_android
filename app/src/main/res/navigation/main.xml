@@ -46,7 +46,9 @@
         tools:layout="@layout/fragment_project"
         >
         <argument
-            android:name="project_id" />
+            android:name="project_id"
+            app:argType="string"
+            />
     </fragment>
 
     <deepLink

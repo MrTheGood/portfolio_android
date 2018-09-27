@@ -22,8 +22,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import eu.insertcode.portfolio.DummyContent
 import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.repository.ProjectRepository
 import kotlinx.android.synthetic.main.fragment_project.*
 
 /**
@@ -39,11 +39,11 @@ class ProjectFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //todo: viewModel
-        val project = DummyContent.projects.find { it.id == arguments!!.getString("project_id") }
+        val project = ProjectRepository.projects.value?.data?.projects?.find { it.id == arguments!!.getString("project_id") }
 
         project_title.text = project!!.title
         project_date.text = project.date
-        project_description.text = "${project.shortDescription}\n${project.fullDescription}"
+        project_description.text = project.description
     }
 
 }
