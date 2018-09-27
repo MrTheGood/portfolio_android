@@ -22,4 +22,5 @@
     <color name="colorAccent">#fbc02d</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="image_background">#3000</color>
 </resources>
