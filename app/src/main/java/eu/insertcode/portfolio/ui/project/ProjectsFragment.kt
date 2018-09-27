@@ -31,6 +31,7 @@ import eu.insertcode.portfolio.data.isLoading
 import eu.insertcode.portfolio.data.isNull
 import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.util.isLandscapeOrientation
+import eu.insertcode.portfolio.util.isNetworkAvailable
 import eu.insertcode.portfolio.util.visibleIf
 import kotlinx.android.synthetic.main.fragment_projects.*
 
@@ -62,8 +63,20 @@ class ProjectsFragment : Fragment() {
 
             projectsRecycler.visibleIf(projects.isSuccess)
             projectsLoading.visibleIf(projects.isLoading)
+
             projectsError.visibleIf(projects.isError || projects.isNull)
+            if (requireContext().isNetworkAvailable()) {
+                projectsError_image.setImageResource(R.drawable.ic_error)
+                projectsError_text.text = getString(R.string.error_unknown)
+            } else {
+                projectsError_image.setImageResource(R.drawable.ic_wifi_off)
+                projectsError_text.text = getString(R.string.error_noConnection)
+
+            }
         })
+
         viewModel.retry()
+        projectsError.setOnClickListener { viewModel.retry() }
+
     }
 }

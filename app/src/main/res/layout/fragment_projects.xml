@@ -29,22 +29,47 @@
         tools:listitem="@layout/item_project"
         />
 
-    <!-- TODO: Better state views -->
-    <TextView
+    <ProgressBar
         android:id="@+id/projectsLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Loading..."
         />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/projectsError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="An error occurred."
-        />
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="UseCompoundDrawables"
+        >
+
+        <ImageView
+            android:id="@+id/projectsError_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_error"
+            android:tint="#5000"
+            android:tintMode="src_in"
+            tools:ignore="ContentDescription"
+            />
+
+
+        <TextView
+            android:id="@+id/projectsError_text"
+            style="@style/AppTheme.TextAppearance.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/error_unknown"
+            />
+
+    </LinearLayout>
 
 
 </FrameLayout>

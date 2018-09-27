@@ -16,7 +16,10 @@
 
 package eu.insertcode.portfolio.util
 
+import android.app.Application
+import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.view.View
 
 /**
@@ -32,3 +35,7 @@ fun View.isPortraitOrientation() = orientation == Configuration.ORIENTATION_PORT
 fun View.visibleIf(condition: Boolean, alternative: Int = View.GONE) {
     visibility = if (condition) View.VISIBLE else alternative
 }
+
+
+fun Context.isNetworkAvailable() =
+        (getSystemService(Application.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo?.isConnected == true
