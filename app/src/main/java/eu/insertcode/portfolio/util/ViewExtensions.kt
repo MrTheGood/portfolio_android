@@ -28,3 +28,7 @@ val View.orientation get() = resources.configuration.orientation
 
 fun View.isLandscapeOrientation() = orientation == Configuration.ORIENTATION_LANDSCAPE
 fun View.isPortraitOrientation() = orientation == Configuration.ORIENTATION_PORTRAIT
+
+fun View.visibleIf(condition: Boolean, alternative: Int = View.GONE) {
+    visibility = if (condition) View.VISIBLE else alternative
+}
