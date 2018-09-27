@@ -26,7 +26,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.data.isError
+import eu.insertcode.portfolio.data.isLoading
+import eu.insertcode.portfolio.data.isNull
+import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.util.isLandscapeOrientation
+import eu.insertcode.portfolio.util.visibleIf
 import kotlinx.android.synthetic.main.fragment_projects.*
 
 /**
@@ -53,7 +58,12 @@ class ProjectsFragment : Fragment() {
 
         val viewModel = ViewModelProviders.of(this)[ProjectsViewModel::class.java]
         viewModel.projects.observe(this, Observer { projects ->
-            projectsAdapter.submitList(projects.data)
+            projectsAdapter.submitList(projects.data?.projects)
+
+            projectsRecycler.visibleIf(projects.isSuccess)
+            projectsLoading.visibleIf(projects.isLoading)
+            projectsError.visibleIf(projects.isError || projects.isNull)
         })
+        viewModel.retry()
     }
 }

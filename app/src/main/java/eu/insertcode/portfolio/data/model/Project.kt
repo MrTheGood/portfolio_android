@@ -16,16 +16,28 @@
 
 package eu.insertcode.portfolio.data.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by maartendegoede on 23/08/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 data class Project(
+        @field:SerializedName("id")
         val id: String,
+
+        @field:SerializedName("title")
         val title: String,
+
+        @field:SerializedName("images")
         val images: List<String>,
-        val shortDescription: String,
-        val fullDescription: String,
+
+        @field:SerializedName("description")
+        val description: String,
+
+        @field:SerializedName("tags")
         val tags: List<String>,
+
+        @field:SerializedName("date")
         val date: String?
 )

@@ -83,6 +83,7 @@ dependencies {
     // Other
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0' //todo: temporarily use Kotlin Coroutines
 
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"

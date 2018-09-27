@@ -17,24 +17,20 @@
 package eu.insertcode.portfolio.ui.project
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import eu.insertcode.portfolio.DummyContent
 import eu.insertcode.portfolio.data.Resource
-import eu.insertcode.portfolio.data.model.Project
+import eu.insertcode.portfolio.data.model.ProjectsList
+import eu.insertcode.portfolio.repository.ProjectRepository
 
 /**
  * Created by maartendegoede on 11/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 class ProjectsViewModel : ViewModel() {
+    val projects: LiveData<Resource<ProjectsList, Exception>> =
+            ProjectRepository.projects
 
-    private val _projects = MutableLiveData<Resource<List<Project>, Exception?>>()
-    val projects: LiveData<Resource<List<Project>, Exception?>>
-        get() = _projects
-
-    init {
-        //todo: do
-        _projects.value = Resource.success(DummyContent.projects)
+    fun retry() {
+        ProjectRepository.loadProjects()
     }
 }
