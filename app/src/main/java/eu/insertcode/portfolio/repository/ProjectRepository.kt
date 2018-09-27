@@ -22,7 +22,7 @@ import com.google.gson.GsonBuilder
 import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.data.model.ProjectsList
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import java.net.URL
 
 /**
@@ -42,7 +42,7 @@ object ProjectRepository {
         if (_projects.value.isSuccess) return
         _projects.value = Resource.loading(_projects.value?.data)
 
-        async {
+        launch {
             try {
                 val stream = URL("https://portfolio.insertcode.eu/gateway/v2alpha/projects.php").openStream()
                 val result = stream.bufferedReader().use { it.readText() }.also { stream.close() }
