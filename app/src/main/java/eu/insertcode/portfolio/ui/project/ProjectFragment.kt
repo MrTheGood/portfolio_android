@@ -22,8 +22,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.repository.ProjectRepository
+import eu.insertcode.portfolio.util.TagColourHelper
 import kotlinx.android.synthetic.main.fragment_project.*
 
 /**
@@ -41,9 +44,22 @@ class ProjectFragment : Fragment() {
         //todo: viewModel
         val project = ProjectRepository.projects.value?.data?.projects?.find { it.id == arguments!!.getString("project_id") }
 
-        project_title.text = project!!.title
+        Glide.with(project_image)
+                .load(project!!.images.firstOrNull())
+                .into(project_image)
+        project_title.text = project.title
         project_date.text = project.date
         project_description.text = project.description
+
+        project_typeIndicator.backgroundTintList = TagColourHelper.getTagColorSL(project.type.toString(), requireContext())
+        val resource = when (project.type) {
+            Project.Type.APP -> R.drawable.ic_type_app
+            Project.Type.GAME -> R.drawable.ic_type_game
+            Project.Type.WEB -> R.drawable.ic_type_web
+            Project.Type.WATCH -> R.drawable.ic_type_watch
+            Project.Type.OTHER -> R.drawable.ic_type_other
+        }
+        project_typeIndicator.setImageResource(resource)
     }
 
 }
