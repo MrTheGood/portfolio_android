@@ -21,7 +21,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?selectableItemBackground"
+    android:foreground="?selectableItemBackground"
     >
 
     <ImageView
@@ -29,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/image_background"
-        app:layout_constraintDimensionRatio="2:1"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="16:9"
         tools:ignore="ContentDescription"
         tools:src="@tools:sample/backgrounds/scenic"
         />
