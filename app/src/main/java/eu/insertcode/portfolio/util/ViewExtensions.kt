@@ -21,6 +21,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 
 /**
  * Created by maartendegoede on 21/09/2018.
@@ -35,6 +37,9 @@ fun View.isPortraitOrientation() = orientation == Configuration.ORIENTATION_PORT
 fun View.visibleIf(condition: Boolean, alternative: Int = View.GONE) {
     visibility = if (condition) View.VISIBLE else alternative
 }
+
+fun View.getColorStateList(@ColorRes colorRes: Int) =
+        ContextCompat.getColorStateList(context, colorRes)
 
 
 fun Context.isNetworkAvailable() =

@@ -24,9 +24,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.repository.ProjectRepository
-import eu.insertcode.portfolio.util.TagColourHelper
+import eu.insertcode.portfolio.util.getColorStateList
 import kotlinx.android.synthetic.main.fragment_project.*
 
 /**
@@ -51,15 +50,8 @@ class ProjectFragment : Fragment() {
         project_date.text = project.date
         project_description.text = project.description
 
-        project_typeIndicator.backgroundTintList = TagColourHelper.getTagColorSL(project.type.toString(), requireContext())
-        val resource = when (project.type) {
-            Project.Type.APP -> R.drawable.ic_type_app
-            Project.Type.GAME -> R.drawable.ic_type_game
-            Project.Type.WEB -> R.drawable.ic_type_web
-            Project.Type.WATCH -> R.drawable.ic_type_watch
-            Project.Type.OTHER -> R.drawable.ic_type_other
-        }
-        project_typeIndicator.setImageResource(resource)
+        project_typeIndicator.backgroundTintList = view?.getColorStateList(project.type.color)
+        project_typeIndicator.setImageResource(project.type.icon)
     }
 
 }

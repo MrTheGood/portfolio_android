@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.model.Project
-import eu.insertcode.portfolio.util.TagColourHelper
+import eu.insertcode.portfolio.util.getColorStateList
 import kotlinx.android.synthetic.main.item_project.view.*
 
 /**
@@ -45,26 +45,20 @@ class ProjectsAdapter : ListAdapter<Project, ProjectsAdapter.ProjectViewHolder>(
 
     class ProjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(project: Project) {
-            view.setOnClickListener {
-                view.findNavController().navigate(R.id.action_project_detail, bundleOf("project_id" to project.id))
+            view.run {
+                setOnClickListener {
+                    findNavController().navigate(R.id.action_project_detail, bundleOf("project_id" to project.id))
+                }
+
+                Glide.with(project_image)
+                        .load(project.images.firstOrNull())
+                        .into(project_image)
+                project_date.text = project.date
+                project_title.text = project.title
+
+                project_typeIndicator.backgroundTintList = view.getColorStateList(project.type.color)
+                project_typeIndicator.setImageResource(project.type.icon)
             }
-
-            Glide.with(view)
-                    .load(project.images.firstOrNull())
-                    .into(view.project_image)
-            view.project_date.text = project.date
-            view.project_title.text = project.title
-
-            view.project_typeIndicator.backgroundTintList = TagColourHelper.getTagColorSL(project.type.toString(), view.context)
-
-            val resource = when (project.type) {
-                Project.Type.APP -> R.drawable.ic_type_app
-                Project.Type.GAME -> R.drawable.ic_type_game
-                Project.Type.WEB -> R.drawable.ic_type_web
-                Project.Type.WATCH -> R.drawable.ic_type_watch
-                Project.Type.OTHER -> R.drawable.ic_type_other
-            }
-            view.project_typeIndicator.setImageResource(resource)
         }
     }
 

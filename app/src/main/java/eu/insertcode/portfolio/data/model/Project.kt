@@ -16,7 +16,10 @@
 
 package eu.insertcode.portfolio.data.model
 
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import com.google.gson.annotations.SerializedName
+import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 23/08/2018.
@@ -58,6 +61,29 @@ data class Project(
         WATCH("watch"),
 
         @SerializedName("other")
-        OTHER("other")
+        OTHER("other");
+
+
+        val icon
+            @DrawableRes
+            get() =
+                when (this) {
+                    Project.Type.APP -> R.drawable.ic_type_app
+                    Project.Type.GAME -> R.drawable.ic_type_game
+                    Project.Type.WEB -> R.drawable.ic_type_web
+                    Project.Type.WATCH -> R.drawable.ic_type_watch
+                    Project.Type.OTHER -> R.drawable.ic_type_other
+                }
+
+        val color
+            @ColorRes
+            get() =
+                when (this) {
+                    Project.Type.APP -> R.color.indicatorType_app
+                    Project.Type.GAME -> R.color.indicatorType_game
+                    Project.Type.WEB -> R.color.indicatorType_web
+                    Project.Type.WATCH -> R.color.indicatorType_watch
+                    Project.Type.OTHER -> R.color.indicatorType_other
+                }
     }
 }

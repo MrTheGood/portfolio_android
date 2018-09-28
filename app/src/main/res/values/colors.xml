@@ -35,4 +35,11 @@
     <color name="tagBackground7">#00ff00</color>
     <color name="tagBackground8">#ffc400</color>
     <color name="tagBackground9">#ff9100</color>
+
+    <!-- Type indicator colour -->
+    <color name="indicatorType_app">#00c853</color>
+    <color name="indicatorType_game">#b71c1c</color>
+    <color name="indicatorType_web">#00b0ff</color>
+    <color name="indicatorType_watch">#8e24aa</color>
+    <color name="indicatorType_other">#ff9100</color>
 </resources>
