@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -29,11 +29,11 @@
         <item name="android:fontFamily">@font/nunito</item>
     </style>
 
-    <style name="AppTheme.TextAppearance.Caption" parent="TextAppearance.AppCompat.Caption">
+    <style name="AppTheme.TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:fontFamily">@font/nunito</item>
     </style>
 
-    <style name="AppTheme.TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">
+    <style name="AppTheme.TextAppearance.Body" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/nunito</item>
     </style>
 

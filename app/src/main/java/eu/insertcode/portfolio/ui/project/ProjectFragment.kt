@@ -17,15 +17,19 @@
 package eu.insertcode.portfolio.ui.project
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.repository.ProjectRepository
+import eu.insertcode.portfolio.util.TagColourHelper
 import eu.insertcode.portfolio.util.getColorStateList
+import eu.insertcode.portfolio.util.goneIf
 import kotlinx.android.synthetic.main.fragment_project.*
 
 /**
@@ -49,6 +53,15 @@ class ProjectFragment : Fragment() {
         project_title.text = project.title
         project_date.text = project.date
         project_description.text = project.description
+
+        project.tags.forEach { tag ->
+            val chip = Chip(context)
+            chip.chipText = tag.toLowerCase().capitalize()
+            chip.chipBackgroundColor = TagColourHelper.getTagColorSL(tag, requireContext())
+            chip.setTextColor(Color.WHITE)
+            project_tags.addView(chip)
+        }
+        project_tags.goneIf(project.tags.isEmpty())
 
         project_typeIndicator.backgroundTintList = view?.getColorStateList(project.type.color)
         project_typeIndicator.setImageResource(project.type.icon)

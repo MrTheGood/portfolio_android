@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/project_title"
-        style="@style/TextAppearance.AppCompat.Title"
+        style="@style/AppTheme.TextAppearance.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
 
     <TextView
         android:id="@+id/project_date"
-        style="@style/TextAppearance.AppCompat.Caption"
+        style="@style/AppTheme.TextAppearance.Caption"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
