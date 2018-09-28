@@ -24,6 +24,36 @@
     tools:context=".MainActivity"
     >
 
+    <!-- This FrameLayout wrapper on the AppBarLayout is a hacky way to keep elevation while also having a rounded app bar. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_toolbar"
+        android:elevation="4dp"
+        >
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:elevation="4dp"
+            android:fitsSystemWindows="true"
+            app:elevation="0dp"
+            >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:background="@null"
+                app:titleTextAppearance="@style/AppTheme.TextAppearance.Title"
+                app:titleTextColor="#fff"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+    </FrameLayout>
+
     <fragment
         android:id="@+id/nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -33,26 +63,5 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/main"
         />
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_toolbar"
-        android:elevation="8dp"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp"
-        >
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_bar_height"
-            android:background="@null"
-            app:titleTextAppearance="@style/AppTheme.TextAppearance.Title"
-            app:titleTextColor="#fff"
-            />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
