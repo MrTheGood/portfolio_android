@@ -28,6 +28,7 @@ import com.google.android.material.chip.Chip
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.repository.ProjectRepository
 import eu.insertcode.portfolio.util.TagColourHelper
+import eu.insertcode.portfolio.util.fromHtml
 import eu.insertcode.portfolio.util.getColorStateList
 import eu.insertcode.portfolio.util.goneIf
 import kotlinx.android.synthetic.main.fragment_project.*
@@ -52,7 +53,7 @@ class ProjectFragment : Fragment() {
                 .into(project_image)
         project_title.text = project.title
         project_date.text = project.date
-        project_description.text = project.description
+        project_description.text = project.description.fromHtml()
 
         project.tags.forEach { tag ->
             val chip = Chip(context)
