@@ -20,14 +20,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/projectsFragment"
+    app:startDestination="@id/portfolioFragment"
     >
 
     <fragment
-        android:id="@+id/projectsFragment"
-        android:name="eu.insertcode.portfolio.ui.project.ProjectsFragment"
+        android:id="@+id/portfolioFragment"
+        android:name="eu.insertcode.portfolio.ui.portfolio.PortfolioFragment"
         android:label="Portfolio"
-        tools:layout="@layout/fragment_projects"
+        tools:layout="@layout/fragment_portfolio"
         >
         <action
             android:id="@+id/action_project_detail"

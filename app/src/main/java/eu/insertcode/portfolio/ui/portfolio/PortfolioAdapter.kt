@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.ui.project
+package eu.insertcode.portfolio.ui.portfolio
 
 import android.view.LayoutInflater
 import android.view.View
@@ -34,16 +34,16 @@ import kotlinx.android.synthetic.main.item_project.view.*
  * Created by maartendegoede on 18/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-class ProjectsAdapter : ListAdapter<Project, ProjectsAdapter.ProjectViewHolder>(ProjectCallback()) {
+class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.PortfolioViewHolder>(ProjectCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ProjectViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_project, parent, false))
+            PortfolioViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_project, parent, false))
 
-    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PortfolioViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ProjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class PortfolioViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(project: Project) {
             view.run {
                 setOnClickListener {

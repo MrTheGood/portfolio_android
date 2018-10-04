@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.ui.project
+package eu.insertcode.portfolio.ui.portfolio
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,23 +33,23 @@ import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.util.isLandscapeOrientation
 import eu.insertcode.portfolio.util.isNetworkAvailable
 import eu.insertcode.portfolio.util.visibleIf
-import kotlinx.android.synthetic.main.fragment_projects.*
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 /**
  * Created by maartendegoede on 11/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-class ProjectsFragment : Fragment() {
+class PortfolioFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-            inflater.inflate(R.layout.fragment_projects, container, false)
+            inflater.inflate(R.layout.fragment_portfolio, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val projectsAdapter = ProjectsAdapter()
+        val portfolioAdapter = PortfolioAdapter()
         projectsRecycler.apply {
-            adapter = projectsAdapter
+            adapter = portfolioAdapter
             layoutManager = LinearLayoutManager(context)
             if (isLandscapeOrientation()) {
                 addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
@@ -57,9 +57,9 @@ class ProjectsFragment : Fragment() {
         }
 
 
-        val viewModel = ViewModelProviders.of(this)[ProjectsViewModel::class.java]
+        val viewModel = ViewModelProviders.of(this)[PortfolioViewModel::class.java]
         viewModel.projects.observe(this, Observer { projects ->
-            projectsAdapter.submitList(projects.data?.projects)
+            portfolioAdapter.submitList(projects.data?.projects)
 
             projectsRecycler.visibleIf(projects.isSuccess)
             projectsLoading.visibleIf(projects.isLoading)

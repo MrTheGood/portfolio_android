@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.ui.project
+package eu.insertcode.portfolio.ui.portfolio
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +26,7 @@ import eu.insertcode.portfolio.repository.ProjectRepository
  * Created by maartendegoede on 11/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-class ProjectsViewModel : ViewModel() {
+class PortfolioViewModel : ViewModel() {
     val projects: LiveData<Resource<ProjectsList, Exception>> =
             ProjectRepository.projects
 
