@@ -23,10 +23,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.repository.ProjectRepository
 import eu.insertcode.portfolio.util.TagColourHelper
 import eu.insertcode.portfolio.util.fromHtml
 import eu.insertcode.portfolio.util.getColorStateList
@@ -45,27 +46,32 @@ class ProjectFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //todo: viewModel
-        val project = ProjectRepository.projects.value?.data?.projects?.find { it.id == arguments!!.getString("project_id") }
+        val viewModel = ViewModelProviders.of(this)[ProjectViewModel::class.java]
+        viewModel.selectProject(arguments?.getString("project_id")!!)
 
-        Glide.with(project_image)
-                .load(project!!.images.firstOrNull())
-                .into(project_image)
-        project_title.text = project.title
-        project_date.text = project.date
-        project_description.text = project.description.fromHtml()
+        viewModel.project.observe(this, Observer { result ->
+            val project = result.data
 
-        project.tags.forEach { tag ->
-            val chip = Chip(context)
-            chip.chipText = tag.toLowerCase().capitalize()
-            chip.chipBackgroundColor = TagColourHelper.getTagColorSL(tag, requireContext())
-            chip.setTextColor(Color.WHITE)
-            project_tags.addView(chip)
-        }
-        project_tags.goneIf(project.tags.isEmpty())
+            Glide.with(project_image)
+                    .load(project!!.images.firstOrNull())
+                    .into(project_image)
+            project_title.text = project.title
+            project_date.text = project.date
+            project_description.text = project.description.fromHtml()
 
-        project_typeIndicator.backgroundTintList = view?.getColorStateList(project.type.color)
-        project_typeIndicator.setImageResource(project.type.icon)
+            project.tags.forEach { tag ->
+                val chip = Chip(context)
+                chip.chipText = tag.toLowerCase().capitalize()
+                chip.chipBackgroundColor = TagColourHelper.getTagColorSL(tag, requireContext())
+                chip.setTextColor(Color.WHITE)
+                project_tags.addView(chip)
+            }
+            project_tags.goneIf(project.tags.isEmpty())
+
+            project_typeIndicator.backgroundTintList = view?.getColorStateList(project.type.color)
+            project_typeIndicator.setImageResource(project.type.icon)
+
+        })
     }
 
 }
