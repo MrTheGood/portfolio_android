@@ -47,7 +47,7 @@ class ProjectFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val viewModel = ViewModelProviders.of(this)[ProjectViewModel::class.java]
-        viewModel.selectProject(arguments?.getString("project_id")!!)
+        viewModel.selectProject(ProjectFragmentArgs.fromBundle(arguments).projectId)
 
         viewModel.project.observe(this, Observer { result ->
             val project = result.data

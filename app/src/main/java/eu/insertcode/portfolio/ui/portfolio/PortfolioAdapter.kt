@@ -19,45 +19,45 @@ package eu.insertcode.portfolio.ui.portfolio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.model.Project
-import eu.insertcode.portfolio.util.getColorStateList
-import kotlinx.android.synthetic.main.item_project.view.*
+import eu.insertcode.portfolio.databinding.ItemProjectBinding
 
 /**
  * Created by maartendegoede on 18/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.PortfolioViewHolder>(ProjectCallback()) {
+class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            PortfolioViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_project, parent, false))
-
-    override fun onBindViewHolder(holder: PortfolioViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val project = getItem(position)
+        holder.apply {
+            bind(createOnClickListener(project.id), project)
+            itemView.tag = project
+        }
     }
 
-    class PortfolioViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(project: Project) {
-            view.run {
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_project_detail, bundleOf("project_id" to project.id))
-                }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            ViewHolder(ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-                Glide.with(project_image)
-                        .load(project.images.firstOrNull())
-                        .into(project_image)
-                project_date.text = project.date
-                project_title.text = project.title
+    private fun createOnClickListener(projectId: String) =
+            View.OnClickListener { v ->
+                val direction = PortfolioFragmentDirections.ActionProjectDetail(projectId)
+                v.findNavController().navigate(direction)
+            }
 
-                project_typeIndicator.backgroundTintList = view.getColorStateList(project.type.color)
-                project_typeIndicator.setImageResource(project.type.icon)
+    class ViewHolder(
+            private val binding: ItemProjectBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(listener: View.OnClickListener, item: Project) {
+            binding.apply {
+                clickListener = listener
+                project = item
+                executePendingBindings()
             }
         }
     }

@@ -15,68 +15,90 @@
   ~    limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?selectableItemBackground"
     >
 
-    <ImageView
-        android:id="@+id/project_image"
-        android:layout_width="208dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        android:background="@color/image_background"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
-        tools:src="@tools:sample/backgrounds/scenic"
-        />
+    <data>
 
-    <TextView
-        android:id="@+id/project_title"
-        style="@style/AppTheme.TextAppearance.Title"
-        android:layout_width="0dp"
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"
+            />
+
+        <variable
+            name="project"
+            type="eu.insertcode.portfolio.data.model.Project"
+            />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/nunito"
-        app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
-        app:layout_constraintStart_toEndOf="@id/project_image"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem"
-        />
+        android:foreground="?selectableItemBackground"
+        android:onClick="@{clickListener}"
+        >
 
-    <TextView
-        android:id="@+id/project_date"
-        style="@style/AppTheme.TextAppearance.Caption"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/nunito"
-        app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
-        app:layout_constraintStart_toEndOf="@id/project_image"
-        app:layout_constraintTop_toBottomOf="@id/project_title"
-        tools:text="@tools:sample/date/day_of_week"
-        />
+        <ImageView
+            android:id="@+id/project_image"
+            imageFromUrl="@{project.images.size() > 0 ? project.images.get(0) : null}"
+            android:layout_width="208dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:background="@color/image_background"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/backgrounds/scenic"
+            />
 
-    <ImageView
-        android:id="@+id/project_typeIndicator"
-        style="@style/AppTheme.ProjectTypeIndicator"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/project_title"
-        tools:backgroundTint="@color/colorPrimary"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/ic_type_app"
-        />
+        <TextView
+            android:id="@+id/project_title"
+            style="@style/AppTheme.TextAppearance.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito"
+            android:text="@{project.title}"
+            app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
+            app:layout_constraintStart_toEndOf="@id/project_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/lorem"
+            />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/project_date"
+            style="@style/AppTheme.TextAppearance.Caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito"
+            android:text="@{project.date}"
+            app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
+            app:layout_constraintStart_toEndOf="@id/project_image"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
+            tools:text="@tools:sample/date/day_of_week"
+            />
+
+        <ImageView
+            android:id="@+id/project_typeIndicator"
+            style="@style/AppTheme.ProjectTypeIndicator"
+            typeIndicator="@{project.type}"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/project_title"
+            tools:backgroundTint="@color/colorPrimary"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_type_app"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
