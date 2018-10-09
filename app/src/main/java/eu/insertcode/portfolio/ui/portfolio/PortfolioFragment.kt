@@ -25,58 +25,44 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.isError
-import eu.insertcode.portfolio.data.isLoading
-import eu.insertcode.portfolio.data.isNull
-import eu.insertcode.portfolio.data.isSuccess
-import eu.insertcode.portfolio.util.isLandscapeOrientation
+import eu.insertcode.portfolio.databinding.FragmentPortfolioBinding
 import eu.insertcode.portfolio.util.isNetworkAvailable
-import eu.insertcode.portfolio.util.visibleIf
-import kotlinx.android.synthetic.main.fragment_portfolio.*
 
 /**
  * Created by maartendegoede on 11/09/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 class PortfolioFragment : Fragment() {
+    private lateinit var portfolioViewModel: PortfolioViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-            inflater.inflate(R.layout.fragment_portfolio, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val portfolioAdapter = PortfolioAdapter()
-        projectsRecycler.apply {
-            adapter = portfolioAdapter
-            layoutManager = LinearLayoutManager(context)
-            if (isLandscapeOrientation()) {
-                addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
-            }
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        portfolioViewModel = ViewModelProviders.of(this)[PortfolioViewModel::class.java]
+        val binding = FragmentPortfolioBinding.inflate(inflater, container, false).apply {
+            viewModel = portfolioViewModel
+            isNetworkAvailable = requireContext().isNetworkAvailable()
+            setLifecycleOwner(this@PortfolioFragment)
         }
 
+        val portfolioAdapter = PortfolioAdapter()
+        binding.projectsRecycler.run {
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
+            adapter = portfolioAdapter
+        }
+        subscribeUi(portfolioAdapter)
 
-        val viewModel = ViewModelProviders.of(this)[PortfolioViewModel::class.java]
-        viewModel.projects.observe(this, Observer { projects ->
-            portfolioAdapter.submitList(projects.data?.projects)
+        setHasOptionsMenu(true)
+        return binding.root
+    }
 
-            projectsRecycler.visibleIf(projects.isSuccess)
-            projectsLoading.visibleIf(projects.isLoading)
-
-            projectsError.visibleIf(projects.isError || projects.isNull)
-            if (requireContext().isNetworkAvailable()) {
-                projectsError_image.setImageResource(R.drawable.ic_error)
-                projectsError_text.text = getString(R.string.error_unknown)
-            } else {
-                projectsError_image.setImageResource(R.drawable.ic_wifi_off)
-                projectsError_text.text = getString(R.string.error_noConnection)
-
-            }
+    private fun subscribeUi(adapter: PortfolioAdapter) {
+        portfolioViewModel.projects.observe(viewLifecycleOwner, Observer { resource ->
+            val projects = resource?.data?.projects
+            if (projects != null) adapter.submitList(projects)
         })
-
-        viewModel.retry()
-        projectsError.setOnClickListener { viewModel.retry() }
-
     }
 }

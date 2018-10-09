@@ -27,10 +27,17 @@ import eu.insertcode.portfolio.repository.ProjectRepository
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 class PortfolioViewModel : ViewModel() {
+
     val projects: LiveData<Resource<ProjectsList, Exception>> =
             ProjectRepository.projects
+
+    init {
+        ProjectRepository.loadProjects()
+    }
 
     fun retry() {
         ProjectRepository.loadProjects()
     }
+
+
 }

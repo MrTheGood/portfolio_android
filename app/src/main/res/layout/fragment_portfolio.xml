@@ -15,63 +15,85 @@
   ~    limitations under the License.
   -->
 
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/projectsRecycler"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isNetworkAvailable"
+            type="Boolean"
+            />
+
+        <variable
+            name="viewModel"
+            type="eu.insertcode.portfolio.ui.portfolio.PortfolioViewModel"
+            />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="16dp"
-        tools:listitem="@layout/item_project"
-        />
-
-    <ProgressBar
-        android:id="@+id/projectsLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        />
-
-    <LinearLayout
-        android:id="@+id/projectsError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:ignore="UseCompoundDrawables"
         >
 
-        <ImageView
-            android:id="@+id/projectsError_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_error"
-            android:tint="#5000"
-            android:tintMode="src_in"
-            tools:ignore="ContentDescription"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/projectsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+            android:visibility="@{viewModel.projects.isSuccess ? View.VISIBLE : View.GONE}"
+            tools:listitem="@layout/item_project"
             />
 
-
-        <TextView
-            android:id="@+id/projectsError_text"
-            style="@style/AppTheme.TextAppearance.Body"
+        <ProgressBar
+            android:id="@+id/projectsLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/error_unknown"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.projects.isLoading ? View.VISIBLE : View.GONE}"
             />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/projectsError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{_ -> viewModel.retry()}"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="@{(viewModel.projects.isError || viewModel.projects == null) ? View.VISIBLE : View.GONE}"
+            tools:ignore="UseCompoundDrawables"
+            >
+
+            <ImageView
+                android:id="@+id/projectsError_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:src="@{isNetworkAvailable ? @drawable/ic_error : @drawable/ic_wifi_off}"
+                android:tint="#5000"
+                android:tintMode="src_in"
+                tools:ignore="ContentDescription"
+                />
+
+            <TextView
+                android:id="@+id/projectsError_text"
+                style="@style/AppTheme.TextAppearance.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{isNetworkAvailable ? @string/error_unknown : @string/error_noConnection}"
+                />
+
+        </LinearLayout>
 
 
-</FrameLayout>
+    </FrameLayout>
+</layout>
