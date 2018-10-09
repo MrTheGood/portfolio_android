@@ -43,7 +43,7 @@
 
         <ImageView
             android:id="@+id/project_image"
-            imageFromUrl="@{project.images.size() > 0 ? project.images.get(0) : null}"
+            imageFromUrl="@{project.images.size() > 0 ? project.images[0] : null}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/image_background"

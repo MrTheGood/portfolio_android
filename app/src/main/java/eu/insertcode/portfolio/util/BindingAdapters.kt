@@ -16,7 +16,10 @@
 
 package eu.insertcode.portfolio.util
 
+import android.os.Build
+import android.text.Html
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -45,5 +48,15 @@ fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
     if (type != null) {
         view.backgroundTintList = view.getColorStateList(type.color)
         view.setImageResource(type.icon)
+    }
+}
+
+@Suppress("DEPRECATION")
+@BindingAdapter("textFromHtml")
+fun bindTextFromHtml(view: TextView, text: String) {
+    view.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(text)
     }
 }

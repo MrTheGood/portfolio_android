@@ -16,19 +16,14 @@
 
 package eu.insertcode.portfolio.util
 
-import android.os.Build
-import android.text.Html
-import android.text.Spanned
-
+import eu.insertcode.portfolio.ui.project.ProjectViewModelFactory
 
 /**
- * Created by maartendegoede on 29/09/2018.
+ * Created by maartendegoede on 09/10/2018.
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
-fun String.fromHtml(): Spanned {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        Html.fromHtml(this)
-    }
+object InjectorUtils {
+
+    fun provideProjectViewModelFactory(projectId: String) =
+            ProjectViewModelFactory(projectId)
 }

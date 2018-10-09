@@ -17,8 +17,10 @@
 package eu.insertcode.portfolio.util
 
 import android.content.Context
+import android.graphics.Color
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import com.google.android.material.chip.Chip
 import eu.insertcode.portfolio.R
 
 /**
@@ -44,9 +46,14 @@ object TagColourHelper {
         return tagColors[pos]
     }
 
-    fun getTagColorSL(tag: String, context: Context) =
+    private fun getTagColor(tag: String, context: Context) =
             ContextCompat.getColorStateList(context, getTagColorRes(tag))
 
-    fun getTagColor(tag: String, context: Context) =
-            ContextCompat.getColor(context, getTagColorRes(tag))
+    fun getChipForTag(tag: String, context: Context): Chip {
+        val chip = Chip(context)
+        chip.chipText = tag.toLowerCase().capitalize()
+        chip.chipBackgroundColor = TagColourHelper.getTagColor(tag, context)
+        chip.setTextColor(Color.WHITE)
+        return chip
+    }
 }

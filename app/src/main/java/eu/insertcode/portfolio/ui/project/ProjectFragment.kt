@@ -16,8 +16,6 @@
 
 package eu.insertcode.portfolio.ui.project
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,12 +23,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
-import com.google.android.material.chip.Chip
-import eu.insertcode.portfolio.R
+import eu.insertcode.portfolio.databinding.FragmentProjectBinding
+import eu.insertcode.portfolio.util.InjectorUtils
 import eu.insertcode.portfolio.util.TagColourHelper
-import eu.insertcode.portfolio.util.fromHtml
-import eu.insertcode.portfolio.util.getColorStateList
 import eu.insertcode.portfolio.util.goneIf
 import kotlinx.android.synthetic.main.fragment_project.*
 
@@ -40,38 +35,24 @@ import kotlinx.android.synthetic.main.fragment_project.*
  */
 class ProjectFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-            inflater.inflate(R.layout.fragment_project, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val projectId = ProjectFragmentArgs.fromBundle(arguments).projectId
 
-    @SuppressLint("SetTextI18n")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this)[ProjectViewModel::class.java]
-        viewModel.selectProject(ProjectFragmentArgs.fromBundle(arguments).projectId)
+        val factory = InjectorUtils.provideProjectViewModelFactory(projectId)
+        val projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
 
-        viewModel.project.observe(this, Observer { result ->
-            val project = result.data
+        val binding = FragmentProjectBinding.inflate(inflater, container, false).apply {
+            viewModel = projectViewModel
+            setLifecycleOwner(this@ProjectFragment)
+        }
 
-            Glide.with(project_image)
-                    .load(project!!.images.firstOrNull())
-                    .into(project_image)
-            project_title.text = project.title
-            project_date.text = project.date
-            project_description.text = project.description.fromHtml()
-
+        projectViewModel.project.observe(this, Observer { project ->
             project.tags.forEach { tag ->
-                val chip = Chip(context)
-                chip.chipText = tag.toLowerCase().capitalize()
-                chip.chipBackgroundColor = TagColourHelper.getTagColorSL(tag, requireContext())
-                chip.setTextColor(Color.WHITE)
-                project_tags.addView(chip)
+                project_tags.addView(TagColourHelper.getChipForTag(tag, requireContext()))
             }
             project_tags.goneIf(project.tags.isEmpty())
-
-            project_typeIndicator.backgroundTintList = view?.getColorStateList(project.type.color)
-            project_typeIndicator.setImageResource(project.type.icon)
-
         })
-    }
 
+        return binding.root
+    }
 }

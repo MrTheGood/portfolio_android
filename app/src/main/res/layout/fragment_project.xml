@@ -14,98 +14,115 @@
   ~    See the License for the specific language governing permissions and
   ~    limitations under the License.
   -->
-<ScrollView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:overScrollMode="always"
-    android:paddingTop="16dp"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="eu.insertcode.portfolio.ui.project.ProjectViewModel"
+            />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="always"
+        android:paddingTop="16dp"
         >
 
-        <ImageView
-            android:id="@+id/project_image"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/image_background"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:9"
-            tools:ignore="ContentDescription"
-            tools:src="@tools:sample/backgrounds/scenic"
-            />
-
-        <ImageView
-            android:id="@+id/project_typeIndicator"
-            style="@style/AppTheme.ProjectTypeIndicator"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/project_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/project_title"
-            tools:backgroundTint="@color/colorPrimary"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_type_app"
-            />
-
-        <TextView
-            android:id="@+id/project_title"
-            style="@style/AppTheme.TextAppearance.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
-            app:layout_constraintTop_toBottomOf="@id/project_image"
-            tools:text="@tools:sample/lorem"
-            />
-
-        <TextView
-            android:id="@+id/project_date"
-            style="@style/AppTheme.TextAppearance.Caption"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
-            app:layout_constraintTop_toBottomOf="@id/project_title"
-            tools:text="@tools:sample/date/day_of_week"
-            />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/project_tags"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/project_date"
-            app:singleLine="true"
-            />
+            >
 
-        <TextView
-            android:id="@+id/project_description"
-            style="@style/AppTheme.TextAppearance.Body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/project_tags"
-            tools:text="@tools:sample/lorem/random"
-            />
+            <ImageView
+                android:id="@+id/project_image"
+                imageFromUrl="@{viewModel.project.images.size() > 0 ? viewModel.project.images[0] : null}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/image_background"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="16:9"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/backgrounds/scenic"
+                />
+
+            <ImageView
+                android:id="@+id/project_typeIndicator"
+                style="@style/AppTheme.ProjectTypeIndicator"
+                typeIndicator="@{viewModel.project.type}"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/project_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/project_title"
+                tools:backgroundTint="@color/colorPrimary"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_type_app"
+                />
+
+            <TextView
+                android:id="@+id/project_title"
+                style="@style/AppTheme.TextAppearance.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{viewModel.project.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+                app:layout_constraintTop_toBottomOf="@id/project_image"
+                tools:text="@tools:sample/lorem"
+                />
+
+            <TextView
+                android:id="@+id/project_date"
+                style="@style/AppTheme.TextAppearance.Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{viewModel.project.date}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+                app:layout_constraintTop_toBottomOf="@id/project_title"
+                tools:text="@tools:sample/date/day_of_week"
+                />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/project_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/project_date"
+                app:singleLine="true"
+                />
+
+            <TextView
+                android:id="@+id/project_description"
+                style="@style/AppTheme.TextAppearance.Body"
+                textFromHtml="@{viewModel.project.description}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_tags"
+                tools:text="@tools:sample/lorem/random"
+                />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
