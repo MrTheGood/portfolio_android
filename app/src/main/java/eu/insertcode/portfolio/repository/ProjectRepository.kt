@@ -22,6 +22,9 @@ import com.google.gson.GsonBuilder
 import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.data.model.ProjectsList
+import kotlinx.coroutines.experimental.CoroutineStart
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.launch
 import java.net.URL
 
@@ -42,7 +45,7 @@ object ProjectRepository {
         if (_projects.value.isSuccess && !force) return
         _projects.value = Resource.loading(_projects.value?.data)
 
-        launch {
+        GlobalScope.launch(Dispatchers.Default, CoroutineStart.DEFAULT, {
             try {
                 val stream = URL("https://portfolio.insertcode.eu/gateway/v2alpha/projects.php").openStream()
                 val result = stream.bufferedReader().use { it.readText() }.also { stream.close() }
@@ -53,6 +56,6 @@ object ProjectRepository {
                 e.printStackTrace()
                 _projects.postValue(Resource.error(e, _projects.value?.data))
             }
-        }
+        })
     }
 }
