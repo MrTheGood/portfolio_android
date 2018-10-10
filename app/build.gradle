@@ -77,9 +77,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
     // Navigation
-    implementation "android.arch.navigation:navigation-fragment:$navigation_version"
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "android.arch.navigation:navigation-ui:$navigation_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
 
     // Glide
