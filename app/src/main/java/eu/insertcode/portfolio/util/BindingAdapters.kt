@@ -18,9 +18,12 @@ package eu.insertcode.portfolio.util
 
 import android.os.Build
 import android.text.Html
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import eu.insertcode.portfolio.R
@@ -30,6 +33,11 @@ import eu.insertcode.portfolio.data.model.Project
  * Created by maartendegoede on 09/10/2018.
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
+@BindingAdapter("visibleIf")
+fun bindVisibleIf(view: View, condition: Boolean) {
+    view.visibleIf(condition)
+}
+
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
@@ -59,4 +67,14 @@ fun bindTextFromHtml(view: TextView, text: String) {
     } else {
         Html.fromHtml(text)
     }
+}
+
+@BindingAdapter("isRefreshing")
+fun bindIsRefreshing(view: SwipeRefreshLayout, boolean: Boolean) {
+    view.isRefreshing = boolean
+}
+
+@BindingAdapter("onRefresh")
+fun bindOnRefresh(view: SwipeRefreshLayout, listener: OnRefreshListener) {
+    view.setOnRefreshListener(listener)
 }

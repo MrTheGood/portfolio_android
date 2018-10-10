@@ -40,34 +40,44 @@
         android:layout_height="match_parent"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/projectsRecycler"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/projectsRefresh"
+            isRefreshing="@{(viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.projects.size() > 0)}"
+            onRefresh="@{() -> viewModel.retry(true)}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="16dp"
-            android:visibility="@{viewModel.projects.isSuccess ? View.VISIBLE : View.GONE}"
-            tools:listitem="@layout/item_project"
-            />
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/projectsRecycler"
+                visibleIf="@{viewModel.projects.isSuccess}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                tools:listitem="@layout/item_project"
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:id="@+id/projectsLoading"
+            visibleIf="@{viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.projects.size() == 0}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="@{viewModel.projects.isLoading ? View.VISIBLE : View.GONE}"
             />
 
         <LinearLayout
             android:id="@+id/projectsError"
+            visibleIf="@{viewModel.projects.isError || viewModel.projects == null}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="32dp"
-            android:onClick="@{_ -> viewModel.retry()}"
+            android:onClick="@{_ -> viewModel.retry(false)}"
             android:orientation="vertical"
             android:padding="16dp"
-            android:visibility="@{(viewModel.projects.isError || viewModel.projects == null) ? View.VISIBLE : View.GONE}"
             tools:ignore="UseCompoundDrawables"
             >
 

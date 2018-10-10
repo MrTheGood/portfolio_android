@@ -35,8 +35,8 @@ class PortfolioViewModel : ViewModel() {
         ProjectRepository.loadProjects()
     }
 
-    fun retry() {
-        ProjectRepository.loadProjects()
+    fun retry(force: Boolean = false) {
+        ProjectRepository.loadProjects(force)
     }
 
 

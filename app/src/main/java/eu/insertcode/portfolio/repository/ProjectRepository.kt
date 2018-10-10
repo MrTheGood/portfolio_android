@@ -38,8 +38,8 @@ object ProjectRepository {
 
     // TODO: Use Retrofit instead for api requests..
     // TODO: Find out how Retrofit works..
-    fun loadProjects() {
-        if (_projects.value.isSuccess) return
+    fun loadProjects(force: Boolean = false) {
+        if (_projects.value.isSuccess && !force) return
         _projects.value = Resource.loading(_projects.value?.data)
 
         launch {
