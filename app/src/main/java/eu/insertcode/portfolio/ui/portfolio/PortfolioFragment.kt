@@ -54,8 +54,6 @@ class PortfolioFragment : Fragment() {
             adapter = portfolioAdapter
         }
         subscribeUi(portfolioAdapter)
-
-        setHasOptionsMenu(true)
         return binding.root
     }
 
