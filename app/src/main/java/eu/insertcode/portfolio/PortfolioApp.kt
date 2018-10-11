@@ -17,9 +17,19 @@
 package eu.insertcode.portfolio
 
 import android.app.Application
+import timber.log.Timber
+import timber.log.Timber.DebugTree
+
 
 /**
  * Created by maartendegoede on 23/08/2018.
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
-class PortfolioApp : Application()
+@Suppress("unused")
+class PortfolioApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        Timber.plant(DebugTree())
+    }
+}
