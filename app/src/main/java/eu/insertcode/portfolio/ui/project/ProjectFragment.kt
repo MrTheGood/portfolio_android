@@ -34,12 +34,13 @@ import kotlinx.android.synthetic.main.fragment_project.*
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 class ProjectFragment : Fragment() {
+    private lateinit var projectViewModel: ProjectViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val projectId = ProjectFragmentArgs.fromBundle(arguments).projectId
 
         val factory = InjectorUtils.provideProjectViewModelFactory(projectId)
-        val projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
+        projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
 
         val binding = FragmentProjectBinding.inflate(inflater, container, false).apply {
             viewModel = projectViewModel
@@ -53,6 +54,17 @@ class ProjectFragment : Fragment() {
             project_tags.goneIf(project.tags.isEmpty())
         })
 
+        val adapter = ProjectImageAdapter()
+        binding.projectImages.adapter = adapter
+        subscribeUi(adapter)
+
         return binding.root
+    }
+
+    private fun subscribeUi(adapter: ProjectImageAdapter) {
+        projectViewModel.project.observe(viewLifecycleOwner, Observer { project ->
+            val projectImages = project?.images
+            if (projectImages != null) adapter.projectImages = projectImages
+        })
     }
 }
