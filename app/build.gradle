@@ -85,6 +85,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Other
+    implementation "com.romandanylyk:pageindicatorview:1.0.2"
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0' //todo: temporarily use Kotlin Coroutines
@@ -99,9 +100,9 @@ dependencies {
 
     // Test
     testImplementation "junit:junit:4.12"
-    androidTestImplementation "androidx.test:runner:1.1.0-alpha4"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-alpha4"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.1.0-alpha4"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-alpha4"
+    androidTestImplementation "androidx.test:runner:1.1.0-beta02"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-beta02"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.1.0-beta02"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-beta02"
     testImplementation "org.robolectric:robolectric:3.8"
 }
