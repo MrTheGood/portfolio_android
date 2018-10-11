@@ -42,7 +42,7 @@ data class Project(
         val description: String,
 
         @field:SerializedName("tags")
-        val tags: List<String>,
+        val tags: List<String>?,
 
         @field:SerializedName("date")
         val date: String?

@@ -48,10 +48,10 @@ class ProjectFragment : Fragment() {
         }
 
         projectViewModel.project.observe(this, Observer { project ->
-            project.tags.forEach { tag ->
+            project.tags?.forEach { tag ->
                 project_tags.addView(TagColourHelper.getChipForTag(tag, requireContext()))
             }
-            project_tags.goneIf(project.tags.isEmpty())
+            project_tags.goneIf(project.tags?.isEmpty() == true)
         })
 
         val adapter = ProjectImageAdapter()
