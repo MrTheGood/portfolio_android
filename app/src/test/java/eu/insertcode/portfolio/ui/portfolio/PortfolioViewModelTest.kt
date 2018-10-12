@@ -14,19 +14,10 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio
-
-import org.junit.Assert.assertEquals
-import org.junit.Test
+package eu.insertcode.portfolio.ui.portfolio
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * Created by maartendegoede on 12/10/2018.
+ * Copyright © 2018 insetCode.eu. All rights reserved.
  */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
-}
+class PortfolioViewModelTest

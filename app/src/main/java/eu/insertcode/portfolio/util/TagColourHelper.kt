@@ -38,7 +38,8 @@ object TagColourHelper {
     )
 
     @ColorRes
-    private fun getTagColorRes(tag: String): Int {
+    fun getTagColorRes(input: String): Int {
+        val tag = input.toLowerCase().capitalize()
         if (!tags.contains(tag)) {
             tags.add(tag)
         }
