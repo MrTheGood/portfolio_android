@@ -51,7 +51,7 @@ object TagColourHelper {
 
     fun getChipForTag(tag: String, context: Context): Chip {
         val chip = Chip(context)
-        chip.chipText = tag.toLowerCase().capitalize()
+        chip.text = tag.toLowerCase().capitalize()
         chip.chipBackgroundColor = TagColourHelper.getTagColor(tag, context)
         chip.setTextColor(Color.WHITE)
         return chip
