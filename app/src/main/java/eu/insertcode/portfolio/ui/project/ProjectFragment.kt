@@ -48,6 +48,7 @@ class ProjectFragment : Fragment() {
         }
 
         projectViewModel.project.observe(this, Observer { project ->
+            project_tags.removeAllViews()
             project.tags?.forEach { tag ->
                 project_tags.addView(TagColourHelper.getChipForTag(tag, requireContext()))
             }
