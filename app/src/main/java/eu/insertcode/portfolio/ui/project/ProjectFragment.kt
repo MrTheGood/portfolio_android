@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import eu.insertcode.portfolio.anim.ProjectTransition
 import eu.insertcode.portfolio.databinding.FragmentProjectBinding
 import eu.insertcode.portfolio.util.InjectorUtils
 import eu.insertcode.portfolio.util.TagColourHelper
@@ -58,6 +59,9 @@ class ProjectFragment : Fragment() {
         val adapter = ProjectImageAdapter()
         binding.projectImages.adapter = adapter
         subscribeUi(adapter)
+
+        sharedElementEnterTransition = ProjectTransition()
+        sharedElementReturnTransition = ProjectTransition()
 
         return binding.root
     }

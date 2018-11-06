@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +47,8 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
     private fun createOnClickListener(projectId: String) =
             View.OnClickListener { v ->
                 val direction = PortfolioFragmentDirections.ActionProjectDetail(projectId)
-                v.findNavController().navigate(direction)
+                val extras = FragmentNavigatorExtras(v to projectId)
+                v.findNavController().navigate(direction, extras)
             }
 
     class ViewHolder(
