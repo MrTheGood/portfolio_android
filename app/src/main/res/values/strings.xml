@@ -18,6 +18,6 @@
     <string name="app_name">Portfolio 2.0 alpha0</string>
 
     <!-- Error -->
-    <string name="error_unknown">Oh nee! Something went wrong :(\nTry again later!</string>
+    <string name="error_unknown">Oh no! Something went wrong :(\nTry again later!</string>
     <string name="error_noConnection">Oh no! Not connected to the internet :(</string>
 </resources>

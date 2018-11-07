@@ -19,6 +19,6 @@
     <string name="app_name">Portfolio 2.0 alpha0</string>
 
     <!-- Error -->
-    <string name="error_unknown">Oh no! Er is iets fout gegaan :(\nProbeer het later opnieuw</string>
-    <string name="error_noConnection">Oh no! Geen internetverbinding :(</string>
+    <string name="error_unknown">Oh nee! Er is iets fout gegaan :(\nProbeer het later opnieuw</string>
+    <string name="error_noConnection">Oh nee! Geen internetverbinding :(</string>
 </resources>
