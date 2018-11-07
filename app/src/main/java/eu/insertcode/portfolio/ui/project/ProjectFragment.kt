@@ -59,7 +59,7 @@ class ProjectFragment : Fragment() {
 
         val adapter = ProjectImageAdapter()
         binding.projectImages.adapter = adapter
-        subscribeUi(adapter)
+        subscribeUi(adapter, savedInstanceState?.getInt("currentItem") ?: 0)
 
         sharedElementEnterTransition = ProjectExpand()
         sharedElementReturnTransition = ProjectCollapse()
@@ -67,10 +67,18 @@ class ProjectFragment : Fragment() {
         return binding.root
     }
 
-    private fun subscribeUi(adapter: ProjectImageAdapter) {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("currentItem", project_images.currentItem)
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun subscribeUi(adapter: ProjectImageAdapter, currentItem: Int) {
         projectViewModel.project.observe(viewLifecycleOwner, Observer { project ->
             val projectImages = project?.images
-            if (projectImages != null) adapter.projectImages = projectImages
+            if (projectImages != null) {
+                adapter.projectImages = projectImages
+                project_images.currentItem = currentItem
+            }
         })
     }
 }
