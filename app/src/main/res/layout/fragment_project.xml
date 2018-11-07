@@ -33,13 +33,16 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="always"
-        android:transitionName="@{viewModel.project.id}"
         android:paddingTop="16dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
+            android:elevation="4dp"
+            android:transitionName="@{viewModel.project.id}"
             >
 
             <androidx.viewpager.widget.ViewPager

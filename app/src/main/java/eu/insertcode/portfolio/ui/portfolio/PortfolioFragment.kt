@@ -25,8 +25,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import eu.insertcode.portfolio.anim.ProjectTransition
 import eu.insertcode.portfolio.databinding.FragmentPortfolioBinding
+import eu.insertcode.portfolio.ui.anim.PortfolioExit
 import eu.insertcode.portfolio.util.isNetworkAvailable
 
 /**
@@ -60,8 +60,7 @@ class PortfolioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedElementEnterTransition = ProjectTransition()
-        sharedElementReturnTransition = ProjectTransition()
+        exitTransition = PortfolioExit()
     }
 
     private fun subscribeUi(adapter: PortfolioAdapter) {

@@ -23,8 +23,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import eu.insertcode.portfolio.anim.ProjectTransition
 import eu.insertcode.portfolio.databinding.FragmentProjectBinding
+import eu.insertcode.portfolio.ui.anim.ProjectCollapse
+import eu.insertcode.portfolio.ui.anim.ProjectExpand
 import eu.insertcode.portfolio.util.InjectorUtils
 import eu.insertcode.portfolio.util.TagColourHelper
 import eu.insertcode.portfolio.util.goneIf
@@ -60,8 +61,8 @@ class ProjectFragment : Fragment() {
         binding.projectImages.adapter = adapter
         subscribeUi(adapter)
 
-        sharedElementEnterTransition = ProjectTransition()
-        sharedElementReturnTransition = ProjectTransition()
+        sharedElementEnterTransition = ProjectExpand()
+        sharedElementReturnTransition = ProjectCollapse()
 
         return binding.root
     }

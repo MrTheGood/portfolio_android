@@ -14,12 +14,28 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.anim
+package eu.insertcode.portfolio.ui.anim
 
-import androidx.transition.AutoTransition
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionSet
+import eu.insertcode.portfolio.ui.anim.custom.ElevationTransition
 
 /**
  * Created by maartendegoede on 06/11/2018.
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
-class ProjectTransition : AutoTransition()
+class ProjectCollapse : TransitionSet() {
+    init {
+        ordering = ORDERING_SEQUENTIAL
+        interpolator = AccelerateDecelerateInterpolator()
+
+        addTransition(ChangeBounds().apply {
+            duration = 250
+        })
+
+        addTransition(ElevationTransition().apply {
+            duration = 50
+        })
+    }
+}

@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.anim
+package eu.insertcode.portfolio.ui.anim.custom
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
