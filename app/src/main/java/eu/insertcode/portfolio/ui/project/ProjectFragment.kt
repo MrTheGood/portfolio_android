@@ -51,10 +51,10 @@ class ProjectFragment : Fragment() {
 
         projectViewModel.project.observe(this, Observer { project ->
             project_tags.removeAllViews()
-            project.tags?.forEach { tag ->
+            project.data?.tags?.forEach { tag ->
                 project_tags.addView(TagColourHelper.getChipForTag(tag, requireContext()))
             }
-            project_tags.goneIf(project.tags?.isEmpty() == true)
+            project_tags.goneIf(project.data?.tags?.isEmpty() == true)
         })
 
         val adapter = ProjectImageAdapter()
@@ -74,7 +74,7 @@ class ProjectFragment : Fragment() {
 
     private fun subscribeUi(adapter: ProjectImageAdapter, currentItem: Int) {
         projectViewModel.project.observe(viewLifecycleOwner, Observer { project ->
-            val projectImages = project?.images
+            val projectImages = project?.data?.images
             if (projectImages != null) {
                 adapter.projectImages = projectImages
                 project_images.currentItem = currentItem

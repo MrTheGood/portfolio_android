@@ -17,9 +17,8 @@
 package eu.insertcode.portfolio.ui.project
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.repository.ProjectRepository
 
@@ -31,16 +30,14 @@ class ProjectViewModel(
         private val projectId: String
 ) : ViewModel() {
 
-    private val _project = MediatorLiveData<Project>()
-    val project: LiveData<Project> get() = _project
+    val project: LiveData<Resource<Project?, Exception>> =
+            ProjectRepository.project
 
     init {
-        val liveProjects = Transformations.map(ProjectRepository.projects) { p ->
-            p.data?.projects?.find { it.id == projectId }
-        }
-        _project.addSource(liveProjects, _project::setValue)
-
-        ProjectRepository.loadProjects()
+        ProjectRepository.loadProject(projectId)
     }
 
+    fun retry(force: Boolean) {
+        ProjectRepository.loadProject(projectId, force)
+    }
 }

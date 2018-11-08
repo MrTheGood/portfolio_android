@@ -29,10 +29,12 @@
         android:label="Portfolio"
         tools:layout="@layout/fragment_portfolio"
         >
+
         <action
             android:id="@+id/action_project_detail"
             app:destination="@id/projectFragment"
             />
+
     </fragment>
 
     <fragment
@@ -41,10 +43,17 @@
         android:label="Portfolio"
         tools:layout="@layout/fragment_project"
         >
+
         <argument
             android:name="project_id"
             app:argType="string"
             />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="https://portfolio.insertcode.eu/projects/{project_id}"
+            />
+
     </fragment>
 
     <deepLink

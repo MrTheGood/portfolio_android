@@ -61,7 +61,9 @@ fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
 
 @Suppress("DEPRECATION")
 @BindingAdapter("textFromHtml")
-fun bindTextFromHtml(view: TextView, text: String) {
+fun bindTextFromHtml(view: TextView, text: String?) {
+    if (text == null) return
+
     view.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
     } else {
