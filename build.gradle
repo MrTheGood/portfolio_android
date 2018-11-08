@@ -20,11 +20,20 @@ buildscript {
     ext.kotlin_version = '1.3.0'
     ext.gradle_version = '3.2.1'
     ext.navigation_version = "1.0.0-alpha07"
+
     repositories {
         jcenter()
         google()
+
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
     }
+
     dependencies {
+        classpath 'io.fabric.tools:gradle:1.26.1'
+        classpath 'com.google.gms:google-services:4.0.1'
+
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigation_version"

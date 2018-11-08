@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.databinding.ItemProjectBinding
+import eu.insertcode.portfolio.util.analyticsSelectProject
 
 /**
  * Created by maartendegoede on 18/09/2018.
@@ -36,7 +37,7 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val project = getItem(position)
         holder.apply {
-            bind(createOnClickListener(project.id), project)
+            bind(createOnClickListener(project), project)
             itemView.tag = project
         }
     }
@@ -44,11 +45,12 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    private fun createOnClickListener(projectId: String) =
+    private fun createOnClickListener(project: Project) =
             View.OnClickListener { v ->
-                val direction = PortfolioFragmentDirections.ActionProjectDetail(projectId)
-                val extras = FragmentNavigatorExtras(v to projectId)
+                val direction = PortfolioFragmentDirections.ActionProjectDetail(project.id)
+                val extras = FragmentNavigatorExtras(v to project.id)
                 v.findNavController().navigate(direction, extras)
+                v.context.analyticsSelectProject(project)
             }
 
     class ViewHolder(
