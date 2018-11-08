@@ -26,7 +26,7 @@ android {
 
     defaultConfig {
         // todo: update assetlinks.json for new application id when releasing
-        applicationId "eu.insertcode.portfolio.alpha0"
+        applicationId "eu.insertcode.portfolio.alpha"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -62,8 +62,8 @@ dependencies {
     kapt "androidx.databinding:databinding-compiler:$gradle_version"
 
     // androidX
-    implementation "androidx.core:core-ktx:1.0.0"
-    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "androidx.core:core-ktx:1.0.1"
+    implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"
 
