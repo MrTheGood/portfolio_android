@@ -38,10 +38,10 @@ fun View.visibleIf(condition: Boolean, alternative: Int = View.GONE) {
     visibility = if (condition) View.VISIBLE else alternative
 }
 
-fun View.goneIf(condition: Boolean, alternative: Int = View.GONE) =
+fun View.goneIf(condition: Boolean) =
         visibleIf(!condition, View.GONE)
 
-fun View.invisibleIf(condition: Boolean, alternative: Int = View.GONE) =
+fun View.invisibleIf(condition: Boolean) =
         visibleIf(!condition, View.INVISIBLE)
 
 fun View.getColorStateList(@ColorRes colorRes: Int) =
