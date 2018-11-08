@@ -42,7 +42,7 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/projectsRefresh"
-            isRefreshing="@{(viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.projects.size() > 0)}"
+            isRefreshing="@{(viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.size() > 0)}"
             onRefresh="@{() -> viewModel.retry(true)}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,7 +50,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/projectsRecycler"
-                visibleIf="@{viewModel.projects.data.projects.size() > 0}"
+                visibleIf="@{viewModel.projects.data.size() > 0}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -62,7 +62,7 @@
 
         <ProgressBar
             android:id="@+id/projectsLoading"
-            visibleIf="@{viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.projects.size() == 0}"
+            visibleIf="@{viewModel.projects.isLoading &amp;&amp; viewModel.projects.data.size() == 0}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

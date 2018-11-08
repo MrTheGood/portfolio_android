@@ -18,15 +18,12 @@ package eu.insertcode.portfolio.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.GsonBuilder
+import com.google.firebase.firestore.FirebaseFirestore
 import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.isSuccess
-import eu.insertcode.portfolio.data.model.ProjectsList
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.net.URL
+import eu.insertcode.portfolio.data.model.Project
+import java.lang.Exception as JavaException
+
 
 /**
  * Created by maartendegoede on 26/09/2018.
@@ -34,9 +31,11 @@ import java.net.URL
  */
 object ProjectRepository {
 
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
+
     @Suppress("ObjectPropertyName")
-    private val _projects = MutableLiveData<Resource<ProjectsList, Exception>>()
-    val projects: LiveData<Resource<ProjectsList, Exception>>
+    private val _projects = MutableLiveData<Resource<List<Project>, JavaException>>()
+    val projects: LiveData<Resource<List<Project>, JavaException>>
         get() = _projects
 
     // TODO: Use Retrofit instead for api requests..
@@ -45,17 +44,15 @@ object ProjectRepository {
         if (_projects.value.isSuccess && !force) return
         _projects.value = Resource.loading(_projects.value?.data)
 
-        GlobalScope.launch(Dispatchers.Default, CoroutineStart.DEFAULT) {
-            try {
-                val stream = URL("https://portfolio.insertcode.eu/gateway/v2alpha/projects.php").openStream()
-                val result = stream.bufferedReader().use { it.readText() }.also { stream.close() }
-
-                val projects = GsonBuilder().create().fromJson(result, ProjectsList::class.java)
-                _projects.postValue(Resource.success(projects))
-            } catch (e: Exception) {
-                e.printStackTrace()
-                _projects.postValue(Resource.error(e, _projects.value?.data))
-            }
-        }
+        firestore.collection("projects")
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        _projects.postValue(Resource.success(task.result!!.map { it.toObject(Project::class.java) }))
+                    } else {
+                        task.exception!!.printStackTrace()
+                        _projects.postValue(Resource.error(task.exception!!, _projects.value?.data))
+                    }
+                }
     }
 }

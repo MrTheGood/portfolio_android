@@ -18,7 +18,6 @@ package eu.insertcode.portfolio.data.model
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import com.google.gson.annotations.SerializedName
 import eu.insertcode.portfolio.R
 
 /**
@@ -26,41 +25,36 @@ import eu.insertcode.portfolio.R
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 data class Project(
-        @field:SerializedName("id")
         val id: String,
-
-        @field:SerializedName("title")
         val title: String,
-
-        @field:SerializedName("type")
-        val type: Type,
-
-        @field:SerializedName("images")
+        val type: String,
         val images: List<String>,
-
-        @field:SerializedName("description")
         val description: String,
-
-        @field:SerializedName("tags")
         val tags: List<String>?,
-
-        @field:SerializedName("date")
         val date: String?
 ) {
+
+    /**
+     * Empty constructor for the Cloud Firestore library.
+     */
+    constructor() : this("", "", "", emptyList(), "", null, null)
+
+    /**
+     * @return the [type] string as [Type] object. [type] is a string because of the Cloud Firestore library.
+     */
+    fun type() = when (type) {
+        Type.APP.type -> Type.APP
+        Type.GAME.type -> Type.GAME
+        Type.WEB.type -> Type.WEB
+        Type.WATCH.type -> Type.WATCH
+        else -> Type.OTHER
+    }
+
     enum class Type(val type: String) {
-        @SerializedName("app")
         APP("app"),
-
-        @SerializedName("game")
         GAME("game"),
-
-        @SerializedName("web")
         WEB("web"),
-
-        @SerializedName("watch")
         WATCH("watch"),
-
-        @SerializedName("other")
         OTHER("other");
 
 

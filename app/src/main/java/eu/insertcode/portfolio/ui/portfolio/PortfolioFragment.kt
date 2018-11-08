@@ -65,7 +65,7 @@ class PortfolioFragment : Fragment() {
 
     private fun subscribeUi(adapter: PortfolioAdapter) {
         portfolioViewModel.projects.observe(viewLifecycleOwner, Observer { resource ->
-            val projects = resource?.data?.projects
+            val projects = resource?.data
             if (projects != null) adapter.submitList(projects)
         })
     }

@@ -31,7 +31,7 @@ fun Context.analyticsSelectProject(project: Project) {
     val bundle = Bundle().apply {
         putString(Param.ITEM_ID, project.id)
         putString(Param.ITEM_NAME, project.title)
-        putString(Param.ITEM_CATEGORY, project.type.toString())
+        putString(Param.ITEM_CATEGORY, project.type)
         putString(Param.CONTENT_TYPE, "project")
     }
 

@@ -19,7 +19,7 @@ package eu.insertcode.portfolio.ui.portfolio
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import eu.insertcode.portfolio.data.Resource
-import eu.insertcode.portfolio.data.model.ProjectsList
+import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.repository.ProjectRepository
 
 /**
@@ -28,7 +28,7 @@ import eu.insertcode.portfolio.repository.ProjectRepository
  */
 class PortfolioViewModel : ViewModel() {
 
-    val projects: LiveData<Resource<ProjectsList, Exception>> =
+    val projects: LiveData<Resource<List<Project>, Exception>> =
             ProjectRepository.projects
 
     init {
