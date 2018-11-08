@@ -184,3 +184,4 @@ fabric.properties
 .idea/codeStyles/Project.xml
 .idea/caches/build_file_checksums.ser
 .idea/navEditor.xml
+/app/google-services.json
