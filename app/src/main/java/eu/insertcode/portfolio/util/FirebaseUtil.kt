@@ -18,6 +18,7 @@ package eu.insertcode.portfolio.util
 
 import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Event
 import com.google.firebase.analytics.FirebaseAnalytics.Param
@@ -31,12 +32,12 @@ fun Context.analyticsSelectProject(project: Project) {
     logEvent(Event.SELECT_CONTENT, project.toBundle())
 }
 
-fun Context.analyticsShareProject(project: Project) {
-    logEvent(Event.SHARE, project.toBundle())
+fun Fragment.analyticsShareProject(project: Project) {
+    context?.logEvent(Event.SHARE, project.toBundle())
 }
 
-fun Context.clickProjectLink(project: Project, link: String) {
-    logEvent("click_project_url", project.toBundle().apply {
+fun Fragment.clickProjectLink(project: Project, link: String) {
+    context?.logEvent("click_project_url", project.toBundle().apply {
         putString("project_link", link)
         putString("project_link_type", if (project.links?.github == link) "github" else if (project.links?.link == link) "link" else "unknown")
     })

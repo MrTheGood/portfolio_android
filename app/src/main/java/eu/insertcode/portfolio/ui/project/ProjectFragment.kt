@@ -16,15 +16,12 @@
 
 package eu.insertcode.portfolio.ui.project
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.databinding.FragmentProjectBinding
 import eu.insertcode.portfolio.ui.anim.ProjectCollapse
 import eu.insertcode.portfolio.ui.anim.ProjectExpand
@@ -69,7 +66,6 @@ class ProjectFragment : Fragment() {
         return binding.root
     }
 
-    // region optionsMenu
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_project, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -90,29 +86,22 @@ class ProjectFragment : Fragment() {
                 ?: return super.onOptionsItemSelected(item)
 
         when (item?.itemId) {
-            R.id.menu_github -> clickLink(project, project.links?.github)
-            R.id.menu_link -> clickLink(project, project.links?.link)
-            R.id.menu_share -> shareProject(project)
+            R.id.menu_github -> {
+                startOpenUrlIntent(project.links?.github!!)
+                clickProjectLink(project, project.links.github)
+            }
+            R.id.menu_link -> {
+                startOpenUrlIntent(project.links?.link!!)
+                clickProjectLink(project, project.links.link)
+            }
+            R.id.menu_share -> {
+                startTextShareIntent(getString(R.string.string_share_project, project.id))
+                analyticsShareProject(project)
+            }
             else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
-
-    private fun shareProject(project: Project) {
-        startActivity(Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "https://project.insertcode.eu/projects/${project.id}")
-        })
-        context?.analyticsShareProject(project)
-    }
-
-    private fun clickLink(project: Project, url: String?) {
-        if (url == null) return
-
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        context?.clickProjectLink(project, url)
-    }
-    // endregion
 
 
     override fun onSaveInstanceState(outState: Bundle) {

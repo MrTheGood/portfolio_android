@@ -18,11 +18,15 @@ package eu.insertcode.portfolio.util
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 21/09/2018.
@@ -50,3 +54,15 @@ fun View.getColorStateList(@ColorRes colorRes: Int) =
 
 fun Context.isNetworkAvailable() =
         (getSystemService(Application.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo?.isConnected == true
+
+fun Fragment.startTextShareIntent(text: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, text)
+    }
+    startActivity(Intent.createChooser(shareIntent, getString(R.string.action_share)))
+}
+
+fun Fragment.startOpenUrlIntent(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+}
