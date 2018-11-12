@@ -28,12 +28,28 @@ import eu.insertcode.portfolio.data.model.Project
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
 fun Context.analyticsSelectProject(project: Project) {
-    val bundle = Bundle().apply {
-        putString(Param.ITEM_ID, project.id)
-        putString(Param.ITEM_NAME, project.title)
-        putString(Param.ITEM_CATEGORY, project.type)
-        putString(Param.CONTENT_TYPE, "project")
-    }
-
-    FirebaseAnalytics.getInstance(this).logEvent(Event.SELECT_CONTENT, bundle)
+    logEvent(Event.SELECT_CONTENT, project.toBundle())
 }
+
+fun Context.analyticsShareProject(project: Project) {
+    logEvent(Event.SHARE, project.toBundle())
+}
+
+fun Context.clickProjectLink(project: Project, link: String) {
+    logEvent("click_project_url", project.toBundle().apply {
+        putString("project_link", link)
+        putString("project_link_type", if (project.links?.github == link) "github" else if (project.links?.link == link) "link" else "unknown")
+    })
+}
+
+private fun Context.logEvent(name: String, bundle: Bundle) =
+        FirebaseAnalytics.getInstance(this).logEvent(name, bundle)
+
+
+private fun Project.toBundle() =
+        Bundle().apply {
+            putString(Param.ITEM_ID, id)
+            putString(Param.ITEM_NAME, title)
+            putString(Param.ITEM_CATEGORY, type)
+            putString(Param.CONTENT_TYPE, "project")
+        }

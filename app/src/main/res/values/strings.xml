@@ -20,4 +20,9 @@
     <!-- Error -->
     <string name="error_unknown">Oh no! Something went wrong :(\nTry again later!</string>
     <string name="error_noConnection">Oh no! Not connected to the internet :(</string>
+
+    <!-- Menu titles -->
+    <string name="menu_title_link">More info</string>
+    <string name="menu_title_github">Github</string>
+    <string name="menu_title_share">Share</string>
 </resources>

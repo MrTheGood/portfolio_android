@@ -15,15 +15,29 @@
   ~    limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Portfolio 2.0 alpha0</string>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <!-- Error -->
-    <string name="error_unknown">Oh nee! Er is iets fout gegaan :(\nProbeer het later opnieuw</string>
-    <string name="error_noConnection">Oh nee! Geen internetverbinding :(</string>
+    <item
+        android:id="@+id/menu_link"
+        android:icon="@drawable/ic_link"
+        android:title="@string/menu_title_link"
+        app:showAsAction="ifRoom"
+        />
 
-    <!-- Menu titles -->
-    <string name="menu_title_link">Meer info</string>
-    <string name="menu_title_github">Github</string>
-    <string name="menu_title_share">Delen</string>
-</resources>
+    <item
+        android:id="@+id/menu_github"
+        android:icon="@drawable/ic_git"
+        android:title="@string/menu_title_github"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/menu_title_share"
+        app:showAsAction="ifRoom"
+        />
+</menu>

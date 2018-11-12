@@ -31,7 +31,8 @@ data class Project(
         val images: List<String> = emptyList(),
         val description: String? = null,
         val tags: List<String> = emptyList(),
-        val date: String? = null
+        val date: String? = null,
+        val links: Link? = null
 ) {
 
     /**
@@ -44,6 +45,11 @@ data class Project(
         Type.WATCH.type -> Type.WATCH
         else -> Type.OTHER
     }
+
+    data class Link(
+            val github: String? = null,
+            val link: String? = null
+    )
 
     enum class Type(val type: String) {
         APP("app"),
