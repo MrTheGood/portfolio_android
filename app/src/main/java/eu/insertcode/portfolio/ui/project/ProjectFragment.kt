@@ -77,6 +77,7 @@ class ProjectFragment : Fragment() {
         menu?.apply {
             val links = projectViewModel.project.value?.data?.links
             findItem(R.id.menu_link).isVisible = links?.link != null
+            findItem(R.id.menu_get_app).isVisible = links?.playstore != null
             findItem(R.id.menu_github).isVisible = links?.github != null
         }
     }
@@ -93,6 +94,10 @@ class ProjectFragment : Fragment() {
             R.id.menu_link -> {
                 startOpenUrlIntent(project.links?.link!!)
                 clickProjectLink(project, project.links.link)
+            }
+            R.id.menu_get_app -> {
+                startOpenUrlIntent(project.links?.playstore!!)
+                clickProjectLink(project, project.links.playstore)
             }
             R.id.menu_share -> {
                 startTextShareIntent(getString(R.string.string_share_project, project.id))

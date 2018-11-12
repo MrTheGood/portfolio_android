@@ -48,6 +48,7 @@ data class Project(
 
     data class Link(
             val github: String? = null,
+            val playstore: String? = null,
             val link: String? = null
     )
 

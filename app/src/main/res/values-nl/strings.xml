@@ -26,6 +26,7 @@
     <string name="menu_title_link">Meer info</string>
     <string name="menu_title_github">Github</string>
     <string name="menu_title_share">Delen</string>
+    <string name="menu_title_get_app">Ontdek het op Google Play</string>
 
     <!-- Actions -->
     <string name="action_share">Delen…</string>
