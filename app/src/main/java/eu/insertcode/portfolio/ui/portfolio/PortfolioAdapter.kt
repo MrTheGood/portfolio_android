@@ -47,7 +47,7 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
 
     private fun createOnClickListener(project: Project) =
             View.OnClickListener { v ->
-                val direction = PortfolioFragmentDirections.ActionProjectDetail(project.id)
+                val direction = PortfolioFragmentDirections.ActionProjectDetail(project.id!!)
                 val extras = FragmentNavigatorExtras(v to project.id)
                 v.findNavController().navigate(direction, extras)
                 v.context.analyticsSelectProject(project)

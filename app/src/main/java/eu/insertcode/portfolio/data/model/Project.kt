@@ -25,19 +25,14 @@ import eu.insertcode.portfolio.R
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 data class Project(
-        val id: String,
-        val title: String,
-        val type: String,
-        val images: List<String>,
-        val description: String,
-        val tags: List<String>?,
-        val date: String?
+        val id: String? = null,
+        val title: String? = null,
+        val type: String = "other",
+        val images: List<String> = emptyList(),
+        val description: String? = null,
+        val tags: List<String> = emptyList(),
+        val date: String? = null
 ) {
-
-    /**
-     * Empty constructor for the Cloud Firestore library.
-     */
-    constructor() : this("", "", "", emptyList(), "", null, null)
 
     /**
      * @return the [type] string as [Type] object. [type] is a string because of the Cloud Firestore library.
