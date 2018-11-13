@@ -39,7 +39,12 @@ fun Fragment.analyticsShareProject(project: Project) {
 fun Fragment.clickProjectLink(project: Project, link: String) {
     context?.logEvent("click_project_url", project.toBundle().apply {
         putString("project_link", link)
-        putString("project_link_type", if (project.links?.github == link) "github" else if (project.links?.link == link) "link" else "unknown")
+        putString("project_link_type", when (link) {
+            project.links?.playstore -> "playstore"
+            project.links?.github -> "github"
+            project.links?.link -> "link"
+            else -> "unknown"
+        })
     })
 }
 
