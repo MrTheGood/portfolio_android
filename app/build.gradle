@@ -72,11 +72,11 @@ dependencies {
     implementation "com.google.android.material:material:1.0.0"
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.5'
-    implementation 'com.google.firebase:firebase-perf:16.2.0'
-    implementation 'com.google.firebase:firebase-appindexing:16.0.2'
-    implementation 'com.google.firebase:firebase-firestore:17.1.2'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-perf:16.2.2'
+    implementation 'com.google.firebase:firebase-appindexing:17.1.0'
+    implementation 'com.google.firebase:firebase-firestore:17.1.4'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
 
     // Architecture
     api "android.arch.lifecycle:extensions:$lifecycle_version"
@@ -94,10 +94,10 @@ dependencies {
 
     // Test
     testImplementation "junit:junit:4.12"
-    androidTestImplementation "androidx.test:runner:1.1.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.1.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0"
+    androidTestImplementation "androidx.test:runner:1.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.1"
     testImplementation "org.robolectric:robolectric:3.8"
 }
 

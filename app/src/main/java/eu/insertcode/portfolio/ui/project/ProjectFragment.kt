@@ -36,8 +36,8 @@ import kotlinx.android.synthetic.main.fragment_project.*
 class ProjectFragment : Fragment() {
     private lateinit var projectViewModel: ProjectViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val projectId = ProjectFragmentArgs.fromBundle(arguments).projectId
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val projectId = ProjectFragmentArgs.fromBundle(arguments!!).projectId
 
         val factory = InjectorUtils.provideProjectViewModelFactory(projectId)
         projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
