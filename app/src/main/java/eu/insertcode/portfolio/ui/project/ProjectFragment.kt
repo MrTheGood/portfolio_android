@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
  */
 class ProjectFragment : Fragment() {
     private lateinit var projectViewModel: ProjectViewModel
+    private var currentItem: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val projectId = ProjectFragmentArgs.fromBundle(arguments!!).projectId
@@ -66,6 +67,7 @@ class ProjectFragment : Fragment() {
                 }
         )
         binding.projectImages.adapter = adapter
+        binding.projectImages.addOnPageSelectedListener { position -> currentItem = position }
         subscribeUi(adapter, savedInstanceState?.getInt("currentItem") ?: 0)
 
         sharedElementEnterTransition = ProjectExpand()
@@ -119,7 +121,7 @@ class ProjectFragment : Fragment() {
 
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("currentItem", project_images.currentItem)
+        outState.putInt("currentItem", currentItem)
         super.onSaveInstanceState(outState)
     }
 

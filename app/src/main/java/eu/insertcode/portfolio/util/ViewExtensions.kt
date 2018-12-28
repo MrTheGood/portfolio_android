@@ -26,6 +26,7 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import eu.insertcode.portfolio.R
 
 /**
@@ -66,3 +67,30 @@ fun Fragment.startTextShareIntent(text: String) {
 fun Fragment.startOpenUrlIntent(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }
+
+
+fun ViewPager.addSimpleOnPageChangeListener(
+        onPageSelected: (position: Int) -> Unit = {},
+        onPageScrollStateChanged: (state: Int) -> Unit = {},
+        onPageScrolled: (position: Int, positionOffset: Float, positionOffsetPixels: Int) -> Unit = { _, _, _ -> }
+) {
+    addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+        override fun onPageSelected(position: Int) =
+                onPageSelected(position)
+
+        override fun onPageScrollStateChanged(state: Int) =
+                onPageScrollStateChanged(state)
+
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) =
+                onPageScrolled(position, positionOffset, positionOffsetPixels)
+    })
+}
+
+fun ViewPager.addOnPageSelectedListener(onPageSelected: (position: Int) -> Unit) =
+        addSimpleOnPageChangeListener(onPageSelected = onPageSelected)
+
+fun ViewPager.addOnPageScrollStateChangedListener(onPageScrollStateChanged: (state: Int) -> Unit) =
+        addSimpleOnPageChangeListener(onPageScrollStateChanged = onPageScrollStateChanged)
+
+fun ViewPager.addOnPageScrolledListener(addOnPageScrolled: (position: Int, positionOffset: Float, positionOffsetPixels: Int) -> Unit) =
+        addSimpleOnPageChangeListener(onPageScrolled = addOnPageScrolled)
