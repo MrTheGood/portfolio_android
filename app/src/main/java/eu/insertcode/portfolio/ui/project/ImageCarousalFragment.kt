@@ -25,6 +25,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.util.InjectorUtils
+import eu.insertcode.portfolio.util.addOnPageSelectedListener
 import kotlinx.android.synthetic.main.fragment_image_carousal.view.*
 import kotlinx.android.synthetic.main.fragment_project.*
 
@@ -42,7 +43,7 @@ class ImageCarousalFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         val args = ImageCarousalFragmentArgs.fromBundle(arguments)
-        currentItem = args.currentItem
+        currentItem = savedInstanceState?.getInt("currentItem", args.currentItem) ?: args.currentItem
 
         val factory = InjectorUtils.provideProjectViewModelFactory(args.projectId)
         projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
@@ -51,9 +52,15 @@ class ImageCarousalFragment : Fragment() {
 
         val adapter = ProjectImageAdapter(zoomable = true)
         view.project_images.adapter = adapter
-        subscribeUi(adapter, args.currentItem)
+        view.project_images.addOnPageSelectedListener { position -> currentItem = position }
+        subscribeUi(adapter, currentItem)
 
         return view
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("currentItem", currentItem)
+        super.onSaveInstanceState(outState)
     }
 
     private fun subscribeUi(adapter: ProjectImageAdapter, currentItem: Int) {
