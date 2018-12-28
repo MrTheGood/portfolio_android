@@ -16,16 +16,18 @@
 
 package eu.insertcode.portfolio.ui.project
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
+import android.widget.ImageView.ScaleType.CENTER_CROP
+import android.widget.ImageView.ScaleType.CENTER_INSIDE
 import androidx.core.util.Pools
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.chrisbanes.photoview.PhotoView
 import eu.insertcode.portfolio.R
 import timber.log.Timber
@@ -36,7 +38,7 @@ import timber.log.Timber
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
 class ProjectImageAdapter(
-        private var onItemClickListener: (position: Int) -> Unit = { },
+        private var onItemClickListener: (position: Int) -> Unit = {},
         private val zoomable: Boolean = false
 ) : PagerAdapter() {
     private val viewPool = Pools.SimplePool<ImageView>(3)
@@ -47,25 +49,24 @@ class ProjectImageAdapter(
             notifyDataSetChanged()
         }
 
-    private fun inflateView(container: ViewGroup) =
-            if (zoomable) PhotoView(container.context).apply {
-                layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-                adjustViewBounds = true
-            } else {
-                ImageView(container.context).apply { layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT) }
-            }.apply {
-                setBackgroundColor(resources.getColor(R.color.image_background))
-                scaleType = ImageView.ScaleType.CENTER_CROP
-            }
+    private fun inflateView(context: Context) =
+            if (zoomable)
+                PhotoView(context).apply {
+                    layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+                    adjustViewBounds = true
+                    scaleType = CENTER_INSIDE
+                }
+            else
+                ImageView(context).apply {
+                    layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
+                    scaleType = CENTER_CROP
+                    setBackgroundResource(R.color.image_background)
+                }
 
     override fun instantiateItem(container: ViewGroup, position: Int): ImageView {
-        val view = viewPool.acquire()
-                ?: inflateView(container)
+        val view = viewPool.acquire() ?: inflateView(container.context)
 
-        Glide.with(view.context)
-                .load(projectImages[position])
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view)
+        Glide.with(view).load(projectImages[position]).into(view)
         view.setOnClickListener { onItemClickListener(position) }
         container.addView(view)
 
