@@ -33,7 +33,7 @@ fun Context.analyticsSelectProject(project: Project) {
 }
 
 fun Context.analyticsViewProjectImage(project: Project, image: String) {
-    logEvent(Event.SELECT_CONTENT, project.toBundle().apply {
+    logEvent("view_project_image", project.toBundle().apply {
         putString("project_image", image)
     })
 }
