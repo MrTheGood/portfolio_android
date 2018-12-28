@@ -32,6 +32,12 @@ fun Context.analyticsSelectProject(project: Project) {
     logEvent(Event.SELECT_CONTENT, project.toBundle())
 }
 
+fun Context.analyticsViewProjectImage(project: Project, image: String) {
+    logEvent(Event.SELECT_CONTENT, project.toBundle().apply {
+        putString("project_image", image)
+    })
+}
+
 fun Fragment.analyticsShareProject(project: Project) {
     context?.logEvent(Event.SHARE, project.toBundle())
 }

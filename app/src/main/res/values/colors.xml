@@ -23,6 +23,7 @@
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="image_background">#3000</color>
+    <color name="carousal_background">#000</color>
 
 
     <!-- TAG Colours -->

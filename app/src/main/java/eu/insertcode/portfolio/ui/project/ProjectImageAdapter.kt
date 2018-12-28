@@ -16,12 +16,18 @@
 
 package eu.insertcode.portfolio.ui.project
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
 import androidx.core.util.Pools
 import androidx.viewpager.widget.PagerAdapter
-import eu.insertcode.portfolio.databinding.ItemProjectImageBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.github.chrisbanes.photoview.PhotoView
+import eu.insertcode.portfolio.R
 import timber.log.Timber
 
 
@@ -29,8 +35,11 @@ import timber.log.Timber
  * Created by maartendegoede on 11/10/2018.
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
-class ProjectImageAdapter : PagerAdapter() {
-    private val viewPool = Pools.SimplePool<ItemProjectImageBinding>(3)
+class ProjectImageAdapter(
+        private var onItemClickListener: (position: Int) -> Unit = { },
+        private val zoomable: Boolean = false
+) : PagerAdapter() {
+    private val viewPool = Pools.SimplePool<ImageView>(3)
 
     var projectImages = listOf<String>()
         set(value) {
@@ -38,25 +47,36 @@ class ProjectImageAdapter : PagerAdapter() {
             notifyDataSetChanged()
         }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): ItemProjectImageBinding {
-        val binding = viewPool.acquire()
-                ?: ItemProjectImageBinding.inflate(
-                        LayoutInflater.from(container.context),
-                        container,
-                        false
-                )
+    private fun inflateView(container: ViewGroup) =
+            if (zoomable) PhotoView(container.context).apply {
+                layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+                adjustViewBounds = true
+            } else {
+                ImageView(container.context).apply { layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT) }
+            }.apply {
+                setBackgroundColor(resources.getColor(R.color.image_background))
+                scaleType = ImageView.ScaleType.CENTER_CROP
+            }
 
-        binding.image = projectImages[position]
-        container.addView(binding.root)
+    override fun instantiateItem(container: ViewGroup, position: Int): ImageView {
+        val view = viewPool.acquire()
+                ?: inflateView(container)
 
-        return binding
+        Glide.with(view.context)
+                .load(projectImages[position])
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(view)
+        view.setOnClickListener { onItemClickListener(position) }
+        container.addView(view)
+
+        return view
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, binding: Any) {
-        binding as ItemProjectImageBinding
+    override fun destroyItem(container: ViewGroup, position: Int, view: Any) {
+        view as ImageView
 
-        container.removeView(binding.root)
-        if (!viewPool.release(binding)) {
+        container.removeView(view)
+        if (!viewPool.release(view)) {
             Timber.w("ItemProjectImage not released.. Consider increasing pool size.")
         }
     }
@@ -64,5 +84,5 @@ class ProjectImageAdapter : PagerAdapter() {
     override fun getCount() = projectImages.size
 
     override fun isViewFromObject(view: View, item: Any) =
-            view === (item as ItemProjectImageBinding).root
+            view === item
 }

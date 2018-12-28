@@ -18,7 +18,6 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
 
@@ -45,17 +44,20 @@
         android:transitionName="@{project.id}"
         >
 
-        <include
+        <ImageView
             android:id="@+id/project_image"
-            layout="@layout/item_project_image"
+            imageFromUrl="@{project.images[0]}"
             android:layout_width="208dp"
             android:layout_height="0dp"
             android:layout_margin="8dp"
+            android:background="@color/image_background"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:image="@{project.images[0]}"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/backgrounds/scenic"
             />
 
         <TextView

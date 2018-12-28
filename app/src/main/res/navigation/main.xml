@@ -54,11 +54,39 @@
             app:uri="https://portfolio.insertcode.eu/projects/{project_id}"
             />
 
+        <action
+            android:id="@+id/action_project_image"
+            app:destination="@id/imageCarousalFragment"
+            />
+
     </fragment>
 
     <deepLink
         android:autoVerify="true"
         app:uri="portfolio.insertcode.eu"
         />
+    <fragment
+        android:id="@+id/imageCarousalFragment"
+        android:name="eu.insertcode.portfolio.ui.project.ImageCarousalFragment"
+        android:label="Portfolio"
+        tools:layout="@layout/fragment_image_carousal"
+        >
+
+        <argument
+            android:name="project_id"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="current_item"
+            android:defaultValue="0"
+            app:argType="integer"
+            />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="https://portfolio.insertcode.eu/projects/{project_id}/{current_image_pos}"
+            />
+    </fragment>
 
 </navigation>

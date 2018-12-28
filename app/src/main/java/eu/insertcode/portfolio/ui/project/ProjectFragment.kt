@@ -21,6 +21,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.databinding.FragmentProjectBinding
 import eu.insertcode.portfolio.ui.anim.ProjectCollapse
@@ -55,7 +56,15 @@ class ProjectFragment : Fragment() {
             project_tags.goneIf(project.data?.tags?.isEmpty() == true)
         })
 
-        val adapter = ProjectImageAdapter()
+        val adapter = ProjectImageAdapter(
+                onItemClickListener = { position: Int ->
+                    projectViewModel.project.value?.data?.run {
+                        val direction = ProjectFragmentDirections.ActionProjectImage(id!!).setCurrentItem(position)
+                        view?.findNavController()?.navigate(direction)
+                        context?.analyticsViewProjectImage(this, images[position])
+                    }
+                }
+        )
         binding.projectImages.adapter = adapter
         subscribeUi(adapter, savedInstanceState?.getInt("currentItem") ?: 0)
 
