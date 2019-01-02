@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,31 +28,32 @@ import eu.insertcode.portfolio.data.model.Project
  * Created by maartendegoede on 08/11/2018.
  * Copyright © 2018 insetCode.eu. All rights reserved.
  */
-fun Context.analyticsSelectProject(project: Project) {
-    logEvent(Event.SELECT_CONTENT, project.toBundle())
-}
+fun Context.analyticsSelectProject(project: Project) =
+        logEvent(Event.SELECT_CONTENT, project.toBundle())
 
-fun Context.analyticsViewProjectImage(project: Project, image: String) {
-    logEvent("view_project_image", project.toBundle().apply {
-        putString("project_image", image)
-    })
-}
-
-fun Fragment.analyticsShareProject(project: Project) {
-    context?.logEvent(Event.SHARE, project.toBundle())
-}
-
-fun Fragment.clickProjectLink(project: Project, link: String) {
-    context?.logEvent("click_project_url", project.toBundle().apply {
-        putString("project_link", link)
-        putString("project_link_type", when (link) {
-            project.links?.playstore -> "playstore"
-            project.links?.github -> "github"
-            project.links?.link -> "link"
-            else -> "unknown"
+fun Context.analyticsViewProjectImage(project: Project, image: String) =
+        logEvent("view_project_image", project.toBundle().apply {
+            putString("project_image", image)
         })
-    })
-}
+
+fun Fragment.analyticsShareProject(project: Project) =
+        context?.logEvent(Event.SHARE, project.toBundle())
+
+fun Fragment.analyticsShareApp() =
+        context?.logEvent(Event.SHARE, Bundle().apply {
+            putString(Param.CONTENT_TYPE, "app")
+        })
+
+fun Fragment.clickProjectLink(project: Project, link: String) =
+        context?.logEvent("click_project_url", project.toBundle().apply {
+            putString("project_link", link)
+            putString("project_link_type", when (link) {
+                project.links?.playstore -> "playstore"
+                project.links?.github -> "github"
+                project.links?.link -> "link"
+                else -> "unknown"
+            })
+        })
 
 private fun Context.logEvent(name: String, bundle: Bundle) =
         FirebaseAnalytics.getInstance(this).logEvent(name, bundle)

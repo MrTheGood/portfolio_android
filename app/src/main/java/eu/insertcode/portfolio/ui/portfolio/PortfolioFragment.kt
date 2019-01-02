@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,17 +17,18 @@
 package eu.insertcode.portfolio.ui.portfolio
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.databinding.FragmentPortfolioBinding
 import eu.insertcode.portfolio.ui.anim.PortfolioExit
+import eu.insertcode.portfolio.util.analyticsShareApp
 import eu.insertcode.portfolio.util.isNetworkAvailable
+import eu.insertcode.portfolio.util.startTextShareIntent
 
 /**
  * Created by maartendegoede on 11/09/2018.
@@ -55,8 +56,22 @@ class PortfolioFragment : Fragment() {
             adapter = portfolioAdapter
         }
         subscribeUi(portfolioAdapter)
+        setHasOptionsMenu(true)
+
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_portfolio, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) =
+            if (item?.itemId == R.id.menu_share) {
+                startTextShareIntent(getString(R.string.string_share_app))
+                analyticsShareApp()
+                true
+            } else super.onOptionsItemSelected(item)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

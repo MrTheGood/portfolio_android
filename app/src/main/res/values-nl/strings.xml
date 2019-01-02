@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -32,5 +32,6 @@
     <string name="action_share">Delen…</string>
 
     <!-- Strings -->
+    <string name="string_share_app">Bekijk het portfolio van insertCode: https://portfolio.insertcode.eu/</string>
     <string name="string_share_project">Bekijk dit project van insertCode: https://portfolio.insertcode.eu/projects/%s</string>
 </resources>

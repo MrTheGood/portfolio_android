@@ -21,27 +21,6 @@
     >
 
     <item
-        android:id="@+id/menu_link"
-        android:icon="@drawable/ic_link"
-        android:title="@string/menu_title_link"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
-        android:id="@+id/menu_get_app"
-        android:icon="@drawable/ic_get_app"
-        android:title="@string/menu_title_get_app"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
-        android:id="@+id/menu_github"
-        android:icon="@drawable/ic_git"
-        android:title="@string/menu_title_github"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_share_outline"
         android:title="@string/menu_title_share"
