@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -21,47 +21,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity"
     >
 
-    <!-- This FrameLayout wrapper on the AppBarLayout is a hacky way to keep elevation while also having a rounded app bar. -->
-    <FrameLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_toolbar"
-        android:elevation="4dp"
+        android:background="@null"
+        android:elevation="0dp"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
         >
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/app_bar_height"
             android:background="@null"
-            android:elevation="4dp"
-            android:fitsSystemWindows="true"
-            app:elevation="0dp"
-            >
+            app:titleTextAppearance="@style/AppTheme.TextAppearance.Title"
+            app:titleTextColor="#fff"
+            />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/app_bar_height"
-                android:background="@null"
-                app:titleTextAppearance="@style/AppTheme.TextAppearance.Title"
-                app:titleTextColor="#fff"
-                />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
-    </FrameLayout>
-
-    <fragment
-        android:id="@+id/nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <!-- MarginBottom is just hacky ways to hide the card corner radius at the bottom. -->
+    <!-- Using a CardView was the easiest way I could find to clip the children of this layout -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/content_margin_top"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main"
-        />
+        android:layout_marginTop="@dimen/app_bar_height"
+        android:layout_marginBottom="-16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        >
+
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main"
+            />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

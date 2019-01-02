@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -17,5 +17,4 @@
 
 <resources>
     <dimen name="app_bar_height">56dp</dimen>
-    <dimen name="content_margin_top">40dp</dimen>
 </resources>

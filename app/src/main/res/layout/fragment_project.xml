@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -45,9 +45,7 @@
             visibleIf="@{viewModel.project.data != null}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
             android:overScrollMode="always"
-            android:paddingTop="16dp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
