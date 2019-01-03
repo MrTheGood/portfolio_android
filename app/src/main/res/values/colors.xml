@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 
 <resources>
     <!-- Main Colours -->
-    <color name="colorPrimary">#d50000</color>
-    <color name="colorPrimaryDark">#b71c1c</color>
-    <color name="colorAccent">#fbc02d</color>
+    <color name="colorPrimary">#f44236</color>
+    <color name="colorPrimaryDark">#d32f2e</color>
+    <color name="colorAccent">#fed73f</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="image_background">#3000</color>
