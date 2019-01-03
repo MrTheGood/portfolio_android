@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -49,9 +49,11 @@
             imageFromUrl="@{project.images[0]}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="8dp"
             android:background="@color/image_background"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
             tools:src="@tools:sample/backgrounds/scenic"
             />
@@ -60,7 +62,7 @@
             android:id="@+id/project_typeIndicator"
             style="@style/AppTheme.ProjectTypeIndicator"
             typeIndicator="@{project.type()}"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@id/project_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/project_title"
@@ -76,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@{project.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
@@ -89,13 +91,11 @@
             style="@style/AppTheme.TextAppearance.Caption"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@{project.date}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+            app:layout_constraintEnd_toEndOf="@id/project_title"
+            app:layout_constraintStart_toStartOf="@id/project_title"
             app:layout_constraintTop_toBottomOf="@id/project_title"
             tools:text="@tools:sample/date/day_of_week"
             />
