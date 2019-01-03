@@ -40,8 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
             android:background="@null"
-            app:titleTextAppearance="@style/AppTheme.TextAppearance.Title"
-            app:titleTextColor="#fff"
+            app:titleTextColor="@color/colorOnPrimary"
             />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,5 +1,5 @@
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -19,22 +19,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>r
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
 
-    <!-- Text styles -->
-    <style name="AppTheme.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:fontFamily">@font/nunito</item>
-    </style>
-
-    <style name="AppTheme.TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="android:fontFamily">@font/nunito</item>
-    </style>
-
-    <style name="AppTheme.TextAppearance.Body" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/nunito</item>
+        <item name="fontFamily">@font/nunito</item>
     </style>
 
     <style name="AppTheme.ProjectTypeIndicator">

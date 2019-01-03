@@ -93,7 +93,7 @@
 
             <TextView
                 android:id="@+id/projectsError_text"
-                style="@style/AppTheme.TextAppearance.Body"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

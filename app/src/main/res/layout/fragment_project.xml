@@ -99,7 +99,7 @@
 
                 <TextView
                     android:id="@+id/project_title"
-                    style="@style/AppTheme.TextAppearance.Title"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -114,7 +114,7 @@
 
                 <TextView
                     android:id="@+id/project_date"
-                    style="@style/AppTheme.TextAppearance.Caption"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -138,7 +138,7 @@
 
                 <TextView
                     android:id="@+id/project_description"
-                    style="@style/AppTheme.TextAppearance.Body"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
                     textFromHtml="@{viewModel.project.data.description}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
 
             <TextView
                 android:id="@+id/projectError_text"
-                style="@style/AppTheme.TextAppearance.Body"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

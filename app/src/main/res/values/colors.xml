@@ -18,8 +18,12 @@
 <resources>
     <!-- Main Colours -->
     <color name="colorPrimary">#f44236</color>
-    <color name="colorPrimaryDark">#d32f2e</color>
-    <color name="colorAccent">#fed73f</color>
+    <color name="colorPrimaryVariant">#d32f2e</color>
+    <color name="colorOnPrimary">#fff</color>
+
+    <color name="colorSecondary">#fed73f</color>
+    <color name="colorSecondaryVariant">#fbc02d</color>
+    <color name="colorOnSecondary">#000</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="image_background">#3000</color>
