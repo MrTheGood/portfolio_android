@@ -1,0 +1,30 @@
+<!--
+  ~    Copyright 2019 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="239.16667"
+        android:viewportHeight="239.16667">
+    <group
+        android:translateX="-23.916666"
+        android:translateY="-23.916666">
+        <path
+            android:fillColor="#ffffff"
+            android:fillType="evenOdd"
+            android:pathData="M287,0H0V287H287V0ZM129.644,188C135.802,198.667 151.198,198.667 157.356,188L193.296,125.75C199.455,115.083 191.757,101.75 179.44,101.75H107.56C95.243,101.75 87.545,115.083 93.704,125.75L129.644,188Z" />
+    </group>
+</vector>
