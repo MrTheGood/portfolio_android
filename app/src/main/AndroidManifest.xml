@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -34,13 +34,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".MainActivity">
-            <tools:validation testUrl="https://portfolio.insertcode.eu" />
-
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <tools:validation testUrl="https://portfolio.insertcode.eu" />
 
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
