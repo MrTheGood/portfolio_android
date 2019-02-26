@@ -46,7 +46,7 @@ class PortfolioFragment : Fragment() {
         val binding = FragmentPortfolioBinding.inflate(inflater, container, false).apply {
             viewModel = portfolioViewModel
             isNetworkAvailable = requireContext().isNetworkAvailable()
-            setLifecycleOwner(this@PortfolioFragment)
+            lifecycleOwner = this@PortfolioFragment
         }
 
         val portfolioAdapter = PortfolioAdapter()
@@ -61,13 +61,13 @@ class PortfolioFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_portfolio, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_portfolio, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?) =
-            if (item?.itemId == R.id.menu_share) {
+    override fun onOptionsItemSelected(item: MenuItem) =
+            if (item.itemId == R.id.menu_share) {
                 startTextShareIntent(getString(R.string.string_share_app))
                 analyticsShareApp()
                 true

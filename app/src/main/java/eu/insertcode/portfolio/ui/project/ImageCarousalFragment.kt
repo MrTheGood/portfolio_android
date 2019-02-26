@@ -44,7 +44,8 @@ class ImageCarousalFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        currentItem = savedInstanceState?.getInt("currentItem", args.currentItem) ?: args.currentItem
+        currentItem = savedInstanceState?.getInt("currentItem", args.currentItem)
+            ?: args.currentItem
 
         val factory = InjectorUtils.provideProjectViewModelFactory(args.projectId)
         projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]

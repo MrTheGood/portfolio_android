@@ -79,15 +79,15 @@ class ProjectFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu_project, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_project, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
-        menu?.apply {
+        menu.apply {
             val links = projectViewModel.project.value?.data?.links
             findItem(R.id.menu_link).isVisible = links?.link != null
             findItem(R.id.menu_get_app).isVisible = links?.playstore != null
@@ -95,11 +95,11 @@ class ProjectFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val project = projectViewModel.project.value?.data
-                ?: return super.onOptionsItemSelected(item)
+            ?: return super.onOptionsItemSelected(item)
 
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.menu_github -> {
                 startOpenUrlIntent(project.links?.github!!)
                 clickProjectLink(project, project.links.github)

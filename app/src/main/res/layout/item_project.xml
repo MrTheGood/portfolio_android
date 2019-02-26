@@ -42,6 +42,7 @@
         android:foreground="?selectableItemBackground"
         android:onClick="@{clickListener}"
         android:transitionName="@{project.id}"
+        tools:ignore="UnusedAttribute"
         >
 
         <ImageView

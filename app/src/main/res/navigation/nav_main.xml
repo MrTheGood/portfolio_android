@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 Maarten de Goede
+  ~    Copyright 2019 Maarten de Goede
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@
         <deepLink
             android:autoVerify="true"
             app:uri="https://portfolio.insertcode.eu/projects/{project_id}"
+            tools:ignore="UnusedAttribute"
             />
 
         <action
@@ -64,6 +65,7 @@
     <deepLink
         android:autoVerify="true"
         app:uri="portfolio.insertcode.eu"
+        tools:ignore="UnusedAttribute"
         />
     <fragment
         android:id="@+id/imageCarousalFragment"
@@ -86,6 +88,7 @@
         <deepLink
             android:autoVerify="true"
             app:uri="https://portfolio.insertcode.eu/projects/{project_id}/{current_image_pos}"
+            tools:ignore="UnusedAttribute"
             />
     </fragment>
 
