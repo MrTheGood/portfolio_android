@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import android.animation.ObjectAnimator
 import android.util.Property
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.transition.Transition
 import androidx.transition.TransitionValues
 
@@ -35,12 +36,12 @@ class ElevationTransition : Transition() {
 
         private val PROPERTY = object : Property<View, Float>(Float::class.java, null) {
 
-            override fun set(view: View?, value: Float) {
-                view?.elevation = value
+            override fun set(view: View, value: Float) {
+                ViewCompat.setElevation(view, value)
             }
 
             override fun get(view: View): Float {
-                return view.elevation
+                return ViewCompat.getElevation(view)
             }
         }
     }
@@ -54,7 +55,7 @@ class ElevationTransition : Transition() {
     }
 
     private fun captureValues(transitionValues: TransitionValues) {
-        transitionValues.values[ELEVATION] = transitionValues.view.elevation
+        transitionValues.values[ELEVATION] = ViewCompat.getElevation(transitionValues.view)
     }
 
     override fun createAnimator(
@@ -68,7 +69,7 @@ class ElevationTransition : Transition() {
             val end = endValues.values[ELEVATION] as Float
 
             if (start != end) {
-                view.elevation = start
+                ViewCompat.setElevation(view, start)
                 return ObjectAnimator.ofFloat(view, PROPERTY, end)
             }
         }

@@ -35,13 +35,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        transitionName="@{project.id}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
         android:elevation="0dp"
         android:foreground="?selectableItemBackground"
         android:onClick="@{clickListener}"
-        transitionName="@{project.id}"
         tools:ignore="UnusedAttribute"
         >
 
@@ -64,6 +64,7 @@
             style="@style/AppTheme.ProjectTypeIndicator"
             typeIndicator="@{project.type()}"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toBottomOf="@id/project_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/project_title"
@@ -78,8 +79,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="@{project.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/project_typeIndicator"

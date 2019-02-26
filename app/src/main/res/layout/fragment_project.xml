@@ -50,11 +50,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/project"
+                transitionName="@{viewModel.project.data.id}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"
-                android:elevation="4dp"
-                android:transitionName="@{viewModel.project.data.id}"
                 >
 
                 <ImageView
@@ -62,6 +61,7 @@
                     style="@style/AppTheme.ProjectTypeIndicator"
                     typeIndicator="@{viewModel.project.data.type()}"
                     android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/project_date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/project_title"
@@ -203,7 +203,7 @@
                 android:src="@{isNetworkAvailable ? @drawable/ic_error : @drawable/ic_wifi_off}"
                 android:tint="#5000"
                 android:tintMode="src_in"
-                tools:ignore="ContentDescription"
+                tools:ignore="ContentDescription,UnusedAttribute"
                 />
 
             <TextView

@@ -58,6 +58,12 @@ fun bindTransitionName(view: View, transitionName: String?) {
     ViewCompat.setTransitionName(view, transitionName)
 }
 
+
+@BindingAdapter("elevation")
+fun bindElevation(view: View, elevation: Float) {
+    ViewCompat.setElevation(view, elevation)
+}
+
 @BindingAdapter("typeIndicator")
 fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
     if (type != null) {

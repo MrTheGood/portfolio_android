@@ -95,6 +95,7 @@
             style="@style/AppTheme.ProjectTypeIndicator"
             typeIndicator="@{project.type()}"
             android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/project_title"
             tools:backgroundTint="@color/colorPrimary"
