@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package eu.insertcode.portfolio
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -26,7 +26,7 @@ import timber.log.Timber.DebugTree
  * Copyright © 2018 insertCode.eu. All rights reserved.
  */
 @Suppress("unused")
-class PortfolioApp : Application() {
+class PortfolioApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

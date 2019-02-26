@@ -41,7 +41,7 @@
         android:elevation="0dp"
         android:foreground="?selectableItemBackground"
         android:onClick="@{clickListener}"
-        android:transitionName="@{project.id}"
+        transitionName="@{project.id}"
         tools:ignore="UnusedAttribute"
         >
 

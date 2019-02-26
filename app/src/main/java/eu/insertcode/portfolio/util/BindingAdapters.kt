@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
@@ -51,10 +52,16 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     }
 }
 
+
+@BindingAdapter("transitionName")
+fun bindTransitionName(view: View, transitionName: String?) {
+    ViewCompat.setTransitionName(view, transitionName)
+}
+
 @BindingAdapter("typeIndicator")
 fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
     if (type != null) {
-        view.backgroundTintList = view.getColorStateList(type.color)
+        ViewCompat.setBackgroundTintList(view, view.getColorStateList(type.color))
         view.setImageResource(type.icon)
     }
 }
