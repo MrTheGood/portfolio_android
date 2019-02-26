@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.databinding.FragmentProjectBinding
 import eu.insertcode.portfolio.ui.anim.ProjectCollapse
@@ -36,17 +37,18 @@ import kotlinx.android.synthetic.main.fragment_project.*
  */
 class ProjectFragment : Fragment() {
     private lateinit var projectViewModel: ProjectViewModel
+    private val args: ProjectFragmentArgs by navArgs()
     private var currentItem: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val projectId = ProjectFragmentArgs.fromBundle(arguments!!).projectId
+        val projectId = args.projectId
 
         val factory = InjectorUtils.provideProjectViewModelFactory(projectId)
         projectViewModel = ViewModelProviders.of(this, factory)[ProjectViewModel::class.java]
 
         val binding = FragmentProjectBinding.inflate(inflater, container, false).apply {
             viewModel = projectViewModel
-            setLifecycleOwner(this@ProjectFragment)
+            lifecycleOwner = this@ProjectFragment
         }
 
         projectViewModel.project.observe(this, Observer { project ->
@@ -60,7 +62,7 @@ class ProjectFragment : Fragment() {
         val adapter = ProjectImageAdapter(
                 onItemClickListener = { position: Int ->
                     projectViewModel.project.value?.data?.run {
-                        val direction = ProjectFragmentDirections.ActionProjectImage(id!!).setCurrentItem(position)
+                        val direction = ProjectFragmentDirections.actionProjectImage(id!!, position)
                         view?.findNavController()?.navigate(direction)
                         context?.analyticsViewProjectImage(this, images[position])
                     }

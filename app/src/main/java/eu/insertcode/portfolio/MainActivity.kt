@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        findNavController(R.id.nav_host).addOnNavigatedListener { _, destination ->
+        findNavController(R.id.nav_host).addOnDestinationChangedListener { _, destination, _ ->
             title = destination.label
         }
     }

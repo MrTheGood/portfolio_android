@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.util.InjectorUtils
 import eu.insertcode.portfolio.util.addOnPageSelectedListener
@@ -35,6 +36,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
  */
 class ImageCarousalFragment : Fragment() {
     private lateinit var projectViewModel: ProjectViewModel
+    private val args: ImageCarousalFragmentArgs by navArgs()
     private var currentItem: Int = 0
 
     override fun onCreateView(
@@ -42,7 +44,6 @@ class ImageCarousalFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        val args = ImageCarousalFragmentArgs.fromBundle(arguments)
         currentItem = savedInstanceState?.getInt("currentItem", args.currentItem) ?: args.currentItem
 
         val factory = InjectorUtils.provideProjectViewModelFactory(args.projectId)

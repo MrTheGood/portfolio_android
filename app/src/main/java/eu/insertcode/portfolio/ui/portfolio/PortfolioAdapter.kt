@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 Maarten de Goede
+ *    Copyright 2019 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
 
     private fun createOnClickListener(project: Project) =
             View.OnClickListener { v ->
-                val direction = PortfolioFragmentDirections.ActionProjectDetail(project.id!!)
+                val direction = PortfolioFragmentDirections.actionProjectDetail(project.id!!)
                 val extras = FragmentNavigatorExtras(v to project.id)
                 v.findNavController().navigate(direction, extras)
                 v.context.analyticsSelectProject(project)
