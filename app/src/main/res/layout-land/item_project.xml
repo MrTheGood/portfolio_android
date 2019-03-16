@@ -29,6 +29,11 @@
             />
 
         <variable
+            name="shareClickListener"
+            type="android.view.View.OnClickListener"
+            />
+
+        <variable
             name="project"
             type="eu.insertcode.portfolio.data.model.Project"
             />

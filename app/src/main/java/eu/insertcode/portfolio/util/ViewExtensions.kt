@@ -56,13 +56,19 @@ fun View.getColorStateList(@ColorRes colorRes: Int) =
 fun Context.isNetworkAvailable() =
         (getSystemService(Application.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo?.isConnected == true
 
-fun Fragment.startTextShareIntent(text: String) {
+fun Context.startTextShareIntent(text: String) {
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_TEXT, text)
     }
     startActivity(Intent.createChooser(shareIntent, getString(R.string.action_share)))
 }
+
+fun Fragment.startTextShareIntent(text: String) =
+        context?.startTextShareIntent(text)
+
+fun View.startTextShareIntent(text: String) =
+        context?.startTextShareIntent(text)
 
 fun Fragment.startOpenUrlIntent(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))

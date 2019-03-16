@@ -24,9 +24,12 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.databinding.ItemProjectBinding
 import eu.insertcode.portfolio.util.analyticsSelectProject
+import eu.insertcode.portfolio.util.analyticsShareProject
+import eu.insertcode.portfolio.util.startTextShareIntent
 
 /**
  * Created by maartendegoede on 18/09/2018.
@@ -37,7 +40,7 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val project = getItem(position)
         holder.apply {
-            bind(createOnClickListener(project), project)
+            bind(createOnClickListener(project),  createOnShareClickListener(project), project)
             itemView.tag = project
         }
     }
@@ -53,13 +56,20 @@ class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(Proje
                 v.context.analyticsSelectProject(project)
             }
 
+    private fun createOnShareClickListener(project: Project) =
+            View.OnClickListener { v ->
+                v.startTextShareIntent(v.resources.getString(R.string.string_share_project, project.id))
+                v.context.analyticsShareProject(project)
+            }
+
     class ViewHolder(
             private val binding: ItemProjectBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: Project) {
+        fun bind(listener: View.OnClickListener, shareListener: View.OnClickListener, item: Project) {
             binding.apply {
                 clickListener = listener
+                shareClickListener = shareListener
                 project = item
                 executePendingBindings()
             }

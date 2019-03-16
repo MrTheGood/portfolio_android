@@ -36,8 +36,11 @@ fun Context.analyticsViewProjectImage(project: Project, image: String) =
             putString("project_image", image)
         })
 
+fun Context.analyticsShareProject(project: Project) =
+        logEvent(Event.SHARE, project.toBundle())
+
 fun Fragment.analyticsShareProject(project: Project) =
-        context?.logEvent(Event.SHARE, project.toBundle())
+        context?.analyticsShareProject(project)
 
 fun Fragment.analyticsShareApp() =
         context?.logEvent(Event.SHARE, Bundle().apply {
