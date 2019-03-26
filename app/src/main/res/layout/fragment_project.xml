@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2019 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isNetworkAvailable"
+            type="Boolean"
+            />
+
+
+        <variable
+            name="viewModel"
+            type="eu.insertcode.portfolio.ui.project.ProjectViewModel"
+            />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            visibleIf="@{viewModel.project.data != null}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="always"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/project"
+                transitionName="@{viewModel.project.data.id}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                >
+
+                <ImageView
+                    android:id="@+id/project_typeIndicator"
+                    style="@style/AppTheme.ProjectTypeIndicator"
+                    typeIndicator="@{viewModel.project.data.type()}"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/project_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/project_title"
+                    tools:backgroundTint="@color/colorPrimary"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_type_app"
+                    />
+
+                <TextView
+                    android:id="@+id/project_title"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{viewModel.project.data.title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/lorem"
+                    />
+
+                <TextView
+                    android:id="@+id/project_date"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.project.data.date}"
+                    app:layout_constraintEnd_toEndOf="@id/project_title"
+                    app:layout_constraintStart_toStartOf="@id/project_title"
+                    app:layout_constraintTop_toBottomOf="@id/project_title"
+                    tools:text="@tools:sample/date/day_of_week"
+                    />
+
+                <View
+                    android:id="@+id/project_divider"
+                    style="@style/AppTheme.Divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_date"
+                    />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/project_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="8dp"
+                    android:background="@color/image_background"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintTop_toBottomOf="@id/project_divider"
+                    tools:background="@tools:sample/backgrounds/scenic"
+                    />
+
+                <com.rd.PageIndicatorView
+                    android:id="@+id/project_imagesIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:padding="4dp"
+                    app:layout_constraintEnd_toEndOf="@id/project_images"
+                    app:layout_constraintStart_toStartOf="@id/project_images"
+                    app:layout_constraintTop_toTopOf="@id/project_images"
+                    app:piv_animationType="swap"
+                    app:piv_dynamicCount="true"
+                    app:piv_interactiveAnimation="true"
+                    app:piv_selectedColor="#fff"
+                    app:piv_unselectedColor="#6000"
+                    app:piv_viewPager="@id/project_images"
+                    />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/project_tags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/project_images"
+                    app:singleLine="true"
+                    />
+
+                <View
+                    android:id="@+id/project_divider1"
+                    style="@style/AppTheme.Divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_tags"
+                    />
+
+                <TextView
+                    android:id="@+id/project_description"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
+                    textFromHtml="@{viewModel.project.data.description}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_divider1"
+                    tools:text="@tools:sample/lorem"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+        <ProgressBar
+            android:id="@+id/projectLoading"
+            visibleIf="@{viewModel.project.isLoading &amp;&amp; viewModel.project.data == null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:id="@+id/projectError"
+            visibleIf="@{viewModel.project.isError || viewModel.project == null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{_ -> viewModel.retry(false)}"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="UseCompoundDrawables"
+            >
+
+            <ImageView
+                android:id="@+id/projectError_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:src="@{isNetworkAvailable ? @drawable/ic_error : @drawable/ic_wifi_off}"
+                android:tint="#5000"
+                android:tintMode="src_in"
+                tools:ignore="ContentDescription,UnusedAttribute"
+                />
+
+            <TextView
+                android:id="@+id/projectError_text"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{isNetworkAvailable ? @string/error_unknown : @string/error_noConnection}"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

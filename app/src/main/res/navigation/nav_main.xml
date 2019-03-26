@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2019 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/portfolioFragment"
+    >
+
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="eu.insertcode.portfolio.ui.portfolio.PortfolioFragment"
+        android:label="Portfolio"
+        tools:layout="@layout/fragment_portfolio"
+        >
+
+        <action
+            android:id="@+id/action_project_detail"
+            app:destination="@id/projectFragment"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="eu.insertcode.portfolio.ui.project.ProjectFragment"
+        android:label="Portfolio"
+        tools:layout="@layout/fragment_project"
+        >
+
+        <argument
+            android:name="project_id"
+            app:argType="string"
+            />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="https://portfolio.insertcode.eu/projects/{project_id}"
+            tools:ignore="UnusedAttribute"
+            />
+
+        <action
+            android:id="@+id/action_project_image"
+            app:destination="@id/imageCarousalFragment"
+            />
+
+    </fragment>
+
+    <deepLink
+        android:autoVerify="true"
+        app:uri="portfolio.insertcode.eu"
+        tools:ignore="UnusedAttribute"
+        />
+    <fragment
+        android:id="@+id/imageCarousalFragment"
+        android:name="eu.insertcode.portfolio.ui.project.ImageCarousalFragment"
+        android:label="Portfolio"
+        tools:layout="@layout/fragment_image_carousal"
+        >
+
+        <argument
+            android:name="project_id"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="current_item"
+            android:defaultValue="0"
+            app:argType="integer"
+            />
+
+        <deepLink
+            android:autoVerify="true"
+            app:uri="https://portfolio.insertcode.eu/projects/{project_id}/{current_image_pos}"
+            tools:ignore="UnusedAttribute"
+            />
+    </fragment>
+
+</navigation>

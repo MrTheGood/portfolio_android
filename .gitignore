@@ -174,12 +174,14 @@ fabric.properties
 ## Intellij Patch ##
 ####################
 # Source: https://stackoverflow.com/questions/26363025/gitignore-misc-xml-and-iml-with-android-studio-0-8-9
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-/build
-.idea/
-app/app.iml
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+
+
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/modules.xml
+.idea/codeStyles/Project.xml
+.idea/caches/build_file_checksums.ser
+.idea/navEditor.xml
+/app/google-services.json

@@ -1,35 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<!--
+  ~    Copyright 2019 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity"
     >
 
-    <FrameLayout
-        android:id="@+id/main_fragment_layout"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        elevation="0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <FrameLayout
-        android:id="@+id/fragments_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_height="wrap_content"
+        android:background="@null"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/activity_main_drawer"
-        />
+        app:elevation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-</android.support.v4.widget.DrawerLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:background="@null"
+            app:titleTextColor="@color/colorOnPrimary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- MarginBottom is just hacky ways to hide the card corner radius at the bottom. -->
+    <!-- Using a CardView was the easiest way I could find to clip the children of this layout -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/app_bar_height"
+        android:layout_marginBottom="-16dp"
+        app:cardBackgroundColor="@color/colorSurface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="1dp"
+        >
+
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_main"
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
