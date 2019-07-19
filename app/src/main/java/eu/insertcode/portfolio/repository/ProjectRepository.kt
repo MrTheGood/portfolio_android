@@ -19,7 +19,6 @@ package eu.insertcode.portfolio.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import eu.insertcode.portfolio.data.Resource
 import eu.insertcode.portfolio.data.isSuccess
 import eu.insertcode.portfolio.data.model.Project
@@ -49,11 +48,11 @@ object ProjectRepository {
         _projects.value = Resource.loading(_projects.value?.data)
 
         firestore.collection("projects")
-                .orderBy("importance", Query.Direction.DESCENDING)
+                .whereEqualTo("listed", true)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        _projects.postValue(Resource.success(task.result!!.map { it.toObject(Project::class.java) }))
+                        _projects.postValue(Resource.success(task.result!!.map { it.toObject(Project::class.java) }.sortedByDescending { it.importance }))
                     } else {
                         task.exception!!.printStackTrace()
                         _projects.postValue(Resource.error(task.exception!!, _projects.value?.data))
