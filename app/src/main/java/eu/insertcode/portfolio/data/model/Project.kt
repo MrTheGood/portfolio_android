@@ -28,6 +28,7 @@ data class Project(
         val id: String? = null,
         val title: String? = null,
         val type: String = "other",
+        val importance: Int = 0,
         val images: List<String> = emptyList(),
         val description: String? = null,
         val tags: List<String> = emptyList(),
