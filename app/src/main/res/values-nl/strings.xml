@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <string name="app_name">Portfolio 2.0 alpha0</string>
+    <string name="app_name">Portfolio</string>
 
     <!-- Error -->
     <string name="error_unknown">Oh nee! Er is iets fout gegaan :(\nProbeer het later opnieuw</string>

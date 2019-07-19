@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Portfolio 2.0 alpha0</string>
+    <string name="app_name">Portfolio</string>
 
     <!-- Error -->
     <string name="error_unknown">Oh no! Something went wrong :(\nTry again later!</string>
