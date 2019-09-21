@@ -33,7 +33,7 @@ import eu.insertcode.portfolio.util.startTextShareIntent
 
 /**
  * Created by maartendegoede on 18/09/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
 

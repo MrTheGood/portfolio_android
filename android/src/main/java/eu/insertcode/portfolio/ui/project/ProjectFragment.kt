@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
 
 /**
  * Created by maartendegoede on 11/09/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 class ProjectFragment : Fragment() {
     private lateinit var projectViewModel: ProjectViewModel

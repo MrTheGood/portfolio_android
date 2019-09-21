@@ -22,7 +22,7 @@ import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 23/08/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 data class Project(
         val id: String? = null,

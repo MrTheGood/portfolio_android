@@ -18,7 +18,7 @@ package eu.insertcode.portfolio.data
 
 /**
  * Created by maartendegoede on 23/08/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  *
  *
  * Status of a resource that is provided to the UI.

@@ -24,7 +24,7 @@ import eu.insertcode.portfolio.repository.ProjectRepository
 
 /**
  * Created by maartendegoede on 11/09/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 class PortfolioViewModel : ViewModel() {
 

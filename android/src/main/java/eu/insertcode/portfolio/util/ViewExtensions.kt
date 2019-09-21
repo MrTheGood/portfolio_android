@@ -31,7 +31,7 @@ import eu.insertcode.portfolio.R
 
 /**
  * Created by maartendegoede on 21/09/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 
 val View.orientation get() = resources.configuration.orientation

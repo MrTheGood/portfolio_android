@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Created by maartendegoede on 21/02/2019.
- * Copyright © 2019 insertCode.eu. All rights reserved.
+ * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
 class SplashActivity : AppCompatActivity() {
 

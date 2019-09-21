@@ -18,7 +18,7 @@ package eu.insertcode.portfolio.data
 
 /**
  * Created by maartendegoede on 23/08/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  * Based on https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/vo/Resource.kt
  *
  * A generic class that holds a value with its loading status.

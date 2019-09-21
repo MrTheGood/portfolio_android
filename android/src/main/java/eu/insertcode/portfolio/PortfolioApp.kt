@@ -23,7 +23,7 @@ import timber.log.Timber.DebugTree
 
 /**
  * Created by maartendegoede on 23/08/2018.
- * Copyright © 2018 insertCode.eu. All rights reserved.
+ * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 @Suppress("unused")
 class PortfolioApp : MultiDexApplication() {
