@@ -14,12 +14,12 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models.project
+package eu.insertcode.portfolio.main.data.models
 
-import eu.insertcode.portfolio.main.models.CollectionItem
-import eu.insertcode.portfolio.main.models.ItemPropertyDelegate
-import eu.insertcode.portfolio.main.models.MutableData
-import eu.insertcode.portfolio.main.models.project.ProjectType.OTHER
+import eu.insertcode.portfolio.main.data.CollectionItem
+import eu.insertcode.portfolio.main.data.ItemPropertyDelegate
+import eu.insertcode.portfolio.main.data.MutableData
+import eu.insertcode.portfolio.main.data.models.ProjectType.OTHER
 
 /**
  * Created by maartendegoede on 2019-09-21.

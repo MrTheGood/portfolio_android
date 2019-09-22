@@ -14,19 +14,31 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models.project
+package eu.insertcode.portfolio.main.data
 
-import eu.insertcode.portfolio.main.models.Item
-import eu.insertcode.portfolio.main.models.MutableData
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-data class ProjectLinks(
-        override val data: MutableData
-) : Item() {
-    val github: String? by data.withDefault { null }
-    val playstore: String? by data.withDefault { null }
-    val link: String? by data.withDefault { null }
+abstract class Item {
+    abstract val data: MutableData
+}
+
+class ItemPropertyDelegate<T : Item>(
+        private val data: MutableData,
+        private val transform: (MutableMap<String, Any?>) -> T
+) : ReadWriteProperty<Any, T> {
+
+    override fun getValue(thisRef: Any, property: KProperty<*>): T {
+        @Suppress("UNCHECKED_CAST")
+        val map = (data[property.name] as Map<String, Any?>).toMutableMap()
+        return transform(map)
+    }
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
+        data[property.name] = value
+    }
 }

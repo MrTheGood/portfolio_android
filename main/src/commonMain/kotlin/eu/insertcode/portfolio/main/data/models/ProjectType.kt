@@ -14,14 +14,16 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models
+package eu.insertcode.portfolio.main.data.models
 
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-abstract class CollectionItem: Item() {
-    abstract val path: String
-    val id: String
-        get() = path.split("/").last()
+enum class ProjectType(val type: String) {
+    APP("app"),
+    GAME("game"),
+    WEB("web"),
+    WATCH("watch"),
+    OTHER("other")
 }

@@ -14,12 +14,19 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models
+package eu.insertcode.portfolio.main.data.models
+
+import eu.insertcode.portfolio.main.data.Item
+import eu.insertcode.portfolio.main.data.MutableData
 
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-abstract class Item {
-    abstract val data: MutableData
+data class ProjectLinks(
+        override val data: MutableData
+) : Item() {
+    val github: String? by data.withDefault { null }
+    val playstore: String? by data.withDefault { null }
+    val link: String? by data.withDefault { null }
 }
