@@ -14,10 +14,12 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models
+package eu.insertcode.portfolio.main.data
+
+import kotlin.properties.ReadWriteProperty
 
 /**
- * Created by maartendegoede on 2019-09-21.
+ * Created by maartendegoede on 2019-09-22.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-typealias MutableData = MutableMap<String, Any?>
+typealias Property<T> = ReadWriteProperty<Any, T>
