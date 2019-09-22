@@ -14,27 +14,27 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.models
+package eu.insertcode.portfolio.main.viewmodels
 
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
+import eu.insertcode.portfolio.main.data.models.Project
 
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-class ItemPropertyDelegate<T : Item>(
-        private val data: MutableData,
-        private val transform: (MutableMap<String, Any?>) -> T
-) : ReadWriteProperty<Any, T> {
+data class HighlightViewState(
+        private val project: Project,
 
-    override fun getValue(thisRef: Any, property: KProperty<*>): T {
-        @Suppress("UNCHECKED_CAST")
-        val map = (data[property.name] as Map<String, Any?>).toMutableMap()
-        return transform(map)
-    }
+        val thumbnailImage: String? = project.images.firstOrNull(),
 
-    override fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
-        data[property.name] = value
-    }
-}
+        //todo: add
+//                val typeIndicatorBackgroundColor: Int = project.type.color,
+//                val typeIndicatorIcon: Int = project.type.icon,
+
+        val isTitleLabelVisible: Boolean = project.title != null,
+        val titleLabelText: String? = project.title,
+
+        val isDateLabelVisible: Boolean = project.date != null,
+        val dateLabelText: String? = project.date
+        //todo: add `val locationLabelText = project.location` according to design
+)
