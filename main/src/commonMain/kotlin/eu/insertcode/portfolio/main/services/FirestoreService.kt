@@ -16,7 +16,10 @@
 
 package eu.insertcode.portfolio.main.services
 
-import eu.insertcode.portfolio.main.data.*
+import eu.insertcode.portfolio.main.data.CollectionItem
+import eu.insertcode.portfolio.main.data.Item
+import eu.insertcode.portfolio.main.data.MutableData
+import eu.insertcode.portfolio.main.data.Resource
 
 /**
  * Created by maartendegoede on 2019-09-23.
@@ -48,4 +51,22 @@ expect class FirestoreService {
 
     fun deleteItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit)
     fun deleteItemsByPath(paths: List<String>, onComplete: (exception: Exception?) -> Unit)
+}
+
+
+data class FirestoreDocument(
+        val path: String,
+        val data: MutableData = mutableMapOf()
+)
+
+data class FirestoreDocumentChange(
+        val type: Type,
+        val document: FirestoreDocument
+) {
+    enum class Type { ADDED, MODIFIED, REMOVED }
+}
+
+sealed class Order {
+    data class Ascending(val field: String) : Order()
+    data class Descending(val field: String) : Order()
 }

@@ -167,9 +167,9 @@ actual class FirestoreService {
 
     private fun firestoreDocumentChangeType(documentChangeType: DocumentChange.Type) =
             when (documentChangeType) {
-                DocumentChange.Type.ADDED -> FirestoreDocumentChangeType.ADDED
-                DocumentChange.Type.MODIFIED -> FirestoreDocumentChangeType.MODIFIED
-                DocumentChange.Type.REMOVED -> FirestoreDocumentChangeType.REMOVED
+                DocumentChange.Type.ADDED -> FirestoreDocumentChange.Type.ADDED
+                DocumentChange.Type.MODIFIED -> FirestoreDocumentChange.Type.MODIFIED
+                DocumentChange.Type.REMOVED -> FirestoreDocumentChange.Type.REMOVED
             }
 
     private fun MutableData.toLocalMap() =
