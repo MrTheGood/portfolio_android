@@ -38,7 +38,7 @@ class PortfolioViewModel(
     private lateinit var projects: Resource<List<Project>, PortfolioViewState.Error>
 
     // UI
-    var viewState by viewState
+    private var viewState by viewState
 
 
     // Configure
