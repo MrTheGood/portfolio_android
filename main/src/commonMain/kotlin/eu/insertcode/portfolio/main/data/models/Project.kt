@@ -20,6 +20,7 @@ import eu.insertcode.portfolio.main.data.CollectionItem
 import eu.insertcode.portfolio.main.data.ItemPropertyDelegate
 import eu.insertcode.portfolio.main.data.MutableData
 import eu.insertcode.portfolio.main.data.models.ProjectType.OTHER
+import eu.insertcode.portfolio.main.services.FirestoreDocument
 
 /**
  * Created by maartendegoede on 2019-09-21.
@@ -38,4 +39,6 @@ class Project(
     val tags: List<String> by data.withDefault { emptyList<String>() }
     val title: String? by data.withDefault { null }
     val type: String by data.withDefault { OTHER.type }
+
+    constructor(document: FirestoreDocument) : this(document.path, document.data)
 }

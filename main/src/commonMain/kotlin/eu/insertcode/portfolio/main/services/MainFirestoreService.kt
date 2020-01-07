@@ -25,7 +25,7 @@ import eu.insertcode.portfolio.main.data.Resource
  * Created by maartendegoede on 2019-09-23.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-expect class FirestoreService {
+interface MainFirestoreService {
     fun removeListener(listener: Any)
 
     // Create
@@ -38,9 +38,10 @@ expect class FirestoreService {
 
     // Read
 
-    fun observeDocument(path: String, transform: (FirestoreDocument) -> Item, onResult: (result: Resource<Item?, Exception>) -> Unit): Any
-    fun observeCollection(path: String, order: Order? = null, limit: Int? = null, transform: (FirestoreDocument) -> CollectionItem, onResult: (result: Resource<List<CollectionItem>, Exception>) -> Unit): Any
-    fun observeCollectionChanges(path: String, onNext: (results: Resource<List<FirestoreDocumentChange>, Exception>) -> Unit): Any
+    fun <T : Item> getDocument(path: String, transform: (FirestoreDocument) -> T, onComplete: (result: Resource<T?, Exception>) -> Unit)
+    fun <T : Item> observeDocument(path: String, transform: (FirestoreDocument) -> T, onNext: (result: Resource<T?, Exception>) -> Unit): Any
+    fun <T : CollectionItem> getCollection(path: String, order: Order? = null, limit: Int? = null, transform: (FirestoreDocument) -> T, onComplete: (result: Resource<List<T>, Exception>) -> Unit)
+    fun <T : CollectionItem> observeCollection(path: String, order: Order? = null, limit: Int? = null, transform: (FirestoreDocument) -> T, onNext: (result: Resource<List<T>, Exception>) -> Unit): Any
 
     // Update
 
@@ -58,13 +59,6 @@ data class FirestoreDocument(
         val path: String,
         val data: MutableData = mutableMapOf()
 )
-
-data class FirestoreDocumentChange(
-        val type: Type,
-        val document: FirestoreDocument
-) {
-    enum class Type { ADDED, MODIFIED, REMOVED }
-}
 
 sealed class Order {
     data class Ascending(val field: String) : Order()

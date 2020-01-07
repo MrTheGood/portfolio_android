@@ -19,27 +19,27 @@ package eu.insertcode.portfolio.main.services
 import com.google.firebase.firestore.*
 import eu.insertcode.portfolio.main.data.*
 
-actual class FirestoreService {
+class FirestoreService : MainFirestoreService {
     private val firestore
         get() = FirebaseFirestore.getInstance()
 
-    actual fun removeListener(listener: Any) {
+    override fun removeListener(listener: Any) {
         if (listener is ListenerRegistration) {
             listener.remove()
         }
     }
 
     // Create
-    actual fun createPath(path: String) =
+    override fun createPath(path: String) =
             firestore.collection(path).document().path
 
-    actual fun createPath(reference: Any) =
+    override fun createPath(reference: Any) =
             (reference as DocumentReference).path
 
-    actual fun createReference(path: String): Any =
+    override fun createReference(path: String): Any =
             firestore.document(path)
 
-    actual fun createItem(
+    override fun createItem(
             item: CollectionItem,
             merge: Boolean,
             onComplete: (exception: Exception?) -> Unit
@@ -52,7 +52,7 @@ actual class FirestoreService {
         }
     }
 
-    actual fun createItems(
+    override fun createItems(
             items: List<CollectionItem>,
             onComplete: (exception: Exception?) -> Unit
     ) {
@@ -66,26 +66,43 @@ actual class FirestoreService {
     }
 
     // Read
-    actual fun observeDocument(
+    override fun <T : Item> observeDocument(
             path: String,
-            transform: (FirestoreDocument) -> Item,
-            onResult: (result: Resource<Item?, Exception>) -> Unit
+            transform: (FirestoreDocument) -> T,
+            onNext: (result: Resource<T?, Exception>) -> Unit
     ): Any = firestore.document(path)
             .addSnapshotListener { snapshot, error ->
                 error?.let {
-                    onResult(Resource.Error(error))
-                } ?: snapshot?.data?.let {
-                    val item = snapshot.data.run { transform(FirestoreDocument(path, it)) }
-                    onResult(Resource.Success(item))
-                } ?: onResult(Resource.Success(null))
+                    onNext(Resource.Error(error))
+                } ?: snapshot?.data?.let { data ->
+                    val item = transform(FirestoreDocument(path, data))
+                    onNext(Resource.Success(item))
+                } ?: onNext(Resource.Success(null))
             }
 
-    actual fun observeCollection(
+    override fun <T : Item> getDocument(
+            path: String,
+            transform: (FirestoreDocument) -> T,
+            onComplete: (result: Resource<T?, Exception>) -> Unit
+    ) {
+        firestore.document(path)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful)
+                        onComplete(Resource.Error(task.exception ?: IllegalStateException()))
+                    else task.result?.data?.let { data ->
+                        val item = transform(FirestoreDocument(path, data))
+                        onComplete(Resource.Success(item))
+                    } ?: onComplete(Resource.Success(null))
+                }
+    }
+
+    override fun <T : CollectionItem> observeCollection(
             path: String,
             order: Order?,
             limit: Int?,
-            transform: (FirestoreDocument) -> CollectionItem,
-            onResult: (result: Resource<List<CollectionItem>, Exception>) -> Unit
+            transform: (FirestoreDocument) -> T,
+            onNext: (result: Resource<List<T>, Exception>) -> Unit
     ): Any = (firestore.collection(path) as Query)
             .let { query ->
                 when (order) {
@@ -97,27 +114,42 @@ actual class FirestoreService {
             .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
             .addSnapshotListener { snapshot, error ->
                 error?.let {
-                    onResult(Resource.Error(error))
+                    onNext(Resource.Error(error))
                 } ?: snapshot?.documents?.let { firestoreDocuments ->
                     val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
-                    onResult(Resource.Success(documents))
-                } ?: onResult(Resource.Success(emptyList()))
-            }
-
-    actual fun observeCollectionChanges(
-            path: String,
-            onNext: (results: Resource<List<FirestoreDocumentChange>, Exception>) -> Unit
-    ): Any = firestore.collection(path)
-            .addSnapshotListener { snapshot, error ->
-                error?.let {
-                    onNext(Resource.Error(error))
-                } ?: snapshot?.documentChanges?.let { documents ->
-                    onNext(Resource.Success(documents.map { firestoreDocumentChange(it) }))
+                    onNext(Resource.Success(documents))
                 } ?: onNext(Resource.Success(emptyList()))
             }
 
+
+    override fun <T : CollectionItem> getCollection(
+            path: String, order: Order?,
+            limit: Int?,
+            transform: (FirestoreDocument) -> T,
+            onComplete: (result: Resource<List<T>, Exception>) -> Unit
+    ) {
+        (firestore.collection(path) as Query)
+                .let { query ->
+                    when (order) {
+                        is Order.Ascending -> query.orderBy(order.field, Query.Direction.ASCENDING)
+                        is Order.Descending -> query.orderBy(order.field, Query.Direction.DESCENDING)
+                        else -> query
+                    }
+                }
+                .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
+                .get()
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful)
+                        onComplete(Resource.Error(task.exception ?: IllegalStateException()))
+                    else task.result?.documents?.let { firestoreDocuments ->
+                        val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
+                        onComplete(Resource.Success(documents))
+                    } ?: onComplete(Resource.Success(emptyList()))
+                }
+    }
+
     // Update
-    actual fun updateItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit) {
+    override fun updateItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit) {
         firestore.document(item.path)
                 .update(item.data.toFirestoreMap())
                 .addOnCompleteListener {
@@ -125,7 +157,7 @@ actual class FirestoreService {
                 }
     }
 
-    actual fun updateItems(items: List<CollectionItem>, onComplete: (exception: Exception?) -> Unit) {
+    override fun updateItems(items: List<CollectionItem>, onComplete: (exception: Exception?) -> Unit) {
         firestore.batch().run {
             items.forEach { update(firestore.document(it.path), it.data.toFirestoreMap()) }
 
@@ -136,7 +168,7 @@ actual class FirestoreService {
     }
 
     // Delete
-    actual fun deleteItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit) {
+    override fun deleteItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit) {
         firestore.document(item.path)
                 .delete()
                 .addOnCompleteListener {
@@ -144,7 +176,7 @@ actual class FirestoreService {
                 }
     }
 
-    actual fun deleteItemsByPath(paths: List<String>, onComplete: (exception: Exception?) -> Unit) {
+    override fun deleteItemsByPath(paths: List<String>, onComplete: (exception: Exception?) -> Unit) {
         firestore.batch().run {
             paths.forEach { delete(firestore.document(it)) }
 
@@ -155,22 +187,6 @@ actual class FirestoreService {
     }
 
     // Util
-
-    private fun firestoreDocumentChange(documentChange: DocumentChange) =
-            FirestoreDocumentChange(
-                    firestoreDocumentChangeType(documentChange.type),
-                    FirestoreDocument(
-                            documentChange.document.reference.path,
-                            documentChange.document.data.toLocalMap()
-                    )
-            )
-
-    private fun firestoreDocumentChangeType(documentChangeType: DocumentChange.Type) =
-            when (documentChangeType) {
-                DocumentChange.Type.ADDED -> FirestoreDocumentChange.Type.ADDED
-                DocumentChange.Type.MODIFIED -> FirestoreDocumentChange.Type.MODIFIED
-                DocumentChange.Type.REMOVED -> FirestoreDocumentChange.Type.REMOVED
-            }
 
     private fun MutableData.toLocalMap() =
             mapValues { it.value?.toLocalValue() }.toMutableMap()
