@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,10 +16,14 @@
 
 package eu.insertcode.portfolio.main.data
 
-import kotlin.properties.ReadWriteProperty
-
 /**
- * Created by maartendegoede on 2019-09-22.
- * Copyright © 2019 Maarten de Goede. All rights reserved.
+ * Created by maartendegoede on 07/01/2020.
+ * Copyright © 2020 Maarten de Goede. All rights reserved.
  */
-typealias Property<T> = ReadWriteProperty<Any, T>
+
+typealias MutableData = MutableMap<String, Any?>
+
+expect class AtomicBoolean(value: Boolean) {
+    fun get(): Boolean
+    fun set(value: Boolean)
+}

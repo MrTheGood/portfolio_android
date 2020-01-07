@@ -37,9 +37,11 @@ kotlin {
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+        implementation("dev.icerock.moko:mvvm:0.4.0")
     }
 
     sourceSets["androidMain"].dependencies {
+        implementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation("com.google.firebase:firebase-firestore:21.1.1")
     }

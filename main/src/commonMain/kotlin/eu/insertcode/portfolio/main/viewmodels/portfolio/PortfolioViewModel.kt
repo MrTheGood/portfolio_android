@@ -16,11 +16,12 @@
 
 package eu.insertcode.portfolio.main.viewmodels.portfolio
 
-import eu.insertcode.portfolio.main.data.Property
-import eu.insertcode.portfolio.main.data.Resource
-import eu.insertcode.portfolio.main.data.isLoading
-import eu.insertcode.portfolio.main.data.isSuccess
+import dev.icerock.moko.mvvm.livedata.LiveData
+import dev.icerock.moko.mvvm.livedata.MutableLiveData
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import eu.insertcode.portfolio.main.data.*
 import eu.insertcode.portfolio.main.data.models.Project
+import eu.insertcode.portfolio.main.repositories.ProjectRepository
 import eu.insertcode.portfolio.main.viewmodels.HighlightViewState
 import eu.insertcode.portfolio.main.viewmodels.TimelineViewState
 import eu.insertcode.portfolio.main.viewmodels.TimelineViewState.TimelineViewError
@@ -29,40 +30,31 @@ import eu.insertcode.portfolio.main.viewmodels.TimelineViewState.TimelineViewErr
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-class PortfolioViewModel(
-        viewState: Property<PortfolioViewState>,
-
-        // Reactions
-        private val navigateToProject: (projectId: String) -> Unit
-) {
+class PortfolioViewModel : ViewModel() {
     private lateinit var projects: Resource<List<Project>, PortfolioViewState.Error>
 
     // UI
-    private var viewState by viewState
-
+    private val _viewState = MutableLiveData<PortfolioViewState?>(null)
+    val viewState: LiveData<PortfolioViewState?> = _viewState
 
     // Configure
 
     fun configure() {
-        //TODO: Use Firebase
-
-        projects = Resource.Loading()
-        updateViewState()
-
-        temporaryUpdateFunction()
-    }
-
-    private fun temporaryUpdateFunction() {
-        //todo: remove
-        projects = Resource.Error(PortfolioViewState.Error.NoInternet)
-        updateViewState()
+        ProjectRepository.getProjects()
+        ProjectRepository.projects.addObserver {
+            projects = it.transformError {
+                val isInternetAvailable = true // todo: implement isInternetAvailable check
+                if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet
+            }
+            updateViewState()
+        }
     }
 
     private fun updateViewState() {
         val timelineViewStates = projects.data?.map { TimelineViewState(it) } ?: emptyList()
         val highlightViewStates = projects.data?.map { HighlightViewState(it) } ?: emptyList()
 
-        viewState = PortfolioViewState(
+        _viewState.value = PortfolioViewState(
                 errorViewError = projects.error,
                 isLoading = projects.isLoading,
 
@@ -78,7 +70,7 @@ class PortfolioViewModel(
     // Actions
 
     fun onProjectItemTapped(projectId: String) {
-        navigateToProject(projectId)
+        navigateToProject.newEvent(projectId)
     }
 
     fun onErrorViewTapped() {
@@ -88,6 +80,10 @@ class PortfolioViewModel(
     }
 
     fun onRefreshViewSwiped() {
-        temporaryUpdateFunction()
+        ProjectRepository.getProjects(true)
     }
+
+    // Reactions
+    /** @sample navigateToProject(projectId) */
+    val navigateToProject: MutableLiveData<Event<String?>> = MutableLiveData(Event(null))
 }

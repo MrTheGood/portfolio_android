@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package eu.insertcode.portfolio.main.data
 
-/**
- * Created by maartendegoede on 2019-09-21.
- * Copyright © 2019 Maarten de Goede. All rights reserved.
- */
-typealias MutableData = MutableMap<String, Any?>
+actual class AtomicBoolean actual constructor(value: Boolean) {
+    private val internal = java.util.concurrent.atomic.AtomicBoolean(value)
+
+    actual fun get() = internal.get()
+
+    actual fun set(value: Boolean) = internal.set(value)
+}

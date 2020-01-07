@@ -35,10 +35,16 @@ sealed class Resource<out D, out E>(val data: D?, val error: E?) {
     class Error<D, E>(error: E, data: D? = null) : Resource<D, E>(data, error)
 }
 
-val Resource<Any, Any>?.isError get() = this is Resource.Error<*, *>
-val Resource<Any, Any>?.isSuccess get() = this is Resource.Success<*, *>
 val Resource<Any, Any>?.isLoading get() = this is Resource.Loading<*, *>
+val Resource<Any, Any>?.isSuccess get() = this is Resource.Success<*, *>
+val Resource<Any, Any>?.isError get() = this is Resource.Error<*, *>
 
 fun <D, E> Resource<D, E>.toLoading(data: D? = this.data, error: E? = this.error) = Resource.Loading(data, error)
 fun <D, E> Resource<D, E>.toSuccess(data: D? = this.data, error: E? = this.error) = Resource.Success(data, error)
 fun <D, E> Resource<D, E>.toError(error: E? = this.error, data: D? = this.data) = Resource.Error(data, error)
+
+fun <D, E, T> Resource<D, E>.transformError(transform: (E?) -> T): Resource<D, T> = when (this) {
+    is Resource.Loading -> Resource.Loading(data, transform(error))
+    is Resource.Success -> Resource.Success(data as D, transform(error))
+    is Resource.Error -> Resource.Error(transform(error), data)
+}

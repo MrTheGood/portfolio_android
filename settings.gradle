@@ -1,1 +1,2 @@
 include ':android', ':main'
+enableFeaturePreview("GRADLE_METADATA")
