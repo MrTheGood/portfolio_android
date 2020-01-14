@@ -28,6 +28,10 @@ android {
         java.srcDirs("src/androidMain/kotlin")
         res.srcDirs("src/androidMain/res")
     }
+
+    packagingOptions {
+        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+    }
 }
 
 kotlin {

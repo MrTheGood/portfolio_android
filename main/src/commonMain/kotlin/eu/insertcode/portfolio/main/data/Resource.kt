@@ -18,7 +18,7 @@ package eu.insertcode.portfolio.main.data
 
 /**
  * Created by maartendegoede on 23/08/2018.
- * Copyright © 2018 Maarten de Goede. All rights reserved.
+ * Copyright © 2020 Maarten de Goede. All rights reserved.
  * Based on https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/vo/Resource.kt
  *
  * A generic class that holds a value with its state, and whether or not
@@ -29,22 +29,31 @@ package eu.insertcode.portfolio.main.data
  * @param D Data type
  * @param E Error type
  */
-sealed class Resource<out D, out E>(val data: D?, val error: E?) {
-    class Loading<D, E>(data: D? = null, error: E? = null) : Resource<D, E>(data, error)
-    class Success<D, E>(data: D, error: E? = null) : Resource<D, E>(data, error)
-    class Error<D, E>(error: E, data: D? = null) : Resource<D, E>(data, error)
+data class Resource<out D, out E>(val state: State, val data: D?, val error: E?) {
+    companion object {
+        fun <D, E> loading(data: D? = null, error: E? = null) = Resource(State.LOADING, data, error)
+        fun <D, E> success(data: D, error: E? = null) = Resource(State.SUCCESS, data, error)
+        fun <D, E> error(error: E, data: D? = null) = Resource(State.ERROR, data, error)
+    }
 }
 
-val Resource<Any, Any>?.isLoading get() = this is Resource.Loading<*, *>
-val Resource<Any, Any>?.isSuccess get() = this is Resource.Success<*, *>
-val Resource<Any, Any>?.isError get() = this is Resource.Error<*, *>
+val Resource<Any, Any>?.isError get() = this?.state == State.ERROR
+val Resource<Any, Any>?.isSuccess get() = this?.state == State.SUCCESS
+val Resource<Any, Any>?.isLoading get() = this?.state == State.LOADING
 
-fun <D, E> Resource<D, E>.toLoading(data: D? = this.data, error: E? = this.error) = Resource.Loading(data, error)
-fun <D, E> Resource<D, E>.toSuccess(data: D? = this.data, error: E? = this.error) = Resource.Success(data, error)
-fun <D, E> Resource<D, E>.toError(error: E? = this.error, data: D? = this.data) = Resource.Error(data, error)
+fun <D, E> Resource<D, E>.toLoading(data: D? = this.data, error: E? = this.error) = Resource.loading(data, error)
+fun <D, E> Resource<D, E>.toSuccess(data: D? = this.data, error: E? = this.error) = Resource.success(data, error)
+fun <D, E> Resource<D, E>.toError(error: E? = this.error, data: D? = this.data) = Resource.error(error, data)
 
-fun <D, E, T> Resource<D, E>.transformError(transform: (E?) -> T): Resource<D, T> = when (this) {
-    is Resource.Loading -> Resource.Loading(data, transform(error))
-    is Resource.Success -> Resource.Success(data as D, transform(error))
-    is Resource.Error -> Resource.Error(transform(error), data)
+
+/**
+ * State of a resource that is provided to the UI.
+ *
+ * These are usually created by the Repository classes where they return
+ * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
+ */
+enum class State {
+    SUCCESS,
+    ERROR,
+    LOADING
 }

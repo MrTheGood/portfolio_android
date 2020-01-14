@@ -17,8 +17,8 @@
 package eu.insertcode.portfolio.main.viewmodels.portfolio
 
 import eu.insertcode.portfolio.main.viewmodels.HighlightViewState
-import eu.insertcode.portfolio.main.viewmodels.TimelineViewState
-import eu.insertcode.portfolio.main.viewmodels.TimelineViewState.TimelineViewError
+import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
+import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState.TimelineViewError
 
 /**
  * Created by maartendegoede on 2019-09-21.
@@ -31,14 +31,13 @@ data class PortfolioViewState(
         val isLoading: Boolean,
 
         val isTimelineVisible: Boolean,
-        val timelineViewStates: List<TimelineViewState>,
+        val timelineItemViewStates: List<TimelineItemViewState>,
         val timelineViewError: TimelineViewError?,
 
         val isHighlightsVisible: Boolean,
         val highlightViewStates: List<HighlightViewState>
 ) {
-    sealed class Error {
-        object NoInternet : Error()
-        object UnknownError : Error()
+    enum class Error {
+        NoInternet, UnknownError
     }
 }

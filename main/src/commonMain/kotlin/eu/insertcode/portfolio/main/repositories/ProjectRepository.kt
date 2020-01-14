@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import eu.insertcode.portfolio.main.services.ServiceProvider
  * Created by maartendegoede on 2019-09-23.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  *
- * NOTE: This file is very much under development
+ * NOTE: This file is under heavy development
  */
 object ProjectRepository {
     private const val PROJECTS = "projects"
@@ -36,7 +36,7 @@ object ProjectRepository {
         get() = ServiceProvider.firestoreService
 
     private val _projects: MutableLiveData<Resource<List<Project>, Exception>> =
-            MutableLiveData(Resource.Loading())
+            MutableLiveData(Resource.loading())
     val projects: LiveData<Resource<List<Project>, Exception>> = _projects
 
     fun getProjects(forceUpdate: Boolean = false) {
@@ -52,10 +52,10 @@ object ProjectRepository {
     fun getProjectDocument(projectId: String, forceUpdate: Boolean = false, onComplete: (Resource<Project?, Exception>) -> Unit) {
         val project = _projects.value.data?.find { it.id == projectId }
         if (_projects.value.isSuccess && project != null && !forceUpdate) {
-            onComplete(Resource.Success(project))
+            onComplete(Resource.success(project))
             return
         }
-        onComplete(Resource.Loading(project))
+        onComplete(Resource.loading(project))
 
         firestoreService.getDocument("$PROJECTS/$projectId", transform = { Project(it) }) { result ->
             onComplete(result)

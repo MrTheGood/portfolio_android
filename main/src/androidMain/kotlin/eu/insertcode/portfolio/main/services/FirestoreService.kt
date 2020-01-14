@@ -73,11 +73,11 @@ class FirestoreService : MainFirestoreService {
     ): Any = firestore.document(path)
             .addSnapshotListener { snapshot, error ->
                 error?.let {
-                    onNext(Resource.Error(error))
+                    onNext(Resource.error(error))
                 } ?: snapshot?.data?.let { data ->
                     val item = transform(FirestoreDocument(path, data))
-                    onNext(Resource.Success(item))
-                } ?: onNext(Resource.Success(null))
+                    onNext(Resource.success(item))
+                } ?: onNext(Resource.success(null))
             }
 
     override fun <T : Item> getDocument(
@@ -89,11 +89,11 @@ class FirestoreService : MainFirestoreService {
                 .get()
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful)
-                        onComplete(Resource.Error(task.exception ?: IllegalStateException()))
+                        onComplete(Resource.error(task.exception ?: IllegalStateException()))
                     else task.result?.data?.let { data ->
                         val item = transform(FirestoreDocument(path, data))
-                        onComplete(Resource.Success(item))
-                    } ?: onComplete(Resource.Success(null))
+                        onComplete(Resource.success(item))
+                    } ?: onComplete(Resource.success(null))
                 }
     }
 
@@ -114,11 +114,11 @@ class FirestoreService : MainFirestoreService {
             .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
             .addSnapshotListener { snapshot, error ->
                 error?.let {
-                    onNext(Resource.Error(error))
+                    onNext(Resource.error(error))
                 } ?: snapshot?.documents?.let { firestoreDocuments ->
                     val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
-                    onNext(Resource.Success(documents))
-                } ?: onNext(Resource.Success(emptyList()))
+                    onNext(Resource.success(documents))
+                } ?: onNext(Resource.success(emptyList()))
             }
 
 
@@ -140,11 +140,11 @@ class FirestoreService : MainFirestoreService {
                 .get()
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful)
-                        onComplete(Resource.Error(task.exception ?: IllegalStateException()))
+                        onComplete(Resource.error(task.exception ?: IllegalStateException()))
                     else task.result?.documents?.let { firestoreDocuments ->
                         val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
-                        onComplete(Resource.Success(documents))
-                    } ?: onComplete(Resource.Success(emptyList()))
+                        onComplete(Resource.success(documents))
+                    } ?: onComplete(Resource.success(emptyList()))
                 }
     }
 

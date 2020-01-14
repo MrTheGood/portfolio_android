@@ -18,13 +18,14 @@ package eu.insertcode.portfolio.main.viewmodels.portfolio
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
+import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import eu.insertcode.portfolio.main.data.*
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
 import eu.insertcode.portfolio.main.viewmodels.HighlightViewState
-import eu.insertcode.portfolio.main.viewmodels.TimelineViewState
-import eu.insertcode.portfolio.main.viewmodels.TimelineViewState.TimelineViewError
+import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
+import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState.TimelineViewError
 
 /**
  * Created by maartendegoede on 2019-09-21.
@@ -35,23 +36,24 @@ class PortfolioViewModel : ViewModel() {
 
     // UI
     private val _viewState = MutableLiveData<PortfolioViewState?>(null)
-    val viewState: LiveData<PortfolioViewState?> = _viewState
+    val viewState: LiveData<PortfolioViewState?> = _viewState.readOnly()
 
     // Configure
-
     fun configure() {
         ProjectRepository.getProjects()
         ProjectRepository.projects.addObserver {
-            projects = it.transformError {
+            projects = it.run {
                 val isInternetAvailable = true // todo: implement isInternetAvailable check
-                if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet
+                val error = if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet
+
+                Resource(state, data, error)
             }
             updateViewState()
         }
     }
 
     private fun updateViewState() {
-        val timelineViewStates = projects.data?.map { TimelineViewState(it) } ?: emptyList()
+        val timelineViewStates = projects.data?.map { TimelineItemViewState(it) } ?: emptyList()
         val highlightViewStates = projects.data?.map { HighlightViewState(it) } ?: emptyList()
 
         _viewState.value = PortfolioViewState(
@@ -59,7 +61,7 @@ class PortfolioViewModel : ViewModel() {
                 isLoading = projects.isLoading,
 
                 isTimelineVisible = projects.isSuccess,
-                timelineViewStates = timelineViewStates,
+                timelineItemViewStates = timelineViewStates,
                 timelineViewError = TimelineViewError.NoContent.takeIf { timelineViewStates.isEmpty() },
 
                 isHighlightsVisible = projects.isSuccess && highlightViewStates.isNotEmpty(),
@@ -74,7 +76,7 @@ class PortfolioViewModel : ViewModel() {
     }
 
     fun onErrorViewTapped() {
-        projects = Resource.Success(listOf(
+        projects = Resource.success(listOf(
                 //todo: actual data
         ))
     }

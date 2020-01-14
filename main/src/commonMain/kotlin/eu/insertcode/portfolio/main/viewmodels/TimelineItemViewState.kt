@@ -22,9 +22,10 @@ import eu.insertcode.portfolio.main.data.models.Project
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-data class TimelineViewState(
+data class TimelineItemViewState(
         private val project: Project,
 
+        val id: String = project.id,
         val thumbnailImage: String? = project.images.firstOrNull(),
 
         //todo: add
@@ -39,7 +40,7 @@ data class TimelineViewState(
 
         val tags: List<TagViewState> = project.tags.map { TagViewState(it) }
 ) {
-    sealed class TimelineViewError {
-        object NoContent : TimelineViewError()
+    enum class TimelineViewError {
+        NoContent
     }
 }

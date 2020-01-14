@@ -53,6 +53,10 @@ android {
         unitTests.includeAndroidResources = true
     }
 
+    packagingOptions {
+        exclude 'META-INF/kotlinx-coroutines-core.kotlin_module'
+    }
+
     dataBinding {
         enabled = true
     }
@@ -63,6 +67,7 @@ ext {
     glide_version = "4.8.0"
 }
 dependencies {
+    implementation project(':main')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "androidx.databinding:databinding-compiler:$gradle_version"
 
@@ -88,6 +93,8 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    implementation "dev.icerock.moko:mvvm:0.4.0"
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"

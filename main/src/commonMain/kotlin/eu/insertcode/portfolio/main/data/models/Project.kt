@@ -26,7 +26,7 @@ import eu.insertcode.portfolio.main.services.FirestoreDocument
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-class Project(
+data class Project(
         override val path: String,
         override var data: MutableData
 ) : CollectionItem() {

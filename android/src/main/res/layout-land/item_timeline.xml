@@ -24,12 +24,7 @@
     <data>
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"
-            />
-
-        <variable
-            name="shareClickListener"
+            name="onClickListener"
             type="android.view.View.OnClickListener"
             />
 
@@ -40,19 +35,19 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        transitionName="@{viewState.id}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
         android:elevation="0dp"
         android:foreground="?selectableItemBackground"
-        android:onClick="@{clickListener}"
-        android:transitionName="@{project.id}"
+        android:onClick="@{onClickListener}"
         tools:ignore="UnusedAttribute"
         >
 
         <ImageView
             android:id="@+id/project_image"
-            imageFromUrl="@{project.images[0]}"
+            imageFromUrl="@{viewState.thumbnailImage}"
             android:layout_width="208dp"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -69,12 +64,13 @@
         <TextView
             android:id="@+id/project_title"
             style="@style/TextAppearance.MaterialComponents.Headline6"
+            visibleIf="@{viewState.isTitleLabelVisible}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="@{project.title}"
+            android:text="@{viewState.titleLabelText}"
             app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
             app:layout_constraintStart_toEndOf="@id/project_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -84,11 +80,12 @@
         <TextView
             android:id="@+id/project_date"
             style="@style/TextAppearance.MaterialComponents.Body2"
+            visibleIf="@{viewState.isDateLabelVisible}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{project.date}"
+            android:text="@{viewState.dateLabelText}"
             app:layout_constraintEnd_toStartOf="@id/project_typeIndicator"
             app:layout_constraintStart_toEndOf="@id/project_image"
             app:layout_constraintTop_toBottomOf="@id/project_title"

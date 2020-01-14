@@ -19,68 +19,39 @@ package eu.insertcode.portfolio.ui.portfolio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.model.Project
-import eu.insertcode.portfolio.databinding.ItemProjectBinding
-import eu.insertcode.portfolio.util.analyticsSelectProject
-import eu.insertcode.portfolio.util.analyticsShareProject
-import eu.insertcode.portfolio.util.startTextShareIntent
+import eu.insertcode.portfolio.databinding.ItemTimelineBinding
+import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
 
 /**
  * Created by maartendegoede on 18/09/2018.
  * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
-class PortfolioAdapter : ListAdapter<Project, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
+class PortfolioAdapter(
+        val onTimelineItemTapped: (id: String) -> Unit
+) : ListAdapter<TimelineItemViewState, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val project = getItem(position)
-        holder.apply {
-            bind(createOnClickListener(project),  createOnShareClickListener(project), project)
-            itemView.tag = project
+        holder.binding.apply {
+            val item = getItem(position)
+            viewState = viewState
+            onClickListener = View.OnClickListener { onTimelineItemTapped(item.id) }
+            executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ViewHolder(ItemTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    private fun createOnClickListener(project: Project) =
-            View.OnClickListener { v ->
-                val direction = PortfolioFragmentDirections.actionProjectDetail(project.id!!)
-                val extras = FragmentNavigatorExtras(v to project.id)
-                v.findNavController().navigate(direction, extras)
-                v.context.analyticsSelectProject(project)
-            }
+    class ViewHolder(val binding: ItemTimelineBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private fun createOnShareClickListener(project: Project) =
-            View.OnClickListener { v ->
-                v.startTextShareIntent(v.resources.getString(R.string.string_share_project, project.id))
-                v.context.analyticsShareProject(project)
-            }
-
-    class ViewHolder(
-            private val binding: ItemProjectBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(listener: View.OnClickListener, shareListener: View.OnClickListener, item: Project) {
-            binding.apply {
-                clickListener = listener
-                shareClickListener = shareListener
-                project = item
-                executePendingBindings()
-            }
-        }
-    }
-
-    class ProjectCallback : DiffUtil.ItemCallback<Project>() {
-        override fun areItemsTheSame(oldItem: Project, newItem: Project) =
+    class ProjectCallback : DiffUtil.ItemCallback<TimelineItemViewState>() {
+        override fun areItemsTheSame(oldItem: TimelineItemViewState, newItem: TimelineItemViewState) =
                 oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Project, newItem: Project) =
+        override fun areContentsTheSame(oldItem: TimelineItemViewState, newItem: TimelineItemViewState) =
                 oldItem == newItem
 
     }
