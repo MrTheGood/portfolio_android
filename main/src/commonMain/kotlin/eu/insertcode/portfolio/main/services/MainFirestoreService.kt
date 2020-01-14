@@ -40,8 +40,8 @@ interface MainFirestoreService {
 
     fun <T : Item> getDocument(path: String, transform: (FirestoreDocument) -> T, onComplete: (result: Resource<T?, Exception>) -> Unit)
     fun <T : Item> observeDocument(path: String, transform: (FirestoreDocument) -> T, onNext: (result: Resource<T?, Exception>) -> Unit): Any
-    fun <T : CollectionItem> getCollection(path: String, order: Order? = null, limit: Int? = null, transform: (FirestoreDocument) -> T, onComplete: (result: Resource<List<T>, Exception>) -> Unit)
-    fun <T : CollectionItem> observeCollection(path: String, order: Order? = null, limit: Int? = null, transform: (FirestoreDocument) -> T, onNext: (result: Resource<List<T>, Exception>) -> Unit): Any
+    fun <T : CollectionItem> getCollection(path: String, order: Order? = null, limit: Int? = null, equalityQueryParams: Map<String, Any> = emptyMap(),transform: (FirestoreDocument) -> T, onComplete: (result: Resource<List<T>, Exception>) -> Unit)
+    fun <T : CollectionItem> observeCollection(path: String, order: Order? = null, limit: Int? = null, equalityQueryParams: Map<String, Any> = emptyMap(), transform: (FirestoreDocument) -> T, onNext: (result: Resource<List<T>, Exception>) -> Unit): Any
 
     // Update
 

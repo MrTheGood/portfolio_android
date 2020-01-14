@@ -43,7 +43,9 @@ object ProjectRepository {
         if (_projects.value.isSuccess && !forceUpdate) return
         _projects.value = _projects.value.toLoading()
 
-        firestoreService.getCollection(PROJECTS, transform = { Project(it) }) { result ->
+        firestoreService.getCollection(PROJECTS,
+                equalityQueryParams = mapOf("listed" to true),
+                transform = { Project(it) }) { result ->
             _projects.value = result
         }
     }
@@ -58,6 +60,7 @@ object ProjectRepository {
         onComplete(Resource.loading(project))
 
         firestoreService.getDocument("$PROJECTS/$projectId", transform = { Project(it) }) { result ->
+            //todo: how can it be successful but with `null` as project? What is the case?
             onComplete(result)
         }
     }

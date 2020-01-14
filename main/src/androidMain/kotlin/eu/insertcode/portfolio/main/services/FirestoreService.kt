@@ -101,6 +101,7 @@ class FirestoreService : MainFirestoreService {
             path: String,
             order: Order?,
             limit: Int?,
+            equalityQueryParams: Map<String, Any>,
             transform: (FirestoreDocument) -> T,
             onNext: (result: Resource<List<T>, Exception>) -> Unit
     ): Any = (firestore.collection(path) as Query)
@@ -112,6 +113,11 @@ class FirestoreService : MainFirestoreService {
                 }
             }
             .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
+            .let {
+                var query = it
+                equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value) }
+                query
+            }
             .addSnapshotListener { snapshot, error ->
                 error?.let {
                     onNext(Resource.error(error))
@@ -121,10 +127,11 @@ class FirestoreService : MainFirestoreService {
                 } ?: onNext(Resource.success(emptyList()))
             }
 
-
     override fun <T : CollectionItem> getCollection(
-            path: String, order: Order?,
+            path: String,
+            order: Order?,
             limit: Int?,
+            equalityQueryParams: Map<String, Any>,
             transform: (FirestoreDocument) -> T,
             onComplete: (result: Resource<List<T>, Exception>) -> Unit
     ) {
@@ -137,6 +144,11 @@ class FirestoreService : MainFirestoreService {
                     }
                 }
                 .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
+                .let {
+                    var query = it
+                    equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value) }
+                    query
+                }
                 .get()
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful)
