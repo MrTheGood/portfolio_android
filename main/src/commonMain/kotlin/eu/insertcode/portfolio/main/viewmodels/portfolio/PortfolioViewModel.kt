@@ -44,7 +44,7 @@ class PortfolioViewModel : ViewModel() {
         ProjectRepository.projects.addObserver {
             projects = it.run {
                 val isInternetAvailable = true // todo: implement isInternetAvailable check
-                val error = if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet
+                val error = it.error?.let { if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet }
 
                 Resource(state, data, error)
             }

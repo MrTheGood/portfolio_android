@@ -36,7 +36,7 @@ class PortfolioAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val item = getItem(position)
-            viewState = viewState
+            viewState = item
             onClickListener = View.OnClickListener { onTimelineItemTapped(item.id) }
             executePendingBindings()
         }
