@@ -16,6 +16,8 @@
 
 package eu.insertcode.portfolio.main.data.models
 
+import eu.insertcode.portfolio.main.data.models.ProjectType.*
+
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
@@ -26,4 +28,12 @@ enum class ProjectType(val type: String) {
     WEB("web"),
     WATCH("watch"),
     OTHER("other")
+}
+
+fun String.toProjectType() = when (this) {
+    APP.type -> APP
+    GAME.type -> GAME
+    WEB.type -> WEB
+    WATCH.type -> WATCH
+    else -> OTHER
 }

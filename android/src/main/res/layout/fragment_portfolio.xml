@@ -54,6 +54,8 @@
                 visibleIf="@{viewModel.viewState.ld().isTimelineVisible}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="24dp"
                 tools:listitem="@layout/item_timeline"
                 />
 

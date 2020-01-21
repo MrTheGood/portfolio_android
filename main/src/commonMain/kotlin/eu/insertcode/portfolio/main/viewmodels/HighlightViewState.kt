@@ -34,7 +34,8 @@ data class HighlightViewState(
         val isTitleLabelVisible: Boolean = project.title != null,
         val titleLabelText: String? = project.title,
 
-        val isDateLabelVisible: Boolean = project.date != null,
-        val dateLabelText: String? = project.date
+        //todo: use actual date label thing instead of this hack to make it build
+        val isDateLabelVisible: Boolean = project.description != null,
+        val dateLabelText: String? = project.description
         //todo: add `val locationLabelText = project.location` according to design
 )

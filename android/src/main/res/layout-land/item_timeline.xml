@@ -38,16 +38,14 @@
         transitionName="@{viewState.id}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:elevation="0dp"
         android:foreground="?selectableItemBackground"
         android:onClick="@{onClickListener}"
-        tools:ignore="UnusedAttribute"
         >
 
         <ImageView
             android:id="@+id/project_image"
-            imageFromUrl="@{viewState.thumbnailImage}"
+            imageFromUrl="@{viewState.thumbnailImageUrl}"
+            visibleIf="@{viewState.isThumbnailImageVisible}"
             android:layout_width="208dp"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -57,14 +55,12 @@
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
             tools:src="@tools:sample/backgrounds/scenic"
             />
 
         <TextView
             android:id="@+id/project_title"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            visibleIf="@{viewState.isTitleLabelVisible}"
+            style="@style/TextAppearanceHeadline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -79,8 +75,7 @@
 
         <TextView
             android:id="@+id/project_date"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            visibleIf="@{viewState.isDateLabelVisible}"
+            style="@style/TextAppearanceBody2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -95,13 +90,12 @@
         <ImageView
             android:id="@+id/project_typeIndicator"
             style="@style/AppTheme.ProjectTypeIndicator"
-            typeIndicator="@{project.type()}"
+            typeIndicator="@{viewState.projectType}"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/project_title"
             tools:backgroundTint="@color/colorPrimary"
-            tools:ignore="ContentDescription"
             tools:src="@drawable/ic_type_app"
             />
 

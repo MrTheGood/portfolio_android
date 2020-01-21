@@ -21,6 +21,8 @@ import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -29,6 +31,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.data.model.Project
+import eu.insertcode.portfolio.main.data.models.ProjectType
 
 /**
  * Created by maartendegoede on 09/10/2018.
@@ -69,6 +72,34 @@ fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
     if (type != null) {
         ViewCompat.setBackgroundTintList(view, view.getColorStateList(type.color))
         view.setImageResource(type.icon)
+    }
+}
+
+@BindingAdapter("typeIndicator")
+fun bindTypeIndicator(view: ImageView, type: ProjectType?) {
+    if (type != null) {
+        @DrawableRes
+        val icon =
+                when (type) {
+                    ProjectType.APP -> R.drawable.ic_type_app
+                    ProjectType.GAME -> R.drawable.ic_type_game
+                    ProjectType.WEB -> R.drawable.ic_type_web
+                    ProjectType.WATCH -> R.drawable.ic_type_watch
+                    ProjectType.OTHER -> R.drawable.ic_type_other
+                }
+
+        @ColorRes
+        val color =
+                when (type) {
+                    ProjectType.APP -> R.color.indicatorType_app
+                    ProjectType.GAME -> R.color.indicatorType_game
+                    ProjectType.WEB -> R.color.indicatorType_web
+                    ProjectType.WATCH -> R.color.indicatorType_watch
+                    ProjectType.OTHER -> R.color.indicatorType_other
+                }
+
+        ViewCompat.setBackgroundTintList(view, view.getColorStateList(color))
+        view.setImageResource(icon)
     }
 }
 

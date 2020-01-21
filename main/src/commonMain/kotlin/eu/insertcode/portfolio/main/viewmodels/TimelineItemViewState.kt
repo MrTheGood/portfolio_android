@@ -17,6 +17,8 @@
 package eu.insertcode.portfolio.main.viewmodels
 
 import eu.insertcode.portfolio.main.data.models.Project
+import eu.insertcode.portfolio.main.data.models.ProjectType
+import eu.insertcode.portfolio.main.data.models.toProjectType
 
 /**
  * Created by maartendegoede on 2019-09-21.
@@ -26,17 +28,19 @@ data class TimelineItemViewState(
         private val project: Project,
 
         val id: String = project.id,
-        val thumbnailImage: String? = project.images.firstOrNull(),
+        val titleLabelText: String = project.title,
 
-        //todo: add
-//                val typeIndicatorBackgroundColor: Int = project.type.color,
-//                val typeIndicatorIcon: Int = project.type.icon,
+        val isThumbnailImageVisible: Boolean = project.images.isNotEmpty(),
+        val thumbnailImageUrl: String? = project.images.firstOrNull(),
 
-        val isTitleLabelVisible: Boolean = project.title != null,
-        val titleLabelText: String? = project.title,
+        val isDescriptionLabelVisible: Boolean = project.images.isEmpty(),
+        val descriptionLabelText: String? = project.description,
 
-        val isDateLabelVisible: Boolean = project.date != null,
-        val dateLabelText: String? = project.date,
+        val projectType: ProjectType = project.type.toProjectType(),
+
+        val locationLabelText: String = project.location,
+        val dateLabelText: String = project.startedAt?.toString()
+            ?: "Sometime", //todo: implement readable string thing
 
         val tags: List<TagViewState> = project.tags.map { TagViewState(it) }
 ) {

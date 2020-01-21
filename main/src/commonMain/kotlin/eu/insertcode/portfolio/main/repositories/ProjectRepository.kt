@@ -43,10 +43,11 @@ object ProjectRepository {
         if (_projects.value.isSuccess && !forceUpdate) return
         _projects.value = _projects.value.toLoading()
 
+        //todo: remove v4_support
         firestoreService.getCollection(PROJECTS,
-                equalityQueryParams = mapOf("listed" to true),
+                equalityQueryParams = mapOf("listed" to true, "v4_support" to true),
                 transform = { Project(it) }) { result ->
-            _projects.value = result
+            _projects.value = result.copy(data = result.data?.sortedByDescending { it.updatedAt?.seconds ?: it.listedAt.seconds })
         }
     }
 

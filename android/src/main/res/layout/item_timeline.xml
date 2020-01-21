@@ -34,77 +34,132 @@
             />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         transitionName="@{viewState.id}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:elevation="0dp"
-        android:foreground="?selectableItemBackground"
-        android:onClick="@{onClickListener}"
-        tools:ignore="UnusedAttribute"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#dedede"
+        app:strokeWidth="1dp"
         >
 
-        <ImageView
-            android:id="@+id/project_image"
-            imageFromUrl="@{viewState.thumbnailImage}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:background="@color/image_background"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@tools:sample/backgrounds/scenic"
-            />
-
-        <ImageView
-            android:id="@+id/project_typeIndicator"
-            style="@style/AppTheme.ProjectTypeIndicator"
-            typeIndicator="@{project.type()}"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/project_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/project_title"
-            tools:backgroundTint="@color/colorPrimary"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_type_app"
-            />
-
-        <TextView
-            android:id="@+id/project_title"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            visibleIf="@{viewState.isTitleLabelVisible}"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:singleLine="true"
-            android:text="@{viewState.titleLabelText}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
-            app:layout_constraintTop_toBottomOf="@id/project_image"
-            tools:text="@tools:sample/lorem"
-            />
+            android:foreground="?selectableItemBackground"
+            android:onClick="@{onClickListener}"
+            >
 
-        <TextView
-            android:id="@+id/project_date"
-            style="@style/TextAppearance.MaterialComponents.Body2"
-            visibleIf="@{viewState.isDateLabelVisible}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@{viewState.dateLabelText}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/project_title"
-            app:layout_constraintStart_toStartOf="@id/project_title"
-            app:layout_constraintTop_toBottomOf="@id/project_title"
-            tools:text="@tools:sample/date/day_of_week"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/project_title"
+                style="@style/TextAppearanceHeadline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewState.titleLabelText}"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem"
+                />
+
+            <!-- todo: remove workaround for corner radius-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/project_image"
+                android:layout_width="match_parent"
+                visibleIf="@{viewState.isThumbnailImageVisible}"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:elevation="0dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_title"
+                >
+
+                <ImageView
+                    imageFromUrl="@{viewState.thumbnailImageUrl}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/image_background"
+                    android:scaleType="centerCrop"
+                    tools:src="@tools:sample/backgrounds/scenic"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/project_description"
+                style="@style/TextAppearanceBody1"
+                visibleIf="@{viewState.isDescriptionLabelVisible}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="4"
+                android:text="@{viewState.descriptionLabelText}"
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_image"
+                tools:text="@tools:sample/lorem/random"
+                />
+
+
+            <ImageView
+                android:id="@+id/project_typeIndicator"
+                style="@style/AppTheme.ProjectTypeIndicator"
+                typeIndicator="@{viewState.projectType}"
+                android:layout_margin="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/project_description"
+                tools:backgroundTint="@color/colorPrimary"
+                tools:src="@drawable/ic_type_app"
+                />
+
+            <TextView
+                android:id="@+id/project_location"
+                style="@style/TextAppearanceBody2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{viewState.locationLabelText}"
+                android:textColor="#777"
+                app:layout_constraintBottom_toTopOf="@id/project_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+                app:layout_constraintTop_toTopOf="@id/project_typeIndicator"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="@tools:sample/lorem"
+                />
+
+            <TextView
+                android:id="@+id/project_date"
+                style="@style/TextAppearanceBody2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{viewState.dateLabelText}"
+                android:textColor="#777"
+                app:layout_constraintBottom_toBottomOf="@id/project_typeIndicator"
+                app:layout_constraintEnd_toEndOf="@id/project_location"
+                app:layout_constraintStart_toStartOf="@id/project_location"
+                app:layout_constraintTop_toBottomOf="@id/project_location"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="@tools:sample/date/mmddyy"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
