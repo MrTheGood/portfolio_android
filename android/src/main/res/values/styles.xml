@@ -26,8 +26,6 @@
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
-
-        <item name="fontFamily">@font/nunito</item>
     </style>
 
     <style name="AppTheme.Divider">
@@ -52,6 +50,60 @@
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+
+    <!-- Text Styles -->
+
+    <style name="TextAppearanceHeadline4" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+
+    <style name="TextAppearanceHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="TextAppearanceHeadline6" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/comfortaa_semibold</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+
+    <style name="TextAppearanceBody1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+
+    <style name="TextAppearanceBody1Small" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+
+    <style name="TextAppearanceBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="TextAppearanceCaptionSmall" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/robotomono_regular</item>
+        <item name="android:textSize">7sp</item>
+    </style>
+
+    <style name="TextAppearanceCaption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/robotomono_regular</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="TextAppearanceCaptionLarge" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/robotomono_regular</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 </resources>
