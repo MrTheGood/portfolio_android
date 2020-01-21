@@ -19,6 +19,7 @@ package eu.insertcode.portfolio.main.data.models
 import eu.insertcode.portfolio.main.data.CollectionItem
 import eu.insertcode.portfolio.main.data.ItemPropertyDelegate
 import eu.insertcode.portfolio.main.data.MutableData
+import eu.insertcode.portfolio.main.data.Timestamp
 import eu.insertcode.portfolio.main.data.models.ProjectType.OTHER
 import eu.insertcode.portfolio.main.services.FirestoreDocument
 
@@ -31,14 +32,19 @@ data class Project(
         override var data: MutableData
 ) : CollectionItem() {
 
-    val date: String? by data.withDefault { null }
-    val description: String? by data.withDefault { null }
+    val description: String by data
+    val endedAt: Timestamp? by data.withDefault { null }
     val images: List<String> by data.withDefault { emptyList<String>() }
-    val importance: Int by data.withDefault { 0 }
-    val links by ItemPropertyDelegate(data) { ProjectLinks(it) }
-    val tags: List<String> by data.withDefault { emptyList<String>() }
-    val title: String? by data.withDefault { null }
+    val links: ProjectLinks by ItemPropertyDelegate(data) { ProjectLinks(it) }
+    val listed: Boolean by data
+    val listedAt: Timestamp by data
+    val location: String by data
+    val startedAt: Timestamp? by data.withDefault { null }
+    val state: String by data
+    val tags: List<String> by data
+    val title: String by data
     val type: String by data.withDefault { OTHER.type }
+    val updatedAt: Timestamp? by data.withDefault { null }
 
     constructor(document: FirestoreDocument) : this(document.path, document.data)
 }
