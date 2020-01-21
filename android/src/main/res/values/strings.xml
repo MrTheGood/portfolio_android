@@ -31,6 +31,5 @@
     <string name="action_share">Share…</string>
 
     <!-- Strings -->
-    <string name="string_share_app">Check out insertCode\'s Portfolio: https://portfolio.insertcode.eu/</string>
     <string name="string_share_project">Check out this project by insertCode: https://portfolio.insertcode.eu/projects/%s</string>
 </resources>

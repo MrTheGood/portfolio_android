@@ -17,9 +17,10 @@
 package eu.insertcode.portfolio.ui.portfolio
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.icerock.moko.mvvm.MvvmFragment
 import dev.icerock.moko.mvvm.createViewModelFactory
@@ -28,9 +29,7 @@ import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.databinding.FragmentPortfolioBinding
 import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewModel
 import eu.insertcode.portfolio.ui.anim.PortfolioExit
-import eu.insertcode.portfolio.util.analyticsShareApp
 import eu.insertcode.portfolio.util.isNetworkAvailable
-import eu.insertcode.portfolio.util.startTextShareIntent
 
 /**
  * Created by maartendegoede on 11/09/2018.
@@ -61,29 +60,14 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
         )
         binding.projectsRecycler.run {
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
             adapter = portfolioAdapter
         }
         viewModel.viewState.ld().observe(viewLifecycleOwner, Observer {
             portfolioAdapter.submitList(it?.timelineItemViewStates ?: emptyList())
         })
 
-        setHasOptionsMenu(true)
-
         return view
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_portfolio, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) =
-            if (item.itemId == R.id.menu_share) {
-                startTextShareIntent(getString(R.string.string_share_app))
-                analyticsShareApp()
-                true
-            } else super.onOptionsItemSelected(item)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -19,7 +19,6 @@ package eu.insertcode.portfolio
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by maartendegoede on 23/08/2018.
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
         findNavController(R.id.nav_host).addOnDestinationChangedListener { _, destination, _ ->
             title = destination.label
