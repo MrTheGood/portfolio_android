@@ -22,6 +22,5 @@ package eu.insertcode.portfolio.main.data
  */
 abstract class CollectionItem : Item() {
     abstract val path: String
-    val id: String
-        get() = path.split("/").last()
+    val id: String by lazy { path.split("/").last() }
 }

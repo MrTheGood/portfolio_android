@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,6 +16,16 @@
 
 package eu.insertcode.portfolio.main.services
 
-actual object ServiceProvider {
-    actual val firestoreService: MainFirestoreService = FirestoreService()
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+
+/**
+ * Created by maartendegoede on 08/02/2020.
+ * Copyright © 2020 Maarten de Goede. All rights reserved.
+ */
+class AndroidConnectivityService(
+        private val context: Context
+) : ConnectivityService {
+    override fun isNetworkAvailable() = (context.getSystemService(Application.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo?.isConnected == true
 }

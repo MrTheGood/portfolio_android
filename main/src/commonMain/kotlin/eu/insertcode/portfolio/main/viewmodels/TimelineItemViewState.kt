@@ -33,8 +33,8 @@ data class TimelineItemViewState(
         val isThumbnailImageVisible: Boolean = project.images.isNotEmpty(),
         val thumbnailImageUrl: String? = project.images.firstOrNull(),
 
-        val isDescriptionLabelVisible: Boolean = project.images.isEmpty(),
-        val descriptionLabelText: String? = project.description,
+        val isDescriptionLabelVisible: Boolean = !isThumbnailImageVisible,
+        val descriptionLabelText: String = project.description,
 
         val projectType: ProjectType = project.type.toProjectType(),
 
@@ -42,9 +42,6 @@ data class TimelineItemViewState(
         val dateLabelText: String = project.startedAt?.toString()
             ?: "Sometime", //todo: implement readable string thing
 
-        val tags: List<TagViewState> = project.tags.map { TagViewState(it) }
-) {
-    enum class TimelineViewError {
-        NoContent
-    }
-}
+        val isTagCollectionVisible: Boolean = isThumbnailImageVisible,
+        val tagViewStates: List<TagViewState> = project.tags.map { TagViewState(it) }
+)

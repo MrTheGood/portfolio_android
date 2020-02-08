@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,10 +17,9 @@
 package eu.insertcode.portfolio.main.services
 
 /**
- * Created by maartendegoede on 2019-09-23.
- * Copyright © 2019 Maarten de Goede. All rights reserved.
+ * Created by maartendegoede on 08/02/2020.
+ * Copyright © 2020 Maarten de Goede. All rights reserved.
  */
-object ServiceProvider {
-    lateinit var firestoreService: FirestoreService
-    lateinit var connectivityService: ConnectivityService
+interface ConnectivityService {
+    fun isNetworkAvailable(): Boolean
 }

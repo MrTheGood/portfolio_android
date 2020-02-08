@@ -19,7 +19,7 @@ package eu.insertcode.portfolio.main.services
 import com.google.firebase.firestore.*
 import eu.insertcode.portfolio.main.data.*
 
-class FirestoreService : MainFirestoreService {
+class AndroidFirestoreService : FirestoreService {
     private val firestore
         get() = FirebaseFirestore.getInstance()
 

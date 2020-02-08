@@ -25,7 +25,7 @@ import eu.insertcode.portfolio.main.data.Resource
  * Created by maartendegoede on 2019-09-23.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-interface MainFirestoreService {
+interface FirestoreService {
     fun removeListener(listener: Any)
 
     // Create

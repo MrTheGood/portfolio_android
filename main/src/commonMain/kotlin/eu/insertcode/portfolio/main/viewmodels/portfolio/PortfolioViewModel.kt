@@ -16,23 +16,32 @@
 
 package eu.insertcode.portfolio.main.viewmodels.portfolio
 
+import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import eu.insertcode.portfolio.main.data.*
+import eu.insertcode.portfolio.main.data.Resource
+import eu.insertcode.portfolio.main.data.isLoading
+import eu.insertcode.portfolio.main.data.isSuccess
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
-import eu.insertcode.portfolio.main.viewmodels.HighlightViewState
+import eu.insertcode.portfolio.main.services.ServiceProvider
 import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
-import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState.TimelineViewError
+import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error
+import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.TimelineCollectionError
 
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
-class PortfolioViewModel : ViewModel() {
-    private lateinit var projects: Resource<List<Project>, PortfolioViewState.Error>
+class PortfolioViewModel(
+        val eventsDispatcher: EventsDispatcher<EventsListener>
+) : ViewModel() {
+    private lateinit var projects: Resource<List<Project>, Error>
+
+    private val isNetworkAvailable
+        get() = ServiceProvider.connectivityService.isNetworkAvailable()
 
     // UI
     private val _viewState = MutableLiveData<PortfolioViewState?>(null)
@@ -41,11 +50,9 @@ class PortfolioViewModel : ViewModel() {
     // Configure
     fun configure() {
         ProjectRepository.getProjects()
-        ProjectRepository.projects.addObserver {
-            projects = it.run {
-                val isInternetAvailable = true // todo: implement isInternetAvailable check
-                val error = it.error?.let { if (isInternetAvailable) PortfolioViewState.Error.UnknownError else PortfolioViewState.Error.NoInternet }
-
+        ProjectRepository.projects.addObserver { resource ->
+            projects = resource.run {
+                val error = error?.let { if (isNetworkAvailable) Error.UnknownError else Error.NoInternet }
                 Resource(state, data, error)
             }
             updateViewState()
@@ -54,7 +61,7 @@ class PortfolioViewModel : ViewModel() {
 
     private fun updateViewState() {
         val timelineViewStates = projects.data?.map { TimelineItemViewState(it) } ?: emptyList()
-        val highlightViewStates = projects.data?.map { HighlightViewState(it) } ?: emptyList()
+        val highlightViewStates = projects.data?.map { TimelineItemViewState(it) } ?: emptyList()
 
         _viewState.value = PortfolioViewState(
                 errorViewError = projects.error,
@@ -62,30 +69,32 @@ class PortfolioViewModel : ViewModel() {
 
                 isTimelineVisible = projects.isSuccess,
                 timelineItemViewStates = timelineViewStates,
-                timelineViewError = TimelineViewError.NoContent.takeIf { timelineViewStates.isEmpty() },
+                timelineViewError = TimelineCollectionError.NoContent.takeIf { timelineViewStates.isEmpty() },
 
                 isHighlightsVisible = projects.isSuccess && highlightViewStates.isNotEmpty(),
                 highlightViewStates = highlightViewStates
         )
     }
 
+
     // Actions
 
     fun onProjectItemTapped(projectId: String) {
-        navigateToProject.newEvent(projectId)
+        eventsDispatcher.dispatchEvent { navigateToProject(projectId) }
     }
 
     fun onErrorViewTapped() {
-        projects = Resource.success(listOf(
-                //todo: actual data
-        ))
+        ProjectRepository.getProjects()
     }
 
     fun onRefreshViewSwiped() {
         ProjectRepository.getProjects(true)
     }
 
-    // Reactions
-    /** @sample navigateToProject(projectId) */
-    val navigateToProject: MutableLiveData<Event<String?>> = MutableLiveData(Event(null))
+
+    // Events
+
+    interface EventsListener {
+        fun navigateToProject(projectId: String)
+    }
 }

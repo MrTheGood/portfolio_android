@@ -17,6 +17,9 @@
 package eu.insertcode.portfolio
 
 import androidx.multidex.MultiDexApplication
+import eu.insertcode.portfolio.main.services.AndroidConnectivityService
+import eu.insertcode.portfolio.main.services.AndroidFirestoreService
+import eu.insertcode.portfolio.main.services.ServiceProvider
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -31,5 +34,8 @@ class PortfolioApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(DebugTree())
+
+        ServiceProvider.firestoreService = AndroidFirestoreService()
+        ServiceProvider.connectivityService = AndroidConnectivityService(this)
     }
 }

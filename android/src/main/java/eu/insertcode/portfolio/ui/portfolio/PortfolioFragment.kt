@@ -21,28 +21,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import dev.icerock.moko.mvvm.MvvmFragment
 import dev.icerock.moko.mvvm.createViewModelFactory
+import dev.icerock.moko.mvvm.dispatcher.eventsDispatcherOnMain
 import eu.insertcode.portfolio.BR
 import eu.insertcode.portfolio.R
 import eu.insertcode.portfolio.databinding.FragmentPortfolioBinding
 import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewModel
 import eu.insertcode.portfolio.ui.anim.PortfolioExit
-import eu.insertcode.portfolio.util.isNetworkAvailable
 
 /**
  * Created by maartendegoede on 11/09/2018.
  * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
-class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewModel>() {
-
+class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewModel>(), PortfolioViewModel.EventsListener {
 
     override val layoutId = R.layout.fragment_portfolio
     override val viewModelClass = PortfolioViewModel::class.java
     override val viewModelVariableId = BR.viewModel
 
-    override fun viewModelFactory() = createViewModelFactory { PortfolioViewModel() }
+    override fun viewModelFactory() = createViewModelFactory { PortfolioViewModel(eventsDispatcherOnMain()) }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -51,17 +49,14 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
 
-        binding.isNetworkAvailable = requireContext().isNetworkAvailable()
+        viewModel.eventsDispatcher.bind(
+                lifecycleOwner = this,
+                listener = this
+        )
         viewModel.configure()
 
-        //todo: possibly use viewModel with an EventsDispatcher
-        val portfolioAdapter = PortfolioAdapter(
-                viewModel::onProjectItemTapped
-        )
-        binding.projectsRecycler.run {
-            layoutManager = LinearLayoutManager(context)
-            adapter = portfolioAdapter
-        }
+        val portfolioAdapter = PortfolioAdapter(viewModel::onProjectItemTapped)
+        binding.projectsRecycler.adapter = portfolioAdapter
         viewModel.viewState.ld().observe(viewLifecycleOwner, Observer {
             portfolioAdapter.submitList(it?.timelineItemViewStates ?: emptyList())
         })
@@ -72,5 +67,10 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exitTransition = PortfolioExit()
+    }
+
+
+    override fun navigateToProject(projectId: String) {
+        //todo: navigation
     }
 }
