@@ -30,7 +30,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import eu.insertcode.portfolio.R
-import eu.insertcode.portfolio.data.model.Project
 import eu.insertcode.portfolio.main.data.models.ProjectType
 
 /**
@@ -65,14 +64,6 @@ fun bindTransitionName(view: View, transitionName: String?) {
 @BindingAdapter("elevation")
 fun bindElevation(view: View, elevation: Float) {
     ViewCompat.setElevation(view, elevation)
-}
-
-@BindingAdapter("typeIndicator")
-fun bindTypeIndicator(view: ImageView, type: Project.Type?) {
-    if (type != null) {
-        ViewCompat.setBackgroundTintList(view, view.getColorStateList(type.color))
-        view.setImageResource(type.icon)
-    }
 }
 
 @BindingAdapter("typeIndicator")

@@ -29,8 +29,8 @@
             />
 
         <variable
-            name="project"
-            type="eu.insertcode.portfolio.data.model.Project"
+            name="viewState"
+            type="eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState"
             />
     </data>
 
