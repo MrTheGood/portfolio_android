@@ -16,6 +16,7 @@
 
 package eu.insertcode.portfolio.util
 
+import android.content.res.ColorStateList
 import android.os.Build
 import android.text.Html
 import android.view.View
@@ -23,10 +24,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import eu.insertcode.portfolio.R
@@ -106,12 +106,9 @@ fun bindTextFromHtml(view: TextView, text: String?) {
     }
 }
 
-@BindingAdapter("isRefreshing")
-fun bindIsRefreshing(view: SwipeRefreshLayout, boolean: Boolean) {
-    view.isRefreshing = boolean
-}
 
-@BindingAdapter("onRefresh")
-fun bindOnRefresh(view: SwipeRefreshLayout, listener: OnRefreshListener) {
-    view.setOnRefreshListener(listener)
+@BindingAdapter("tagBackgroundTint")
+fun bindTagBackgroundTint(view: View, color: String?) {
+    val color = color ?: return
+    ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf("#$color".toColorInt()))
 }

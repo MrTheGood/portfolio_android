@@ -22,6 +22,7 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import eu.insertcode.portfolio.main.data.Resource
+import eu.insertcode.portfolio.main.data.isError
 import eu.insertcode.portfolio.main.data.isLoading
 import eu.insertcode.portfolio.main.data.isSuccess
 import eu.insertcode.portfolio.main.data.models.Project
@@ -47,15 +48,22 @@ class PortfolioViewModel(
     private val _viewState = MutableLiveData<PortfolioViewState?>(null)
     val viewState: LiveData<PortfolioViewState?> = _viewState.readOnly()
 
+    private val _isNewProjectsLabelVisible = MutableLiveData(false)
+    val isNewProjectsLabelVisible = _isNewProjectsLabelVisible.readOnly()
+
     // Configure
     fun configure() {
-        ProjectRepository.getProjects()
+        ProjectRepository.observeProjects()
+
         ProjectRepository.projects.addObserver { resource ->
             projects = resource.run {
                 val error = error?.let { if (isNetworkAvailable) Error.UnknownError else Error.NoInternet }
                 Resource(state, data, error)
             }
-            updateViewState()
+
+            if (viewState.value?.timelineItemViewStates.isNullOrEmpty())
+                updateViewState()
+            else _isNewProjectsLabelVisible.value = true
         }
     }
 
@@ -63,15 +71,16 @@ class PortfolioViewModel(
         val timelineViewStates = projects.data?.map { TimelineItemViewState(it) } ?: emptyList()
         val highlightViewStates = projects.data?.map { TimelineItemViewState(it) } ?: emptyList()
 
+        _isNewProjectsLabelVisible.value = false
         _viewState.value = PortfolioViewState(
                 errorViewError = projects.error,
-                isLoading = projects.isLoading,
+                isLoading = projects.isLoading && projects.data.isNullOrEmpty(),
 
-                isTimelineVisible = projects.isSuccess,
+                isTimelineVisible = !projects.isError && timelineViewStates.isNotEmpty(),
                 timelineItemViewStates = timelineViewStates,
-                timelineViewError = TimelineCollectionError.NoContent.takeIf { timelineViewStates.isEmpty() },
+                timelineViewError = TimelineCollectionError.NoContent.takeIf { projects.isSuccess && timelineViewStates.isEmpty() },
 
-                isHighlightsVisible = projects.isSuccess && highlightViewStates.isNotEmpty(),
+                isHighlightsVisible = !projects.isError && highlightViewStates.isNotEmpty(),
                 highlightViewStates = highlightViewStates
         )
     }
@@ -84,11 +93,11 @@ class PortfolioViewModel(
     }
 
     fun onErrorViewTapped() {
-        ProjectRepository.getProjects()
+        ProjectRepository.observeProjects()
     }
 
-    fun onRefreshViewSwiped() {
-        ProjectRepository.getProjects(true)
+    fun onNewProjectsLabelTapped() {
+        updateViewState()
     }
 
 

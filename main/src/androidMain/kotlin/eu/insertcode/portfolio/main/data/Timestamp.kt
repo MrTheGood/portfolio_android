@@ -16,6 +16,7 @@
 
 package eu.insertcode.portfolio.main.data
 
+import android.text.format.DateUtils
 import java.util.*
 
 actual class Timestamp actual constructor(
@@ -23,6 +24,10 @@ actual class Timestamp actual constructor(
 ) {
     actual val dateValue: Any
         get() = Date(seconds * 1000)
+
+    actual fun toReadableString() =
+            DateUtils.getRelativeTimeSpanString((dateValue as Date).time).toString()
+
 
     actual companion object {
         actual fun current() =

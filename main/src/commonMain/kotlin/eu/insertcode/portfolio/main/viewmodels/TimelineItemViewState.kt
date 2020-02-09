@@ -39,8 +39,7 @@ data class TimelineItemViewState(
         val projectType: ProjectType = project.type.toProjectType(),
 
         val locationLabelText: String = project.location,
-        val dateLabelText: String = project.startedAt?.toString()
-            ?: "Sometime", //todo: implement readable string thing
+        val lastUpdateDateLabelText: String = (project.updatedAt ?: project.endedAt ?: project.startedAt ?: project.listedAt).toReadableString(),
 
         val isTagCollectionVisible: Boolean = isThumbnailImageVisible,
         val tagViewStates: List<TagViewState> = project.tags.map { TagViewState(it) }

@@ -19,33 +19,63 @@ package eu.insertcode.portfolio.ui.portfolio
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.util.Pools.SimplePool
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import eu.insertcode.portfolio.databinding.ItemTagBinding
 import eu.insertcode.portfolio.databinding.ItemTimelineBinding
 import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
+import kotlinx.android.synthetic.main.item_timeline.view.*
+import timber.log.Timber
 
 /**
  * Created by maartendegoede on 18/09/2018.
  * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 class PortfolioAdapter(
-        val onTimelineItemTapped: (id: String) -> Unit
+        private val onTimelineItemTapped: (id: String) -> Unit
 ) : ListAdapter<TimelineItemViewState, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
+    private val tagViewPool = SimplePool<ItemTagBinding>(20)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val item = getItem(position)
             viewState = item
             onClickListener = View.OnClickListener { onTimelineItemTapped(item.id) }
+            holder.bindTags()
             executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(ItemTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ViewHolder(ItemTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false), tagViewPool)
 
-    class ViewHolder(val binding: ItemTimelineBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(
+            val binding: ItemTimelineBinding,
+            private val tagViewPool: SimplePool<ItemTagBinding>
+    ) : RecyclerView.ViewHolder(binding.root) {
+        var tagBindings = ArrayList<ItemTagBinding>()
+
+        fun bindTags() {
+            val tagsLayout = binding.root.project_tags_layout
+
+            tagBindings.forEach { if (!tagViewPool.release(it)) Timber.w("Couldn't release tag view. Consider increasing pool size.") }
+            tagBindings.clear()
+            tagsLayout.removeAllViews()
+
+            binding.viewState!!.tagViewStates.forEach { viewState ->
+                val tagView = tagViewPool.acquire()
+                    ?: ItemTagBinding.inflate(LayoutInflater.from(tagsLayout.context), tagsLayout, false).apply {
+                        lifecycleOwner = binding.lifecycleOwner
+                    }
+
+                tagView.viewState = viewState
+                tagView.executePendingBindings()
+                tagsLayout.addView(tagView.root)
+            }
+        }
+    }
 
     class ProjectCallback : DiffUtil.ItemCallback<TimelineItemViewState>() {
         override fun areItemsTheSame(oldItem: TimelineItemViewState, newItem: TimelineItemViewState) =

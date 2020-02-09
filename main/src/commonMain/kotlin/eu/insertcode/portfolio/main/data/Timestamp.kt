@@ -20,6 +20,8 @@ expect class Timestamp(seconds: Long) {
     val seconds: Long
     val dateValue: Any
 
+    fun toReadableString(): String
+
     companion object {
         fun current(): Timestamp
     }

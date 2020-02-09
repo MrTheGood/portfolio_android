@@ -69,8 +69,8 @@
             <!-- todo: remove workaround for corner radius-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/project_image"
-                android:layout_width="match_parent"
                 visibleIf="@{viewState.isThumbnailImageVisible}"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
                 android:elevation="0dp"
@@ -92,6 +92,21 @@
                     />
 
             </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/project_tags_layout"
+                visibleIf="@{viewState.isTagCollectionVisible}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/project_image"
+                app:layout_constraintEnd_toEndOf="@id/project_image"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="@id/project_image"
+                />
 
             <TextView
                 android:id="@+id/project_description"
@@ -145,17 +160,31 @@
                 />
 
             <TextView
+                android:id="@+id/project_date_prefix"
+                style="@style/TextAppearanceBody2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last update:"
+                android:textColor="#777"
+                app:layout_constraintBottom_toBottomOf="@id/project_date"
+                app:layout_constraintEnd_toStartOf="@id/project_date"
+                app:layout_constraintStart_toStartOf="@id/project_location"
+                app:layout_constraintTop_toTopOf="@id/project_date"
+                />
+
+            <TextView
                 android:id="@+id/project_date"
                 style="@style/TextAppearanceBody2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginStart="4dp"
                 android:singleLine="true"
-                android:text="@{viewState.dateLabelText}"
+                android:text="@{viewState.lastUpdateDateLabelText}"
                 android:textColor="#777"
                 app:layout_constraintBottom_toBottomOf="@id/project_typeIndicator"
                 app:layout_constraintEnd_toEndOf="@id/project_location"
-                app:layout_constraintStart_toStartOf="@id/project_location"
+                app:layout_constraintStart_toEndOf="@id/project_date_prefix"
                 app:layout_constraintTop_toBottomOf="@id/project_location"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="@tools:sample/date/mmddyy"

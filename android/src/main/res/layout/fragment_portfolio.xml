@@ -37,33 +37,45 @@
         android:layout_height="match_parent"
         >
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/projectsRefresh"
-            isRefreshing="@{viewModel.viewState.ld().isLoading}"
-            onRefresh="@{() -> viewModel.onRefreshViewSwiped()}"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/projectsRecycler"
+            visibleIf="@{viewModel.viewState.ld().isTimelineVisible}"
             android:layout_width="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_height="match_parent"
-            >
+            android:clipToPadding="false"
+            android:paddingBottom="24dp"
+            tools:listitem="@layout/item_timeline"
+            />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/projectsRecycler"
-                visibleIf="@{viewModel.viewState.ld().isTimelineVisible}"
-                android:layout_width="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="24dp"
-                tools:listitem="@layout/item_timeline"
-                />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <TextView
+            visibleIf="@{viewModel.isNewProjectsLabelVisible.ld()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_tag"
+            android:drawableStart="@drawable/ic_refresh"
+            android:drawablePadding="4dp"
+            android:drawableTint="#fff"
+            android:fontFamily="@font/robotomono_regular"
+            android:gravity="center"
+            android:onClick="@{_ -> viewModel.onNewProjectsLabelTapped()}"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="New Updates"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            />
 
         <TextView
             android:id="@+id/timelineErrorView"
             visibleIf="@{viewModel.viewState.ld().timelineViewError != null}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:text="No content available"
             />
 

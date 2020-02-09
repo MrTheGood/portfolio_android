@@ -21,7 +21,26 @@ package eu.insertcode.portfolio.main.viewmodels
  * Copyright © 2019 Maarten de Goede. All rights reserved.
  */
 data class TagViewState(
-        val tagLabelText: String
-        //todo: add
-//                    val tagBackgroundColor: String = tagLabelText.color
+        private val text: String,
+
+        val tagLabelText: String = text.toLowerCase(),
+        val tagBackgroundColor: String = tagColorFromString(tagLabelText)
 )
+
+
+private val tags: ArrayList<String> = ArrayList()
+private val tagColors = listOf(
+        "673AB7", "43A047",
+        "1E88E5", "26C6DA",
+        "AB47BC", "E91E63",
+        "F4511E", "FFA000",
+        "4054B2"
+)
+
+private fun tagColorFromString(input: String): String {
+    val tag = input.toLowerCase()
+    if (!tags.contains(tag))
+        tags.add(tag)
+
+    return tagColors[tags.indexOf(tag) % tagColors.size]
+}

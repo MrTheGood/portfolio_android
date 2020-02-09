@@ -35,22 +35,20 @@ object ProjectRepository {
     private val firestoreService
         get() = ServiceProvider.firestoreService
 
-    private val _projects: MutableLiveData<Resource<List<Project>, Exception>> =
-            MutableLiveData(Resource.loading())
+    private val _projects: MutableLiveData<Resource<List<Project>, Exception>> = MutableLiveData(Resource.loading())
     val projects: LiveData<Resource<List<Project>, Exception>> = _projects
 
-    fun getProjects(forceUpdate: Boolean = false) {
-        if (_projects.value.isSuccess && !forceUpdate) return
+    fun observeProjects() {
+        if (_projects.value.isSuccess) return
         _projects.value = _projects.value.toLoading()
 
         //todo: remove v4_support
-        firestoreService.getCollection(PROJECTS,
+        firestoreService.observeCollection(PROJECTS,
                 equalityQueryParams = mapOf("listed" to true, "v4_support" to true),
                 transform = { Project(it) }) { result ->
             _projects.value = result.copy(data = result.data?.sortedByDescending { it.updatedAt?.seconds ?: it.listedAt.seconds })
         }
     }
-
 
     fun getProjectDocument(projectId: String, forceUpdate: Boolean = false, onComplete: (Resource<Project?, Exception>) -> Unit) {
         val project = _projects.value.data?.find { it.id == projectId }
