@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import dev.icerock.moko.mvvm.MvvmFragment
 import dev.icerock.moko.mvvm.createViewModelFactory
 import dev.icerock.moko.mvvm.dispatcher.eventsDispatcherOnMain
@@ -71,6 +72,7 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
 
 
     override fun navigateToProject(projectId: String) {
-        //todo: navigation
+        val direction = PortfolioFragmentDirections.actionProjectDetail(projectId)
+        view?.findNavController()?.navigate(direction)
     }
 }
