@@ -29,19 +29,18 @@
     </data>
 
     <TextView
+        style="@style/TextAppearanceCaptionSmall"
         tagBackgroundTint="@{viewState.tagBackgroundColor}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:background="@drawable/background_tag"
-        android:fontFamily="@font/robotomono_regular"
         android:paddingStart="8dp"
         android:paddingTop="1.5dp"
         android:paddingEnd="8dp"
         android:paddingBottom="3dp"
         android:text="@{viewState.tagLabelText}"
         android:textColor="#fff"
-        android:textSize="10sp"
         tools:text="@tools:sample/lorem"
         />
 

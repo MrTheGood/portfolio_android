@@ -58,16 +58,13 @@
             android:drawableStart="@drawable/ic_refresh"
             android:drawablePadding="4dp"
             android:drawableTint="#fff"
-            android:fontFamily="@font/robotomono_regular"
             android:gravity="center"
             android:onClick="@{_ -> viewModel.onNewProjectsLabelTapped()}"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
             android:text="New Updates"
+            android:textAppearance="@style/TextAppearanceCaptionLarge"
             android:textColor="#fff"
-            android:textSize="14sp"
             />
 
         <TextView
@@ -114,7 +111,7 @@
 
             <TextView
                 android:id="@+id/projectsError_text"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearanceBody1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
