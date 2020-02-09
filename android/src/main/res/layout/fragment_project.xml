@@ -21,10 +21,8 @@
 
     <data>
 
-        <import
-            type="eu.insertcode.portfolio.main.viewmodels.project.ProjectViewState.Error"
-            alias="E"
-            />
+        <import type="eu.insertcode.portfolio.main.viewmodels.project.ProjectViewState.Error" alias="E"/>
+        <import type="eu.insertcode.portfolio.util.WindowInset" />
 
         <variable
             name="viewModel"
@@ -45,10 +43,12 @@
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                bottomSystemWindowInsets="@{WindowInset.Margin}"
+                topSystemWindowInsets="@{WindowInset.Margin}"
                 transitionName="@{viewModel.viewState.ld().id}"
-                android:layout_marginHorizontal="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
                 >
 
                 <TextView
@@ -196,7 +196,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:minHeight="0dp"
-                    android:onClick="@{_ -> viewModel.onLinkItemTapped(viewModel.viewState.value.webLinkText)}"
+                    android:onClick="@{_ -> viewModel.onLinkItemTapped(viewModel.viewState.value.webLink)}"
                     android:paddingHorizontal="4dp"
                     android:singleLine="true"
                     android:text="@{viewModel.viewState.ld().webLinkText}"
