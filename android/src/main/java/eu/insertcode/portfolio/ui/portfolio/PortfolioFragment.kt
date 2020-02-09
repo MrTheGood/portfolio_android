@@ -65,6 +65,11 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.screenPresented()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exitTransition = PortfolioExit()

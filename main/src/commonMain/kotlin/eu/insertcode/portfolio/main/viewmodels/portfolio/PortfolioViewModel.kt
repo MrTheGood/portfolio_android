@@ -85,6 +85,10 @@ class PortfolioViewModel(
 
     // Actions
 
+    fun screenPresented() {
+        updateViewState()
+    }
+
     fun onProjectItemTapped(projectId: String) {
         eventsDispatcher.dispatchEvent { navigateToProject(projectId) }
     }

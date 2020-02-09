@@ -26,6 +26,7 @@ import eu.insertcode.portfolio.main.data.MutableData
 data class ProjectLinks(
         override val data: MutableData
 ) : Item() {
+    val appstore: String? by data.withDefault { null }
     val github: String? by data.withDefault { null }
     val playstore: String? by data.withDefault { null }
     val link: String? by data.withDefault { null }
