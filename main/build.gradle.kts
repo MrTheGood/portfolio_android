@@ -36,6 +36,7 @@ android {
 
 kotlin {
     //todo: add IOS
+    //todo: add Web
 
     android("android")
 
