@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~    Copyright 2020 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import
+            type="eu.insertcode.portfolio.main.viewmodels.project.ProjectViewState.Error"
+            alias="E"
+            />
+
+        <variable
+            name="viewModel"
+            type="eu.insertcode.portfolio.main.viewmodels.project.ProjectViewModel"
+            />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="always"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                transitionName="@{viewModel.viewState.ld().id}"
+                android:layout_marginHorizontal="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/project_title"
+                    style="@style/TextAppearanceHeadline5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{viewModel.viewState.ld().titleLabelText}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/lorem"
+                    />
+
+                <!-- todo: remove workaround for corner radius-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/project_image"
+                    visibleIf="@{viewModel.viewState.ld().isImageVisible}"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="8dp"
+                    android:elevation="0dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_title"
+                    >
+
+                    <ImageView
+                        imageFromUrl="@{viewModel.viewState.ld().imageUrl}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/image_background"
+                        android:scaleType="centerCrop"
+                        tools:src="@tools:sample/backgrounds/scenic"
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/project_tags_layout"
+                    visibleIf="@{viewModel.viewState.ld().isTagCollectionVisible}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@id/project_image"
+                    app:layout_constraintEnd_toEndOf="@id/project_image"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="@id/project_image"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/project_typeIndicator"
+                    style="@style/AppTheme.ProjectTypeIndicator"
+                    typeIndicator="@{viewModel.viewState.ld().projectType}"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/project_description"
+                    app:layout_constraintTop_toBottomOf="@id/project_image"
+                    tools:backgroundTint="@color/colorPrimary"
+                    tools:src="@drawable/ic_type_app"
+                    />
+
+                <TextView
+                    android:id="@+id/project_location"
+                    style="@style/TextAppearanceBody2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@{viewModel.viewState.ld().locationLabelText}"
+                    android:textColor="#777"
+                    app:layout_constraintBottom_toTopOf="@id/project_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/project_typeIndicator"
+                    app:layout_constraintTop_toTopOf="@id/project_typeIndicator"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="@tools:sample/lorem"
+                    />
+
+                <TextView
+                    android:id="@+id/project_date_prefix"
+                    style="@style/TextAppearanceBody2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last update:"
+                    android:textColor="#777"
+                    app:layout_constraintBottom_toBottomOf="@id/project_date"
+                    app:layout_constraintEnd_toStartOf="@id/project_date"
+                    app:layout_constraintStart_toStartOf="@id/project_location"
+                    app:layout_constraintTop_toTopOf="@id/project_date"
+                    />
+
+                <TextView
+                    android:id="@+id/project_date"
+                    style="@style/TextAppearanceBody2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:layout_marginStart="4dp"
+                    android:singleLine="true"
+                    android:text="@{viewModel.viewState.ld().lastUpdateDateLabelText}"
+                    android:textColor="#777"
+                    app:layout_constraintBottom_toBottomOf="@id/project_typeIndicator"
+                    app:layout_constraintEnd_toEndOf="@id/project_location"
+                    app:layout_constraintStart_toEndOf="@id/project_date_prefix"
+                    app:layout_constraintTop_toBottomOf="@id/project_location"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="@tools:sample/date/mmddyy"
+                    />
+
+                <TextView
+                    android:id="@+id/project_description"
+                    style="@style/TextAppearanceBody1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="12dp"
+                    android:text="@{viewModel.viewState.ld().descriptionLabelText}"
+                    android:textColor="#000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_typeIndicator"
+                    tools:text="@tools:sample/lorem/random"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/project_link_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    visibleIf="@{viewModel.viewState.ld().isWebLinkVisible}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="2dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{_ -> viewModel.onLinkItemTapped(viewModel.viewState.value.webLinkText)}"
+                    android:paddingHorizontal="4dp"
+                    android:singleLine="true"
+                    android:text="@{viewModel.viewState.ld().webLinkText}"
+                    android:textAppearance="@style/TextAppearanceCaption"
+                    android:textColor="@color/colorSecondaryVariant"
+                    app:icon="@drawable/ic_link"
+                    app:iconPadding="4dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/colorSecondaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_description"
+                    app:rippleColor="@color/colorSecondary"
+                    tools:text="melonmelon.dev/clapp"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/project_playstore_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    visibleIf="@{viewModel.viewState.ld().isPlaystoreLinkVisible}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="2dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{_ -> viewModel.onLinkItemTapped(viewModel.viewState.value.playstoreLink)}"
+                    android:paddingHorizontal="4dp"
+                    android:singleLine="true"
+                    android:text="get on Google Play"
+                    android:textAppearance="@style/TextAppearanceCaption"
+                    android:textColor="@color/colorSecondaryVariant"
+                    app:icon="@drawable/ic_get_app"
+                    app:iconPadding="4dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/colorSecondaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_link_button"
+                    app:rippleColor="@color/colorSecondary"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/project_github_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    visibleIf="@{viewModel.viewState.ld().isGithubLinkVisible}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="2dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:onClick="@{_ -> viewModel.onLinkItemTapped(viewModel.viewState.value.githubLink)}"
+                    android:paddingHorizontal="4dp"
+                    android:singleLine="true"
+                    android:text="view on GitHub"
+                    android:textAppearance="@style/TextAppearanceCaption"
+                    android:textColor="@color/colorSecondaryVariant"
+                    app:icon="@drawable/ic_git"
+                    app:iconPadding="4dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/colorSecondaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/project_playstore_button"
+                    app:rippleColor="@color/colorSecondary"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+        <ProgressBar
+            android:id="@+id/project_loading"
+            visibleIf="@{viewModel.viewState.ld().isLoading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+        <!-- TODO: use Error.NotFound and Error.NoInternet -->
+        <LinearLayout
+            android:id="@+id/projectError"
+            visibleIf="@{viewModel.viewState.ld().errorViewError != null}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{_ -> viewModel.onErrorViewTapped()}"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="UseCompoundDrawables"
+            >
+
+            <ImageView
+                android:id="@+id/projectError_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:src="@{viewModel.viewState.ld().errorViewError == E.NotFound ? @drawable/ic_error : @drawable/ic_error}"
+                android:tint="#5000"
+                android:tintMode="src_in"
+                tools:ignore="ContentDescription,UnusedAttribute"
+                />
+
+            <TextView
+                android:id="@+id/projectError_text"
+                style="@style/TextAppearanceBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.viewState.ld().errorViewError == E.NotFound ? @string/error_unknown : @string/error_unknown}"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

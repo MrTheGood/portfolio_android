@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2019 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">Portfolio</string>
+
+    <!-- Error -->
+    <string name="error_unknown">Oh nee! Er is iets fout gegaan :(\nProbeer het later opnieuw</string>
+    <string name="error_noConnection">Oh nee! Geen internetverbinding :(</string>
+
+    <!-- Menu titles -->
+    <string name="menu_title_link">Meer info</string>
+    <string name="menu_title_github">Github</string>
+    <string name="menu_title_share">Delen</string>
+    <string name="menu_title_get_app">Ontdek het op Google Play</string>
+
+    <!-- Actions -->
+    <string name="action_share">Delen…</string>
+
+    <!-- Strings -->
+    <string name="string_share_project">Bekijk dit project van insertCode: https://portfolio.insertcode.eu/projects/%s</string>
+</resources>
