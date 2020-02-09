@@ -24,13 +24,11 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import eu.insertcode.portfolio.main.data.Resource
 import eu.insertcode.portfolio.main.data.isError
 import eu.insertcode.portfolio.main.data.isLoading
-import eu.insertcode.portfolio.main.data.isSuccess
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
 import eu.insertcode.portfolio.main.services.ServiceProvider
 import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
 import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error
-import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.TimelineCollectionError
 
 /**
  * Created by maartendegoede on 2019-09-21.
@@ -78,7 +76,6 @@ class PortfolioViewModel(
 
                 isTimelineVisible = !projects.isError && timelineViewStates.isNotEmpty(),
                 timelineItemViewStates = timelineViewStates,
-                timelineViewError = TimelineCollectionError.NoContent.takeIf { projects.isSuccess && timelineViewStates.isEmpty() },
 
                 isHighlightsVisible = !projects.isError && highlightViewStates.isNotEmpty(),
                 highlightViewStates = highlightViewStates

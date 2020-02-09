@@ -22,9 +22,11 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.Build
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import eu.insertcode.portfolio.R
@@ -100,3 +102,49 @@ fun ViewPager.addOnPageScrollStateChangedListener(onPageScrollStateChanged: (sta
 
 fun ViewPager.addOnPageScrolledListener(addOnPageScrolled: (position: Int, positionOffset: Float, positionOffsetPixels: Int) -> Unit) =
         addSimpleOnPageChangeListener(onPageScrolled = addOnPageScrolled)
+
+
+// doOnApplyWindowInsets
+// source: https://chris.banes.dev/2019/04/12/insets-listeners-to-layouts/
+
+fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, InitialPadding, InitialMargin) -> Unit) {
+    if (Build.VERSION.SDK_INT < 20) return
+
+    val initialPadding = recordInitialPaddingForView(this)
+    val initialMargin = recordInitialMarginForView(this)
+    setOnApplyWindowInsetsListener { v, insets ->
+        f(v, WindowInsetsCompat.toWindowInsetsCompat(insets), initialPadding, initialMargin)
+        insets
+    }
+    requestApplyInsetsWhenAttached()
+}
+
+data class InitialPadding(val left: Int, val top: Int,
+                          val right: Int, val bottom: Int)
+
+data class InitialMargin(val left: Int, val top: Int,
+                         val right: Int, val bottom: Int)
+
+private fun recordInitialPaddingForView(view: View) = InitialPadding(
+        view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
+
+private fun recordInitialMarginForView(view: View) = InitialMargin(
+        view.marginLeft, view.marginTop, view.marginRight, view.marginBottom)
+
+
+fun View.requestApplyInsetsWhenAttached() {
+    if (Build.VERSION.SDK_INT < 20) return
+
+    if (isAttachedToWindow)
+        requestApplyInsets()
+    else addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+        override fun onViewAttachedToWindow(v: View) {
+            v.removeOnAttachStateChangeListener(this)
+
+            if (Build.VERSION.SDK_INT < 20) return
+            v.requestApplyInsets()
+        }
+
+        override fun onViewDetachedFromWindow(v: View) = Unit
+    })
+}

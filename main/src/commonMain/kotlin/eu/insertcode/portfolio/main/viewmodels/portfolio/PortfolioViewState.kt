@@ -30,16 +30,11 @@ data class PortfolioViewState(
 
         val isTimelineVisible: Boolean,
         val timelineItemViewStates: List<TimelineItemViewState>,
-        val timelineViewError: TimelineCollectionError?,
 
         val isHighlightsVisible: Boolean,
         val highlightViewStates: List<TimelineItemViewState>
 ) {
     enum class Error {
         NoInternet, UnknownError
-    }
-
-    enum class TimelineCollectionError {
-        NoContent
     }
 }

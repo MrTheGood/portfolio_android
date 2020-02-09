@@ -24,6 +24,7 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="eu.insertcode.portfolio.util.WindowInset" />
         <import type="eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error" alias="E" />
 
         <variable
@@ -39,16 +40,19 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/projectsRecycler"
+            bottomSystemWindowInsets="@{WindowInset.Padding}"
+            topSystemWindowInsets="@{WindowInset.Padding}"
             visibleIf="@{viewModel.viewState.ld().isTimelineVisible}"
             android:layout_width="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_timeline"
             />
 
         <TextView
+            topSystemWindowInsets="@{WindowInset.Margin}"
             visibleIf="@{viewModel.isNewProjectsLabelVisible.ld()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,15 +69,6 @@
             android:text="New Updates"
             android:textAppearance="@style/TextAppearanceCaptionLarge"
             android:textColor="#fff"
-            />
-
-        <TextView
-            android:id="@+id/timelineErrorView"
-            visibleIf="@{viewModel.viewState.ld().timelineViewError != null}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="No content available"
             />
 
         <ProgressBar

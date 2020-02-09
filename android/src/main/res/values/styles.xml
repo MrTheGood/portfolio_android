@@ -28,15 +28,6 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
     </style>
 
-    <style name="AppTheme.Divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_margin">8dp</item>
-
-        <item name="android:alpha">.12</item>
-        <item name="android:background">?attr/colorOnSurface</item>
-    </style>
-
     <style name="AppTheme.ProjectTypeIndicator">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
@@ -69,19 +60,19 @@
 
     <style name="TextAppearanceHeadline6" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">@font/comfortaa_semibold</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 
     <style name="TextAppearanceBody1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/inter_regular</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 
     <style name="TextAppearanceBody1Small" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/inter_regular</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
 
@@ -93,17 +84,17 @@
 
     <style name="TextAppearanceCaptionSmall" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/robotomono_regular</item>
-        <item name="android:textSize">7sp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="TextAppearanceCaption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/robotomono_regular</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextAppearanceCaptionLarge" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/robotomono_regular</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

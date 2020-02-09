@@ -20,6 +20,7 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.text.Html
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -111,4 +112,43 @@ fun bindTextFromHtml(view: TextView, text: String?) {
 fun bindTagBackgroundTint(view: View, color: String?) {
     val color = color ?: return
     ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf("#$color".toColorInt()))
+}
+
+
+enum class WindowInset { Padding, Margin }
+
+@BindingAdapter(
+        "leftSystemWindowInsets",
+        "rightSystemWindowInsets",
+        "topSystemWindowInsets",
+        "bottomSystemWindowInsets",
+        requireAll = false
+)
+fun applySystemWindowInsets(
+        view: View,
+        insetLeft: WindowInset?,
+        insetRight: WindowInset?,
+        insetTop: WindowInset?,
+        insetBottom: WindowInset?
+) {
+    view.doOnApplyWindowInsets { view, insets, padding, margin ->
+        val left = insets.systemWindowInsetLeft
+        val right = insets.systemWindowInsetRight
+        val top = insets.systemWindowInsetTop
+        val bottom = insets.systemWindowInsetBottom
+
+        view.setPadding(
+                padding.left + (left.takeIf { insetLeft == WindowInset.Padding } ?: 0),
+                padding.top + (top.takeIf { insetTop == WindowInset.Padding } ?: 0),
+                padding.right + (right.takeIf { insetRight == WindowInset.Padding } ?: 0),
+                padding.bottom + (bottom.takeIf { insetBottom == WindowInset.Padding } ?: 0)
+        )
+
+        (view.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(
+                margin.left + (left.takeIf { insetLeft == WindowInset.Margin } ?: 0),
+                margin.top + (top.takeIf { insetTop == WindowInset.Margin } ?: 0),
+                margin.right + (right.takeIf { insetRight == WindowInset.Margin } ?: 0),
+                margin.bottom + (bottom.takeIf { insetBottom == WindowInset.Margin } ?: 0)
+        )
+    }
 }
