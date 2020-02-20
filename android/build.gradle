@@ -109,7 +109,6 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     // Other
-    implementation "com.romandanylyk:pageindicatorview:1.0.2"
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 

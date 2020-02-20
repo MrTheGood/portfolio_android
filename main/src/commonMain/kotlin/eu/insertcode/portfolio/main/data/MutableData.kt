@@ -22,8 +22,3 @@ package eu.insertcode.portfolio.main.data
  */
 
 typealias MutableData = MutableMap<String, Any?>
-
-expect class AtomicBoolean(value: Boolean) {
-    fun get(): Boolean
-    fun set(value: Boolean)
-}

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Maarten de Goede
+ *    Copyright 2020 Maarten de Goede
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,11 +14,12 @@
  *    limitations under the License.
  */
 
-package eu.insertcode.portfolio.main.viewmodels
+package eu.insertcode.portfolio.main.viewmodels.portfolio
 
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.data.models.ProjectType
 import eu.insertcode.portfolio.main.data.models.toProjectType
+import eu.insertcode.portfolio.main.viewmodels.TagViewState
 
 /**
  * Created by maartendegoede on 2019-09-21.

@@ -27,7 +27,6 @@ import eu.insertcode.portfolio.main.data.isLoading
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
 import eu.insertcode.portfolio.main.services.ServiceProvider
-import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
 import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error
 
 /**

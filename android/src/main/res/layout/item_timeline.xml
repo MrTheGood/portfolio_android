@@ -30,7 +30,7 @@
 
         <variable
             name="viewState"
-            type="eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState"
+            type="eu.insertcode.portfolio.main.viewmodels.portfolio.TimelineItemViewState"
             />
     </data>
 

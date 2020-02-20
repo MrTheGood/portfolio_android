@@ -23,7 +23,6 @@
 
     <data>
 
-        <import type="android.view.View" />
         <import type="eu.insertcode.portfolio.util.WindowInset" />
         <import type="eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error" alias="E" />
 

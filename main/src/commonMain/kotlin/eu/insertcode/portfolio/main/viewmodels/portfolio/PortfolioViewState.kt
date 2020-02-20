@@ -16,8 +16,6 @@
 
 package eu.insertcode.portfolio.main.viewmodels.portfolio
 
-import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
-
 /**
  * Created by maartendegoede on 2019-09-21.
  * Copyright © 2019 Maarten de Goede. All rights reserved.

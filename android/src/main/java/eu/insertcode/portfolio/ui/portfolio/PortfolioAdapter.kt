@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import eu.insertcode.portfolio.databinding.ItemTagBinding
 import eu.insertcode.portfolio.databinding.ItemTimelineBinding
-import eu.insertcode.portfolio.main.viewmodels.TimelineItemViewState
+import eu.insertcode.portfolio.main.viewmodels.portfolio.TimelineItemViewState
 import kotlinx.android.synthetic.main.item_timeline.view.*
 import timber.log.Timber
 
