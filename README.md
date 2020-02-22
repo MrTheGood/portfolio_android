@@ -1,10 +1,7 @@
-# portfolio_android
-My personal portfolio app written in Kotlin Multiplatform for Android.
+# Kotlin Multiplatform Portfolio app
+My perosnal portfolio as a [Kotlin Multiplatform project](https://kotlinlang.org/docs/reference/multiplatform.html).
 
-## Why make a KMP Portfolio app?
-I originally started this project for the fun of making it, and to get a better grasp of Android and Kotlin development.
-Later, I decided to rewrite it to solve some bad decisions I took in the initial development, but simply solving them ended up being too much work so I decided to redesign and rewrite it again. When I was nearly finished redesigning it, I decided to change the design again, which resulted in some required data changes in the database, which resulted in me having to rethink the logic. Around this time I decided that I needed a project in which I could figure out what works really well in terms of architecture, so that is what this project became. Halfway through that I decided that I should make it use Kotlin Multiplatform which triggered another remake. 
-Now more than 2 and a half years after the initial commit and more than 1 year after the decision to remake this app, I have finally finished what I now call version 4.0.
+This is currently still a work in progress.
 
 ## Used Libraries
 **Android**
