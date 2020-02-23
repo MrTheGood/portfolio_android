@@ -1,5 +1,5 @@
 # Kotlin Multiplatform Portfolio app
-My perosnal portfolio as a [Kotlin Multiplatform project](https://kotlinlang.org/docs/reference/multiplatform.html).
+My personal portfolio as a [Kotlin Multiplatform project](https://kotlinlang.org/docs/reference/multiplatform.html).
 
 This is currently still a work in progress.
 
