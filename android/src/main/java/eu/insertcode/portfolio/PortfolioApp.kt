@@ -16,6 +16,7 @@
 
 package eu.insertcode.portfolio
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import eu.insertcode.portfolio.main.services.AndroidConnectivityService
 import eu.insertcode.portfolio.main.services.AndroidFirestoreService
@@ -33,6 +34,8 @@ class PortfolioApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
         Timber.plant(DebugTree())
 
         ServiceProvider.firestoreService = AndroidFirestoreService()

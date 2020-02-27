@@ -25,12 +25,22 @@
     <color name="colorSecondaryVariant">#fbc02d</color>
     <color name="colorOnSecondary">#000</color>
 
+
+    <color name="statusBarColor">#80ffffff</color>
+    <color name="navigationBarColor">#BBffffff</color>
+    <bool name="windowLightNavigationBar">true</bool>
+    <bool name="windowLightStatusBar">true</bool>
+
+
     <color name="colorSurface">#FFFFFF</color>
     <color name="image_background">#3000</color>
-    <color name="carousal_background">#000</color>
+    <color name="strokeColor">#dedede</color>
 
+    <!-- textColor -->
+    <color name="textColor">#000</color>
+    <color name="textColorLight">#777</color>
 
-    <!-- TAG Colours -->
+    <!-- tagColor -->
     <color name="tagBackground1">#6200ea</color>
     <color name="tagBackground2">#64dd17</color>
     <color name="tagBackground3">#0091ea</color>
@@ -41,7 +51,7 @@
     <color name="tagBackground8">#ffc400</color>
     <color name="tagBackground9">#ff9100</color>
 
-    <!-- Type indicator colour -->
+    <!-- indicatorTypeColor -->
     <color name="indicatorType_app">#00c853</color>
     <color name="indicatorType_game">#b71c1c</color>
     <color name="indicatorType_web">#00b0ff</color>

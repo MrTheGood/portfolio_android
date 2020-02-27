@@ -60,14 +60,14 @@
             android:background="@drawable/background_tag"
             android:drawableStart="@drawable/ic_refresh"
             android:drawablePadding="4dp"
-            android:drawableTint="#fff"
+            android:drawableTint="?colorOnPrimary"
             android:gravity="center"
             android:onClick="@{_ -> viewModel.onNewProjectsLabelTapped()}"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
             android:text="New Updates"
             android:textAppearance="@style/TextAppearanceCaptionLarge"
-            android:textColor="#fff"
+            android:textColor="?colorOnPrimary"
             />
 
         <ProgressBar
@@ -98,7 +98,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:src="@{viewModel.viewState.ld().errorViewError == E.UnknownError ? @drawable/ic_error : @drawable/ic_wifi_off}"
-                android:tint="#5000"
+                android:tint="@color/textColor"
+                android:alpha=".55"
                 android:tintMode="src_in"
                 tools:ignore="ContentDescription,UnusedAttribute"
                 />

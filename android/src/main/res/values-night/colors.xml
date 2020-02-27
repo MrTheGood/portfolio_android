@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2020 Maarten de Goede
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<resources>
+    <!-- Main Colours -->
+    <color name="colorPrimary">#e02a1d</color>
+    <color name="colorPrimaryVariant">#c11717</color>
+    <color name="colorOnPrimary">#fff</color>
+
+    <color name="colorSecondary">#d6b017</color>
+    <color name="colorSecondaryVariant">#dda30f</color>
+    <color name="colorOnSecondary">#000</color>
+
+
+    <color name="statusBarColor">#80121212</color>
+    <color name="navigationBarColor">#BB121212</color>
+    <bool name="windowLightNavigationBar">false</bool>
+    <bool name="windowLightStatusBar">false</bool>
+
+
+    <color name="colorSurface">#121212</color>
+    <color name="image_background">#3fff</color>
+    <color name="strokeColor">#fefefe</color>
+
+    <!-- textColor -->
+    <color name="textColor">#fff</color>
+    <color name="textColorLight">#afff</color>
+
+    <!-- tagColor -->
+    <color name="tagBackground1">#5300c9</color>
+    <color name="tagBackground2">#48bc00</color>
+    <color name="tagBackground3">#0371b5</color>
+    <color name="tagBackground4">#1fa8ba</color>
+    <color name="tagBackground5">#9500af</color>
+    <color name="tagBackground6">#ba0041</color>
+    <color name="tagBackground7">#00b200</color>
+    <color name="tagBackground8">#aa8301</color>
+    <color name="tagBackground9">#b76903</color>
+
+    <!-- indicatorTypeColor -->
+    <color name="indicatorType_app">#01893a</color>
+    <color name="indicatorType_game">#820000</color>
+    <color name="indicatorType_web">#0074aa</color>
+    <color name="indicatorType_watch">#70018e</color>
+    <color name="indicatorType_other">#ad6301</color>
+</resources>

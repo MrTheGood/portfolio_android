@@ -87,7 +87,7 @@ dependencies {
     implementation 'androidx.browser:browser:1.2.0'
 
     // Google
-    implementation "com.google.android.material:material:1.2.0-alpha04"
+    implementation "com.google.android.material:material:1.2.0-alpha05"
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.2.2'
