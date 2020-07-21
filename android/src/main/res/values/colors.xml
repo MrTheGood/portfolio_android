@@ -33,6 +33,7 @@
 
 
     <color name="colorSurface">#FFFFFF</color>
+    <color name="cardBackgroundColor">#FAFAFA</color>
     <color name="image_background">#3000</color>
     <color name="strokeColor">#dedede</color>
 
