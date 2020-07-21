@@ -21,17 +21,20 @@ package eu.insertcode.portfolio.main.data
  * Copyright © 2020 Maarten de Goede. All rights reserved.
  * Based on https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/vo/Resource.kt
  *
- * A generic class that holds a value with its state, and whether or not
- * This allows the possibility to still retain the data, even while it's reloading.
+ * A generic class that holds a value with its state.
+ * This allows the possibility to still retain the data, even while it's loading, or after an error occurred.
+ * The reasoning behind this is that, during pagination loading, the data still exists while it's loading.
+ * Or an error might not actually be a breaking error, but simply a lost connection, which does not mean all data should be thrown away.
  *
- * @param data The data of this Resource
+ * @param data The data in this [Resource]
  * @param error An error, if any
- * @param D Data type
- * @param E Error type
+ * @param D The type of [data] this [Resource] can contain
+ * @param E The type of [error] this [Resource] can contain
  */
 data class Resource<out D, out E>(val state: State, val data: D?, val error: E?) {
     companion object {
         fun <D, E> loading(data: D? = null, error: E? = null) = Resource(State.LOADING, data, error)
+        fun <D, E> notFound(data: D? = null, error: E? = null) = Resource(State.NOT_FOUND, data, error)
         fun <D, E> success(data: D, error: E? = null) = Resource(State.SUCCESS, data, error)
         fun <D, E> error(error: E, data: D? = null) = Resource(State.ERROR, data, error)
     }
@@ -39,21 +42,25 @@ data class Resource<out D, out E>(val state: State, val data: D?, val error: E?)
 
 val Resource<Any, Any>?.isError get() = this?.state == State.ERROR
 val Resource<Any, Any>?.isSuccess get() = this?.state == State.SUCCESS
+val Resource<Any, Any>?.isNotFound get() = this?.state == State.NOT_FOUND
 val Resource<Any, Any>?.isLoading get() = this?.state == State.LOADING
 
 fun <D, E> Resource<D, E>.toLoading(data: D? = this.data, error: E? = this.error) = Resource.loading(data, error)
-fun <D, E> Resource<D, E>.toSuccess(data: D? = this.data, error: E? = this.error) = Resource.success(data, error)
-fun <D, E> Resource<D, E>.toError(error: E? = this.error, data: D? = this.data) = Resource.error(error, data)
+fun <D, E> Resource<D, E>.toSuccess(data: D, error: E? = this.error) = Resource.success(data, error)
+fun <D, E> Resource<D, E>.toError(error: E, data: D? = this.data) = Resource.error(error, data)
 
 
 /**
- * State of a resource that is provided to the UI.
+ * State of a [Resource].
  *
- * These are usually created by the Repository classes where they return
- * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
+ * [SUCCESS] indicates that the loading of the data has been successful.
+ * [NOT_FOUND] indicates that the resource could not be found or has no data, meaning that it might have been deleted.
+ * [ERROR] indicates that an error has occurred. These errors could include, but are not limited to: IOExceptions, timeouts, or anything else.
+ * [LOADING] indicates that the data is still loading, or that a reload has occurred due to pagination or a reload click
  */
 enum class State {
     SUCCESS,
+    NOT_FOUND,
     ERROR,
     LOADING
 }

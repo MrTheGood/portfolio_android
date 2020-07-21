@@ -37,7 +37,6 @@ class PortfolioViewModel(
         val eventsDispatcher: EventsDispatcher<EventsListener>
 ) : ViewModel() {
     private lateinit var projects: Resource<List<Project>, Error>
-
     private val isNetworkAvailable
         get() = ServiceProvider.connectivityService.isNetworkAvailable()
 
@@ -50,8 +49,6 @@ class PortfolioViewModel(
 
     // Configure
     fun configure() {
-        ProjectRepository.observeProjects()
-
         ProjectRepository.projects.addObserver { resource ->
             projects = resource.run {
                 val error = error?.let { if (isNetworkAvailable) Error.UnknownError else Error.NoInternet }
@@ -93,7 +90,7 @@ class PortfolioViewModel(
     }
 
     fun onErrorViewTapped() {
-        ProjectRepository.observeProjects()
+        ProjectRepository.retryProjects()
     }
 
     fun onNewProjectsLabelTapped() {

@@ -33,10 +33,10 @@ class AndroidFirestoreService : FirestoreService {
     override fun createPath(path: String) =
             firestore.collection(path).document().path
 
-    override fun createPath(reference: Any) =
+    override fun createPath(reference: Reference) =
             (reference as DocumentReference).path
 
-    override fun createReference(path: String): Any =
+    override fun createReference(path: String): Reference =
             firestore.document(path)
 
     override fun createItem(
@@ -66,34 +66,40 @@ class AndroidFirestoreService : FirestoreService {
     }
 
     // Read
-    override fun <T : Item> observeDocument(
+    override fun <T : CollectionItem> observeDocument(
             path: String,
             transform: (FirestoreDocument) -> T,
-            onNext: (result: Resource<T?, Exception>) -> Unit
-    ): Any = firestore.document(path)
-            .addSnapshotListener { snapshot, error ->
-                error?.let {
-                    onNext(Resource.error(error))
-                } ?: snapshot?.data?.let { data ->
-                    val item = transform(FirestoreDocument(path, data))
-                    onNext(Resource.success(item))
-                } ?: onNext(Resource.success(null))
-            }
+            onNext: (result: Resource<T, Exception>) -> Unit
+    ): FirestoreListener {
+        onNext(Resource.loading())
+        return FirestoreListener(
+                firestore.document(path)
+                        .addSnapshotListener { snapshot, error ->
+                            error?.let {
+                                onNext(Resource.error(error))
+                            } ?: snapshot?.data?.let { data ->
+                                val item = transform(FirestoreDocument(path, data.toLocalMap()))
+                                onNext(Resource.success(item))
+                            } ?: onNext(Resource.notFound())
+                        }
+        )
+    }
 
-    override fun <T : Item> getDocument(
+    override fun <T : CollectionItem> getDocument(
             path: String,
             transform: (FirestoreDocument) -> T,
-            onComplete: (result: Resource<T?, Exception>) -> Unit
+            onComplete: (result: Resource<T, Exception>) -> Unit
     ) {
+        onComplete(Resource.loading())
         firestore.document(path)
                 .get()
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful)
                         onComplete(Resource.error(task.exception ?: IllegalStateException()))
                     else task.result?.data?.let { data ->
-                        val item = transform(FirestoreDocument(path, data))
+                        val item = transform(FirestoreDocument(path, data.toLocalMap()))
                         onComplete(Resource.success(item))
-                    } ?: onComplete(Resource.success(null))
+                    } ?: onComplete(Resource.notFound())
                 }
     }
 
@@ -102,39 +108,51 @@ class AndroidFirestoreService : FirestoreService {
             order: Order?,
             limit: Int?,
             equalityQueryParams: Map<String, Any>,
+            greaterThanQueryParams: Map<String, Any>,
+            lessThanQueryParams: Map<String, Any>,
             transform: (FirestoreDocument) -> T,
             onNext: (result: Resource<List<T>, Exception>) -> Unit
-    ): Any = (firestore.collection(path) as Query)
-            .let { query ->
-                when (order) {
-                    is Order.Ascending -> query.orderBy(order.field, Query.Direction.ASCENDING)
-                    is Order.Descending -> query.orderBy(order.field, Query.Direction.DESCENDING)
-                    else -> query
-                }
-            }
-            .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
-            .let {
-                var query = it
-                equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value) }
-                query
-            }
-            .addSnapshotListener { snapshot, error ->
-                error?.let {
-                    onNext(Resource.error(error))
-                } ?: snapshot?.documents?.let { firestoreDocuments ->
-                    val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
-                    onNext(Resource.success(documents))
-                } ?: onNext(Resource.success(emptyList()))
-            }
+    ): FirestoreListener {
+        onNext(Resource.loading())
+        return FirestoreListener(
+                (firestore.collection(path) as Query)
+                        .let { query ->
+                            when (order) {
+                                is Order.Ascending -> query.orderBy(order.field, Query.Direction.ASCENDING)
+                                is Order.Descending -> query.orderBy(order.field, Query.Direction.DESCENDING)
+                                else -> query
+                            }
+                        }
+                        .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
+                        .let {
+                            var query = it
+                            equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value.toFirestoreValue()) }
+                            greaterThanQueryParams.forEach { (key, value) -> query = query.whereGreaterThan(key, value.toFirestoreValue()) }
+                            lessThanQueryParams.forEach { (key, value) -> query = query.whereLessThan(key, value.toFirestoreValue()) }
+                            query
+                        }
+                        .addSnapshotListener { snapshots, error ->
+                            error?.let {
+                                onNext(Resource.error(error))
+                            } ?: snapshots!!.documents.let { firestoreDocuments ->
+                                val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
+                                onNext(Resource.success(documents))
+                            }
+                        }
+        )
+    }
 
     override fun <T : CollectionItem> getCollection(
             path: String,
             order: Order?,
             limit: Int?,
             equalityQueryParams: Map<String, Any>,
+            greaterThanQueryParams: Map<String, Any>,
+            lessThanQueryParams: Map<String, Any>,
             transform: (FirestoreDocument) -> T,
             onComplete: (result: Resource<List<T>, Exception>) -> Unit
     ) {
+        onComplete(Resource.loading())
         (firestore.collection(path) as Query)
                 .let { query ->
                     when (order) {
@@ -146,17 +164,19 @@ class AndroidFirestoreService : FirestoreService {
                 .let { query -> limit?.let { query.limit(it.toLong()) } ?: query }
                 .let {
                     var query = it
-                    equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value) }
+                    equalityQueryParams.forEach { (key, value) -> query = query.whereEqualTo(key, value.toFirestoreValue()) }
+                    greaterThanQueryParams.forEach { (key, value) -> query = query.whereGreaterThan(key, value.toFirestoreValue()) }
+                    lessThanQueryParams.forEach { (key, value) -> query = query.whereLessThan(key, value.toFirestoreValue()) }
                     query
                 }
                 .get()
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful)
                         onComplete(Resource.error(task.exception ?: IllegalStateException()))
-                    else task.result?.documents?.let { firestoreDocuments ->
+                    else task.result!!.documents.let { firestoreDocuments ->
                         val documents = firestoreDocuments.map { transform(FirestoreDocument(it.reference.path, it.data!!.toLocalMap())) }
                         onComplete(Resource.success(documents))
-                    } ?: onComplete(Resource.success(emptyList()))
+                    }
                 }
     }
 
@@ -180,15 +200,15 @@ class AndroidFirestoreService : FirestoreService {
     }
 
     // Delete
-    override fun deleteItem(item: CollectionItem, onComplete: (exception: Exception?) -> Unit) {
-        firestore.document(item.path)
+    override fun deleteItem(path: String, onComplete: (exception: Exception?) -> Unit) {
+        firestore.document(path)
                 .delete()
                 .addOnCompleteListener {
                     onComplete(it.exception)
                 }
     }
 
-    override fun deleteItemsByPath(paths: List<String>, onComplete: (exception: Exception?) -> Unit) {
+    override fun deleteItems(paths: List<String>, onComplete: (exception: Exception?) -> Unit) {
         firestore.batch().run {
             paths.forEach { delete(firestore.document(it)) }
 
@@ -203,30 +223,33 @@ class AndroidFirestoreService : FirestoreService {
     private fun MutableData.toLocalMap() =
             mapValues { it.value?.toLocalValue() }.toMutableMap()
 
+
+    private fun List<*>.toLocalList() =
+            map { it?.toLocalValue() }.toMutableList()
+
     private fun Any.toLocalValue(): Any = when (this) {
         is com.google.firebase.Timestamp -> Timestamp(seconds)
+        is List<*> ->
+            this.toMutableList().toLocalList()
         is Map<*, *> ->
             @Suppress("UNCHECKED_CAST")
             (this as Map<String, *>).toMutableMap().toLocalMap()
         else -> this
     }
 
-    private fun MutableData.toFirestoreMap(): MutableData {
-        return mapValues { it.value?.toFirestoreValue() }.toMutableMap()
-    }
+    private fun MutableData.toFirestoreMap(): MutableData =
+            mapValues { it.value?.toFirestoreValue() }.toMutableMap()
 
-    private fun List<Any>.toFirestoreList(): List<Any> {
-        return map { it.toFirestoreValue() }
-    }
+    private fun List<*>.toFirestoreList(): MutableList<*> =
+            map { it?.toFirestoreValue() }.toMutableList()
 
     private fun Any.toFirestoreValue() = when (this) {
         is Timestamp -> com.google.firebase.Timestamp(seconds, seconds.toInt() * 1000000000)
+        is List<*> ->
+            this.toMutableList().toFirestoreList()
         is Map<*, *> ->
             @Suppress("UNCHECKED_CAST")
             (this as Map<String, *>).toMutableMap().toFirestoreMap()
-        is List<*> ->
-            @Suppress("UNCHECKED_CAST")
-            (this as List<Any>).toFirestoreList()
         is Item -> data.toFirestoreMap()
         else -> this
     }
