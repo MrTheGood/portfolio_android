@@ -40,10 +40,10 @@ data class Resource<out D, out E>(val state: State, val data: D?, val error: E?)
     }
 }
 
-val Resource<Any, Any>?.isError get() = this?.state == State.ERROR
-val Resource<Any, Any>?.isSuccess get() = this?.state == State.SUCCESS
-val Resource<Any, Any>?.isNotFound get() = this?.state == State.NOT_FOUND
-val Resource<Any, Any>?.isLoading get() = this?.state == State.LOADING
+val Resource<*, *>?.isError get() = this?.state == State.ERROR
+val Resource<*, *>?.isSuccess get() = this?.state == State.SUCCESS
+val Resource<*, *>?.isNotFound get() = this?.state == State.NOT_FOUND
+val Resource<*, *>?.isLoading get() = this?.state == State.LOADING
 
 fun <D, E> Resource<D, E>.toLoading(data: D? = this.data, error: E? = this.error) = Resource.loading(data, error)
 fun <D, E> Resource<D, E>.toSuccess(data: D, error: E? = this.error) = Resource.success(data, error)

@@ -22,6 +22,7 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import eu.insertcode.portfolio.main.data.Resource
+import eu.insertcode.portfolio.main.data.isNotFound
 import eu.insertcode.portfolio.main.data.models.Project
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
 
@@ -44,10 +45,7 @@ class ProjectViewModel(
         this.projectId = projectId
         ProjectRepository.getProjectDocument(projectId, onComplete = { resource ->
             project = resource.run {
-                val error = error?.let {
-                    if (false) ProjectViewState.Error.NotFound else ProjectViewState.Error.UnknownError
-                }
-                Resource(state, data, error)
+                Resource(state, data, if (isNotFound) ProjectViewState.Error.NotFound else ProjectViewState.Error.UnknownError)
             }
             updateViewState()
         })
