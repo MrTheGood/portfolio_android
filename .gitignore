@@ -185,3 +185,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 .idea/navEditor.xml
 android/google-services.json
+.idea/jarRepositories.xml
+.idea/compiler.xml

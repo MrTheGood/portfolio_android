@@ -19,7 +19,7 @@ android {
             isDebuggable = false
             isMinifyEnabled = false
 
-            matchingFallbacks = listOf("release")
+            matchingFallbacks = mutableListOf("release")
         }
     }
 
@@ -48,6 +48,6 @@ kotlin {
     sourceSets["androidMain"].dependencies {
         implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
-        implementation("com.google.firebase:firebase-firestore:21.4.0")
+        implementation("com.google.firebase:firebase-firestore:21.5.0")
     }
 }
