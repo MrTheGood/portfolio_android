@@ -17,11 +17,11 @@
 
 <resources>
     <!-- Main Colours -->
-    <color name="colorPrimary">#f44236</color>
+    <color name="colorPrimary">#F44236</color>
     <color name="colorPrimaryVariant">#d32f2e</color>
     <color name="colorOnPrimary">#fff</color>
 
-    <color name="colorSecondary">#fed73f</color>
+    <color name="colorSecondary">#F4CE35</color>
     <color name="colorSecondaryVariant">#fbc02d</color>
     <color name="colorOnSecondary">#000</color>
 
@@ -41,20 +41,20 @@
     <color name="textColorLight">#777</color>
 
     <!-- tagColor -->
-    <color name="tagBackground1">#6200ea</color>
-    <color name="tagBackground2">#64dd17</color>
-    <color name="tagBackground3">#0091ea</color>
-    <color name="tagBackground4">#4dd0e1</color>
-    <color name="tagBackground5">#d500f9</color>
-    <color name="tagBackground6">#f50057</color>
-    <color name="tagBackground7">#00ff00</color>
-    <color name="tagBackground8">#ffc400</color>
-    <color name="tagBackground9">#ff9100</color>
+    <color name="tagBackground1">#6200EA</color>
+    <color name="tagBackground2">#59EA00</color>
+    <color name="tagBackground3">#0090EA</color>
+    <color name="tagBackground4">#00CFEA</color>
+    <color name="tagBackground5">#C700EA</color>
+    <color name="tagBackground6">#EA0052</color>
+    <color name="tagBackground7">#00EA00</color>
+    <color name="tagBackground8">#EAB300</color>
+    <color name="tagBackground9">#EA8400</color>
 
     <!-- indicatorTypeColor -->
-    <color name="indicatorType_app">#00c853</color>
-    <color name="indicatorType_game">#b71c1c</color>
-    <color name="indicatorType_web">#00b0ff</color>
-    <color name="indicatorType_watch">#8e24aa</color>
-    <color name="indicatorType_other">#ff9100</color>
+    <color name="indicatorType_app">#30DB77</color>
+    <color name="indicatorType_game">#DB3030</color>
+    <color name="indicatorType_web">#30A5DB</color>
+    <color name="indicatorType_watch">#B630DB</color>
+    <color name="indicatorType_other">#DB9130</color>
 </resources>
