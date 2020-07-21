@@ -40,7 +40,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="3dp"
         android:text="@{viewState.tagLabelText}"
-        android:textColor="?colorOnSurface"
+        android:textColor="?colorOnPrimary"
         tools:text="@tools:sample/lorem"
         />
 

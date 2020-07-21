@@ -45,7 +45,7 @@ class ProjectViewModel(
         this.projectId = projectId
         ProjectRepository.getProjectDocument(projectId, onComplete = { resource ->
             project = resource.run {
-                Resource(state, data, if (isNotFound) ProjectViewState.Error.NotFound else ProjectViewState.Error.UnknownError)
+                Resource(state, data, if (isNotFound) ProjectViewState.Error.NotFound else error?.run { ProjectViewState.Error.UnknownError })
             }
             updateViewState()
         })
