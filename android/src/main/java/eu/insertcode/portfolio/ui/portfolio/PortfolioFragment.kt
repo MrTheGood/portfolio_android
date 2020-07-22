@@ -56,10 +56,13 @@ class PortfolioFragment : MvvmFragment<FragmentPortfolioBinding, PortfolioViewMo
         )
         viewModel.configure()
 
-        val portfolioAdapter = PortfolioAdapter(viewModel::onProjectItemTapped)
+        val portfolioAdapter = PortfolioAdapter(viewLifecycleOwner, viewModel::onProjectItemTapped)
         binding.projectsRecycler.adapter = portfolioAdapter
         viewModel.viewState.ld().observe(viewLifecycleOwner, Observer {
-            portfolioAdapter.submitList(it?.timelineItemViewStates ?: emptyList())
+            portfolioAdapter.timelineItemViewStates = it?.timelineItemViewStates ?: emptyList()
+        })
+        viewModel.aboutViewState.ld().observe(viewLifecycleOwner, Observer {
+            portfolioAdapter.aboutViewState = it
         })
 
         return view

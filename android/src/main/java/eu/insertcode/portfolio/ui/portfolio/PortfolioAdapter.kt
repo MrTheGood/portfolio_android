@@ -20,11 +20,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.Pools.SimplePool
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import eu.insertcode.portfolio.databinding.ItemTagBinding
 import eu.insertcode.portfolio.databinding.ItemTimelineBinding
+import eu.insertcode.portfolio.databinding.ViewAboutBinding
+import eu.insertcode.portfolio.main.viewmodels.portfolio.AboutViewState
 import eu.insertcode.portfolio.main.viewmodels.portfolio.TimelineItemViewState
 import kotlinx.android.synthetic.main.item_timeline.view.*
 import timber.log.Timber
@@ -34,22 +35,89 @@ import timber.log.Timber
  * Copyright © 2018 Maarten de Goede. All rights reserved.
  */
 class PortfolioAdapter(
-        private val onTimelineItemTapped: (id: String) -> Unit
-) : ListAdapter<TimelineItemViewState, PortfolioAdapter.ViewHolder>(ProjectCallback()) {
-    private val tagViewPool = SimplePool<ItemTagBinding>(20)
+        private val lifecycleOwner: LifecycleOwner,
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.apply {
-            val item = getItem(position)
-            viewState = item
-            onClickListener = View.OnClickListener { onTimelineItemTapped(item.id) }
-            holder.bindTags()
-            executePendingBindings()
-        }
+        private val onTimelineItemTapped: (id: String) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
+        const val TYPE_ABOUT = 0
+        const val TYPE_TIMELINE = 1
     }
 
+    init {
+        setHasStableIds(true)
+    }
+
+    private val tagViewPool = SimplePool<ItemTagBinding>(20)
+
+    var timelineItemViewStates = listOf<TimelineItemViewState>()
+        set(value) {
+            field = value
+            dataChanged()
+        }
+
+    var aboutViewState: AboutViewState? = null
+        set(value) {
+            field = value
+            dataChanged()
+        }
+
+    private var viewStates = listOf<Any?>()
+    private fun dataChanged() {
+        viewStates = listOf<Any?>(aboutViewState) + timelineItemViewStates
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount() = viewStates.count()
+
+    override fun getItemViewType(position: Int) =
+            when {
+                viewStates[position] is AboutViewState -> TYPE_ABOUT
+                viewStates[position] is TimelineItemViewState -> TYPE_TIMELINE
+                else -> throw IllegalArgumentException("Unsupported view type")
+            }
+
+    override fun getItemId(position: Int) =
+            (viewStates[position] as? TimelineItemViewState)?.id?.hashCode()?.toLong()
+                ?: getItemViewType(position).toLong()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(ItemTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false), tagViewPool)
+            when (viewType) {
+                TYPE_ABOUT -> AboutViewHolder(
+                        ViewAboutBinding.inflate(
+                                LayoutInflater.from(parent.context),
+                                parent, false
+                        ).also {
+                            it.lifecycleOwner = lifecycleOwner
+                        }
+                )
+
+                TYPE_TIMELINE -> ViewHolder(
+                        ItemTimelineBinding.inflate(
+                                LayoutInflater.from(parent.context),
+                                parent, false
+                        ).also {
+                            it.lifecycleOwner = lifecycleOwner
+                        }, tagViewPool)
+                else -> throw IllegalArgumentException("Unsupported view type")
+            }
+
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is AboutViewHolder -> holder.binding.apply {
+                viewState = viewStates[position] as AboutViewState
+                executePendingBindings()
+            }
+            is ViewHolder -> holder.binding.apply {
+                val item = viewStates[position] as TimelineItemViewState
+                viewState = item
+                onClickListener = View.OnClickListener { onTimelineItemTapped(item.id) }
+                holder.bindTags()
+                executePendingBindings()
+            }
+        }
+    }
 
     class ViewHolder(
             val binding: ItemTimelineBinding,
@@ -77,12 +145,5 @@ class PortfolioAdapter(
         }
     }
 
-    class ProjectCallback : DiffUtil.ItemCallback<TimelineItemViewState>() {
-        override fun areItemsTheSame(oldItem: TimelineItemViewState, newItem: TimelineItemViewState) =
-                oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: TimelineItemViewState, newItem: TimelineItemViewState) =
-                oldItem == newItem
-
-    }
+    class AboutViewHolder(val binding: ViewAboutBinding) : RecyclerView.ViewHolder(binding.root)
 }

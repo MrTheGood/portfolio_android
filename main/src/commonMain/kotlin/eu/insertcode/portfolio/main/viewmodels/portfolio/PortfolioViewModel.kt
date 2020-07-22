@@ -24,7 +24,9 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import eu.insertcode.portfolio.main.data.Resource
 import eu.insertcode.portfolio.main.data.isError
 import eu.insertcode.portfolio.main.data.isLoading
+import eu.insertcode.portfolio.main.data.models.AboutMe
 import eu.insertcode.portfolio.main.data.models.Project
+import eu.insertcode.portfolio.main.repositories.AboutRepository
 import eu.insertcode.portfolio.main.repositories.ProjectRepository
 import eu.insertcode.portfolio.main.services.ServiceProvider
 import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Error
@@ -36,6 +38,7 @@ import eu.insertcode.portfolio.main.viewmodels.portfolio.PortfolioViewState.Erro
 class PortfolioViewModel(
         val eventsDispatcher: EventsDispatcher<EventsListener>
 ) : ViewModel() {
+    private lateinit var about: Resource<AboutMe, Exception>
     private lateinit var projects: Resource<List<Project>, Error>
     private val isNetworkAvailable
         get() = ServiceProvider.connectivityService.isNetworkAvailable()
@@ -44,11 +47,19 @@ class PortfolioViewModel(
     private val _viewState = MutableLiveData<PortfolioViewState?>(null)
     val viewState: LiveData<PortfolioViewState?> = _viewState.readOnly()
 
+    private val _aboutViewState = MutableLiveData<AboutViewState?>(null)
+    val aboutViewState: LiveData<AboutViewState?> = _aboutViewState.readOnly()
+
     private val _isNewProjectsLabelVisible = MutableLiveData(false)
     val isNewProjectsLabelVisible = _isNewProjectsLabelVisible.readOnly()
 
     // Configure
     fun configure() {
+        AboutRepository.about.addObserver { resource ->
+            about = resource
+            updateAboutViewState()
+        }
+
         ProjectRepository.projects.addObserver { resource ->
             projects = resource.run {
                 val error = error?.let { if (isNetworkAvailable) Error.UnknownError else Error.NoInternet }
@@ -76,6 +87,11 @@ class PortfolioViewModel(
                 isHighlightsVisible = !projects.isError && highlightViewStates.isNotEmpty(),
                 highlightViewStates = highlightViewStates
         )
+    }
+
+
+    private fun updateAboutViewState() {
+        _aboutViewState.value = AboutViewState(about)
     }
 
 
