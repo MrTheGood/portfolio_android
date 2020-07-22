@@ -32,8 +32,8 @@
     <bool name="windowLightStatusBar">false</bool>
 
 
-    <color name="colorSurface">#121212</color>
-    <color name="cardBackgroundColor">#181818</color>
+    <color name="colorSurface">#141414</color>
+    <color name="cardBackgroundColor">#202020</color>
     <color name="image_background">#3fff</color>
     <color name="strokeColor">#C8C8C8</color>
 

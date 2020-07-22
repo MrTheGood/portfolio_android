@@ -31,7 +31,7 @@ data class AboutMe(
 
     val bio: String by data
     val displayName: String by data
-    val profilePhoto: String by dataz
+    val profilePhoto: String by data
 
     constructor(document: FirestoreDocument) : this(document.path, document.data)
 }
