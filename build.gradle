@@ -18,7 +18,7 @@
 
 buildscript {
     ext.kotlin_version = '1.4.10'
-    ext.gradle_version = '4.1.0'
+    ext.gradle_version = '4.2.0-beta03'
     ext.navigation_version = "2.3.0"
 
     repositories {
