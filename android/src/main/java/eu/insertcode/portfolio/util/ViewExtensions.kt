@@ -16,6 +16,7 @@
 
 package eu.insertcode.portfolio.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.ComponentName
@@ -109,7 +110,7 @@ fun Activity.startUrlIntent(url: String) {
     val uri = Uri.parse(url)
     Intent(Intent.ACTION_VIEW, uri).apply {
         resolveActivity(packageManager)?.let { startActivity(this) }
-            ?: run { openInBrowser(uri)}
+            ?: run { openInBrowser(uri) }
     }
 }
 
@@ -134,45 +135,40 @@ private fun Activity.setDeepLinkingState(state: Int) {
 }
 
 
-// doOnApplyWindowInsets
-// source: https://chris.banes.dev/2019/04/12/insets-listeners-to-layouts/
+/**
+ * doOnApplyWindowInsets
+ * source: https://chris.banes.dev/insets-listeners-to-layouts/
+ * Changed by: MrTheGood
+ */
 
-fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, InitialPadding, InitialMargin) -> Unit) {
+data class InitialSpacing(val left: Int, val top: Int, val right: Int, val bottom: Int)
+
+fun View.doOnApplyWindowInsets(onApplyWindowInsets: (view: View, insets: WindowInsetsCompat, initialPadding: InitialSpacing, initialMargin: InitialSpacing) -> Unit) {
     if (Build.VERSION.SDK_INT < 20) return
 
-    val initialPadding = recordInitialPaddingForView(this)
-    val initialMargin = recordInitialMarginForView(this)
-    setOnApplyWindowInsetsListener { v, insets ->
-        f(v, WindowInsetsCompat.toWindowInsetsCompat(insets), initialPadding, initialMargin)
+    val initialPadding = InitialSpacing(paddingLeft, paddingTop, paddingRight, paddingBottom)
+    val initialMargin = InitialSpacing(marginLeft, marginTop, marginRight, marginBottom)
+
+    setOnApplyWindowInsetsListener { view, insets ->
+        onApplyWindowInsets(view, WindowInsetsCompat.toWindowInsetsCompat(insets), initialPadding, initialMargin)
         insets
     }
     requestApplyInsetsWhenAttached()
 }
 
-data class InitialPadding(val left: Int, val top: Int,
-                          val right: Int, val bottom: Int)
-
-data class InitialMargin(val left: Int, val top: Int,
-                         val right: Int, val bottom: Int)
-
-private fun recordInitialPaddingForView(view: View) = InitialPadding(
-        view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
-
-private fun recordInitialMarginForView(view: View) = InitialMargin(
-        view.marginLeft, view.marginTop, view.marginRight, view.marginBottom)
-
-
-fun View.requestApplyInsetsWhenAttached() {
+private fun View.requestApplyInsetsWhenAttached() {
     if (Build.VERSION.SDK_INT < 20) return
 
-    if (isAttachedToWindow)
+    if (isAttachedToWindow) {
         requestApplyInsets()
-    else addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-        override fun onViewAttachedToWindow(v: View) {
-            v.removeOnAttachStateChangeListener(this)
+        return
+    }
 
-            if (Build.VERSION.SDK_INT < 20) return
-            v.requestApplyInsets()
+    addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+        @SuppressLint("NewApi")
+        override fun onViewAttachedToWindow(view: View) {
+            view.removeOnAttachStateChangeListener(this)
+            view.requestApplyInsets()
         }
 
         override fun onViewDetachedFromWindow(v: View) = Unit

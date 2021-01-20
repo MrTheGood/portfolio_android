@@ -131,24 +131,24 @@ fun applySystemWindowInsets(
         insetTop: WindowInset?,
         insetBottom: WindowInset?
 ) {
-    view.doOnApplyWindowInsets { view, insets, padding, margin ->
+    view.doOnApplyWindowInsets { _, insets, initialPadding, initialMargin ->
         val left = insets.systemWindowInsetLeft
         val right = insets.systemWindowInsetRight
         val top = insets.systemWindowInsetTop
         val bottom = insets.systemWindowInsetBottom
 
         view.setPadding(
-                padding.left + (left.takeIf { insetLeft == WindowInset.Padding } ?: 0),
-                padding.top + (top.takeIf { insetTop == WindowInset.Padding } ?: 0),
-                padding.right + (right.takeIf { insetRight == WindowInset.Padding } ?: 0),
-                padding.bottom + (bottom.takeIf { insetBottom == WindowInset.Padding } ?: 0)
+                initialPadding.left + (left.takeIf { insetLeft == WindowInset.Padding } ?: 0),
+                initialPadding.top + (top.takeIf { insetTop == WindowInset.Padding } ?: 0),
+                initialPadding.right + (right.takeIf { insetRight == WindowInset.Padding } ?: 0),
+                initialPadding.bottom + (bottom.takeIf { insetBottom == WindowInset.Padding } ?: 0)
         )
 
         (view.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(
-                margin.left + (left.takeIf { insetLeft == WindowInset.Margin } ?: 0),
-                margin.top + (top.takeIf { insetTop == WindowInset.Margin } ?: 0),
-                margin.right + (right.takeIf { insetRight == WindowInset.Margin } ?: 0),
-                margin.bottom + (bottom.takeIf { insetBottom == WindowInset.Margin } ?: 0)
+                initialMargin.left + (left.takeIf { insetLeft == WindowInset.Margin } ?: 0),
+                initialMargin.top + (top.takeIf { insetTop == WindowInset.Margin } ?: 0),
+                initialMargin.right + (right.takeIf { insetRight == WindowInset.Margin } ?: 0),
+                initialMargin.bottom + (bottom.takeIf { insetBottom == WindowInset.Margin } ?: 0)
         )
     }
 }
