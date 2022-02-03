@@ -27,7 +27,6 @@ import eu.insertcode.portfolio.databinding.ItemTimelineBinding
 import eu.insertcode.portfolio.databinding.ViewAboutBinding
 import eu.insertcode.portfolio.main.viewmodels.portfolio.AboutViewState
 import eu.insertcode.portfolio.main.viewmodels.portfolio.TimelineItemViewState
-import kotlinx.android.synthetic.main.item_timeline.view.*
 import timber.log.Timber
 
 /**
@@ -126,7 +125,7 @@ class PortfolioAdapter(
         var tagBindings = ArrayList<ItemTagBinding>()
 
         fun bindTags() {
-            val tagsLayout = binding.root.project_tags_layout
+            val tagsLayout = binding.projectTagsLayout
 
             tagBindings.forEach { if (!tagViewPool.release(it)) Timber.w("Couldn't release tag view. Consider increasing pool size.") }
             tagBindings.clear()

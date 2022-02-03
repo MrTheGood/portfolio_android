@@ -18,9 +18,9 @@ package eu.insertcode.portfolio
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by maartendegoede on 23/08/2018.
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rootView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+        findViewById<ViewGroup>(R.id.rootView).systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 
         findNavController(R.id.nav_host).addOnDestinationChangedListener { _, destination, _ ->

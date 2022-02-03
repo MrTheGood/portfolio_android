@@ -187,3 +187,4 @@ fabric.properties
 android/google-services.json
 .idea/jarRepositories.xml
 .idea/compiler.xml
+.idea/kotlinScripting.xml

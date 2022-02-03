@@ -33,7 +33,6 @@ import eu.insertcode.portfolio.main.viewmodels.project.ProjectViewState
 import eu.insertcode.portfolio.ui.anim.ProjectCollapse
 import eu.insertcode.portfolio.ui.anim.ProjectExpand
 import eu.insertcode.portfolio.util.startUrlIntent
-import kotlinx.android.synthetic.main.fragment_project.view.*
 
 
 /**
@@ -73,7 +72,7 @@ class ProjectFragment : MvvmFragment<FragmentProjectBinding, ProjectViewModel>()
     }
 
     private fun bindTags(viewState: ProjectViewState) {
-        val tagsLayout = binding.root.project_tags_layout
+        val tagsLayout = binding.projectTagsLayout
         tagsLayout.removeAllViews()
 
         viewState.tagViewStates.forEach { viewState ->
