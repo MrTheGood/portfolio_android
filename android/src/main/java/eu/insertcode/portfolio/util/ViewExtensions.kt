@@ -128,7 +128,7 @@ fun Activity.openInBrowser(uri: Uri) {
 
 private fun Activity.setDeepLinkingState(state: Int) {
     applicationContext.packageManager.setComponentEnabledSetting(
-            ComponentName(packageName, "$packageName.SplashActivity"),
+            ComponentName(packageName, "eu.insertcode.portfolio.SplashActivity"),
             state,
             PackageManager.DONT_KILL_APP
     )
