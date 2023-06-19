@@ -19,7 +19,7 @@ android {
             isDebuggable = false
             isMinifyEnabled = false
 
-            matchingFallbacks = mutableListOf("release")
+            matchingFallbacks.add("release")
         }
     }
 
@@ -30,7 +30,9 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+        resources {
+            excludes += setOf("META-INF/kotlinx-coroutines-core.kotlin_module")
+        }
     }
 }
 
@@ -43,6 +45,10 @@ kotlin {
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
         implementation("dev.icerock.moko:mvvm:0.4.0")
+
+
+        implementation("dev.icerock.moko:mvvm-core:0.16.0")
+        implementation("dev.icerock.moko:mvvm-livedata:0.16.0")
     }
 
     sourceSets["androidMain"].dependencies {
