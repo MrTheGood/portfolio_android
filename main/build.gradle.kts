@@ -43,8 +43,8 @@ kotlin {
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-        implementation("dev.icerock.moko:mvvm-core:0.11.0")
-        implementation("dev.icerock.moko:mvvm-livedata:0.11.0")
+        implementation("dev.icerock.moko:mvvm-core:0.15.0")
+        implementation("dev.icerock.moko:mvvm-livedata:0.15.0")
     }
 
     sourceSets["androidMain"].dependencies {

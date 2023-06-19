@@ -35,3 +35,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+todo:
+- migrate database
+todo:
+- check dynamic feature modules
+- Analytics
+- Image carousal
+- Fullscreen image carousal screen
+- Disable versions for updates
+- Proper landscape mode support
+- share projects

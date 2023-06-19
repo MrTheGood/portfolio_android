@@ -22,8 +22,8 @@ import android.view.ViewGroup
 import androidx.core.util.Pools.SimplePool
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import eu.insertcode.portfolio.databinding.ItemProjectBinding
 import eu.insertcode.portfolio.databinding.ItemTagBinding
-import eu.insertcode.portfolio.databinding.ItemTimelineBinding
 import eu.insertcode.portfolio.databinding.ViewAboutBinding
 import eu.insertcode.portfolio.main.viewmodels.portfolio.AboutViewState
 import eu.insertcode.portfolio.main.viewmodels.portfolio.TimelineItemViewState
@@ -92,7 +92,7 @@ class PortfolioAdapter(
                 )
 
                 TYPE_TIMELINE -> ViewHolder(
-                        ItemTimelineBinding.inflate(
+                        ItemProjectBinding.inflate(
                                 LayoutInflater.from(parent.context),
                                 parent, false
                         ).also {
@@ -119,7 +119,7 @@ class PortfolioAdapter(
     }
 
     class ViewHolder(
-            val binding: ItemTimelineBinding,
+            val binding: ItemProjectBinding,
             private val tagViewPool: SimplePool<ItemTagBinding>
     ) : RecyclerView.ViewHolder(binding.root) {
         var tagBindings = ArrayList<ItemTagBinding>()
